@@ -1,0 +1,678 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>Lectura 2: Proyecto del semestre &#8212; Jupiter Book Clase Flujo en Redes 202302</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'Class_1_Introduction_Motivation/2-Project';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Lectura 3: Grafos" href="3-Graphs.html" />
+    <link rel="prev" title="Lectura 1: Flujo en redes" href="1-Introduction.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="../SyllabusFlujoEnRedes.html">
+  
+  
+  
+  
+  
+    <p class="title logo__title">Jupiter Book Clase Flujo en Redes 202302</p>
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../SyllabusFlujoEnRedes.html">
+                    
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Lectures</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="1-Introduction.html"><strong>Lectura 1: Flujo en redes</strong></a></li>
+
+<li class="toctree-l1 current active"><a class="current reference internal" href="#"><strong>Lectura 2: Proyecto del semestre</strong></a></li>
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="3-Graphs.html"><strong>Lectura 3: Grafos</strong></a></li>
+
+
+
+
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2FClass_1_Introduction_Motivation/2-Project.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/Class_1_Introduction_Motivation/2-Project.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script>
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Lectura 2: Proyecto del semestre</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#"><strong>Lectura 2: Proyecto del semestre</strong></a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#resolver-el-problema-de-reconfiguracion-de-redes-de-distribucion-de-energia-electrica-rsd"><strong>Resolver el problema de reconfiguración de redes de distribución de energia eléctrica (RSD)</strong></a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#introduccion"><strong>Introducción</strong></a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#modelo-matematico-general"><strong>Modelo matemático General</strong></a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#modelo-matematico-inicial"><strong>Modelo Matemático inicial</strong></a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#restriccion-de-radialidad"><strong>Restricción de radialidad</strong></a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#generalizacion-de-la-restriccion-de-radialidad"><strong>Generalización de la restricción de radialidad</strong></a></li>
+</ul>
+</li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section id="lectura-2-proyecto-del-semestre">
+<h1><strong>Lectura 2: Proyecto del semestre</strong><a class="headerlink" href="#lectura-2-proyecto-del-semestre" title="Permalink to this heading">#</a></h1>
+</section>
+<section id="resolver-el-problema-de-reconfiguracion-de-redes-de-distribucion-de-energia-electrica-rsd">
+<h1><strong>Resolver el problema de reconfiguración de redes de distribución de energia eléctrica (RSD)</strong><a class="headerlink" href="#resolver-el-problema-de-reconfiguracion-de-redes-de-distribucion-de-energia-electrica-rsd" title="Permalink to this heading">#</a></h1>
+</section>
+<section id="introduccion">
+<h1><strong>Introducción</strong><a class="headerlink" href="#introduccion" title="Permalink to this heading">#</a></h1>
+<ul class="simple">
+<li><p>Los Sistemas de Distribución de Energia Eléctrica (SDEE) se planifican como redes malladas interconectadas.</p></li>
+<li><p>Sin embargo, funcionan con una topología o configuración radial:</p>
+<ul>
+<li><p>Para facilitar la coordinación de las protecciones, y</p></li>
+<li><p>Para reducir la corriente de cortocircuito de las SDEE.</p></li>
+</ul>
+</li>
+<li><p>Para obtener una topología radial existen interruptores de interconexión (abiertos y/o cerrados) en puntos estratégicos del sistema.</p></li>
+<li><p>Así, la topología inicial puede modificarse accionando los interruptores para transferir las demandas entre los distintos alimentadores.</p></li>
+<li><p>La nueva topología tiene otro punto de operación y debe seguir siendo radial.</p></li>
+<li><p>El problema de reconfiguración del sistema de distribución (DSR) consiste en abrir y/o cerrar interruptores con el objetivo de mejorar un índice de rendimiento.</p></li>
+<li><p>La reconfiguración óptima es una herramienta importante para aumentar la fiabilidad de los SDEE:</p>
+<ul>
+<li><p>especialmente cuando la automatización avanzada y las tecnologías de redes inteligentes adquieren mayor importancia y se vuelven más accesibles para los servicios públicos de distribución.</p></li>
+</ul>
+</li>
+</ul>
+<p><img alt="" src="../_images/33-bus_system.png" /></p>
+</section>
+<section id="modelo-matematico-general">
+<h1><strong>Modelo matemático General</strong><a class="headerlink" href="#modelo-matematico-general" title="Permalink to this heading">#</a></h1>
+<ul class="simple">
+<li><p><strong>Variables de control (continuas y/o enteras)</strong>:</p>
+<ul>
+<li><p>estado de funcionamiento de los interruptores de interconexión (abierto o cerrado).</p></li>
+</ul>
+</li>
+<li><p><strong>Función objetivo:</strong></p>
+<ul>
+<li><p>minimizar las pérdidas de potencia activa;</p></li>
+<li><p>minimizar la desviación de la magnitud de tensión; o</p></li>
+<li><p>Aislar los fallos.</p></li>
+</ul>
+</li>
+<li><p>Matemáticamente, el problema RSD es un problema programación no lineal entero mixto (PNLEM).</p></li>
+<li><p>El tamaño del problema de reconfiguración está directamente asociado al número de <strong>interruptores de interconexión</strong> (IC) presentes en el sistema.</p></li>
+<li><p>Si un sistema tiene <span class="math notranslate nohighlight">\(C\)</span> conmutadores, el número de topologías posibles para el sistema es del orden de <span class="math notranslate nohighlight">\(2C\)</span>.</p></li>
+<li><p>La mayoría de estas topologías no son prácticas, porque no satisfacen la restricción de radialidad o tienen nodos desconectados.</p></li>
+</ul>
+<p><img alt="" src="../_images/mod_reconfi.png" /></p>
+<p>Arriba se encuentra un modelo de operación de las llaves de interconexión entre los nodos <span class="math notranslate nohighlight">\(i\)</span> y <span class="math notranslate nohighlight">\(j\)</span></p>
+<p>La variable entera <span class="math notranslate nohighlight">\(y_{ij}\)</span> representa el estado de operación de la llave de interconexión entre los nodos <span class="math notranslate nohighlight">\(i\)</span> y <span class="math notranslate nohighlight">\(j\)</span>.</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(y_{ij} = 1\)</span> si la llave de interconexión entre los nodos <span class="math notranslate nohighlight">\(i\)</span> y <span class="math notranslate nohighlight">\(j\)</span> está abierta</p></li>
+<li><p><span class="math notranslate nohighlight">\(y_{ij} = 0\)</span> si la llave de interconexión entre los nodos <span class="math notranslate nohighlight">\(i\)</span> y <span class="math notranslate nohighlight">\(j\)</span> está cerrada</p></li>
+<li><p>La variable continua <span class="math notranslate nohighlight">\(P_{ij}\)</span> representa el flujo de potencia activa entre los nodos <span class="math notranslate nohighlight">\(i\)</span> y <span class="math notranslate nohighlight">\(j\)</span>.</p></li>
+<li><p>La variable continua <span class="math notranslate nohighlight">\(Q_{ij}\)</span> representa el flujo de potencia reactiva entre los nodos <span class="math notranslate nohighlight">\(i\)</span> y <span class="math notranslate nohighlight">\(j\)</span>.</p></li>
+<li><p>La variable continua <span class="math notranslate nohighlight">\(P_{ij}\)</span> representa el flujo de corriente entre los nodos <span class="math notranslate nohighlight">\(i\)</span> y <span class="math notranslate nohighlight">\(j\)</span>.</p></li>
+<li><p>La variable continua <span class="math notranslate nohighlight">\(V_{i}\)</span> representa el voltaje en el nodo <span class="math notranslate nohighlight">\(i\)</span>.</p></li>
+<li><p>Los parametros <span class="math notranslate nohighlight">\(P_{i}^{D}\)</span> y <span class="math notranslate nohighlight">\(Q_{i}^{D}\)</span> representan la demanda de potencia activa y reactiva en el nodo <span class="math notranslate nohighlight">\(i\)</span>.</p></li>
+<li><p>Los parametros <span class="math notranslate nohighlight">\(R_{ij}\)</span> y <span class="math notranslate nohighlight">\(X_{ij}\)</span> representan la resistencia y reactancia de la linea entre los nodos <span class="math notranslate nohighlight">\(i\)</span> y <span class="math notranslate nohighlight">\(j\)</span>.</p></li>
+</ul>
+</section>
+<section id="modelo-matematico-inicial">
+<h1><strong>Modelo Matemático inicial</strong><a class="headerlink" href="#modelo-matematico-inicial" title="Permalink to this heading">#</a></h1>
+<ul class="simple">
+<li><p><strong>Objetivo:</strong> minimizar el costo de las pérdidas de potencia activa en el sistema.</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+Min \sum\limits_{ij \in {B}}\sum\limits_{t \in {T}} {{R_{ij}}I_{ij,t}^{sqr}};
+\]</div>
+<ul class="simple">
+<li><p><strong>Restricciones:</strong> equilibrio de potencia activa y reactiva, límite de magnitud de tensión, límite de corriente en los circuitos, funcionamiento radial del SDE.
+$<span class="math notranslate nohighlight">\(
+\sum\limits_{ki \in {B}} {{P_{ki,t}}}   - \sum\limits_{ij \in {B}} {\left( {{P_{ij,t}} + {R_{ij}}I_{ij,t}^{sqr}} \right)} + P_{i,t}^S = P_{i,t}^D;\forall i \in {N},  \forall t \in {T}
+\)</span>$</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+\sum\limits_{ki \in {B}} {{Q_{ki,t}}}   - \sum\limits_{ij \in {B}} {\left( {{Q_{ij,t}} + {X_{ij}}I_{ij,t}^{sqr}} \right)}  + Q_{i,t}^S= Q_{i,t}^D;\forall i \in {N},    \forall t \in {T}
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+{V_{i,t}^{sqr} = V_{j,t}^{sqr} + 2\left( {{R_{ij}}{P_{ij,t}} + {X_{ij}}{Q_{ij,t}}} \right)}- Z_{ij}^2{I_{ij,t}^{sqr}} + \Delta_{ij,t}^{V}; \forall ij \in {B},  \forall  t \in {T}
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+- {b^V}( {1 - {y_{ij,t}^B}}) \le \Delta _{ij,t}^V \le {b^V}( {1 -  {y_{ij,t}^B}});\forall ij \in B,\forall t \in T
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+V_{j,t}^{sqr} I_{ij,t}^{sqr} = P_{ij,t}^2 +  Q_{ij,t}^2;\forall ij \in {B},  \forall  t \in T
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+{ {\underline V }^2} \le V_{i,t}^{sqr} \le {\overline V }^2;\forall i \in N,\forall t \in T
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+0 \le I_{ij,t}^{sqr} \le \overline I_{ij}^2 y_{ij,t}^B;\forall ij \in {B}, \forall t \in {T}
+\]</div>
+<ul class="simple">
+<li><p><strong>Variables:</strong> estado de funcionamiento de los interruptores de interconexión.</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+y_{ij,t}^B \in \left\{ {0,1} \right\};\forall ij \in {B}, \forall t \in {T}
+\]</div>
+</section>
+<section id="restriccion-de-radialidad">
+<h1><strong>Restricción de radialidad</strong><a class="headerlink" href="#restriccion-de-radialidad" title="Permalink to this heading">#</a></h1>
+<ul class="simple">
+<li><p>La representación de un SDEE se realiza mediante nodos y circuitos.</p></li>
+<li><p>Analizando la teoría de grafos, un SDEE puede considerarse como un grafo formado por , arcos y - nodos.</p></li>
+<li><p>Desde la teoría de grafos, un árbol es un grafo conexo sin ciclos, por lo que es posible comparar la topología radial de un SDEE con un árbol.</p></li>
+<li><p>Como se muestra en (M. S. Bazaraa, 1990), el árbol de un grafo es un subgrafo conexo con <span class="math notranslate nohighlight">\((m - 1)\)</span> arcos.</p></li>
+<li><p>Así, se puede decir que la topología de un SDEE con <span class="math notranslate nohighlight">\(N\)</span> nodos es radial si satisface las dos condiciones siguientes:</p>
+<ul>
+<li><p>Condición 1: la solución debe presentar <span class="math notranslate nohighlight">\((N - 1)\)</span> circuitos.</p></li>
+<li><p>Condición 2: la solución debe generar una topología conexa.</p></li>
+</ul>
+</li>
+<li><p>Obsérvese que las restricciones de radialidad deben estar formadas por la Condición 1 y la Condición 2.</p></li>
+<li><p><strong>Sólo la condición 1 no garantiza la radialidad del SDEE.</strong></p></li>
+</ul>
+<p>** Consecuencia en el problema de reconfiguración**</p>
+<ul class="simple">
+<li><p>El problema RSD cumple las siguientes características:</p></li>
+</ul>
+<ol class="arabic simple">
+<li><p>En el SDEE sólo existe una única subestación (nodo subestación) ;</p></li>
+<li><p>Todos los demás nodos son nodos de carga;</p></li>
+<li><p>Debe cumplirse la primera ley de Kirchhoff, y</p></li>
+<li><p>el objetivo es encontrar la mejor topología radial.</p></li>
+</ol>
+<p><strong>La condición 1</strong> se cumple mediante la siguiente restricción:</p>
+<div class="math notranslate nohighlight">
+\[\sum_{ij \in B}{ y_{ij,t}^B} = |N| - 1\]</div>
+<ul class="simple">
+<li><p>Una solución que satisfaga la restricción de equilibrio de potencia (primera ley de Kirchhoff) tiene que proporcionar la potencia demandada en cada nodo de carga.</p></li>
+<li><p>Por tanto, existe un camino entre la subestación y los nodos de carga. Por lo tanto, cada nodo está conectado con la subestación, formando un grafo conectado, <strong>lo que demuestra la condición 2</strong>.</p></li>
+<li><p>Así, cuando las restricciones de equilibrio de potencia se combinan con la <strong>condición 1</strong>, cada nodo de carga está conectado por un único camino con la subestación, es decir, el SDEE está conectado, sin mallas.</p></li>
+</ul>
+<section id="generalizacion-de-la-restriccion-de-radialidad">
+<h2><strong>Generalización de la restricción de radialidad</strong><a class="headerlink" href="#generalizacion-de-la-restriccion-de-radialidad" title="Permalink to this heading">#</a></h2>
+<p><strong>Más de una subestación:</strong></p>
+<ul class="simple">
+<li><p>Este caso aparece con frecuencia en diversos problemas de optimización de SDEE.</p></li>
+<li><p>Por lo tanto, la condición 1 debe modificarse por:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[\sum_{ij \in B}{ y_{ij,t}^B} = |N|- |N_{sub}|\]</div>
+<p>En el que <span class="math notranslate nohighlight">\(|N_{sub}|\)</span> es el numero total de subestaciones en el SDEE.</p>
+<p>La restricción anterior más las restricciones de equilibrio de potencia garantizan que deben construirse circuitos <span class="math notranslate nohighlight">\(|N|- |N_{sub}|\)</span> para alimentar los nodos de carga <span class="math notranslate nohighlight">\(|N|- |N_{sub}|\)</span> y que deben construirse <span class="math notranslate nohighlight">\(|N_{sub}|\)</span> topologias radiales en la solución final.</p>
+<p><strong>Nodos de transferencia:</strong></p>
+<ul class="simple">
+<li><p>Un nodo de transferencia es simplemente un nodo sin generación ni demanda.</p></li>
+<li><p>Los nodos de transferencia no son tan frecuentes en un SDEE, se utilizan para conectar un nodo de carga con otros nodos de carga.</p></li>
+<li><p>Un nodo de transferencia no es un nodo terminal (ésta es la condición principal sobre el uso de nodos de transferencia); por lo tanto, hay al menos dos circuitos más que “salen” del nodo de transferencia.</p></li>
+<li><p>Por otro lado, si se sabe que todos los nodos de transferencia forman parte de la topología radial SDEE, un método sencillo consiste en suponer un valor de carga pequeño (por ejemplo, 0,001 kW) en todos los nodos de transferencia para garantizar que todos los nodos están conectados.</p></li>
+</ul>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./Class_1_Introduction_Motivation"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="1-Introduction.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title"><strong>Lectura 1: Flujo en redes</strong></p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="3-Graphs.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><strong>Lectura 3: Grafos</strong></p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div></div>
+  
+</div>
+
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#"><strong>Lectura 2: Proyecto del semestre</strong></a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#resolver-el-problema-de-reconfiguracion-de-redes-de-distribucion-de-energia-electrica-rsd"><strong>Resolver el problema de reconfiguración de redes de distribución de energia eléctrica (RSD)</strong></a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#introduccion"><strong>Introducción</strong></a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#modelo-matematico-general"><strong>Modelo matemático General</strong></a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#modelo-matematico-inicial"><strong>Modelo Matemático inicial</strong></a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#restriccion-de-radialidad"><strong>Restricción de radialidad</strong></a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#generalizacion-de-la-restriccion-de-radialidad"><strong>Generalización de la restricción de radialidad</strong></a></li>
+</ul>
+</li>
+</ul>
+
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Alejandra Tabares
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  <p class="copyright">
+    
+      © Copyright 2022.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

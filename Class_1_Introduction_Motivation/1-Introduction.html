@@ -1,0 +1,681 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>Lectura 1: Flujo en redes &#8212; Jupiter Book Clase Flujo en Redes 202302</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'Class_1_Introduction_Motivation/1-Introduction';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Lectura 2: Proyecto del semestre" href="2-Project.html" />
+    <link rel="prev" title="" href="../SyllabusFlujoEnRedes.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="../SyllabusFlujoEnRedes.html">
+  
+  
+  
+  
+  
+    <p class="title logo__title">Jupiter Book Clase Flujo en Redes 202302</p>
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../SyllabusFlujoEnRedes.html">
+                    
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Lectures</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active"><a class="current reference internal" href="#"><strong>Lectura 1: Flujo en redes</strong></a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="2-Project.html"><strong>Lectura 2: Proyecto del semestre</strong></a></li>
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="3-Graphs.html"><strong>Lectura 3: Grafos</strong></a></li>
+
+
+
+
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2FClass_1_Introduction_Motivation/1-Introduction.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/Class_1_Introduction_Motivation/1-Introduction.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script>
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Lectura 1: Flujo en redes</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#"><strong>Lectura 1: Flujo en redes</strong></a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#introduccion-a-la-optimizacion-en-redes"><strong>Introducción a la optimización en redes</strong></a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#problemas-clasicos-de-flujo-de-redes"><strong>Problemas clásicos de flujo de redes</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#algoritmos-para-resolver-problemas-de-flujo-de-redes"><strong>Algoritmos para resolver problemas de flujo de redes</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ejemplos-de-problemas-de-flujo-de-redes"><strong>Ejemplos de problemas de flujo de redes</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ejemplo-practico"><strong>Ejemplo práctico</strong></a></li>
+</ul>
+</li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section id="lectura-1-flujo-en-redes">
+<h1><strong>Lectura 1: Flujo en redes</strong><a class="headerlink" href="#lectura-1-flujo-en-redes" title="Permalink to this heading">#</a></h1>
+<p><img alt="" src="../_images/motivation.png" /></p>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="introduccion-a-la-optimizacion-en-redes">
+<h1><strong>Introducción a la optimización en redes</strong><a class="headerlink" href="#introduccion-a-la-optimizacion-en-redes" title="Permalink to this heading">#</a></h1>
+<p>La optimización en redes es un caso particular de programación lineal  que se ocupa del diseño de redes que minimizan o maximizan alguna función objetivo.</p>
+<p>Los problemas de optimización en redes se encuentran en una amplia variedad de aplicaciones, incluyendo la gestión de inventarios, la planificación del transporte y la distribución de energía.</p>
+<p><em>Un problema de optimización en redes se caracteriza por un conjunto de nodos, un conjunto de arcos que conectan los nodos y un conjunto de restricciones</em>. Las restricciones pueden ser restricciones de capacidad, restricciones de tiempo o restricciones de costo. El objetivo del problema es encontrar una asignación de flujo a los arcos que satisfaga las restricciones y que minimice o maximice la función objetivo.</p>
+<p>Hay una variedad de algoritmos que se pueden utilizar para resolver problemas de optimización en redes. Los algoritmos más comunes son el algoritmo de Ford-Fulkerson, el algoritmo de Dinic y el algoritmo de Push-Relabel.</p>
+<p><img alt="" src="../_images/opti.png" /></p>
+<section id="problemas-clasicos-de-flujo-de-redes">
+<h2><strong>Problemas clásicos de flujo de redes</strong><a class="headerlink" href="#problemas-clasicos-de-flujo-de-redes" title="Permalink to this heading">#</a></h2>
+<p>Los problemas de flujo de redes son un tipo de problema de programación lineal que se utilizan para modelar y resolver una amplia variedad de problemas del mundo real, como el transporte de bienes, el flujo de información y la asignación de recursos.</p>
+<p>Un problema de flujo de redes se puede definir como un conjunto de nodos y arcos, donde cada arco tiene una capacidad asociada. El objetivo es encontrar una asignación de flujo a los arcos que satisfaga ciertas restricciones, como la conservación del flujo y la capacidad máxima de los arcos.</p>
+<p>Algunos de los problemas de flujo de redes más comunes son:</p>
+<ul class="simple">
+<li><p><em>Problema de la ruta mas corta</em>: El problema de la ruta más corta es encontrar la ruta más corta entre dos nodos. En un sentido mas amplio responde a la pregunta de cual es la mejor forma de recorrer una red yendo desde un nodo inicial a un nodo final</p></li>
+<li><p><em>Problema del flujo máximo</em>: El problema del flujo máximo es encontrar una asignación de flujo a los arcos que maximice el flujo de un nodo a otro respetando la capacidad de los arcos.</p></li>
+<li><p><em>Problema del flujo mínimo</em>: El problema del flujo mínimo es encontrar una asignación de flujo a los arcos que minimice el flujo de un nodo a otro.</p></li>
+<li><p><em>Problema del flujo con costo mínimo</em>: Considerando que es conocido el custo por unidad eel flujo que pasa en cada arco de la red, que los arcos pueden ser capacitados, y que se requiere enviar unidades de flujo localizados en ciertos nodos (oferta o producción) para otros nodos (demanda o consumo), el problema trata de encontrar una asignación de flujo a los arcos que minimice el costo de transportar un bien de un nodo a otro.</p></li>
+</ul>
+</section>
+<section id="algoritmos-para-resolver-problemas-de-flujo-de-redes">
+<h2><strong>Algoritmos para resolver problemas de flujo de redes</strong><a class="headerlink" href="#algoritmos-para-resolver-problemas-de-flujo-de-redes" title="Permalink to this heading">#</a></h2>
+<p>Hay una variedad de algoritmos que se pueden utilizar para resolver problemas de optimización en redes. Los algoritmos más comunes son:</p>
+<ul class="simple">
+<li><p>Algoritmo de Ford-Fulkerson: El algoritmo de Ford-Fulkerson es un algoritmo iterativo que se utiliza para encontrar el flujo máximo en una red.</p></li>
+<li><p>Algoritmo de Dinic: El algoritmo de Dinic es un algoritmo más eficiente que el algoritmo de Ford-Fulkerson.</p></li>
+<li><p>Algoritmo de Push-Relabel: El algoritmo de Push-Relabel es un algoritmo más eficiente que el algoritmo de Ford-Fulkerson y el algoritmo de Dinic.</p></li>
+</ul>
+</section>
+<section id="ejemplos-de-problemas-de-flujo-de-redes">
+<h2><strong>Ejemplos de problemas de flujo de redes</strong><a class="headerlink" href="#ejemplos-de-problemas-de-flujo-de-redes" title="Permalink to this heading">#</a></h2>
+<p>A continuación se presentan algunos ejemplos de problemas de flujo de redes que se han resuelto utilizando los algoritmos que discutimos anteriormente:</p>
+<ul class="simple">
+<li><p><em>Problema de gestión de inventarios</em>: Una empresa tiene tres almacenes y dos tiendas. Los almacenes almacenan diferentes productos y las tiendas venden diferentes productos. La empresa quiere encontrar una asignación de flujo a los almacenes y las tiendas que minimice el costo de transportar los productos de los almacenes a las tiendas.</p></li>
+<li><p><em>Problema de planificación del transporte</em>: Una empresa tiene tres fábricas y cuatro almacenes. Las fábricas producen diferentes productos y los almacenes almacenan diferentes productos. La empresa quiere encontrar una asignación de flujo a las fábricas y los almacenes que minimice el costo de transportar los productos de las fábricas a los almacenes.</p></li>
+<li><p><em>Problema de distribución de energía</em>: Una empresa tiene tres plantas de energía y cuatro ciudades. Las plantas de energía generan electricidad y las ciudades consumen electricidad. La empresa quiere encontrar una asignación de flujo a las plantas de energía y las ciudades que minimice el costo de transportar la electricidad de las plantas de energía a las ciudades.</p></li>
+</ul>
+<hr class="docutils" />
+</section>
+<hr class="docutils" />
+<section id="ejemplo-practico">
+<h2><strong>Ejemplo práctico</strong><a class="headerlink" href="#ejemplo-practico" title="Permalink to this heading">#</a></h2>
+<hr class="docutils" />
+<p><strong>Contexto</strong>: Imagina que eres el encargado de logística de una empresa distribuidora de agua que suministra a una ciudad. La ciudad tiene varios distritos que están conectados por una serie de tuberías. Estas tuberías tienen capacidades diferentes, y necesitas garantizar que el agua llegue a todos los distritos de manera eficiente.</p>
+<p>La fuente del agua es un gran embalse (denominado “s” en nuestro modelo) y hay un distrito principal al que se debe suministrar una gran cantidad de agua (denominado “t”). Sin embargo, el agua no puede ser enviada directamente desde el embalse al distrito principal. En lugar de eso, debe pasar a través de varios distritos intermedios (denominados “a”, “b” y “c” en nuestro modelo) que tienen sus propias necesidades y que también deben ser abastecidos.</p>
+<p>Tu objetivo es determinar cómo debe fluir el agua a través de esta red de tuberías para maximizar la cantidad de agua que llega al distrito principal, garantizando al mismo tiempo que cada distrito intermedio reciba su suministro adecuado.</p>
+<hr class="docutils" />
+<p>Con este contexto en mente, el código que iremos a ver intenta modelar este escenario:</p>
+<ul class="simple">
+<li><p>Los nodos representan el embalse, los distritos intermedios y el distrito principal.</p></li>
+<li><p>Los bordes (o arcos) representan las tuberías que conectan estos lugares, y el peso de cada borde representa la capacidad máxima de cada tubería.</p></li>
+</ul>
+<p>Al resolver el problema de flujo máximo, estás encontrando la mejor manera de distribuir el agua desde el embalse a través de los distritos intermedios para finalmente llegar al distrito principal, maximizando la cantidad entregada a este último sin violar las restricciones de capacidad de las tuberías.</p>
+<p>El flujo en cada borde (tubería) que el modelo proporciona al final indica cuánta agua debería ser enviada a través de cada tubería para lograr este objetivo.</p>
+<hr class="docutils" />
+<p><strong>Nota</strong>: El problema de flujo máximo es un problema de optimización que se puede resolver con el algoritmo de Ford-Fulkerson. Este algoritmo no se implementa en NetworkX, pero se puede encontrar en otros paquetes de Python, como <a class="reference external" href="https://networkx.org/documentation/stable/reference/algorithms/generated/networkx.algorithms.flow.maximum_flow.html">NetworkX</a>. Para más información con relación al paquete de optimización pulp, puedes consultar la <a class="reference external" href="https://coin-or.github.io/pulp/main/index.html">documentación</a>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Importamos las bibliotecas necesarias</span>
+<span class="kn">import</span> <span class="nn">networkx</span> <span class="k">as</span> <span class="nn">nx</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">from</span> <span class="nn">pulp</span> <span class="kn">import</span> <span class="n">LpMaximize</span><span class="p">,</span> <span class="n">LpProblem</span><span class="p">,</span> <span class="n">LpVariable</span><span class="p">,</span> <span class="n">lpSum</span><span class="p">,</span> <span class="n">value</span>
+
+<span class="c1"># Creamos un gráfico dirigido</span>
+<span class="n">G</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">DiGraph</span><span class="p">()</span>
+
+<span class="c1"># Nombres descriptivos para los nodos</span>
+<span class="n">nodes_map</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;s&#39;</span><span class="p">:</span> <span class="s1">&#39;Embalse&#39;</span><span class="p">,</span> <span class="s1">&#39;a&#39;</span><span class="p">:</span> <span class="s1">&#39;Distrito A&#39;</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">:</span> <span class="s1">&#39;Distrito B&#39;</span><span class="p">,</span> <span class="s1">&#39;c&#39;</span><span class="p">:</span> <span class="s1">&#39;Distrito C&#39;</span><span class="p">,</span> <span class="s1">&#39;t&#39;</span><span class="p">:</span> <span class="s1">&#39;Distrito Principal&#39;</span><span class="p">}</span>
+
+<span class="c1"># Añadimos los bordes al gráfico junto con sus capacidades (representando las tuberías)</span>
+<span class="n">edges</span> <span class="o">=</span> <span class="p">[(</span><span class="s1">&#39;s&#39;</span><span class="p">,</span> <span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="mi">16</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;s&#39;</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="mi">13</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="mi">10</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="s1">&#39;t&#39;</span><span class="p">,</span> <span class="mi">12</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="s1">&#39;c&#39;</span><span class="p">,</span> <span class="mi">14</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;c&#39;</span><span class="p">,</span> <span class="s1">&#39;t&#39;</span><span class="p">,</span> <span class="mi">20</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;c&#39;</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="mi">9</span><span class="p">)]</span>
+<span class="n">G</span><span class="o">.</span><span class="n">add_weighted_edges_from</span><span class="p">(</span><span class="n">edges</span><span class="p">)</span>
+
+<span class="c1"># Creamos un diseño de red personalizado para representar mejor el flujo</span>
+<span class="n">pos</span> <span class="o">=</span> <span class="p">{</span><span class="n">node</span><span class="p">:</span> <span class="n">coord</span> <span class="k">for</span> <span class="n">node</span><span class="p">,</span> <span class="n">coord</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">([</span><span class="s1">&#39;s&#39;</span><span class="p">,</span> <span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="s1">&#39;c&#39;</span><span class="p">,</span> <span class="s1">&#39;t&#39;</span><span class="p">],</span> <span class="p">[[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">]])}</span>
+
+<span class="c1"># Visualizamos la red</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span>
+<span class="n">edge_labels</span> <span class="o">=</span> <span class="p">{(</span><span class="n">u</span><span class="p">,</span> <span class="n">v</span><span class="p">):</span> <span class="n">w</span><span class="p">[</span><span class="s1">&#39;weight&#39;</span><span class="p">]</span> <span class="k">for</span> <span class="n">u</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="n">w</span> <span class="ow">in</span> <span class="n">G</span><span class="o">.</span><span class="n">edges</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="kc">True</span><span class="p">)}</span>
+<span class="n">nx</span><span class="o">.</span><span class="n">draw_networkx_edge_labels</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">pos</span><span class="p">,</span> <span class="n">edge_labels</span><span class="o">=</span><span class="n">edge_labels</span><span class="p">)</span>
+<span class="n">nx</span><span class="o">.</span><span class="n">draw</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">pos</span><span class="p">,</span> <span class="n">with_labels</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">labels</span><span class="o">=</span><span class="n">nodes_map</span><span class="p">,</span> <span class="n">node_size</span><span class="o">=</span><span class="mi">3000</span><span class="p">,</span> <span class="n">node_color</span><span class="o">=</span><span class="s2">&quot;lightblue&quot;</span><span class="p">,</span> <span class="n">edge_color</span><span class="o">=</span><span class="s2">&quot;gray&quot;</span><span class="p">,</span> <span class="n">font_size</span><span class="o">=</span><span class="mi">15</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Red de Distribución de Agua&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">ModuleNotFoundError</span><span class="g g-Whitespace">                       </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">line</span> <span class="mi">2</span>
+<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="c1"># Importamos las bibliotecas necesarias</span>
+<span class="ne">----&gt; </span><span class="mi">2</span> <span class="kn">import</span> <span class="nn">networkx</span> <span class="k">as</span> <span class="nn">nx</span>
+<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="kn">from</span> <span class="nn">pulp</span> <span class="kn">import</span> <span class="n">LpMaximize</span><span class="p">,</span> <span class="n">LpProblem</span><span class="p">,</span> <span class="n">LpVariable</span><span class="p">,</span> <span class="n">lpSum</span><span class="p">,</span> <span class="n">value</span>
+
+<span class="ne">ModuleNotFoundError</span>: No module named &#39;networkx&#39;
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># --- Modelamos el problema de flujo máximo ---</span>
+
+<span class="c1"># Creamos el problema de optimización</span>
+<span class="n">prob</span> <span class="o">=</span> <span class="n">LpProblem</span><span class="p">(</span><span class="s2">&quot;MaxFlowProblem&quot;</span><span class="p">,</span> <span class="n">LpMaximize</span><span class="p">)</span>
+
+<span class="c1"># Creamos las variables de flujo para cada borde</span>
+<span class="n">flow</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="k">for</span> <span class="n">u</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="n">w</span> <span class="ow">in</span> <span class="n">G</span><span class="o">.</span><span class="n">edges</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+    <span class="n">flow</span><span class="p">[(</span><span class="n">u</span><span class="p">,</span> <span class="n">v</span><span class="p">)]</span> <span class="o">=</span> <span class="n">LpVariable</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;flow_</span><span class="si">{</span><span class="n">u</span><span class="si">}</span><span class="s2">_</span><span class="si">{</span><span class="n">v</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">w</span><span class="p">[</span><span class="s1">&#39;weight&#39;</span><span class="p">])</span>
+
+<span class="c1"># Objetivo: Maximizar el flujo hacia el Distrito Principal</span>
+<span class="n">prob</span> <span class="o">+=</span> <span class="n">lpSum</span><span class="p">([</span><span class="n">flow</span><span class="p">[(</span><span class="n">u</span><span class="p">,</span> <span class="s1">&#39;t&#39;</span><span class="p">)]</span> <span class="k">for</span> <span class="n">u</span> <span class="ow">in</span> <span class="n">G</span><span class="o">.</span><span class="n">predecessors</span><span class="p">(</span><span class="s1">&#39;t&#39;</span><span class="p">)]),</span> <span class="s2">&quot;Maximize Flow to Main District&quot;</span>
+
+<span class="c1"># Restricciones de conservación de flujo</span>
+<span class="k">for</span> <span class="n">node</span> <span class="ow">in</span> <span class="n">G</span><span class="o">.</span><span class="n">nodes</span><span class="p">():</span>
+    <span class="n">total_flow_in</span> <span class="o">=</span> <span class="n">lpSum</span><span class="p">([</span><span class="n">flow</span><span class="p">[(</span><span class="n">u</span><span class="p">,</span> <span class="n">node</span><span class="p">)]</span> <span class="k">for</span> <span class="n">u</span> <span class="ow">in</span> <span class="n">G</span><span class="o">.</span><span class="n">predecessors</span><span class="p">(</span><span class="n">node</span><span class="p">)])</span>
+    <span class="n">total_flow_out</span> <span class="o">=</span> <span class="n">lpSum</span><span class="p">([</span><span class="n">flow</span><span class="p">[(</span><span class="n">node</span><span class="p">,</span> <span class="n">v</span><span class="p">)]</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">G</span><span class="o">.</span><span class="n">successors</span><span class="p">(</span><span class="n">node</span><span class="p">)])</span>
+    
+    <span class="k">if</span> <span class="n">node</span> <span class="o">==</span> <span class="s1">&#39;s&#39;</span><span class="p">:</span>  <span class="c1"># Embalse</span>
+        <span class="n">prob</span> <span class="o">+=</span> <span class="n">total_flow_out</span> <span class="o">==</span> <span class="n">total_flow_in</span> <span class="o">+</span> <span class="nb">sum</span><span class="p">([</span><span class="n">flow</span><span class="p">[(</span><span class="s1">&#39;s&#39;</span><span class="p">,</span> <span class="n">v</span><span class="p">)]</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">G</span><span class="o">.</span><span class="n">successors</span><span class="p">(</span><span class="s1">&#39;s&#39;</span><span class="p">)])</span>
+    <span class="k">elif</span> <span class="n">node</span> <span class="o">==</span> <span class="s1">&#39;t&#39;</span><span class="p">:</span>  <span class="c1"># Distrito Principal</span>
+        <span class="n">prob</span> <span class="o">+=</span> <span class="n">total_flow_in</span> <span class="o">==</span> <span class="n">total_flow_out</span> <span class="o">+</span> <span class="nb">sum</span><span class="p">([</span><span class="n">flow</span><span class="p">[(</span><span class="n">u</span><span class="p">,</span> <span class="s1">&#39;t&#39;</span><span class="p">)]</span> <span class="k">for</span> <span class="n">u</span> <span class="ow">in</span> <span class="n">G</span><span class="o">.</span><span class="n">predecessors</span><span class="p">(</span><span class="s1">&#39;t&#39;</span><span class="p">)])</span>
+    <span class="k">else</span><span class="p">:</span>  <span class="c1"># Distritos intermedios</span>
+        <span class="n">prob</span> <span class="o">+=</span> <span class="n">total_flow_in</span> <span class="o">==</span> <span class="n">total_flow_out</span>
+
+<span class="c1"># Resolvemos el problema</span>
+<span class="n">prob</span><span class="o">.</span><span class="n">solve</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># --- Resultados ---</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Flujo de agua optimizado:</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Flujo máximo hacia el </span><span class="si">{</span><span class="n">nodes_map</span><span class="p">[</span><span class="s1">&#39;t&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">value</span><span class="p">(</span><span class="n">prob</span><span class="o">.</span><span class="n">objective</span><span class="p">)</span><span class="si">}</span><span class="s2"> unidades&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">u</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">G</span><span class="o">.</span><span class="n">edges</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Flujo desde </span><span class="si">{</span><span class="n">nodes_map</span><span class="p">[</span><span class="n">u</span><span class="p">]</span><span class="si">}</span><span class="s2"> hacia </span><span class="si">{</span><span class="n">nodes_map</span><span class="p">[</span><span class="n">v</span><span class="p">]</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">flow</span><span class="p">[(</span><span class="n">u</span><span class="p">,</span><span class="w"> </span><span class="n">v</span><span class="p">)]</span><span class="o">.</span><span class="n">varValue</span><span class="si">}</span><span class="s2"> unidades&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Flujo de agua optimizado:
+
+Flujo máximo hacia el Distrito Principal: 26.0 unidades
+Flujo desde Embalse hacia Distrito A: 13.0 unidades
+Flujo desde Embalse hacia Distrito B: 13.0 unidades
+Flujo desde Distrito A hacia Distrito B: 1.0 unidades
+Flujo desde Distrito A hacia Distrito Principal: 12.0 unidades
+Flujo desde Distrito B hacia Distrito A: 0.0 unidades
+Flujo desde Distrito B hacia Distrito C: 14.0 unidades
+Flujo desde Distrito C hacia Distrito Principal: 14.0 unidades
+Flujo desde Distrito C hacia Distrito B: 0.0 unidades
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./Class_1_Introduction_Motivation"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="../SyllabusFlujoEnRedes.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title"></p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="2-Project.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><strong>Lectura 2: Proyecto del semestre</strong></p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div></div>
+  
+</div>
+
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#"><strong>Lectura 1: Flujo en redes</strong></a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#introduccion-a-la-optimizacion-en-redes"><strong>Introducción a la optimización en redes</strong></a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#problemas-clasicos-de-flujo-de-redes"><strong>Problemas clásicos de flujo de redes</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#algoritmos-para-resolver-problemas-de-flujo-de-redes"><strong>Algoritmos para resolver problemas de flujo de redes</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ejemplos-de-problemas-de-flujo-de-redes"><strong>Ejemplos de problemas de flujo de redes</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ejemplo-practico"><strong>Ejemplo práctico</strong></a></li>
+</ul>
+</li>
+</ul>
+
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Alejandra Tabares
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  <p class="copyright">
+    
+      © Copyright 2022.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
