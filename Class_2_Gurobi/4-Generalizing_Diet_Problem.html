@@ -1,0 +1,831 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>Lectura 4: Marco general para Formulación implícita &#8212; Flujo en Redes 202302</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'Class_2_Gurobi/4-Generalizing_Diet_Problem';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Lectura 1: Flujo en redes como programas lineales" href="../Class_3_Network_as_LP/1-Introduction.html" />
+    <link rel="prev" title="Lectura 3: Ejercicio en clase" href="3-Exercice.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="../SyllabusFlujoEnRedes.html">
+  
+  
+  
+  
+  
+    <p class="title logo__title">Flujo en Redes 202302</p>
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../SyllabusFlujoEnRedes.html">
+                    Syllabus
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Semana 1</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../Class_1_Introduction_Motivation/1-Introduction.html"><strong>Lectura 1: Flujo en redes</strong></a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="../Class_1_Introduction_Motivation/2-Project.html"><strong>Lectura 2: Proyecto del semestre</strong></a></li>
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../Class_1_Introduction_Motivation/3-Graphs.html"><strong>Lectura 3: Grafos</strong></a></li>
+
+
+
+
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Semana 2</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="1-Hello_word_diet_problem.html"><strong>Lectura 1: introducción a Gurobi python</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="2-Implicit_formulation.html"><strong>Lectura 2: Formulación implícita</strong></a></li>
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="3-Exercice.html"><strong>Lectura 3: Ejercicio en clase</strong></a></li>
+
+<li class="toctree-l1 current active"><a class="current reference internal" href="#"><strong>Lectura 4: Marco general para Formulación implícita</strong></a></li>
+
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Semana 3</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../Class_3_Network_as_LP/1-Introduction.html"><strong>Lectura 1: Flujo en redes como programas lineales</strong></a></li>
+
+
+
+
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/tabarespozos/Flujo_en_redes_202302/blob/Flujo_en_redes_202302/Class_2_Gurobi/4-Generalizing_Diet_Problem.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch onColab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img src="../_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/tabarespozos/Flujo_en_redes_202302" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/tabarespozos/Flujo_en_redes_202302/issues/new?title=Issue%20on%20page%20%2FClass_2_Gurobi/4-Generalizing_Diet_Problem.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/Class_2_Gurobi/4-Generalizing_Diet_Problem.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script>
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Lectura 4: Marco general para Formulación implícita</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#"><strong>Lectura 4: Marco general para Formulación implícita</strong></a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#ejercicio">Ejercicio</a></li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section id="lectura-4-marco-general-para-formulacion-implicita">
+<h1><strong>Lectura 4: Marco general para Formulación implícita</strong><a class="headerlink" href="#lectura-4-marco-general-para-formulacion-implicita" title="Permalink to this heading">#</a></h1>
+<H3>Generalizar el problema de la dieta</H3>
+<p>Recordemos que el objetivo del problema de la dieta es encontrar una combinación de alimentos que satisfaga algunos requisitos de nutrientes. Es sencillo escribir un modelo para un pequeño conjunto de entradas como el siguiente.</p>
+<p>Unidades de nutrientes y costo por onza de alimento:</p>
+<table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Food type</p></th>
+<th class="head"><p>Iron</p></th>
+<th class="head"><p>Calcium</p></th>
+<th class="head"><p>Cost</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>1</p></td>
+<td><p>2</p></td>
+<td><p>0</p></td>
+<td><p>20</p></td>
+</tr>
+<tr class="row-odd"><td><p>2</p></td>
+<td><p>0</p></td>
+<td><p>1</p></td>
+<td><p>10</p></td>
+</tr>
+<tr class="row-even"><td><p>3</p></td>
+<td><p>3</p></td>
+<td><p>2</p></td>
+<td><p>31</p></td>
+</tr>
+<tr class="row-odd"><td><p>4</p></td>
+<td><p>1</p></td>
+<td><p>2</p></td>
+<td><p>11</p></td>
+</tr>
+<tr class="row-even"><td><p>5</p></td>
+<td><p>2</p></td>
+<td><p>1</p></td>
+<td><p>12</p></td>
+</tr>
+</tbody>
+</table>
+<p>Necesidades de nutrientes: 21 unidades de hierro y 12 unidades de calcio</p>
+<p>Podemos definir simplemente nuestras variables de decisión <span class="math notranslate nohighlight">\(x_1,\ldots,x_5\)</span> como el número de onzas a consumir de cada tipo de alimento, y el programa lineal resultante es simplemente:</p>
+<div class="math notranslate nohighlight">
+\[ min_x \quad  20 x_1 + 10 x_2 + 31 x_3 + 11 x_4 + 12 x_5 \]</div>
+<div class="math notranslate nohighlight">
+\[text{s.t.} \quad  2 x_1 + 0 x_2 + 3 x_3 + 1 x_4 + 2 x_5 \ge 21 \]</div>
+<div class="math notranslate nohighlight">
+\[ 0 x_1 + 1 x_2 + 2 x_3 + 2 x_4 + 1 x_5 \ge 12 \]</div>
+<div class="math notranslate nohighlight">
+\[ x_1,\ldots,x_5 \ge 0 \]</div>
+<p>Escribir este pequeño LP es un ejercicio útil, pero necesitaremos escribir una versión más general del modelo si alguna vez queremos escribir un programa que pueda resolver cualquier instancia del problema de la dieta.</p>
+<H3>Conjuntos e índices</H3>
+<p>Un LP consta de variables de decisión, restricciones y un objetivo, todos los cuales tendremos que definir, pero ninguno de los cuales podemos definir hasta que creemos una notación para los distintos conjuntos del problema. Para el problema de la dieta, las entidades relevantes son los nutrientes y los tipos de alimentos. Empezaremos definiendo los siguientes conjuntos:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(i \in I\)</span>: nutrientes</p></li>
+<li><p><span class="math notranslate nohighlight">\(j \in J\)</span>: tipos de alimentos</p></li>
+</ul>
+<p>La convención que preferimos es utilizar una letra mayúscula para denotar el conjunto completo, y una letra minúscula para denotar un elemento de ese conjunto. El símbolo <span class="math notranslate nohighlight">\(\in\)</span> puede leerse como ``en’’, por lo que <span class="math notranslate nohighlight">\(i \in I\)</span> indica que <span class="math notranslate nohighlight">\(i\)</span> es un nutriente concreto que está en <span class="math notranslate nohighlight">\(I\)</span>, el conjunto completo de nutrientes.</p>
+<p>Definir los conjuntos relevantes suele ser el primer paso en la modelización.</p>
+<H3>Datos</H3>
+<p>Una vez que hemos definido nuestros conjuntos, podemos tomar nuestros datos de entrada y escribirlos de una manera más general. Dado que las LP pueden tener cualquier combinación de restricciones <span class="math notranslate nohighlight">\(\ge\)</span>, <span class="math notranslate nohighlight">\(\le\)</span> y <span class="math notranslate nohighlight">\(=\)</span>, podemos generalizar los requisitos de nutrientes para incluir un límite inferior y superior para cada nutriente.</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(c_j\)</span>: coste por onza del tipo de alimento <span class="math notranslate nohighlight">\(j\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(a_{ij}\)</span>: cantidad de nutriente <span class="math notranslate nohighlight">\(i\)</span> por onza de alimento del tipo <span class="math notranslate nohighlight">\(j\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(l_i, u_i\)</span>: necesidades diarias mínimas y máximas del nutriente <span class="math notranslate nohighlight">\(i\)</span></p></li>
+</ul>
+<H3>Variables de decisión</H3>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(x_j\)</span>: el número de onzas a consumir del tipo de alimento <span class="math notranslate nohighlight">\(j\)</span>.</p></li>
+</ul>
+<p>Con las variables de decisión y los datos escritos de forma genérica, podemos escribir expresiones para el coste total, y para la cantidad de cada nutriente en nuestra dieta.</p>
+<H3>Objetivo</H3>
+<p>El coste total puede obtenerse multiplicando el número de onzas consumidas de un tipo de alimento, <span class="math notranslate nohighlight">\(x_j\)</span>, por el coste por onza de ese tipo de alimento, <span class="math notranslate nohighlight">\(c_j\)</span>, y sumando todos los tipos de alimentos <span class="math notranslate nohighlight">\(j \in J\)</span>. Utilizaremos la notación <span class="math notranslate nohighlight">\(\sum\)</span> para denotar sumas, poniendo el conjunto sobre el que estamos sumando bajo <span class="math notranslate nohighlight">\(\sum\)</span>. Por lo tanto, el objetivo se puede escribir como <span class="math notranslate nohighlight">\(\sum_{j \in J} c_j x_j\)</span>.</p>
+<H3>Restricciones</H3>
+<p>Para escribir las restricciones que imponen límites al consumo de nutrientes, necesitaremos escribir una expresión para la cantidad de cada nutriente que consumimos.</p>
+<p>Fijemos el nutriente <span class="math notranslate nohighlight">\(i\)</span>. La contribución del tipo de alimento <span class="math notranslate nohighlight">\(j\)</span> al nutriente <span class="math notranslate nohighlight">\(i\)</span> será el producto de la cantidad por onza del nutriente <span class="math notranslate nohighlight">\(i\)</span>, <span class="math notranslate nohighlight">\(a_{ij}\)</span>, por el número de onzas consumidas, <span class="math notranslate nohighlight">\(x_j\)</span>. Vamos a sumar este producto sobre todos los tipos de alimentos <span class="math notranslate nohighlight">\(j \in J\)</span>, de nuevo utilizando <span class="math notranslate nohighlight">\(\sum\)</span> notación. La expresión resultante será <span class="math notranslate nohighlight">\(\sum_{j \in J} a_{ij}x_j\)</span>.</p>
+<p>Esta expresión es válida para cualquier nutriente <span class="math notranslate nohighlight">\(i \in I\)</span>. Esto nos da todo lo que necesitamos para formular el problema de la dieta como un LP.</p>
+<H3>Formulation</H3>
+<div class="math notranslate nohighlight">
+\[ \min_x \quad  \sum_{j \in J} c_j x_j \]</div>
+<div class="math notranslate nohighlight">
+\[ \text{s.t.} \quad  l_i \le \sum_{j \in J} a_{ij} x_j \le u_i, \quad i \in I \]</div>
+<div class="math notranslate nohighlight">
+\[  x_j \ge 0, \quad j \in J.\]</div>
+<p>Ahora vamos a implementar el método solve_diet_problem. Tenemos una restricción que pone un límite inferior y superior en una expresión lineal. Encontraremos el método Model.addRange útil para esto, y preferimos usarlo en lugar de hacer dos llamadas a Model.addConstr.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">gurobipy</span> <span class="k">as</span> <span class="nn">grb</span>
+<span class="kn">from</span> <span class="nn">gurobipy</span> <span class="kn">import</span> <span class="n">GRB</span>
+
+grb.Model.addRange<span class="o">?</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Bold -Color-Bold-Red">Signature:</span>      grb<span class=" -Color -Color-Bold -Color-Bold-Yellow">.</span>Model<span class=" -Color -Color-Bold -Color-Bold-Yellow">.</span>addRange<span class=" -Color -Color-Bold -Color-Bold-Yellow">(</span>self<span class=" -Color -Color-Bold -Color-Bold-Yellow">,</span> expr<span class=" -Color -Color-Bold -Color-Bold-Yellow">,</span> lower<span class=" -Color -Color-Bold -Color-Bold-Yellow">,</span> upper<span class=" -Color -Color-Bold -Color-Bold-Yellow">,</span> name<span class=" -Color -Color-Bold -Color-Bold-Yellow">=</span><span class=" -Color -Color-Bold -Color-Bold-Blue">&#39;&#39;</span><span class=" -Color -Color-Bold -Color-Bold-Yellow">)</span>
+<span class=" -Color -Color-Bold -Color-Bold-Red">Call signature:</span> grb<span class=" -Color -Color-Bold -Color-Bold-Yellow">.</span>Model<span class=" -Color -Color-Bold -Color-Bold-Yellow">.</span>addRange<span class=" -Color -Color-Bold -Color-Bold-Yellow">(*</span>args<span class=" -Color -Color-Bold -Color-Bold-Yellow">,</span> <span class=" -Color -Color-Bold -Color-Bold-Yellow">**</span>kwargs<span class=" -Color -Color-Bold -Color-Bold-Yellow">)</span>
+<span class=" -Color -Color-Bold -Color-Bold-Red">Type:</span>           cython_function_or_method
+<span class=" -Color -Color-Bold -Color-Bold-Red">String form:</span>    &lt;cyfunction Model.addRange at 0x000001F8AD7B4930&gt;
+<span class=" -Color -Color-Bold -Color-Bold-Red">Docstring:</span>     
+ROUTINE:
+  addRange(expr, lhs, rhs, name)
+
+PURPOSE:
+  Add a range constraint to the model.
+
+ARGUMENTS:
+  expr (Var, or LinExpr): Linear expression being constrained
+  lower (float): Lower bound on linear expression
+  upper (float): Upper bound on linear expression
+  name (string): Constraint name (default is no name)
+
+RETURN VALUE:
+  The created Constr object.
+
+EXAMPLE:
+  c = model.addRange(x + y, 1.0, 2.0)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">solve_diet_problem</span><span class="p">(</span><span class="n">nutrient_densities</span><span class="p">,</span> <span class="n">costs</span><span class="p">,</span> <span class="n">nutrient_requirements</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Esta función está diseñada para encontrar la dieta más barata que satisface ciertos requisitos nutricionales.</span>
+
+<span class="sd">    Entradas:</span>
+<span class="sd">  </span>
+<span class="sd">    :param nutrient_densities: Diccionario que mapea cada tipo de alimento y nutriente a su densidad nutricional.</span>
+<span class="sd">    :param costs: Diccionario que mapea cada tipo de alimento a su costo.</span>
+<span class="sd">    :param nutrient_requirements: Diccionario que mapea cada nutriente a un rango (min, max) de requerimiento.</span>
+
+<span class="sd">    Salida:</span>
+<span class="sd">    :return: Diccionario que mapea cada tipo de alimento a la cantidad óptima a consumir.</span>
+<span class="sd">    :raises Exception: Se lanza una excepción si el modelo es inviable.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="c1"># Creamos un modelo matemático en Gurobi. Piensa en esto como un lienzo vacío donde añadiremos nuestras decisiones y restricciones.</span>
+    <span class="n">m</span> <span class="o">=</span> <span class="n">grb</span><span class="o">.</span><span class="n">Model</span><span class="p">()</span>
+    
+    <span class="c1"># Para cada tipo de alimento, decidimos cuánto consumir. Estas son nuestras &quot;variables de decisión&quot;.</span>
+    <span class="c1"># También decimos a Gurobi que queremos minimizar el costo total de los alimentos que consumimos.</span>
+    <span class="n">ounces_consumed</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="k">for</span> <span class="n">food_type</span><span class="p">,</span> <span class="n">cost</span> <span class="ow">in</span> <span class="n">costs</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="n">var</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">addVar</span><span class="p">(</span><span class="n">obj</span><span class="o">=</span><span class="n">cost</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;ounces_consumed.&#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">food_type</span><span class="p">))</span>
+        <span class="n">ounces_consumed</span><span class="p">[</span><span class="n">food_type</span><span class="p">]</span> <span class="o">=</span> <span class="n">var</span>
+
+    <span class="c1"># Hacemos que Gurobi sepa de las nuevas variables.</span>
+    <span class="n">m</span><span class="o">.</span><span class="n">update</span><span class="p">()</span>
+
+    <span class="c1"># Ahora, añadimos las restricciones de nutrientes.</span>
+    <span class="c1"># Para cada nutriente, calculamos cuánto consumimos en total basado en nuestras decisiones de alimentos.</span>
+    <span class="c1"># Luego, nos aseguramos de que esta cantidad esté entre los valores mínimos y máximos que queremos.</span>
+    <span class="k">for</span> <span class="n">nutrient</span><span class="p">,</span> <span class="p">(</span><span class="n">min_requirement</span><span class="p">,</span> <span class="n">max_requirement</span><span class="p">)</span> <span class="ow">in</span> <span class="n">nutrient_requirements</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="n">total_nutrient_consumed</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">nutrient_densities</span><span class="p">[</span><span class="n">food_type</span><span class="p">,</span> <span class="n">nutrient</span><span class="p">]</span> <span class="o">*</span> <span class="n">ounces_consumed</span><span class="p">[</span><span class="n">food_type</span><span class="p">]</span> <span class="k">for</span> <span class="n">food_type</span> <span class="ow">in</span> <span class="n">costs</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+        
+        <span class="n">m</span><span class="o">.</span><span class="n">addRange</span><span class="p">(</span><span class="n">total_nutrient_consumed</span><span class="p">,</span> <span class="n">min_requirement</span><span class="p">,</span> <span class="n">max_requirement</span><span class="p">,</span> <span class="s1">&#39;nutrient.&#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">nutrient</span><span class="p">))</span>
+
+    <span class="c1"># ¡Listo! Ahora le decimos a Gurobi que encuentre la mejor solución.</span>
+    <span class="n">m</span><span class="o">.</span><span class="n">optimize</span><span class="p">()</span>
+    
+    <span class="c1"># Si Gurobi encontró una solución que cumple con nuestros requisitos nutricionales y minimiza el costo, nos dice cuánto de cada alimento consumir.</span>
+    <span class="c1"># Si no, nos avisa que no fue posible encontrar una dieta que cumpla con las condiciones.</span>
+    <span class="k">if</span> <span class="n">m</span><span class="o">.</span><span class="n">status</span> <span class="o">==</span> <span class="n">GRB</span><span class="o">.</span><span class="n">OPTIMAL</span><span class="p">:</span>
+        <span class="k">return</span> <span class="p">{</span><span class="n">food_type</span><span class="p">:</span> <span class="n">var</span><span class="o">.</span><span class="n">X</span> <span class="k">for</span> <span class="n">food_type</span><span class="p">,</span> <span class="n">var</span> <span class="ow">in</span> <span class="n">ounces_consumed</span><span class="o">.</span><span class="n">items</span><span class="p">()}</span>
+    
+    <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s2">&quot;Modelo infactible, no fue posible encontrar una dieta que cumpla con los requisitos.&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Probemos nuestra función con el problema de la dieta generalizado. Para ello, primero debemos cargar los datos del problema.</p>
+<p><strong>Definir instancias</strong></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Instancia 1</span>
+<span class="n">nutrient_densities_1</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="p">(</span><span class="s1">&#39;apple&#39;</span><span class="p">,</span> <span class="s1">&#39;vitamin_c&#39;</span><span class="p">):</span> <span class="mf">4.6</span><span class="p">,</span>
+    <span class="p">(</span><span class="s1">&#39;banana&#39;</span><span class="p">,</span> <span class="s1">&#39;vitamin_c&#39;</span><span class="p">):</span> <span class="mf">8.7</span><span class="p">,</span>
+    <span class="p">(</span><span class="s1">&#39;carrot&#39;</span><span class="p">,</span> <span class="s1">&#39;vitamin_c&#39;</span><span class="p">):</span> <span class="mf">2.8</span>
+<span class="p">}</span>
+
+<span class="n">costs_1</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;apple&#39;</span><span class="p">:</span> <span class="mf">0.5</span><span class="p">,</span>
+    <span class="s1">&#39;banana&#39;</span><span class="p">:</span> <span class="mf">0.4</span><span class="p">,</span>
+    <span class="s1">&#39;carrot&#39;</span><span class="p">:</span> <span class="mf">0.3</span>
+<span class="p">}</span>
+
+<span class="n">nutrient_requirements_1</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;vitamin_c&#39;</span><span class="p">:</span> <span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">50</span><span class="p">)</span>  <span class="c1"># Requerimos entre 10 y 50 unidades de vitamina C</span>
+<span class="p">}</span>
+
+<span class="c1"># Instancia 2</span>
+<span class="n">nutrient_densities_2</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="p">(</span><span class="s1">&#39;apple&#39;</span><span class="p">,</span> <span class="s1">&#39;vitamin_c&#39;</span><span class="p">):</span> <span class="mf">4.6</span><span class="p">,</span>
+    <span class="p">(</span><span class="s1">&#39;banana&#39;</span><span class="p">,</span> <span class="s1">&#39;vitamin_c&#39;</span><span class="p">):</span> <span class="mf">8.2</span><span class="p">,</span>  <span class="c1"># Cambiamos ligeramente la densidad nutricional</span>
+    <span class="p">(</span><span class="s1">&#39;carrot&#39;</span><span class="p">,</span> <span class="s1">&#39;vitamin_c&#39;</span><span class="p">):</span> <span class="mf">3.1</span>  <span class="c1"># Cambiamos ligeramente la densidad nutricional</span>
+<span class="p">}</span>
+
+<span class="n">costs_2</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;apple&#39;</span><span class="p">:</span> <span class="mf">0.55</span><span class="p">,</span>  <span class="c1"># Cambiamos ligeramente el costo</span>
+    <span class="s1">&#39;banana&#39;</span><span class="p">:</span> <span class="mf">0.38</span><span class="p">,</span>  <span class="c1"># Cambiamos ligeramente el costo</span>
+    <span class="s1">&#39;carrot&#39;</span><span class="p">:</span> <span class="mf">0.32</span>  <span class="c1"># Cambiamos ligeramente el costo</span>
+<span class="p">}</span>
+
+<span class="n">nutrient_requirements_2</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;vitamin_c&#39;</span><span class="p">:</span> <span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">45</span><span class="p">)</span>  <span class="c1"># Cambiamos ligeramente los requerimientos</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">result_1</span> <span class="o">=</span> <span class="n">solve_diet_problem</span><span class="p">(</span><span class="n">nutrient_densities_1</span><span class="p">,</span> <span class="n">costs_1</span><span class="p">,</span> <span class="n">nutrient_requirements_1</span><span class="p">)</span>
+<span class="n">result_2</span> <span class="o">=</span> <span class="n">solve_diet_problem</span><span class="p">(</span><span class="n">nutrient_densities_2</span><span class="p">,</span> <span class="n">costs_2</span><span class="p">,</span> <span class="n">nutrient_requirements_2</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Resultados para la Instancia 1:&quot;</span><span class="p">,</span> <span class="n">result_1</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Resultados para la Instancia 2:&quot;</span><span class="p">,</span> <span class="n">result_2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Gurobi Optimizer version 10.0.2 build v10.0.2rc0 (win64)
+
+CPU model: 12th Gen Intel(R) Core(TM) i7-1265U, instruction set [SSE2|AVX|AVX2]
+Thread count: 10 physical cores, 12 logical processors, using up to 12 threads
+
+Optimize a model with 1 rows, 4 columns and 4 nonzeros
+Model fingerprint: 0xa75ab635
+Coefficient statistics:
+  Matrix range     [1e+00, 9e+00]
+  Objective range  [3e-01, 5e-01]
+  Bounds range     [4e+01, 4e+01]
+  RHS range        [5e+01, 5e+01]
+Presolve removed 1 rows and 4 columns
+Presolve time: 0.01s
+Presolve: All rows and columns removed
+Iteration    Objective       Primal Inf.    Dual Inf.      Time
+       0    4.5977011e-01   0.000000e+00   0.000000e+00      0s
+
+Solved in 0 iterations and 0.02 seconds (0.00 work units)
+Optimal objective  4.597701149e-01
+Gurobi Optimizer version 10.0.2 build v10.0.2rc0 (win64)
+
+CPU model: 12th Gen Intel(R) Core(TM) i7-1265U, instruction set [SSE2|AVX|AVX2]
+Thread count: 10 physical cores, 12 logical processors, using up to 12 threads
+
+Optimize a model with 1 rows, 4 columns and 4 nonzeros
+Model fingerprint: 0xaaeb98f7
+Coefficient statistics:
+  Matrix range     [1e+00, 8e+00]
+  Objective range  [3e-01, 6e-01]
+  Bounds range     [3e+01, 3e+01]
+  RHS range        [5e+01, 5e+01]
+Presolve removed 1 rows and 4 columns
+Presolve time: 0.01s
+Presolve: All rows and columns removed
+Iteration    Objective       Primal Inf.    Dual Inf.      Time
+       0    5.5609756e-01   0.000000e+00   0.000000e+00      0s
+
+Solved in 0 iterations and 0.02 seconds (0.00 work units)
+Optimal objective  5.560975610e-01
+Resultados para la Instancia 1: {&#39;apple&#39;: 0.0, &#39;banana&#39;: 1.149425287356322, &#39;carrot&#39;: 0.0}
+Resultados para la Instancia 2: {&#39;apple&#39;: 0.0, &#39;banana&#39;: 1.4634146341463417, &#39;carrot&#39;: 0.0}
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="ejercicio">
+<h1>Ejercicio<a class="headerlink" href="#ejercicio" title="Permalink to this heading">#</a></h1>
+<p>Prueba a crear una función para automatizar la generación de instancias aleatorias de problemas de dieta. Esto es especialmente útil si estás tratando de probar la robustez o la eficiencia de tu función con diferentes conjuntos de datos.</p>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./Class_2_Gurobi"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="3-Exercice.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title"><strong>Lectura 3: Ejercicio en clase</strong></p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="../Class_3_Network_as_LP/1-Introduction.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><strong>Lectura 1: Flujo en redes como programas lineales</strong></p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div></div>
+  
+</div>
+
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#"><strong>Lectura 4: Marco general para Formulación implícita</strong></a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#ejercicio">Ejercicio</a></li>
+</ul>
+
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Alejandra Tabares
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  <p class="copyright">
+    
+      © Copyright 2022.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

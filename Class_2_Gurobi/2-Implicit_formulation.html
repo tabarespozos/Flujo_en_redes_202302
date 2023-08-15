@@ -1,0 +1,973 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>Lectura 2: Formulación implícita &#8212; Flujo en Redes 202302</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'Class_2_Gurobi/2-Implicit_formulation';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Lectura 3: Ejercicio en clase" href="3-Exercice.html" />
+    <link rel="prev" title="Lectura 1: introducción a Gurobi python" href="1-Hello_word_diet_problem.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="../SyllabusFlujoEnRedes.html">
+  
+  
+  
+  
+  
+    <p class="title logo__title">Flujo en Redes 202302</p>
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../SyllabusFlujoEnRedes.html">
+                    Syllabus
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Semana 1</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../Class_1_Introduction_Motivation/1-Introduction.html"><strong>Lectura 1: Flujo en redes</strong></a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="../Class_1_Introduction_Motivation/2-Project.html"><strong>Lectura 2: Proyecto del semestre</strong></a></li>
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../Class_1_Introduction_Motivation/3-Graphs.html"><strong>Lectura 3: Grafos</strong></a></li>
+
+
+
+
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Semana 2</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="1-Hello_word_diet_problem.html"><strong>Lectura 1: introducción a Gurobi python</strong></a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#"><strong>Lectura 2: Formulación implícita</strong></a></li>
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="3-Exercice.html"><strong>Lectura 3: Ejercicio en clase</strong></a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="4-Generalizing_Diet_Problem.html"><strong>Lectura 4: Marco general para Formulación implícita</strong></a></li>
+
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Semana 3</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../Class_3_Network_as_LP/1-Introduction.html"><strong>Lectura 1: Flujo en redes como programas lineales</strong></a></li>
+
+
+
+
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/tabarespozos/Flujo_en_redes_202302/blob/Flujo_en_redes_202302/Class_2_Gurobi/2-Implicit_formulation.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch onColab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img src="../_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/tabarespozos/Flujo_en_redes_202302" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/tabarespozos/Flujo_en_redes_202302/issues/new?title=Issue%20on%20page%20%2FClass_2_Gurobi/2-Implicit_formulation.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/Class_2_Gurobi/2-Implicit_formulation.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script>
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Lectura 2: Formulación implícita</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#"><strong>Lectura 2: Formulación implícita</strong></a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modelando-en-gurobi-desde-lo-matematico-a-python-nivel-avanzado">Modelando en Gurobi: Desde lo Matemático a Python (Nivel Avanzado)</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#ejemplo-ilustrativo">Ejemplo ilustrativo</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#problema-de-asignacion-de-recursos">Problema de asignación de recursos</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#datos">Datos</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#variables-de-decision">Variables de decisión</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#restricciones-de-los-trabajos">Restricciones de los trabajos</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#restricciones-de-los-recursos">Restricciones de los recursos</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#funcion-objetivo">Función objetivo</a></li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section id="lectura-2-formulacion-implicita">
+<h1><strong>Lectura 2: Formulación implícita</strong><a class="headerlink" href="#lectura-2-formulacion-implicita" title="Permalink to this heading">#</a></h1>
+<section id="modelando-en-gurobi-desde-lo-matematico-a-python-nivel-avanzado">
+<h2>Modelando en Gurobi: Desde lo Matemático a Python (Nivel Avanzado)<a class="headerlink" href="#modelando-en-gurobi-desde-lo-matematico-a-python-nivel-avanzado" title="Permalink to this heading">#</a></h2>
+<p><strong>1. Conjuntos</strong></p>
+<p><em>Expresión Matemática:</em></p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\( I = \{1, 2, ..., n\} \)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\( J = \{a, b, ..., z\} \)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\( K = \{(i, j) | i \in I, j \in J \} \)</span> (Producto cruzado)</p></li>
+</ul>
+<p><em>En Python:</em></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">I</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">J</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">string</span><span class="o">.</span><span class="n">ascii_lowercase</span><span class="p">)</span>
+<span class="n">K</span> <span class="o">=</span> <span class="p">[(</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">I</span> <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="n">J</span><span class="p">]</span>
+</pre></div>
+</div>
+<p><strong>2. Parámetros</strong></p>
+<p>Pueden ser determinísticos o estocásticos, unidimensionales o multidimensionales.</p>
+<p><em>Expresión Matemática:</em></p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\( c_{ij} \)</span> (costos asociados al conjunto <span class="math notranslate nohighlight">\(K \)</span>, matriz)</p></li>
+<li><p><span class="math notranslate nohighlight">\( d_{ijk} \)</span> (demanda tridimensional para conjuntos <span class="math notranslate nohighlight">\(I, J, K \)</span>)</p></li>
+</ul>
+<p><em>En Python:</em></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">c</span> <span class="o">=</span> <span class="p">{(</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">):</span> <span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span> <span class="ow">in</span> <span class="n">K</span><span class="p">}</span>  <span class="c1"># Un diccionario con costos aleatorios</span>
+<span class="n">d</span> <span class="o">=</span> <span class="p">{(</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">k</span><span class="p">):</span> <span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">20</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">I</span> <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="n">J</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">K</span><span class="p">}</span>
+</pre></div>
+</div>
+<p><strong>3. Variables</strong></p>
+<p>Consideremos variables binarias, continuas, y enteras, todas multidimensionales.</p>
+<p><em>Expresión Matemática:</em>
+<span class="math notranslate nohighlight">\( x_{ijk} \)</span> (cantidad del producto <span class="math notranslate nohighlight">\(i \)</span> a enviar al destino <span class="math notranslate nohighlight">\(j \)</span> en el periodo <span class="math notranslate nohighlight">\(k \)</span>)
+<span class="math notranslate nohighlight">\( y_{ij} \in \{0, 1\} \)</span> (variable binaria que es 1 si se realiza el envío <span class="math notranslate nohighlight">\(i \)</span> a <span class="math notranslate nohighlight">\(j \)</span>)
+<span class="math notranslate nohighlight">\( z_{i} \)</span> (variable entera que representa un cierto volumen asociado con <span class="math notranslate nohighlight">\(i \)</span>)</p>
+<p><em>En Python:</em></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">addVars</span><span class="p">(</span><span class="n">I</span><span class="p">,</span> <span class="n">J</span><span class="p">,</span> <span class="n">K</span><span class="p">,</span> <span class="n">vtype</span><span class="o">=</span><span class="n">GRB</span><span class="o">.</span><span class="n">CONTINUOUS</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;x&quot;</span><span class="p">)</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">addVars</span><span class="p">(</span><span class="n">I</span><span class="p">,</span> <span class="n">J</span><span class="p">,</span> <span class="n">vtype</span><span class="o">=</span><span class="n">GRB</span><span class="o">.</span><span class="n">BINARY</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;y&quot;</span><span class="p">)</span>
+<span class="n">z</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">addVars</span><span class="p">(</span><span class="n">I</span><span class="p">,</span> <span class="n">vtype</span><span class="o">=</span><span class="n">GRB</span><span class="o">.</span><span class="n">INTEGER</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;z&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>4. Restricciones</strong></p>
+<p>Supongamos que, además de la demanda, tenemos restricciones de capacidad y lógicas.</p>
+<p><em>Expresión Matemática:</em></p>
+<p>a) Demanda:
+<span class="math notranslate nohighlight">\( \sum_{i \in I} x_{ijk} \leq d_{ijk} \quad \forall j \in J, k \in K \)</span></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">M</span> <span class="o">=</span> <span class="mi">1000</span>
+<span class="n">T</span> <span class="o">=</span> <span class="mi">50</span>
+<span class="c1"># a) Demanda</span>
+<span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="n">J</span><span class="p">:</span>
+    <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">K</span><span class="p">:</span>
+        <span class="n">m</span><span class="o">.</span><span class="n">addConstr</span><span class="p">(</span><span class="n">quicksum</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">k</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">I</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="n">d</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">k</span><span class="p">],</span> <span class="n">name</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;demanda_</span><span class="si">{</span><span class="n">j</span><span class="si">}</span><span class="s2">_</span><span class="si">{</span><span class="n">k</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>b) Capacidad:
+<span class="math notranslate nohighlight">\( \sum_{j \in J} x_{ijk} \leq z_i \times M \quad \forall i \in I, k \in K \)</span> (donde <span class="math notranslate nohighlight">\(M \)</span> es una constante grande)</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">M</span> <span class="o">=</span> <span class="mi">1000</span>
+<span class="c1"># b) Capacidad</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">I</span><span class="p">:</span>
+    <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">K</span><span class="p">:</span>
+        <span class="n">m</span><span class="o">.</span><span class="n">addConstr</span><span class="p">(</span><span class="n">quicksum</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">k</span><span class="p">]</span> <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="n">J</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="n">z</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">*</span> <span class="n">M</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;capacidad_</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">_</span><span class="si">{</span><span class="n">k</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>c) Lógica (Si <span class="math notranslate nohighlight">\(y_{ij} \)</span> es 1, entonces <span class="math notranslate nohighlight">\(\sum_k x_{ijk} \)</span> debe ser mayor que un umbral <span class="math notranslate nohighlight">\(T \)</span>):
+<span class="math notranslate nohighlight">\( y_{ij} \times T \leq \sum_k x_{ijk} \)</span></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">M</span> <span class="o">=</span> <span class="mi">1000</span>
+<span class="n">T</span> <span class="o">=</span> <span class="mi">50</span>
+<span class="c1"># c) Lógica</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">I</span><span class="p">:</span>
+    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="n">J</span><span class="p">:</span>
+        <span class="n">m</span><span class="o">.</span><span class="n">addConstr</span><span class="p">(</span><span class="n">y</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span> <span class="o">*</span> <span class="n">T</span> <span class="o">&lt;=</span> <span class="n">quicksum</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">k</span><span class="p">]</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">K</span><span class="p">),</span> <span class="n">name</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;logica_</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">_</span><span class="si">{</span><span class="n">j</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>5. Función Objetivo</strong></p>
+<p>Supongamos que queremos minimizar el costo total y penalizar el uso de ciertas combinaciones.</p>
+<p><em>Expresión Matemática:</em>
+<span class="math notranslate nohighlight">\( \min \sum_{i \in I} \sum_{j \in J} \sum_{k \in K} c_{ij} \times x_{ijk} + P \times y_{ij} \)</span>
+(donde <span class="math notranslate nohighlight">\(P \)</span> es una penalización por usar la combinación <span class="math notranslate nohighlight">\(i, j \)</span>)</p>
+<p><em>En Python:</em></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">P</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="n">m</span><span class="o">.</span><span class="n">setObjective</span><span class="p">(</span><span class="n">quicksum</span><span class="p">(</span><span class="n">c</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span> <span class="o">*</span> <span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">k</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">I</span> <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="n">J</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">K</span><span class="p">)</span> <span class="o">+</span> <span class="n">P</span> <span class="o">*</span> <span class="n">quicksum</span><span class="p">(</span><span class="n">y</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">I</span> <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="n">J</span><span class="p">),</span> <span class="n">GRB</span><span class="o">.</span><span class="n">MINIMIZE</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="ejemplo-ilustrativo">
+<h1>Ejemplo ilustrativo<a class="headerlink" href="#ejemplo-ilustrativo" title="Permalink to this heading">#</a></h1>
+<p>Considere una empresa de consultoría que tiene tres puestos vacantes: Probador, Desarrollador Java y Arquitecto. Los tres principales candidatos (recursos) para los puestos son: Carlos, Joe y Monika. La consultora ha realizado pruebas de competencia a cada uno de los candidatos para evaluar su capacidad para desempeñar cada uno de los puestos. Los resultados de estas pruebas se denominan <em>puntuaciones de emparejamiento</em>. Supongamos que sólo se puede asignar un candidato a un puesto de trabajo y que, como máximo, se puede asignar un puesto de trabajo a un candidato.</p>
+<p>El problema consiste en determinar una asignación de recursos y trabajos tal que cada trabajo se cumpla, cada recurso se asigne a un trabajo como máximo y la puntuación total de las asignaciones sea máxima.</p>
+<p>El siguiente código Python importa la librería Gurobi invocable e importa la clase <code class="docutils literal notranslate"><span class="pre">GRB</span></code> en el espacio de nombres principal.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">gurobipy</span> <span class="k">as</span> <span class="nn">gp</span>
+<span class="kn">from</span> <span class="nn">gurobipy</span> <span class="kn">import</span> <span class="n">GRB</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="problema-de-asignacion-de-recursos">
+<h1>Problema de asignación de recursos<a class="headerlink" href="#problema-de-asignacion-de-recursos" title="Permalink to this heading">#</a></h1>
+<section id="datos">
+<h2>Datos<a class="headerlink" href="#datos" title="Permalink to this heading">#</a></h2>
+<p>La lista <span class="math notranslate nohighlight">\(R\)</span> contiene los nombres de los tres recursos: Carlos, Joe y Monika.</p>
+<p>La lista <span class="math notranslate nohighlight">\(J\)</span> contiene los nombres de los puestos de trabajo: Probador, Desarrollador Java y Arquitecto.</p>
+<p><span class="math notranslate nohighlight">\(r \in R\)</span>: índice y conjunto de recursos. El recurso <span class="math notranslate nohighlight">\(r\)</span> pertenece al conjunto de recursos <span class="math notranslate nohighlight">\(R\)</span>.</p>
+<p><span class="math notranslate nohighlight">\(j \in J\)</span>: índice y conjunto de puestos de trabajo. El trabajo <span class="math notranslate nohighlight">\(j\)</span> pertenece al conjunto de trabajos <span class="math notranslate nohighlight">\(J\)</span>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Resource and job sets</span>
+<span class="n">R</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Carlos&#39;</span><span class="p">,</span> <span class="s1">&#39;Joe&#39;</span><span class="p">,</span> <span class="s1">&#39;Monika&#39;</span><span class="p">]</span>
+<span class="n">J</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Tester&#39;</span><span class="p">,</span> <span class="s1">&#39;JavaDeveloper&#39;</span><span class="p">,</span> <span class="s1">&#39;Architect&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>La capacidad de cada recurso para realizar cada uno de los trabajos se indica en la siguiente tabla de puntuaciones de concordancia:</p>
+<p><img alt="scores" src="https://github.com/Gurobi/modeling-examples/blob/master/intro_to_modeling/matching_score_data.PNG?raw=1" /></p>
+<p>Para cada recurso <span class="math notranslate nohighlight">\(r\)</span> y trabajo <span class="math notranslate nohighlight">\(j\)</span>, existe una puntuación de coincidencia correspondiente <span class="math notranslate nohighlight">\(s\)</span>. La puntuación de concordancia <span class="math notranslate nohighlight">\(s\)</span> sólo puede tomar valores entre 0 y 100. Es decir, <span class="math notranslate nohighlight">\(s_{r,j}\)</span> es la puntuación de concordancia. Es decir,  <span class="math notranslate nohighlight">\(s_{r,j} \in [0, 100]\)</span>  para todos los recursos <span class="math notranslate nohighlight">\(r \in R\)</span> y trabajos <span class="math notranslate nohighlight">\(j \in J\)</span>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Combinaciones posibles (producto cruzado)</span>
+<span class="n">K</span> <span class="o">=</span> <span class="p">[(</span><span class="n">r</span><span class="p">,</span> <span class="n">j</span><span class="p">)</span> <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">R</span> <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="n">J</span><span class="p">]</span>
+
+<span class="c1"># 2. Parámetros</span>
+<span class="c1"># Datos de puntuación de coincidencia para cada combinación posible de persona-trabajo</span>
+<span class="n">scores</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="p">(</span><span class="s1">&#39;Carlos&#39;</span><span class="p">,</span> <span class="s1">&#39;Tester&#39;</span><span class="p">):</span> <span class="mi">53</span><span class="p">,</span>
+    <span class="p">(</span><span class="s1">&#39;Carlos&#39;</span><span class="p">,</span> <span class="s1">&#39;JavaDeveloper&#39;</span><span class="p">):</span> <span class="mi">27</span><span class="p">,</span>
+    <span class="p">(</span><span class="s1">&#39;Carlos&#39;</span><span class="p">,</span> <span class="s1">&#39;Architect&#39;</span><span class="p">):</span> <span class="mi">13</span><span class="p">,</span>
+    <span class="p">(</span><span class="s1">&#39;Joe&#39;</span><span class="p">,</span> <span class="s1">&#39;Tester&#39;</span><span class="p">):</span> <span class="mi">80</span><span class="p">,</span>
+    <span class="p">(</span><span class="s1">&#39;Joe&#39;</span><span class="p">,</span> <span class="s1">&#39;JavaDeveloper&#39;</span><span class="p">):</span> <span class="mi">47</span><span class="p">,</span>
+    <span class="p">(</span><span class="s1">&#39;Joe&#39;</span><span class="p">,</span> <span class="s1">&#39;Architect&#39;</span><span class="p">):</span> <span class="mi">67</span><span class="p">,</span>
+    <span class="p">(</span><span class="s1">&#39;Monika&#39;</span><span class="p">,</span> <span class="s1">&#39;Tester&#39;</span><span class="p">):</span> <span class="mi">53</span><span class="p">,</span>
+    <span class="p">(</span><span class="s1">&#39;Monika&#39;</span><span class="p">,</span> <span class="s1">&#39;JavaDeveloper&#39;</span><span class="p">):</span> <span class="mi">73</span><span class="p">,</span>
+    <span class="p">(</span><span class="s1">&#39;Monika&#39;</span><span class="p">,</span> <span class="s1">&#39;Architect&#39;</span><span class="p">):</span> <span class="mi">47</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>El siguiente constructor crea un objeto <code class="docutils literal notranslate"><span class="pre">Model</span></code> vacío “m”. Especificamos el nombre del modelo pasando la cadena “RAP” como argumento. El objeto <code class="docutils literal notranslate"><span class="pre">Model</span></code> “m” contiene un único problema de optimización. Consiste en un conjunto de variables, un conjunto de restricciones, y la función objetivo.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Declare and initialize model</span>
+<span class="n">m</span> <span class="o">=</span> <span class="n">gp</span><span class="o">.</span><span class="n">Model</span><span class="p">(</span><span class="s1">&#39;RAP&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="variables-de-decision">
+<h1>Variables de decisión<a class="headerlink" href="#variables-de-decision" title="Permalink to this heading">#</a></h1>
+<p>Para resolver este problema de asignación, necesitamos identificar qué recurso se asigna a qué trabajo. Introducimos una variable de decisión para cada posible asignación de recursos a trabajos. Por lo tanto, tenemos 9 variables de decisión.</p>
+<p>Para simplificar la notación matemática de la formulación del modelo, definimos los siguientes índices para los recursos y los empleos:</p>
+<p><img alt="variables" src="https://github.com/Gurobi/modeling-examples/blob/master/intro_to_modeling/decision_variables.PNG?raw=1" /></p>
+<p>Por ejemplo, <span class="math notranslate nohighlight">\(x_{2,1}\)</span> es la variable de decisión asociada con la asignación del recurso Joe al trabajo Tester. Por lo tanto, la variable de decisión <span class="math notranslate nohighlight">\(x_{r,j}\)</span> es igual a 1 si el recurso <span class="math notranslate nohighlight">\(r \in R\)</span> se asigna al trabajo <span class="math notranslate nohighlight">\(j \in J\)</span>, y 0 en caso contrario.</p>
+<p>El método <code class="docutils literal notranslate"><span class="pre">Model.addVars()</span></code> crea las variables de decisión para un objeto <code class="docutils literal notranslate"><span class="pre">Model</span></code>.
+Este método devuelve un objeto <code class="docutils literal notranslate"><span class="pre">tupledict</span></code> de Gurobi que contiene las variables recién creadas. Proporcionamos el objeto <code class="docutils literal notranslate"><span class="pre">K</span></code> como primer argumento para especificar los índices de las variables. La palabra clave <code class="docutils literal notranslate"><span class="pre">name</span></code> se utiliza para especificar un nombre para las variables de decisión recién creadas. Por defecto, se supone que las variables no son negativas.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 3. Variables</span>
+<span class="c1"># Variables de decisión: x[r, j] será 1 si el recurso &#39;r&#39; es asignado al trabajo &#39;j&#39;, y 0 de lo contrario.</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">addVars</span><span class="p">(</span><span class="n">K</span><span class="p">,</span> <span class="n">vtype</span><span class="o">=</span><span class="n">GRB</span><span class="o">.</span><span class="n">BINARY</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;assign&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="restricciones-de-los-trabajos">
+<h1>Restricciones de los trabajos<a class="headerlink" href="#restricciones-de-los-trabajos" title="Permalink to this heading">#</a></h1>
+<p>Ahora hablaremos de las restricciones asociadas a los trabajos. Estas restricciones deben garantizar que cada puesto sea ocupado exactamente por un recurso.</p>
+<p>La restricción del puesto de trabajo Probador requiere que el recurso 1 (Carlos), el recurso 2 (Joe) o el recurso 3 (Monika) estén asignados a este puesto de trabajo. Esto corresponde a la siguiente restricción.</p>
+<p>Restricción (Probador=1)</p>
+<div class="math notranslate nohighlight">
+\[
+x_{1,1} + x_{2,1} + x_{3,1} = 1
+\]</div>
+<p>Del mismo modo, las restricciones para los puestos de Desarrollador Java y Arquitecto pueden definirse del siguiente modo.</p>
+<p>Restricción (Desarrollador Java = 2)</p>
+<div class="math notranslate nohighlight">
+\[
+x_{1,2} + x_{2,2} + x_{3,2} = 1
+\]</div>
+<p>Restricción (Arquitecto = 3)</p>
+<div class="math notranslate nohighlight">
+\[
+x_{1,3} + x_{2,3} + x_{3,3} = 1
+\]</div>
+<p>Las restricciones de los trabajos están definidas por las columnas de la siguiente tabla.</p>
+<p><img alt="trabajos" src="Images/jobs_constraints.png" /></p>
+<p>En general, la restricción para el trabajo Tester se puede definir de la siguiente manera.</p>
+<div class="math notranslate nohighlight">
+\[
+x_{1,1} + x_{2,1} + x_{3,1} = \sum_{r=1}^{3 } x_{r,1} = \sum_{r \in R} x_{r,1} = 1
+\]</div>
+<p>Todas las restricciones de trabajo pueden definirse de forma igualmente sucinta. Para cada trabajo <span class="math notranslate nohighlight">\(j \in J\)</span>, se toma el sumatorio de las variables de decisión sobre todos los recursos. Podemos escribir la restricción de trabajo correspondiente de la siguiente manera.</p>
+<div class="math notranslate nohighlight">
+\[
+\sum_{r_en R} x_{r,j} = 1
+\]</div>
+<p>El método <code class="docutils literal notranslate"><span class="pre">Model.addConstrs()</span></code> de la API de Gurobi/Python define las restricciones de trabajo del objeto <code class="docutils literal notranslate"><span class="pre">Model</span></code> “m”. Este método devuelve un objeto <code class="docutils literal notranslate"><span class="pre">tupledict</span></code> de Gurobi que contiene las restricciones de trabajo.
+El primer argumento de este método, “gp.quicksum(x[r, j] for r in R)”, es el método de la suma y define el LHS de las restricciones de los trabajos de la siguiente manera:
+Para cada trabajo <span class="math notranslate nohighlight">\(j\)</span> en el conjunto de trabajos <span class="math notranslate nohighlight">\(J\)</span>, tome la suma de las variables de decisión sobre todos los recursos. El <span class="math notranslate nohighlight">\(==\)</span> define una restricción de igualdad, y el número “1” es el RHS de las restricciones.</p>
+<p>Estas restricciones dicen que se debe asignar exactamente un recurso a cada trabajo. El segundo argumento es el nombre de este tipo de restricciones.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Restricciones de trabajo: Asegurar que cada trabajo es asignado exactamente a una persona</span>
+<span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="n">J</span><span class="p">:</span>
+    <span class="n">m</span><span class="o">.</span><span class="n">addConstr</span><span class="p">(</span><span class="n">gp</span><span class="o">.</span><span class="n">quicksum</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="n">r</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span> <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">R</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;job_</span><span class="si">{</span><span class="n">j</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="restricciones-de-los-recursos">
+<h1>Restricciones de los recursos<a class="headerlink" href="#restricciones-de-los-recursos" title="Permalink to this heading">#</a></h1>
+<p>Las restricciones de los recursos deben garantizar que se asigne como máximo un trabajo a cada recurso. Es decir, es posible que no todos los recursos estén asignados.</p>
+<p>Por ejemplo, queremos una restricción que requiera que Carlos esté asignado como máximo a uno de los trabajos: o bien al trabajo 1 (Probador), o bien al trabajo 2 (Desarrollador Java ), o bien al trabajo 3 (Arquitecto). Podemos escribir esta restricción de la siguiente manera.</p>
+<p>Restricción (Carlos=1)</p>
+<div class="math notranslate nohighlight">
+\[
+x_{1, 1} + x_{1, 2} + x_{1, 3} \leq 1.
+\]</div>
+<p>Esta restricción es menor o igual que 1 para permitir la posibilidad de que Carlos no esté asignado a ningún trabajo. Del mismo modo, las restricciones para los recursos Joe y Monika pueden definirse del siguiente modo:</p>
+<p>Restricción (Joe=2)</p>
+<div class="math notranslate nohighlight">
+\[
+x_{2, 1} + x_{2, 2} + x_{2, 3} \leq 1.
+\]</div>
+<p>Restricción (Monika=3)</p>
+<div class="math notranslate nohighlight">
+\[
+x_{3, 1} + x_{3, 2} + x_{3, 3} \leq 1.
+\]</div>
+<p>Obsérvese que las restricciones de recursos están definidas por las filas de la tabla siguiente.</p>
+<p><img alt="recursos" src="https://github.com/Gurobi/modeling-examples/blob/master/intro_to_modeling/resource_constraints.PNG?raw=1" /></p>
+<p>La restricción del recurso Carlos se puede definir de la siguiente manera.</p>
+<div class="math notranslate nohighlight">
+\[
+x_{1, 1} + x_{1, 2} + x_{1, 3} = \sum_{j=1}^{3 } x_{1,j} = \sum_{j \in J} x_{1,j} \leq 1.
+\]</div>
+<p>De nuevo, cada una de estas restricciones puede escribirse de forma sucinta. Para cada recurso <span class="math notranslate nohighlight">\(r \in R\)</span>, tomar la suma de las variables de decisión sobre todos los puestos de trabajo. Podemos escribir la restricción de recursos correspondiente de la siguiente manera.</p>
+<div class="math notranslate nohighlight">
+\[
+\sum_{j \in J} x_{r,j} \leq  1.
+\]</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Restricciones de recurso: Asegurar que cada persona es asignada a lo sumo a un trabajo</span>
+<span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">R</span><span class="p">:</span>
+    <span class="n">m</span><span class="o">.</span><span class="n">addConstr</span><span class="p">(</span><span class="n">gp</span><span class="o">.</span><span class="n">quicksum</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="n">r</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span> <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="n">J</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="mi">1</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;resource_</span><span class="si">{</span><span class="n">r</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="funcion-objetivo">
+<h1>Función objetivo<a class="headerlink" href="#funcion-objetivo" title="Permalink to this heading">#</a></h1>
+<p>La función objetivo es maximizar la puntuación total de las asignaciones que satisfacen las restricciones del trabajo y de los recursos.</p>
+<p>Para la tarea Comprobador, la puntuación de correspondencia es <span class="math notranslate nohighlight">\(53x_{1,1}\)</span>, si se asigna el recurso Carlos, o <span class="math notranslate nohighlight">\(80x_{2,1}\)</span>, si se asigna el recurso Joe, o <span class="math notranslate nohighlight">\(53x_{3,1}\)</span>, si se asigna el recurso Monika.
+En consecuencia, la puntuación de coincidencia para el trabajo de Comprobador es la siguiente, donde sólo un término de esta suma será distinto de cero.</p>
+<div class="math notranslate nohighlight">
+\[
+53x_{1,1} + 80x_{2,1} + 53x_{3,1}.
+\]</div>
+<p>Del mismo modo, las puntuaciones para los puestos de Desarrollador Java y Arquitecto se definen del siguiente modo. La puntuación para el puesto de Desarrollador Java es:</p>
+<div class="math notranslate nohighlight">
+\[
+27x_{1, 2} + 47x_{2, 2} + 73x_{3, 2}.
+\]</div>
+<p>La puntuación para el puesto de Arquitecto es:</p>
+<div class="math notranslate nohighlight">
+\[
+13x_{1, 3} + 67x_{2, 3} + 47x_{3, 3}.
+\]</div>
+<p>La puntuación total de coincidencia es la suma de cada celda de la siguiente tabla.</p>
+<p><img alt="objfcn" src="https://github.com/Gurobi/modeling-examples/blob/master/intro_to_modeling/objective_function.PNG?raw=1" /></p>
+<p>El objetivo es maximizar la puntuación total de coincidencia de las asignaciones. Por lo tanto, la función objetivo se define de la siguiente manera.</p>
+<p>\begin{equation}
+\text{Maximize} \quad (53x_{1,1} + 80x_{2,1} + 53x_{3,1}) ; +
+\end{equation}</p>
+<p>\begin{equation}
+\quad (27x_{1, 2} + 47x_{2, 2} + 73x_{3, 2}) ; +
+\end{equation}</p>
+<p>\begin{equation}
+\quad (13x_{1, 3} + 67x_{2, 3} + 47x_{3, 3}).
+\end{equation}</p>
+<p>Cada término entre paréntesis en la función objetivo se puede expresar de la siguiente manera.</p>
+<p>\begin{equation}
+(53x_{1,1} + 80x_{2,1} + 53x_{3,1}) = \sum_{r \in R} s_{r,1}x_{r,1}.
+\end{equation}</p>
+<p>\begin{equation}
+(27x_{1, 2} + 47x_{2, 2} + 73x_{3, 2}) = \sum_{r \in R} s_{r,2}x_{r,2}.
+\end{equation}</p>
+<p>\begin{equation}
+(13x_{1, 3} + 67x_{2, 3} + 47x_{3, 3}) = \sum_{r \in R} s_{r,3}x_{r,3}.
+\end{equation}</p>
+<p>Por lo tanto, la función objetivo se puede escribir de forma concisa como:</p>
+<p>\begin{equation}
+\text{Maximize} \quad \sum_{j \in J} \sum_{r \in R} s_{r,j}x_{r,j}.
+\end{equation}</p>
+<p>El método <code class="docutils literal notranslate"><span class="pre">Model.setObjective()</span></code> de la API de Gurobi/Python define la función objetivo del objeto <code class="docutils literal notranslate"><span class="pre">Model</span></code> “m”. La expresión objetivo se especifica en el primer argumento de este método.
+Nótese que tanto los parámetros de puntuación de coincidencia “score” como las variables de decisión de asignación “x” se definen sobre las claves “k”.</p>
+<p>El segundo argumento, <code class="docutils literal notranslate"><span class="pre">GRB.MAXIMIZE</span></code>, es el “sentido” de la optimización. En este caso, queremos <em>maximizar</em> el total de puntuaciones coincidentes de todas las asignaciones.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 5. Función Objetivo</span>
+<span class="c1"># Maximizar la puntuación total de coincidencia de todas las asignaciones</span>
+<span class="n">m</span><span class="o">.</span><span class="n">setObjective</span><span class="p">(</span><span class="n">gp</span><span class="o">.</span><span class="n">quicksum</span><span class="p">(</span><span class="n">scores</span><span class="p">[</span><span class="n">r</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span> <span class="o">*</span> <span class="n">x</span><span class="p">[</span><span class="n">r</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span> <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">R</span> <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="n">J</span><span class="p">),</span> <span class="n">GRB</span><span class="o">.</span><span class="n">MAXIMIZE</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Utilizamos el método “write()” de la API de Gurobi/Python para escribir la formulación del modelo en un archivo llamado “RAP.lp”.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Guardar el modelo para inspección posterior</span>
+<span class="n">m</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;RAP.lp&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p><img alt="RAP" src="https://github.com/Gurobi/modeling-examples/blob/master/intro_to_modeling/RAP_lp.PNG?raw=1" /></p>
+<p>Utilizamos el método “optimize( )” de la API de Gurobi/Python para resolver el problema que hemos definido para el objeto modelo “m”.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Ejecutar el optimizador</span>
+<span class="n">m</span><span class="o">.</span><span class="n">optimize</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Gurobi Optimizer version 10.0.2 build v10.0.2rc0 (win64)
+
+CPU model: 11th Gen Intel(R) Core(TM) i7-1165G7 @ 2.80GHz, instruction set [SSE2|AVX|AVX2|AVX512]
+Thread count: 4 physical cores, 8 logical processors, using up to 8 threads
+
+Optimize a model with 6 rows, 9 columns and 18 nonzeros
+Model fingerprint: 0x0a338f16
+Variable types: 0 continuous, 9 integer (9 binary)
+Coefficient statistics:
+  Matrix range     [1e+00, 1e+00]
+  Objective range  [1e+01, 8e+01]
+  Bounds range     [1e+00, 1e+00]
+  RHS range        [1e+00, 1e+00]
+Presolve time: 0.00s
+Presolved: 6 rows, 9 columns, 18 nonzeros
+Variable types: 0 continuous, 9 integer (9 binary)
+Found heuristic solution: objective 193.0000000
+
+Root relaxation: cutoff, 0 iterations, 0.00 seconds (0.00 work units)
+
+Explored 1 nodes (0 simplex iterations) in 0.02 seconds (0.00 work units)
+Thread count was 8 (of 8 available processors)
+
+Solution count 1: 193 
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 1.930000000000e+02, best bound 1.930000000000e+02, gap 0.0000%
+</pre></div>
+</div>
+</div>
+</div>
+<p>El método <code class="docutils literal notranslate"><span class="pre">Model.getVars()</span></code> de la API de Gurobi/Python
+recupera una lista de todas las variables del objeto Modelo “m”. El atributo de variable <code class="docutils literal notranslate"><span class="pre">.x</span></code> se utiliza para consultar los valores de la solución y el atributo <code class="docutils literal notranslate"><span class="pre">.varName</span></code> se utiliza para consultar el nombre de las variables de decisión.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Visulizar la solución del problema de asignación de tareas</span>
+<span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">m</span><span class="o">.</span><span class="n">getVars</span><span class="p">():</span>
+    <span class="k">if</span> <span class="n">v</span><span class="o">.</span><span class="n">x</span> <span class="o">&gt;</span> <span class="mf">1e-6</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">v</span><span class="o">.</span><span class="n">varName</span><span class="p">,</span> <span class="n">v</span><span class="o">.</span><span class="n">x</span><span class="p">)</span>
+
+<span class="c1"># Visulizar el valor de la función objetivo</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Total matching score: &#39;</span><span class="p">,</span> <span class="n">m</span><span class="o">.</span><span class="n">objVal</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>assign[Carlos,Tester] 1.0
+assign[Joe,Architect] 1.0
+assign[Monika,JavaDeveloper] 1.0
+Total matching score:  193.0
+</pre></div>
+</div>
+</div>
+</div>
+<p>La asignación óptima es asignar</p>
+<ul class="simple">
+<li><p>Carlos al puesto de Probador, con una puntuación de 53</p></li>
+<li><p>Joe al puesto de Arquitecto, con una puntuación de 67</p></li>
+<li><p>Monika al puesto de Desarrollador Java, con una puntuación de 73.</p></li>
+</ul>
+<p>La máxima puntuación total es 193.</p>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./Class_2_Gurobi"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="1-Hello_word_diet_problem.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title"><strong>Lectura 1: introducción a Gurobi python</strong></p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="3-Exercice.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><strong>Lectura 3: Ejercicio en clase</strong></p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div></div>
+  
+</div>
+
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#"><strong>Lectura 2: Formulación implícita</strong></a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modelando-en-gurobi-desde-lo-matematico-a-python-nivel-avanzado">Modelando en Gurobi: Desde lo Matemático a Python (Nivel Avanzado)</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#ejemplo-ilustrativo">Ejemplo ilustrativo</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#problema-de-asignacion-de-recursos">Problema de asignación de recursos</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#datos">Datos</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#variables-de-decision">Variables de decisión</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#restricciones-de-los-trabajos">Restricciones de los trabajos</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#restricciones-de-los-recursos">Restricciones de los recursos</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#funcion-objetivo">Función objetivo</a></li>
+</ul>
+
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Alejandra Tabares
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  <p class="copyright">
+    
+      © Copyright 2022.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

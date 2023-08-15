@@ -1,0 +1,1713 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>Lectura 1: Flujo en redes como programas lineales &#8212; Flujo en Redes 202302</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'Class_3_Network_as_LP/1-Introduction';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="prev" title="Lectura 4: Marco general para Formulación implícita" href="../Class_2_Gurobi/4-Generalizing_Diet_Problem.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="../SyllabusFlujoEnRedes.html">
+  
+  
+  
+  
+  
+    <p class="title logo__title">Flujo en Redes 202302</p>
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../SyllabusFlujoEnRedes.html">
+                    Syllabus
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Semana 1</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../Class_1_Introduction_Motivation/1-Introduction.html"><strong>Lectura 1: Flujo en redes</strong></a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="../Class_1_Introduction_Motivation/2-Project.html"><strong>Lectura 2: Proyecto del semestre</strong></a></li>
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../Class_1_Introduction_Motivation/3-Graphs.html"><strong>Lectura 3: Grafos</strong></a></li>
+
+
+
+
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Semana 2</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../Class_2_Gurobi/1-Hello_word_diet_problem.html"><strong>Lectura 1: introducción a Gurobi python</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Class_2_Gurobi/2-Implicit_formulation.html"><strong>Lectura 2: Formulación implícita</strong></a></li>
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../Class_2_Gurobi/3-Exercice.html"><strong>Lectura 3: Ejercicio en clase</strong></a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="../Class_2_Gurobi/4-Generalizing_Diet_Problem.html"><strong>Lectura 4: Marco general para Formulación implícita</strong></a></li>
+
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Semana 3</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active"><a class="current reference internal" href="#"><strong>Lectura 1: Flujo en redes como programas lineales</strong></a></li>
+
+
+
+
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/tabarespozos/Flujo_en_redes_202302/blob/Flujo_en_redes_202302/Class_3_Network_as_LP/1-Introduction.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch onColab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img src="../_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/tabarespozos/Flujo_en_redes_202302" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/tabarespozos/Flujo_en_redes_202302/issues/new?title=Issue%20on%20page%20%2FClass_3_Network_as_LP/1-Introduction.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/Class_3_Network_as_LP/1-Introduction.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script>
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Lectura 1: Flujo en redes como programas lineales</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#"><strong>Lectura 1: Flujo en redes como programas lineales</strong></a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#ruta-mas-corta">Ruta mas corta.</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ejemplo-motivador">Ejemplo Motivador:</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#problema-de-flujo-maximo">Problema de Flujo Máximo</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Ejemplo Motivador:</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#formulacion-matematica">Formulación Matemática:</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Ejemplo motivador :</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#ejercicio">Ejercicio</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conjuntos">Conjuntos:</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#parametros">Parámetros:</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#variables-de-decision">Variables de decisión:</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modelo-matematico">Modelo matemático:</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#flujo-de-costo-minimo-min-cost-flow">Flujo de Costo Mínimo (Min-Cost Flow)</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#enunciado">Enunciado:</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">Formulación Matemática:</a></li>
+</ul>
+</li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section id="lectura-1-flujo-en-redes-como-programas-lineales">
+<h1><strong>Lectura 1: Flujo en redes como programas lineales</strong><a class="headerlink" href="#lectura-1-flujo-en-redes-como-programas-lineales" title="Permalink to this heading">#</a></h1>
+</section>
+<section id="ruta-mas-corta">
+<h1>Ruta mas corta.<a class="headerlink" href="#ruta-mas-corta" title="Permalink to this heading">#</a></h1>
+<p>El problema de la ruta mas corta consiste en encontrar la ruta de menor costo entre un par de nodos en una red.</p>
+<p><img alt="" src="Images/ruta_mas_corta_google.png" /></p>
+<section id="ejemplo-motivador">
+<h2>Ejemplo Motivador:<a class="headerlink" href="#ejemplo-motivador" title="Permalink to this heading">#</a></h2>
+<p>Supongamos que eres un viajero que busca ir de la ciudad A a la ciudad E utilizando la red de carreteras existente. Dada la siguiente red con las distancias entre ciudades, encuentra la ruta más corta entre la ciudad A y la ciudad E.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">A</span> <span class="o">-</span> <span class="n">B</span><span class="p">:</span> <span class="mi">5</span> <span class="n">km</span>
+<span class="n">A</span> <span class="o">-</span> <span class="n">C</span><span class="p">:</span> <span class="mi">7</span> <span class="n">km</span>
+<span class="n">B</span> <span class="o">-</span> <span class="n">C</span><span class="p">:</span> <span class="mi">3</span> <span class="n">km</span>
+<span class="n">B</span> <span class="o">-</span> <span class="n">D</span><span class="p">:</span> <span class="mi">4</span> <span class="n">km</span>
+<span class="n">C</span> <span class="o">-</span> <span class="n">D</span><span class="p">:</span> <span class="mi">2</span> <span class="n">km</span>
+<span class="n">C</span> <span class="o">-</span> <span class="n">E</span><span class="p">:</span> <span class="mi">6</span> <span class="n">km</span>
+<span class="n">D</span> <span class="o">-</span> <span class="n">E</span><span class="p">:</span> <span class="mi">5</span> <span class="n">km</span>
+</pre></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">networkx</span> <span class="k">as</span> <span class="nn">nx</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
+
+<span class="c1"># Datos</span>
+<span class="n">nodes</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="s1">&#39;B&#39;</span><span class="p">,</span> <span class="s1">&#39;C&#39;</span><span class="p">,</span> <span class="s1">&#39;D&#39;</span><span class="p">,</span> <span class="s1">&#39;E&#39;</span><span class="p">]</span>
+<span class="n">edges</span> <span class="o">=</span> <span class="p">[(</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="s1">&#39;B&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="s1">&#39;C&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;B&#39;</span><span class="p">,</span> <span class="s1">&#39;C&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;B&#39;</span><span class="p">,</span> <span class="s1">&#39;D&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;C&#39;</span><span class="p">,</span> <span class="s1">&#39;D&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;C&#39;</span><span class="p">,</span> <span class="s1">&#39;E&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;D&#39;</span><span class="p">,</span> <span class="s1">&#39;E&#39;</span><span class="p">)]</span>
+<span class="n">costs</span> <span class="o">=</span> <span class="p">{(</span><span class="n">edges</span><span class="p">[</span><span class="n">i</span><span class="p">]):</span> <span class="n">c</span> <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">c</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">([</span><span class="mi">5</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">5</span><span class="p">])}</span>
+
+<span class="c1"># Crear el grafo</span>
+<span class="n">G</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">Graph</span><span class="p">()</span>
+<span class="k">for</span> <span class="n">edge</span><span class="p">,</span> <span class="n">cost</span> <span class="ow">in</span> <span class="n">costs</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+    <span class="n">G</span><span class="o">.</span><span class="n">add_edge</span><span class="p">(</span><span class="n">edge</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">edge</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">weight</span><span class="o">=</span><span class="n">cost</span><span class="p">)</span>
+
+<span class="c1"># Dibujar la instancia</span>
+<span class="n">pos</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">spring_layout</span><span class="p">(</span><span class="n">G</span><span class="p">)</span>
+<span class="n">nx</span><span class="o">.</span><span class="n">draw</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">pos</span><span class="p">,</span> <span class="n">with_labels</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">node_size</span><span class="o">=</span><span class="mi">700</span><span class="p">,</span> <span class="n">node_color</span><span class="o">=</span><span class="s1">&#39;skyblue&#39;</span><span class="p">)</span>
+<span class="n">labels</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">get_edge_attributes</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="s1">&#39;weight&#39;</span><span class="p">)</span>
+<span class="n">nx</span><span class="o">.</span><span class="n">draw_networkx_edge_labels</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">pos</span><span class="p">,</span> <span class="n">edge_labels</span><span class="o">=</span><span class="n">labels</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Red de Carreteras&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/8aee54542f6164f2544bb639fffa3f31df6baf991b3cb1a3961bd2a057018fcb.png" src="../_images/8aee54542f6164f2544bb639fffa3f31df6baf991b3cb1a3961bd2a057018fcb.png" />
+</div>
+</div>
+<p><strong>Formulación del problema de optimización</strong></p>
+<ul class="simple">
+<li><p><strong>Variables de decisión</strong>:
+<span class="math notranslate nohighlight">\( x_{ij} \)</span> : 1 si el camino entre ciudad <span class="math notranslate nohighlight">\(i\)</span> y <span class="math notranslate nohighlight">\(j\)</span> es tomado; 0 de lo contrario.</p></li>
+<li><p><strong>Función objetivo</strong>:
+Minimizar <span class="math notranslate nohighlight">\( \sum_{(i,j) \in A} c_{ij} x_{ij} \)</span>,
+donde <span class="math notranslate nohighlight">\(c_{ij}\)</span> es la distancia entre la ciudad <span class="math notranslate nohighlight">\(i\)</span> y <span class="math notranslate nohighlight">\(j\)</span>.</p></li>
+<li><p><strong>Restricciones</strong>:</p>
+<ol class="arabic simple">
+<li><p>Debe salir de la ciudad A: <span class="math notranslate nohighlight">\( \sum_{j|(A,j) \in A} x_{Aj} = 1 \)</span></p></li>
+<li><p>Debe llegar a la ciudad E: <span class="math notranslate nohighlight">\( \sum_{i|(i,E) \in A} x_{iE} = 1 \)</span></p></li>
+<li><p>Balance de flujo para las ciudades intermedias: <span class="math notranslate nohighlight">\(\sum_{j|(i,j) \in A} x_{ij} - \sum_{k|(k,i) \in A} x_{ki} = 0 , \forall i\)</span> que no sea A o E.</p></li>
+</ol>
+</li>
+</ul>
+<p><strong>Código en Gurobi</strong>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">gurobipy</span> <span class="kn">import</span> <span class="n">Model</span><span class="p">,</span> <span class="n">GRB</span>
+<span class="n">m</span> <span class="o">=</span> <span class="n">Model</span><span class="p">()</span>
+
+<span class="c1"># Variables</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">addVars</span><span class="p">(</span><span class="n">edges</span><span class="p">,</span> <span class="n">obj</span><span class="o">=</span><span class="n">costs</span><span class="p">,</span> <span class="n">vtype</span><span class="o">=</span><span class="n">GRB</span><span class="o">.</span><span class="n">BINARY</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;x&quot;</span><span class="p">)</span>
+
+<span class="c1"># Restricciones</span>
+<span class="n">m</span><span class="o">.</span><span class="n">addConstr</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="s1">&#39;*&#39;</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;Salida desde A&quot;</span><span class="p">)</span>
+<span class="n">m</span><span class="o">.</span><span class="n">addConstr</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="s1">&#39;*&#39;</span><span class="p">,</span> <span class="s1">&#39;E&#39;</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;Llegada a E&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">nodes</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">i</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="s1">&#39;E&#39;</span><span class="p">]:</span>
+        <span class="n">m</span><span class="o">.</span><span class="n">addConstr</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="s1">&#39;*&#39;</span><span class="p">)</span> <span class="o">-</span> <span class="n">x</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="s1">&#39;*&#39;</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;Balance en </span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="c1"># Optimización</span>
+<span class="n">m</span><span class="o">.</span><span class="n">optimize</span><span class="p">()</span>
+
+<span class="c1"># Imprimir solución</span>
+<span class="k">if</span> <span class="n">m</span><span class="o">.</span><span class="n">status</span> <span class="o">==</span> <span class="n">GRB</span><span class="o">.</span><span class="n">OPTIMAL</span><span class="p">:</span>
+    <span class="k">for</span> <span class="n">edge</span> <span class="ow">in</span> <span class="n">edges</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">x</span><span class="p">[</span><span class="n">edge</span><span class="p">]</span><span class="o">.</span><span class="n">x</span> <span class="o">&gt;</span> <span class="mf">0.5</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Ruta desde </span><span class="si">{</span><span class="n">edge</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2"> a </span><span class="si">{</span><span class="n">edge</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Restricted license - for non-production use only - expires 2024-10-28
+Gurobi Optimizer version 10.0.2 build v10.0.2rc0 (win64)
+
+CPU model: 11th Gen Intel(R) Core(TM) i7-1165G7 @ 2.80GHz, instruction set [SSE2|AVX|AVX2|AVX512]
+Thread count: 4 physical cores, 8 logical processors, using up to 8 threads
+
+Optimize a model with 5 rows, 7 columns and 14 nonzeros
+Model fingerprint: 0xa06d13ef
+Variable types: 0 continuous, 7 integer (7 binary)
+Coefficient statistics:
+  Matrix range     [1e+00, 1e+00]
+  Objective range  [2e+00, 7e+00]
+  Bounds range     [1e+00, 1e+00]
+  RHS range        [1e+00, 1e+00]
+Presolve removed 5 rows and 7 columns
+Presolve time: 0.01s
+Presolve: All rows and columns removed
+
+Explored 0 nodes (0 simplex iterations) in 0.02 seconds (0.00 work units)
+Thread count was 1 (of 8 available processors)
+
+Solution count 1: 13 
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 1.300000000000e+01, best bound 1.300000000000e+01, gap 0.0000%
+Ruta desde A a C
+Ruta desde C a E
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Graficar la solución</span>
+<span class="n">edges_taken</span> <span class="o">=</span> <span class="p">[</span><span class="n">edge</span> <span class="k">for</span> <span class="n">edge</span> <span class="ow">in</span> <span class="n">edges</span> <span class="k">if</span> <span class="n">x</span><span class="p">[</span><span class="n">edge</span><span class="p">]</span><span class="o">.</span><span class="n">x</span> <span class="o">&gt;</span> <span class="mf">0.5</span><span class="p">]</span>
+
+<span class="n">edge_colors</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;red&#39;</span> <span class="k">if</span> <span class="n">edge</span> <span class="ow">in</span> <span class="n">edges_taken</span> <span class="k">else</span> <span class="s1">&#39;black&#39;</span> <span class="k">for</span> <span class="n">edge</span> <span class="ow">in</span> <span class="n">G</span><span class="o">.</span><span class="n">edges</span><span class="p">()]</span>
+<span class="n">nx</span><span class="o">.</span><span class="n">draw</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">pos</span><span class="p">,</span> <span class="n">with_labels</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">node_size</span><span class="o">=</span><span class="mi">700</span><span class="p">,</span> <span class="n">node_color</span><span class="o">=</span><span class="s1">&#39;skyblue&#39;</span><span class="p">,</span> <span class="n">edge_color</span><span class="o">=</span><span class="n">edge_colors</span><span class="p">)</span>
+<span class="n">labels</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">get_edge_attributes</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="s1">&#39;weight&#39;</span><span class="p">)</span>
+<span class="n">nx</span><span class="o">.</span><span class="n">draw_networkx_edge_labels</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">pos</span><span class="p">,</span> <span class="n">edge_labels</span><span class="o">=</span><span class="n">labels</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Ruta Más Corta de A a E&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/46c5bac7dba08f251faa0bb23915c09f0f846e75c711936f0d7565ac605a4433.png" src="../_images/46c5bac7dba08f251faa0bb23915c09f0f846e75c711936f0d7565ac605a4433.png" />
+</div>
+</div>
+<p><strong>Ejercicio</strong></p>
+<p>Ahora intenta resolver la siguiente instancia:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">A</span> <span class="o">-&gt;</span> <span class="n">B</span><span class="p">:</span> <span class="mi">5</span> <span class="n">km</span>
+
+<span class="n">A</span> <span class="o">-&gt;</span> <span class="n">C</span><span class="p">:</span> <span class="mi">7</span> <span class="n">km</span>
+
+<span class="n">B</span> <span class="o">-&gt;</span> <span class="n">C</span><span class="p">:</span> <span class="mi">3</span> <span class="n">km</span>
+
+<span class="n">B</span> <span class="o">-&gt;</span> <span class="n">D</span><span class="p">:</span> <span class="mi">4</span> <span class="n">km</span>
+
+<span class="n">B</span> <span class="o">-&gt;</span> <span class="n">F</span><span class="p">:</span> <span class="mi">6</span> <span class="n">km</span>
+
+<span class="n">C</span> <span class="o">-&gt;</span> <span class="n">D</span><span class="p">:</span> <span class="mi">2</span> <span class="n">km</span>
+
+<span class="n">C</span> <span class="o">-&gt;</span> <span class="n">E</span><span class="p">:</span> <span class="mi">8</span> <span class="n">km</span>
+
+<span class="n">D</span> <span class="o">-&gt;</span> <span class="n">E</span><span class="p">:</span> <span class="mi">7</span> <span class="n">km</span>
+
+<span class="n">D</span> <span class="o">-&gt;</span> <span class="n">F</span><span class="p">:</span> <span class="mi">5</span> <span class="n">km</span>
+
+<span class="n">E</span> <span class="o">-&gt;</span> <span class="n">G</span><span class="p">:</span> <span class="mi">9</span> <span class="n">km</span>
+
+<span class="n">F</span> <span class="o">-&gt;</span> <span class="n">G</span><span class="p">:</span> <span class="mi">3</span> <span class="n">km</span>
+
+<span class="n">F</span> <span class="o">-&gt;</span> <span class="n">H</span><span class="p">:</span> <span class="mi">7</span> <span class="n">km</span>
+
+<span class="n">G</span> <span class="o">-&gt;</span> <span class="n">H</span><span class="p">:</span> <span class="mi">4</span> <span class="n">km</span>
+
+<span class="n">H</span> <span class="o">-&gt;</span> <span class="n">I</span><span class="p">:</span> <span class="mi">6</span> <span class="n">km</span>
+
+<span class="n">E</span> <span class="o">-&gt;</span> <span class="n">I</span><span class="p">:</span> <span class="mi">11</span> <span class="n">km</span>
+</pre></div>
+</div>
+<p>Cual es la ruta más corta entre A y I?</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Pon tu código aquí</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">networkx</span> <span class="k">as</span> <span class="nn">nx</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">from</span> <span class="nn">gurobipy</span> <span class="kn">import</span> <span class="n">Model</span><span class="p">,</span> <span class="n">GRB</span>
+
+<span class="c1"># Datos</span>
+<span class="n">nodes</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="s1">&#39;B&#39;</span><span class="p">,</span> <span class="s1">&#39;C&#39;</span><span class="p">,</span> <span class="s1">&#39;D&#39;</span><span class="p">,</span> <span class="s1">&#39;E&#39;</span><span class="p">,</span> <span class="s1">&#39;F&#39;</span><span class="p">,</span> <span class="s1">&#39;G&#39;</span><span class="p">,</span> <span class="s1">&#39;H&#39;</span><span class="p">,</span> <span class="s1">&#39;I&#39;</span><span class="p">]</span>
+<span class="n">edges</span> <span class="o">=</span> <span class="p">[(</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="s1">&#39;B&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="s1">&#39;C&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;B&#39;</span><span class="p">,</span> <span class="s1">&#39;C&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;B&#39;</span><span class="p">,</span> <span class="s1">&#39;D&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;B&#39;</span><span class="p">,</span> <span class="s1">&#39;F&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;C&#39;</span><span class="p">,</span> <span class="s1">&#39;D&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;C&#39;</span><span class="p">,</span> <span class="s1">&#39;E&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;D&#39;</span><span class="p">,</span> <span class="s1">&#39;E&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;D&#39;</span><span class="p">,</span> <span class="s1">&#39;F&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;E&#39;</span><span class="p">,</span> <span class="s1">&#39;G&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;F&#39;</span><span class="p">,</span> <span class="s1">&#39;G&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;F&#39;</span><span class="p">,</span> <span class="s1">&#39;H&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;G&#39;</span><span class="p">,</span> <span class="s1">&#39;H&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;H&#39;</span><span class="p">,</span> <span class="s1">&#39;I&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;E&#39;</span><span class="p">,</span> <span class="s1">&#39;I&#39;</span><span class="p">)]</span>
+<span class="n">costs</span> <span class="o">=</span> <span class="p">{(</span><span class="n">edges</span><span class="p">[</span><span class="n">i</span><span class="p">]):</span> <span class="n">c</span> <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">c</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">([</span><span class="mi">5</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">11</span><span class="p">])}</span>
+
+<span class="c1"># Crear el grafo dirigido</span>
+<span class="n">G</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">DiGraph</span><span class="p">()</span>
+<span class="k">for</span> <span class="n">edge</span><span class="p">,</span> <span class="n">cost</span> <span class="ow">in</span> <span class="n">costs</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+    <span class="n">G</span><span class="o">.</span><span class="n">add_edge</span><span class="p">(</span><span class="n">edge</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">edge</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">weight</span><span class="o">=</span><span class="n">cost</span><span class="p">)</span>
+
+<span class="c1"># Dibujar la instancia</span>
+<span class="n">pos</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">spring_layout</span><span class="p">(</span><span class="n">G</span><span class="p">)</span>
+<span class="n">nx</span><span class="o">.</span><span class="n">draw</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">pos</span><span class="p">,</span> <span class="n">with_labels</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">node_size</span><span class="o">=</span><span class="mi">700</span><span class="p">,</span> <span class="n">node_color</span><span class="o">=</span><span class="s1">&#39;skyblue&#39;</span><span class="p">,</span> <span class="n">arrowsize</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+<span class="n">labels</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">get_edge_attributes</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="s1">&#39;weight&#39;</span><span class="p">)</span>
+<span class="n">nx</span><span class="o">.</span><span class="n">draw_networkx_edge_labels</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">pos</span><span class="p">,</span> <span class="n">edge_labels</span><span class="o">=</span><span class="n">labels</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Red de Carreteras Dirigida&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="c1"># Modelo en Gurobi</span>
+<span class="n">m</span> <span class="o">=</span> <span class="n">Model</span><span class="p">()</span>
+
+<span class="c1"># Variables</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">addVars</span><span class="p">(</span><span class="n">edges</span><span class="p">,</span> <span class="n">obj</span><span class="o">=</span><span class="n">costs</span><span class="p">,</span> <span class="n">vtype</span><span class="o">=</span><span class="n">GRB</span><span class="o">.</span><span class="n">BINARY</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;x&quot;</span><span class="p">)</span>
+
+<span class="c1"># Restricciones</span>
+<span class="n">m</span><span class="o">.</span><span class="n">addConstr</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="s1">&#39;*&#39;</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;Salida desde A&quot;</span><span class="p">)</span>
+<span class="n">m</span><span class="o">.</span><span class="n">addConstr</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="s1">&#39;*&#39;</span><span class="p">,</span> <span class="s1">&#39;I&#39;</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;Llegada a I&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">nodes</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">i</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="s1">&#39;I&#39;</span><span class="p">]:</span>
+        <span class="n">m</span><span class="o">.</span><span class="n">addConstr</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="s1">&#39;*&#39;</span><span class="p">)</span> <span class="o">-</span> <span class="n">x</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="s1">&#39;*&#39;</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;Balance en </span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="c1"># Optimización</span>
+<span class="n">m</span><span class="o">.</span><span class="n">optimize</span><span class="p">()</span>
+
+<span class="c1"># Graficar la solución</span>
+<span class="n">edges_taken</span> <span class="o">=</span> <span class="p">[</span><span class="n">edge</span> <span class="k">for</span> <span class="n">edge</span> <span class="ow">in</span> <span class="n">edges</span> <span class="k">if</span> <span class="n">x</span><span class="p">[</span><span class="n">edge</span><span class="p">]</span><span class="o">.</span><span class="n">x</span> <span class="o">&gt;</span> <span class="mf">0.5</span><span class="p">]</span>
+
+<span class="n">edge_colors</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;red&#39;</span> <span class="k">if</span> <span class="n">edge</span> <span class="ow">in</span> <span class="n">edges_taken</span> <span class="k">else</span> <span class="s1">&#39;black&#39;</span> <span class="k">for</span> <span class="n">edge</span> <span class="ow">in</span> <span class="n">G</span><span class="o">.</span><span class="n">edges</span><span class="p">()]</span>
+<span class="n">nx</span><span class="o">.</span><span class="n">draw</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">pos</span><span class="p">,</span> <span class="n">with_labels</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">node_size</span><span class="o">=</span><span class="mi">700</span><span class="p">,</span> <span class="n">node_color</span><span class="o">=</span><span class="s1">&#39;skyblue&#39;</span><span class="p">,</span> <span class="n">edge_color</span><span class="o">=</span><span class="n">edge_colors</span><span class="p">,</span> <span class="n">arrowsize</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+<span class="n">labels</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">get_edge_attributes</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="s1">&#39;weight&#39;</span><span class="p">)</span>
+<span class="n">nx</span><span class="o">.</span><span class="n">draw_networkx_edge_labels</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">pos</span><span class="p">,</span> <span class="n">edge_labels</span><span class="o">=</span><span class="n">labels</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Ruta Más Corta de A a I&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/30bdb93a4ad61b36803b0c8a4152e03323e5a1e056b6cca39802cd470349933b.png" src="../_images/30bdb93a4ad61b36803b0c8a4152e03323e5a1e056b6cca39802cd470349933b.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Gurobi Optimizer version 10.0.2 build v10.0.2rc0 (win64)
+
+CPU model: 11th Gen Intel(R) Core(TM) i7-1165G7 @ 2.80GHz, instruction set [SSE2|AVX|AVX2|AVX512]
+Thread count: 4 physical cores, 8 logical processors, using up to 8 threads
+
+Optimize a model with 9 rows, 15 columns and 30 nonzeros
+Model fingerprint: 0x8dbed9f0
+Variable types: 0 continuous, 15 integer (15 binary)
+Coefficient statistics:
+  Matrix range     [1e+00, 1e+00]
+  Objective range  [2e+00, 1e+01]
+  Bounds range     [1e+00, 1e+00]
+  RHS range        [1e+00, 1e+00]
+Found heuristic solution: objective 28.0000000
+Presolve removed 9 rows and 15 columns
+Presolve time: 0.00s
+Presolve: All rows and columns removed
+
+Explored 0 nodes (0 simplex iterations) in 0.01 seconds (0.00 work units)
+Thread count was 1 (of 8 available processors)
+
+Solution count 2: 24 28 
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 2.400000000000e+01, best bound 2.400000000000e+01, gap 0.0000%
+</pre></div>
+</div>
+<img alt="../_images/dee8bd8880bd9331160764a514b7a95c1dbf4117b2e03502e099b362f436a90c.png" src="../_images/dee8bd8880bd9331160764a514b7a95c1dbf4117b2e03502e099b362f436a90c.png" />
+</div>
+</div>
+</section>
+</section>
+<section id="problema-de-flujo-maximo">
+<h1>Problema de Flujo Máximo<a class="headerlink" href="#problema-de-flujo-maximo" title="Permalink to this heading">#</a></h1>
+<p>El problema de flujo máximo busca encontrar el mayor flujo posible que puede ser enviado de un nodo fuente a un nodo destino en una red dada.</p>
+<section id="id1">
+<h2>Ejemplo Motivador:<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h2>
+<p>Imaginemos que tenemos una red de tuberías que conecta diferentes puntos (nodos). Cada tubería (arista) tiene una capacidad de flujo determinada. El objetivo es encontrar el flujo máximo que puede ser transportado desde un punto de origen (fuente) hasta un punto final (sumidero) sin exceder las capacidades de las tuberías.</p>
+</section>
+<section id="formulacion-matematica">
+<h2>Formulación Matemática:<a class="headerlink" href="#formulacion-matematica" title="Permalink to this heading">#</a></h2>
+<p>Dado un grafo <span class="math notranslate nohighlight">\( G = (V, E)\)</span>  con un conjunto de nodos <span class="math notranslate nohighlight">\( V \)</span> y un conjunto de aristas <span class="math notranslate nohighlight">\( E \)</span>. Cada arista <span class="math notranslate nohighlight">\((i, j)\)</span> tiene una capacidad <span class="math notranslate nohighlight">\(c_{ij}\)</span>. Buscamos el flujo <span class="math notranslate nohighlight">\(f_{ij}\)</span> tal que:</p>
+<p><strong>Variables</strong>:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(f_{ij}\)</span> : Flujo en la arista <span class="math notranslate nohighlight">\((i, j)\)</span>.</p></li>
+</ul>
+<p><strong>Función Objetivo</strong>:</p>
+<p>Maximizar <span class="math notranslate nohighlight">\( \sum_{j \in V} f_{sj} \)</span> (Maximizar el flujo saliente del nodo fuente).</p>
+<p><strong>Restricciones</strong>:</p>
+<ol class="arabic">
+<li><p><strong>Conservación del Flujo</strong> (para todos los nodos excepto la fuente y el sumidero):</p>
+<p><span class="math notranslate nohighlight">\(\sum_{j \in V} f_{ji} - \sum_{j \in V} f_{ij} = 0 \)</span></p>
+</li>
+<li><p><strong>Restricción de Fuente</strong>:</p>
+<p><span class="math notranslate nohighlight">\( \sum_{j \in V} f_{sj} - \sum_{j \in V} f_{js} \geq 0 \)</span></p>
+</li>
+<li><p><strong>Restricción de Sumidero</strong>:</p>
+<p><span class="math notranslate nohighlight">\( \sum_{j \in V} f_{jt} - \sum_{j \in V} f_{tj} \leq 0 \)</span></p>
+</li>
+<li><p><strong>Capacidad de las Aristas</strong>:</p>
+<p><span class="math notranslate nohighlight">\( 0 \leq f_{ij} \leq c_{ij} \)</span> para todo <span class="math notranslate nohighlight">\((i, j) \in E \)</span></p>
+</li>
+</ol>
+<p><strong>Intenta plantear una formulación alternativa</strong></p>
+<ul class="simple">
+<li><p>Escribe tu modelo aquí</p></li>
+</ul>
+</section>
+<section id="id2">
+<h2>Ejemplo motivador :<a class="headerlink" href="#id2" title="Permalink to this heading">#</a></h2>
+<p>Consideremos el siguiente grafo dirigido:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">A</span> <span class="p">(</span><span class="n">Fuente</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">B</span><span class="p">:</span> <span class="mi">20</span>
+<span class="n">A</span> <span class="o">-&gt;</span> <span class="n">C</span><span class="p">:</span> <span class="mi">30</span>
+<span class="n">B</span> <span class="o">-&gt;</span> <span class="n">C</span><span class="p">:</span> <span class="mi">10</span>
+<span class="n">B</span> <span class="o">-&gt;</span> <span class="n">D</span><span class="p">:</span> <span class="mi">30</span>
+<span class="n">C</span> <span class="o">-&gt;</span> <span class="n">D</span><span class="p">:</span> <span class="mi">20</span>
+<span class="n">C</span> <span class="o">-&gt;</span> <span class="n">E</span> <span class="p">(</span><span class="n">Sumidero</span><span class="p">):</span> <span class="mi">10</span>
+<span class="n">D</span> <span class="o">-&gt;</span> <span class="n">E</span><span class="p">:</span> <span class="mi">40</span>
+</pre></div>
+</div>
+<p>Queremos encontrar el flujo máximo desde A hasta E.</p>
+<p><strong>Código en python</strong></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">networkx</span> <span class="k">as</span> <span class="nn">nx</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">from</span> <span class="nn">gurobipy</span> <span class="kn">import</span> <span class="n">Model</span><span class="p">,</span> <span class="n">GRB</span>
+
+<span class="c1"># Datos</span>
+<span class="n">nodes</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="s1">&#39;B&#39;</span><span class="p">,</span> <span class="s1">&#39;C&#39;</span><span class="p">,</span> <span class="s1">&#39;D&#39;</span><span class="p">,</span> <span class="s1">&#39;E&#39;</span><span class="p">]</span>
+<span class="n">edges</span> <span class="o">=</span> <span class="p">[(</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="s1">&#39;B&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="s1">&#39;C&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;B&#39;</span><span class="p">,</span> <span class="s1">&#39;C&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;B&#39;</span><span class="p">,</span> <span class="s1">&#39;D&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;C&#39;</span><span class="p">,</span> <span class="s1">&#39;D&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;C&#39;</span><span class="p">,</span> <span class="s1">&#39;E&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;D&#39;</span><span class="p">,</span> <span class="s1">&#39;E&#39;</span><span class="p">)]</span>
+<span class="n">capacities</span> <span class="o">=</span> <span class="p">{(</span><span class="n">edges</span><span class="p">[</span><span class="n">i</span><span class="p">]):</span> <span class="n">c</span> <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">c</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">([</span><span class="mi">20</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">40</span><span class="p">])}</span>
+
+<span class="c1"># Crear el grafo dirigido con NetworkX</span>
+<span class="n">G</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">DiGraph</span><span class="p">()</span>
+<span class="k">for</span> <span class="n">edge</span><span class="p">,</span> <span class="n">capacity</span> <span class="ow">in</span> <span class="n">capacities</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+    <span class="n">G</span><span class="o">.</span><span class="n">add_edge</span><span class="p">(</span><span class="n">edge</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">edge</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">capacity</span><span class="o">=</span><span class="n">capacity</span><span class="p">)</span>
+
+<span class="c1"># Visualización con NetworkX - Grafo Inicial</span>
+<span class="n">pos</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">spring_layout</span><span class="p">(</span><span class="n">G</span><span class="p">)</span>
+<span class="n">edge_labels</span> <span class="o">=</span> <span class="p">{(</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">):</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">G</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">][</span><span class="s1">&#39;capacity&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span> <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span> <span class="ow">in</span> <span class="n">G</span><span class="o">.</span><span class="n">edges</span><span class="p">()}</span>
+<span class="n">nx</span><span class="o">.</span><span class="n">draw</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">pos</span><span class="p">,</span> <span class="n">with_labels</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">node_size</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span> <span class="n">node_color</span><span class="o">=</span><span class="s1">&#39;lightgray&#39;</span><span class="p">,</span> <span class="n">arrowsize</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">font_size</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
+<span class="n">nx</span><span class="o">.</span><span class="n">draw_networkx_edge_labels</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">pos</span><span class="p">,</span> <span class="n">edge_labels</span><span class="o">=</span><span class="n">edge_labels</span><span class="p">,</span> <span class="n">font_size</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Grafo Inicial con Capacidades&quot;</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/f2f09b6465d580894b08eb272c041b4994ce60139db427396cd10712308376ca.png" src="../_images/f2f09b6465d580894b08eb272c041b4994ce60139db427396cd10712308376ca.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Modelo en Gurobi</span>
+<span class="n">m</span> <span class="o">=</span> <span class="n">Model</span><span class="p">()</span>
+
+<span class="c1"># Variables</span>
+<span class="n">flow</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">addVars</span><span class="p">(</span><span class="n">edges</span><span class="p">,</span> <span class="n">ub</span><span class="o">=</span><span class="n">capacities</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;flow&quot;</span><span class="p">)</span>
+
+<span class="c1"># Restricciones</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">nodes</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">i</span> <span class="o">==</span> <span class="s1">&#39;A&#39;</span><span class="p">:</span>  <span class="c1"># Fuente</span>
+        <span class="n">m</span><span class="o">.</span><span class="n">addConstr</span><span class="p">(</span><span class="n">flow</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="s1">&#39;*&#39;</span><span class="p">)</span> <span class="o">-</span> <span class="n">flow</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="s1">&#39;*&#39;</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;Source_</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">i</span> <span class="o">==</span> <span class="s1">&#39;E&#39;</span><span class="p">:</span>  <span class="c1"># Sumidero</span>
+        <span class="n">m</span><span class="o">.</span><span class="n">addConstr</span><span class="p">(</span><span class="n">flow</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="s1">&#39;*&#39;</span><span class="p">)</span> <span class="o">-</span> <span class="n">flow</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="s1">&#39;*&#39;</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;Sink_</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>  <span class="c1"># Conservación del flujo</span>
+        <span class="n">m</span><span class="o">.</span><span class="n">addConstr</span><span class="p">(</span><span class="n">flow</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="s1">&#39;*&#39;</span><span class="p">)</span> <span class="o">-</span> <span class="n">flow</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="s1">&#39;*&#39;</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;FlowConserv_</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="c1"># Función objetivo</span>
+<span class="n">m</span><span class="o">.</span><span class="n">setObjective</span><span class="p">(</span><span class="n">flow</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="s1">&#39;*&#39;</span><span class="p">)</span> <span class="o">-</span> <span class="n">flow</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="s1">&#39;*&#39;</span><span class="p">,</span> <span class="s1">&#39;A&#39;</span><span class="p">),</span> <span class="n">GRB</span><span class="o">.</span><span class="n">MAXIMIZE</span><span class="p">)</span>
+
+<span class="c1"># Optimizar</span>
+<span class="n">m</span><span class="o">.</span><span class="n">optimize</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Gurobi Optimizer version 10.0.2 build v10.0.2rc0 (win64)
+
+CPU model: 11th Gen Intel(R) Core(TM) i7-1165G7 @ 2.80GHz, instruction set [SSE2|AVX|AVX2|AVX512]
+Thread count: 4 physical cores, 8 logical processors, using up to 8 threads
+
+Optimize a model with 5 rows, 7 columns and 14 nonzeros
+Model fingerprint: 0x59b4cac7
+Coefficient statistics:
+  Matrix range     [1e+00, 1e+00]
+  Objective range  [1e+00, 1e+00]
+  Bounds range     [1e+01, 4e+01]
+  RHS range        [0e+00, 0e+00]
+Presolve removed 3 rows and 4 columns
+Presolve time: 0.01s
+Presolved: 2 rows, 3 columns, 4 nonzeros
+
+Iteration    Objective       Primal Inf.    Dual Inf.      Time
+       0    5.0000000e+01   0.000000e+00   0.000000e+00      0s
+       0    5.0000000e+01   0.000000e+00   0.000000e+00      0s
+
+Solved in 0 iterations and 0.01 seconds (0.00 work units)
+Optimal objective  5.000000000e+01
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Imprimir solución</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Flujos óptimos en cada arista:&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">edge</span><span class="p">,</span> <span class="n">variable</span> <span class="ow">in</span> <span class="n">flow</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Flujo desde </span><span class="si">{</span><span class="n">edge</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2"> hacia </span><span class="si">{</span><span class="n">edge</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">variable</span><span class="o">.</span><span class="n">x</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">capacities</span><span class="p">[</span><span class="n">edge</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Flujos óptimos en cada arista:
+Flujo desde A hacia B: 20.0/20
+Flujo desde A hacia C: 30.0/30
+Flujo desde B hacia C: 0.0/10
+Flujo desde B hacia D: 20.0/30
+Flujo desde C hacia D: 20.0/20
+Flujo desde C hacia E: 10.0/10
+Flujo desde D hacia E: 40.0/40
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Actualizar el grafo con los flujos</span>
+<span class="k">for</span> <span class="n">edge</span><span class="p">,</span> <span class="n">variable</span> <span class="ow">in</span> <span class="n">flow</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+    <span class="n">G</span><span class="p">[</span><span class="n">edge</span><span class="p">[</span><span class="mi">0</span><span class="p">]][</span><span class="n">edge</span><span class="p">[</span><span class="mi">1</span><span class="p">]][</span><span class="s1">&#39;flow&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">variable</span><span class="o">.</span><span class="n">x</span>
+
+<span class="c1"># Visualización con NetworkX - Grafo con Flujos</span>
+<span class="n">edge_labels_with_flow</span> <span class="o">=</span> <span class="p">{(</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">):</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">G</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">][</span><span class="s1">&#39;flow&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">G</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">][</span><span class="s1">&#39;capacity&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span> <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span> <span class="ow">in</span> <span class="n">G</span><span class="o">.</span><span class="n">edges</span><span class="p">()}</span>
+<span class="n">nx</span><span class="o">.</span><span class="n">draw</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">pos</span><span class="p">,</span> <span class="n">with_labels</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">node_size</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span> <span class="n">node_color</span><span class="o">=</span><span class="s1">&#39;lightblue&#39;</span><span class="p">,</span> <span class="n">arrowsize</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">font_size</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
+<span class="n">nx</span><span class="o">.</span><span class="n">draw_networkx_edge_labels</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">pos</span><span class="p">,</span> <span class="n">edge_labels</span><span class="o">=</span><span class="n">edge_labels_with_flow</span><span class="p">,</span> <span class="n">font_size</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Flujo Máximo desde A hasta E&quot;</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/25100be8c0483d3557259a6f46788d1285a66e2c2ebaaa918a5de4490e17df0c.png" src="../_images/25100be8c0483d3557259a6f46788d1285a66e2c2ebaaa918a5de4490e17df0c.png" />
+</div>
+</div>
+</section>
+</section>
+<section id="ejercicio">
+<h1>Ejercicio<a class="headerlink" href="#ejercicio" title="Permalink to this heading">#</a></h1>
+<p><strong>Problema de Evacuación de Emergencia</strong></p>
+<p>La ciudad de Industropolis, una metrópoli próspera situada cerca de un gran río, está en grave peligro debido a la inminente ruptura de un dique cercano. Las autoridades locales han decidido llevar a cabo una evacuación masiva para garantizar la seguridad de sus habitantes. Sin embargo, la operación de evacuación es compleja debido a la estructura de las carreteras de la ciudad y a las limitaciones de capacidad.</p>
+<p>Industropolis cuenta con 3 puntos de evacuación estratégicos a los que llamaremos E1, E2 y E3. Además, hay 3 zonas seguras fuera de la ciudad donde las personas pueden ser llevadas para su seguridad, denominadas Z1, Z2 y Z3.</p>
+<p>La red de carreteras entre los puntos de evacuación y las zonas seguras se puede representar como un conjunto de rutas. Cada ruta tiene una capacidad máxima, que representa el número de personas que puede ser evacuado por esa ruta en una hora. Algunas rutas conectan puntos de evacuación con zonas seguras, mientras que otras conectan diferentes puntos de evacuación entre sí, representando intersecciones o vías principales dentro de la ciudad.</p>
+<p>Los datos de las capacidades de las rutas se detallan a continuación:</p>
+<p><strong>Rutas y Capacidades:</strong></p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(E1 \rightarrow N1\)</span>: 4000 personas/hora</p></li>
+<li><p><span class="math notranslate nohighlight">\(E2 \rightarrow N1\)</span>: 3000 personas/hora</p></li>
+<li><p><span class="math notranslate nohighlight">\(E2 \rightarrow N2\)</span>: 2000 personas/hora</p></li>
+<li><p><span class="math notranslate nohighlight">\(E3 \rightarrow N3\)</span>: 4500 personas/hora</p></li>
+<li><p><span class="math notranslate nohighlight">\(N1 \rightarrow N3\)</span>: 2500 personas/hora</p></li>
+<li><p><span class="math notranslate nohighlight">\(N1 \rightarrow N4\)</span>: 3500 personas/hora</p></li>
+<li><p><span class="math notranslate nohighlight">\(N2 \rightarrow N4\)</span>: 3000 personas/hora</p></li>
+<li><p><span class="math notranslate nohighlight">\(N3 \rightarrow Z1\)</span>: 4000 personas/hora</p></li>
+<li><p><span class="math notranslate nohighlight">\(N3 \rightarrow Z2\)</span>: 1500 personas/hora</p></li>
+<li><p><span class="math notranslate nohighlight">\(N4 \rightarrow Z2\)</span>: 3000 personas/hora</p></li>
+<li><p><span class="math notranslate nohighlight">\(N4 \rightarrow Z3\)</span>: 2500 personas/hora</p></li>
+</ul>
+<p>Su tarea es determinar:</p>
+<ol class="arabic simple">
+<li><p>¿Cuál es el número máximo de personas que pueden ser evacuadas de Industropolis en una hora?</p></li>
+<li><p>¿Qué ruta o rutas representan los cuellos de botella en esta operación de evacuación?</p></li>
+<li><p>Si se tuviera la opción de aumentar la capacidad de una sola ruta en 1000 personas/hora, ¿cuál debería ser para maximizar aún más la evacuación?</p></li>
+</ol>
+<p>Se espera que presenten una metodología clara para la resolución, utilizando técnicas de optimización y herramientas de programación lineal. La solución debe incluir una representación visual de la red de carreteras y las rutas de evacuación propuestas, así como un análisis detallado de los resultados y las recomendaciones para las autoridades.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">gurobipy</span> <span class="k">as</span> <span class="nn">gp</span>
+<span class="kn">from</span> <span class="nn">gurobipy</span> <span class="kn">import</span> <span class="n">GRB</span>
+
+<span class="c1"># Datos</span>
+<span class="n">nodes</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;E1&#39;</span><span class="p">,</span> <span class="s1">&#39;E2&#39;</span><span class="p">,</span> <span class="s1">&#39;E3&#39;</span><span class="p">,</span> <span class="s1">&#39;N1&#39;</span><span class="p">,</span> <span class="s1">&#39;N2&#39;</span><span class="p">,</span> <span class="s1">&#39;N3&#39;</span><span class="p">,</span> <span class="s1">&#39;N4&#39;</span><span class="p">,</span> <span class="s1">&#39;Z1&#39;</span><span class="p">,</span> <span class="s1">&#39;Z2&#39;</span><span class="p">,</span> <span class="s1">&#39;Z3&#39;</span><span class="p">]</span>
+<span class="n">edges</span> <span class="o">=</span> <span class="p">[(</span><span class="s1">&#39;E1&#39;</span><span class="p">,</span> <span class="s1">&#39;N1&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;E2&#39;</span><span class="p">,</span> <span class="s1">&#39;N1&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;E2&#39;</span><span class="p">,</span> <span class="s1">&#39;N2&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;E3&#39;</span><span class="p">,</span> <span class="s1">&#39;N3&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;N1&#39;</span><span class="p">,</span> <span class="s1">&#39;N3&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;N1&#39;</span><span class="p">,</span> <span class="s1">&#39;N4&#39;</span><span class="p">),</span> 
+         <span class="p">(</span><span class="s1">&#39;N2&#39;</span><span class="p">,</span> <span class="s1">&#39;N4&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;N3&#39;</span><span class="p">,</span> <span class="s1">&#39;Z1&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;N3&#39;</span><span class="p">,</span> <span class="s1">&#39;Z2&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;N4&#39;</span><span class="p">,</span> <span class="s1">&#39;Z2&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;N4&#39;</span><span class="p">,</span> <span class="s1">&#39;Z3&#39;</span><span class="p">)]</span>
+<span class="n">capacities</span> <span class="o">=</span> <span class="p">{(</span><span class="n">edges</span><span class="p">[</span><span class="n">i</span><span class="p">]):</span> <span class="n">c</span> <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">c</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">([</span><span class="mi">4000</span><span class="p">,</span> <span class="mi">3000</span><span class="p">,</span> <span class="mi">2000</span><span class="p">,</span> <span class="mi">4500</span><span class="p">,</span> <span class="mi">2500</span><span class="p">,</span> <span class="mi">3500</span><span class="p">,</span> <span class="mi">3000</span><span class="p">,</span> <span class="mi">4000</span><span class="p">,</span> <span class="mi">1500</span><span class="p">,</span> <span class="mi">3000</span><span class="p">,</span> <span class="mi">2500</span><span class="p">])}</span>
+
+<span class="c1"># Crear el modelo</span>
+<span class="n">m</span> <span class="o">=</span> <span class="n">gp</span><span class="o">.</span><span class="n">Model</span><span class="p">(</span><span class="s2">&quot;Evacuacion_Multiple&quot;</span><span class="p">)</span>
+
+<span class="c1"># Variables</span>
+<span class="n">flow</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">addVars</span><span class="p">(</span><span class="n">edges</span><span class="p">,</span> <span class="n">obj</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="n">ub</span><span class="o">=</span><span class="n">capacities</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;flow&quot;</span><span class="p">)</span>
+
+<span class="c1"># Restricciones de conservación de flujo</span>
+<span class="k">for</span> <span class="n">node</span> <span class="ow">in</span> <span class="n">nodes</span><span class="p">:</span>
+    <span class="n">total_in</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">flow</span><span class="p">[</span><span class="n">edge</span><span class="p">]</span> <span class="k">for</span> <span class="n">edge</span> <span class="ow">in</span> <span class="n">edges</span> <span class="k">if</span> <span class="n">edge</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="n">node</span><span class="p">)</span>
+    <span class="n">total_out</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">flow</span><span class="p">[</span><span class="n">edge</span><span class="p">]</span> <span class="k">for</span> <span class="n">edge</span> <span class="ow">in</span> <span class="n">edges</span> <span class="k">if</span> <span class="n">edge</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="n">node</span><span class="p">)</span>
+
+    <span class="c1"># Nodos fuente</span>
+    <span class="k">if</span> <span class="n">node</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;E1&#39;</span><span class="p">,</span> <span class="s1">&#39;E2&#39;</span><span class="p">,</span> <span class="s1">&#39;E3&#39;</span><span class="p">]:</span>
+        <span class="n">m</span><span class="o">.</span><span class="n">addConstr</span><span class="p">(</span><span class="n">total_out</span> <span class="o">-</span> <span class="n">total_in</span> <span class="o">==</span> <span class="nb">sum</span><span class="p">(</span><span class="n">flow</span><span class="p">[</span><span class="n">edge</span><span class="p">]</span> <span class="k">for</span> <span class="n">edge</span> <span class="ow">in</span> <span class="n">edges</span> <span class="k">if</span> <span class="n">edge</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="n">node</span><span class="p">))</span>
+    <span class="c1"># Nodos sumidero</span>
+    <span class="k">elif</span> <span class="n">node</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;Z1&#39;</span><span class="p">,</span> <span class="s1">&#39;Z2&#39;</span><span class="p">,</span> <span class="s1">&#39;Z3&#39;</span><span class="p">]:</span>
+        <span class="n">m</span><span class="o">.</span><span class="n">addConstr</span><span class="p">(</span><span class="n">total_in</span> <span class="o">-</span> <span class="n">total_out</span> <span class="o">==</span> <span class="nb">sum</span><span class="p">(</span><span class="n">flow</span><span class="p">[</span><span class="n">edge</span><span class="p">]</span> <span class="k">for</span> <span class="n">edge</span> <span class="ow">in</span> <span class="n">edges</span> <span class="k">if</span> <span class="n">edge</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="n">node</span><span class="p">))</span>
+    <span class="c1"># Otros nodos</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">m</span><span class="o">.</span><span class="n">addConstr</span><span class="p">(</span><span class="n">total_out</span> <span class="o">-</span> <span class="n">total_in</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span>
+
+<span class="c1"># Optimizar</span>
+<span class="n">m</span><span class="o">.</span><span class="n">optimize</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Gurobi Optimizer version 10.0.2 build v10.0.2rc0 (win64)
+
+CPU model: 11th Gen Intel(R) Core(TM) i7-1165G7 @ 2.80GHz, instruction set [SSE2|AVX|AVX2|AVX512]
+Thread count: 4 physical cores, 8 logical processors, using up to 8 threads
+
+Optimize a model with 10 rows, 11 columns and 14 nonzeros
+Model fingerprint: 0xfe3c3411
+Coefficient statistics:
+  Matrix range     [1e+00, 1e+00]
+  Objective range  [1e+00, 1e+00]
+  Bounds range     [2e+03, 5e+03]
+  RHS range        [0e+00, 0e+00]
+Presolve removed 7 rows and 1 columns
+Presolve time: 0.01s
+Presolved: 3 rows, 10 columns, 12 nonzeros
+
+Iteration    Objective       Primal Inf.    Dual Inf.      Time
+       0   -3.2500000e+04   2.500000e+03   0.000000e+00      0s
+       2   -3.0000000e+04   0.000000e+00   0.000000e+00      0s
+
+Solved in 2 iterations and 0.01 seconds (0.00 work units)
+Optimal objective -3.000000000e+04
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Imprimir solución</span>
+<span class="k">if</span> <span class="n">m</span><span class="o">.</span><span class="n">status</span> <span class="o">==</span> <span class="n">GRB</span><span class="o">.</span><span class="n">OPTIMAL</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Maximo numero de personas que pueden ser evacuadas en una hora: </span><span class="si">{</span><span class="o">-</span><span class="n">m</span><span class="o">.</span><span class="n">objVal</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Flujos en las rutas:&quot;</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">edge</span><span class="p">,</span> <span class="n">var</span> <span class="ow">in</span> <span class="n">flow</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Desde </span><span class="si">{</span><span class="n">edge</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2"> a </span><span class="si">{</span><span class="n">edge</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">var</span><span class="o">.</span><span class="n">x</span><span class="si">}</span><span class="s2"> personas&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Maximo numero de personas que pueden ser evacuadas en una hora: 30000.0
+
+Flujos en las rutas:
+Desde E1 a N1: 3000.0 personas
+Desde E2 a N1: 3000.0 personas
+Desde E2 a N2: 2000.0 personas
+Desde E3 a N3: 3000.0 personas
+Desde N1 a N3: 2500.0 personas
+Desde N1 a N4: 3500.0 personas
+Desde N2 a N4: 2000.0 personas
+Desde N3 a Z1: 4000.0 personas
+Desde N3 a Z2: 1500.0 personas
+Desde N4 a Z2: 3000.0 personas
+Desde N4 a Z3: 2500.0 personas
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>Formulación del problema</strong></p>
+<p>Por supuesto, la formulación matemática para el problema de evacuación con múltiples fuentes y sumideros es la siguiente:</p>
+<section id="conjuntos">
+<h2>Conjuntos:<a class="headerlink" href="#conjuntos" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\( E \)</span> : Conjunto de puntos de evacuación (fuentes)</p></li>
+<li><p><span class="math notranslate nohighlight">\( Z \)</span> : Conjunto de zonas seguras (sumideros)</p></li>
+<li><p><span class="math notranslate nohighlight">\( N \)</span> : Conjunto de nodos intermedios</p></li>
+<li><p><span class="math notranslate nohighlight">\( R \)</span> : Conjunto de rutas (arcos) entre nodos</p></li>
+</ul>
+</section>
+<section id="parametros">
+<h2>Parámetros:<a class="headerlink" href="#parametros" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\( c_{ij} \)</span> : Capacidad de personas por hora que pueden ser evacuadas desde el nodo <span class="math notranslate nohighlight">\( i \)</span> al nodo <span class="math notranslate nohighlight">\( j \)</span></p></li>
+</ul>
+</section>
+<section id="variables-de-decision">
+<h2>Variables de decisión:<a class="headerlink" href="#variables-de-decision" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\( f_{ij} \)</span> : Flujo de personas por hora evacuadas desde el nodo <span class="math notranslate nohighlight">\( i \)</span> al nodo <span class="math notranslate nohighlight">\( j \)</span></p></li>
+</ul>
+</section>
+<section id="modelo-matematico">
+<h2>Modelo matemático:<a class="headerlink" href="#modelo-matematico" title="Permalink to this heading">#</a></h2>
+<p><strong>Función Objetivo:</strong></p>
+<p><span class="math notranslate nohighlight">\( \text{max} \text{ F} \)</span></p>
+<p><strong>Sujeto a las restricciones:</strong></p>
+<ol class="arabic simple">
+<li><p><strong>Restricciones de capacidad:</strong> El flujo en una ruta no debe superar su capacidad.</p></li>
+</ol>
+<p><span class="math notranslate nohighlight">\(f_{ij} \leq c_{ij} \quad \forall (i, j) \in R \)</span></p>
+<ol class="arabic simple" start="2">
+<li><p><strong>Restricciones de conservación de flujo:</strong> La cantidad de personas que entran y salen de un nodo deben ser iguales, excepto en los puntos de evacuación y zonas seguras.</p></li>
+</ol>
+<p><span class="math notranslate nohighlight">\( \sum_{j|(i,j) \in R} f_{ij} - \sum_{j|(j,i) \in R} f_{ji} = 0 \quad \forall i \in N \)</span></p>
+<ol class="arabic simple" start="3">
+<li><p><strong>Restricciones para puntos de evacuación:</strong> La cantidad de personas que salen de un punto de evacuación es igual al flujo total de ese punto.</p></li>
+</ol>
+<p><span class="math notranslate nohighlight">\( \sum_{j|(i,j) \in R} f_{ij} = F \quad \forall i \in E \)</span></p>
+<ol class="arabic simple" start="4">
+<li><p><strong>Restricciones para zonas seguras:</strong> La cantidad de personas que llegan a una zona segura es igual al flujo total hacia esa zona.</p></li>
+</ol>
+<p><span class="math notranslate nohighlight">\(\sum_{j|(j,i) \in R} f_{ji} = F  \quad \forall i \in Z \)</span></p>
+<p>Donde:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\( i \)</span> y <span class="math notranslate nohighlight">\( j \)</span> son nodos cualesquiera en la red.</p></li>
+<li><p>La primera suma en las restricciones de conservación de flujo representa el flujo total saliente del nodo <span class="math notranslate nohighlight">\( i \)</span> y la segunda suma representa el flujo total entrante al nodo <span class="math notranslate nohighlight">\( i \)</span>.</p></li>
+</ul>
+<p>Esta formulación garantiza que se maximice el número de personas evacuadas teniendo en cuenta las capacidades de las rutas y asegurando un flujo correcto a través de la red.</p>
+</section>
+</section>
+<section id="flujo-de-costo-minimo-min-cost-flow">
+<h1>Flujo de Costo Mínimo (Min-Cost Flow)<a class="headerlink" href="#flujo-de-costo-minimo-min-cost-flow" title="Permalink to this heading">#</a></h1>
+<p>El problema del flujo de costo mínimo (a menudo llamado simplemente “Min-Cost Flow”) es un problema fundamental de optimización en redes que combina aspectos de ambos, el problema de ruta más corta y el problema de flujo máximo. Su objetivo es encontrar el flujo de menor costo posible que satisface las demandas y restricciones de suministro en una red.</p>
+<section id="enunciado">
+<h2>Enunciado:<a class="headerlink" href="#enunciado" title="Permalink to this heading">#</a></h2>
+<p>Supongamos que una empresa de transporte tiene bodegas en tres ciudades (A, B y C) y necesita enviar productos a tiendas en otras tres ciudades (X, Y y Z). Las bodegas tienen una cierta cantidad de productos y las tiendas tienen una demanda específica. Además, el costo de enviar una unidad de producto de una ciudad a otra es conocido. El objetivo es determinar la cantidad de productos que deben ser enviados desde cada bodega a cada tienda de manera que se minimice el costo total de transporte y se satisfaga la demanda de cada tienda.</p>
+<ul>
+<li><p>Oferta en bodegas:</p>
+<ul class="simple">
+<li><p>A: 20</p></li>
+<li><p>B: 30</p></li>
+<li><p>C: 25</p></li>
+</ul>
+</li>
+<li><p>Demanda en tiendas:</p>
+<ul class="simple">
+<li><p>X: 10</p></li>
+<li><p>Y: 25</p></li>
+<li><p>Z: 40</p></li>
+</ul>
+</li>
+<li><p>Costo de transporte (por unidad de producto):</p>
+<table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p></p></th>
+<th class="head"><p>X</p></th>
+<th class="head"><p>Y</p></th>
+<th class="head"><p>Z</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>A</p></td>
+<td><p>8</p></td>
+<td><p>6</p></td>
+<td><p>10</p></td>
+</tr>
+<tr class="row-odd"><td><p>B</p></td>
+<td><p>9</p></td>
+<td><p>5</p></td>
+<td><p>9</p></td>
+</tr>
+<tr class="row-even"><td><p>C</p></td>
+<td><p>11</p></td>
+<td><p>7</p></td>
+<td><p>7</p></td>
+</tr>
+</tbody>
+</table>
+</li>
+</ul>
+</section>
+<section id="id3">
+<h2>Formulación Matemática:<a class="headerlink" href="#id3" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Conjuntos:</p>
+<ul>
+<li><p><span class="math notranslate nohighlight">\(I\)</span>: Conjunto de bodegas, <span class="math notranslate nohighlight">\(I = \{A, B, C\}\)</span>.</p></li>
+<li><p><span class="math notranslate nohighlight">\(J\)</span>: Conjunto de tiendas, <span class="math notranslate nohighlight">\(J = \{X, Y, Z\}\)</span>.</p></li>
+</ul>
+</li>
+<li><p>Parámetros:</p>
+<ul>
+<li><p><span class="math notranslate nohighlight">\( s_i \)</span>: Oferta de la bodega <span class="math notranslate nohighlight">\(i \in I\)</span>.</p></li>
+<li><p><span class="math notranslate nohighlight">\( d_j \)</span>: Demanda de la tienda <span class="math notranslate nohighlight">\(j \in J\)</span>.</p></li>
+<li><p><span class="math notranslate nohighlight">\( c_{ij} \)</span>: Costo de enviar una unidad de producto de la bodega <span class="math notranslate nohighlight">\(i\)</span> a la tienda <span class="math notranslate nohighlight">\(j\)</span>.</p></li>
+</ul>
+</li>
+<li><p>Variables:</p>
+<ul>
+<li><p><span class="math notranslate nohighlight">\( x_{ij} \)</span>: Cantidad de productos enviados de la bodega <span class="math notranslate nohighlight">\(i\)</span> a la tienda <span class="math notranslate nohighlight">\(j\)</span>.</p></li>
+</ul>
+</li>
+</ul>
+<p><strong>Función objetivo</strong>:</p>
+<p>Minimizar <span class="math notranslate nohighlight">\( \sum_{i \in I} \sum_{j \in J} c_{ij} x_{ij} \)</span></p>
+<p><strong>Restricciones</strong>:</p>
+<ol class="arabic simple">
+<li><p>Oferta en bodegas:
+$<span class="math notranslate nohighlight">\( \sum_{j \in J} x_{ij} \leq s_i \quad \forall i \in I \)</span>$</p></li>
+<li><p>Demanda en tiendas:
+$<span class="math notranslate nohighlight">\( \sum_{i \in I} x_{ij} = d_j \quad \forall j \in J \)</span>$</p></li>
+<li><p>No negatividad:
+$<span class="math notranslate nohighlight">\( x_{ij} \geq 0 \quad \forall i \in I, \forall j \in J \)</span>$</p></li>
+</ol>
+<p><strong>Código en Python:</strong></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">gurobipy</span> <span class="kn">import</span> <span class="n">Model</span><span class="p">,</span> <span class="n">GRB</span>
+<span class="kn">import</span> <span class="nn">networkx</span> <span class="k">as</span> <span class="nn">nx</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
+<span class="c1"># Data</span>
+<span class="n">bodegas</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="s1">&#39;B&#39;</span><span class="p">,</span> <span class="s1">&#39;C&#39;</span><span class="p">]</span>
+<span class="n">tiendas</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;X&#39;</span><span class="p">,</span> <span class="s1">&#39;Y&#39;</span><span class="p">,</span> <span class="s1">&#39;Z&#39;</span><span class="p">]</span>
+<span class="n">oferta</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;A&#39;</span><span class="p">:</span> <span class="mi">20</span><span class="p">,</span> <span class="s1">&#39;B&#39;</span><span class="p">:</span> <span class="mi">30</span><span class="p">,</span> <span class="s1">&#39;C&#39;</span><span class="p">:</span> <span class="mi">25</span><span class="p">}</span>
+<span class="n">demanda</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;X&#39;</span><span class="p">:</span> <span class="mi">10</span><span class="p">,</span> <span class="s1">&#39;Y&#39;</span><span class="p">:</span> <span class="mi">25</span><span class="p">,</span> <span class="s1">&#39;Z&#39;</span><span class="p">:</span> <span class="mi">40</span><span class="p">}</span>
+<span class="n">costos</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="p">(</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="s1">&#39;X&#39;</span><span class="p">):</span> <span class="mi">8</span><span class="p">,</span> <span class="p">(</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="s1">&#39;Y&#39;</span><span class="p">):</span> <span class="mi">6</span><span class="p">,</span> <span class="p">(</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="s1">&#39;Z&#39;</span><span class="p">):</span> <span class="mi">10</span><span class="p">,</span>
+    <span class="p">(</span><span class="s1">&#39;B&#39;</span><span class="p">,</span> <span class="s1">&#39;X&#39;</span><span class="p">):</span> <span class="mi">9</span><span class="p">,</span> <span class="p">(</span><span class="s1">&#39;B&#39;</span><span class="p">,</span> <span class="s1">&#39;Y&#39;</span><span class="p">):</span> <span class="mi">5</span><span class="p">,</span> <span class="p">(</span><span class="s1">&#39;B&#39;</span><span class="p">,</span> <span class="s1">&#39;Z&#39;</span><span class="p">):</span> <span class="mi">9</span><span class="p">,</span>
+    <span class="p">(</span><span class="s1">&#39;C&#39;</span><span class="p">,</span> <span class="s1">&#39;X&#39;</span><span class="p">):</span> <span class="mi">11</span><span class="p">,</span> <span class="p">(</span><span class="s1">&#39;C&#39;</span><span class="p">,</span> <span class="s1">&#39;Y&#39;</span><span class="p">):</span> <span class="mi">7</span><span class="p">,</span> <span class="p">(</span><span class="s1">&#39;C&#39;</span><span class="p">,</span> <span class="s1">&#39;Z&#39;</span><span class="p">):</span> <span class="mi">7</span>
+<span class="p">}</span>
+
+<span class="c1"># Creación del grafo</span>
+<span class="n">G</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">DiGraph</span><span class="p">()</span>
+
+<span class="c1"># Adición de nodos</span>
+<span class="k">for</span> <span class="n">bodega</span> <span class="ow">in</span> <span class="n">bodegas</span><span class="p">:</span>
+    <span class="n">G</span><span class="o">.</span><span class="n">add_node</span><span class="p">(</span><span class="n">bodega</span><span class="p">,</span> <span class="n">demand</span><span class="o">=-</span><span class="n">oferta</span><span class="p">[</span><span class="n">bodega</span><span class="p">])</span>  <span class="c1"># Las bodegas tienen oferta negativa (porque suministran)</span>
+
+<span class="k">for</span> <span class="n">tienda</span> <span class="ow">in</span> <span class="n">tiendas</span><span class="p">:</span>
+    <span class="n">G</span><span class="o">.</span><span class="n">add_node</span><span class="p">(</span><span class="n">tienda</span><span class="p">,</span> <span class="n">demand</span><span class="o">=</span><span class="n">demanda</span><span class="p">[</span><span class="n">tienda</span><span class="p">])</span>
+
+<span class="c1"># Adición de aristas con costos</span>
+<span class="k">for</span> <span class="p">(</span><span class="n">bodega</span><span class="p">,</span> <span class="n">tienda</span><span class="p">),</span> <span class="n">costo</span> <span class="ow">in</span> <span class="n">costos</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+    <span class="n">G</span><span class="o">.</span><span class="n">add_edge</span><span class="p">(</span><span class="n">bodega</span><span class="p">,</span> <span class="n">tienda</span><span class="p">,</span> <span class="n">weight</span><span class="o">=</span><span class="n">costo</span><span class="p">)</span>
+
+<span class="c1"># Dibujo del grafo</span>
+<span class="n">pos</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;A&#39;</span><span class="p">:</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span>
+    <span class="s1">&#39;B&#39;</span><span class="p">:</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span>
+    <span class="s1">&#39;C&#39;</span><span class="p">:</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">),</span>
+    <span class="s1">&#39;X&#39;</span><span class="p">:</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span>
+    <span class="s1">&#39;Y&#39;</span><span class="p">:</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span>
+    <span class="s1">&#39;Z&#39;</span><span class="p">:</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+<span class="p">}</span>
+<span class="n">edge_labels</span> <span class="o">=</span> <span class="p">{(</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">):</span> <span class="n">G</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">][</span><span class="s1">&#39;weight&#39;</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span> <span class="ow">in</span> <span class="n">G</span><span class="o">.</span><span class="n">edges</span><span class="p">()}</span>
+
+<span class="n">nx</span><span class="o">.</span><span class="n">draw</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">pos</span><span class="p">,</span> <span class="n">with_labels</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">node_color</span><span class="o">=</span><span class="s1">&#39;lightblue&#39;</span><span class="p">,</span> <span class="n">node_size</span><span class="o">=</span><span class="mi">1500</span><span class="p">,</span> <span class="n">font_size</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">edge_color</span><span class="o">=</span><span class="s1">&#39;gray&#39;</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.6</span><span class="p">)</span>
+<span class="n">nx</span><span class="o">.</span><span class="n">draw_networkx_edge_labels</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">pos</span><span class="p">,</span> <span class="n">edge_labels</span><span class="o">=</span><span class="n">edge_labels</span><span class="p">,</span> <span class="n">font_size</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Red Inicial de Transporte&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/1ca29b33fd7e21719e92115f739eed148f3a04691c87c63c0b230296484ae5e1.png" src="../_images/1ca29b33fd7e21719e92115f739eed148f3a04691c87c63c0b230296484ae5e1.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Modelo</span>
+<span class="n">m</span> <span class="o">=</span> <span class="n">Model</span><span class="p">(</span><span class="s2">&quot;Flujo de costo mínimo&quot;</span><span class="p">)</span>
+
+<span class="c1"># Variables</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">addVars</span><span class="p">(</span><span class="n">bodegas</span><span class="p">,</span> <span class="n">tiendas</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;x&quot;</span><span class="p">)</span>
+
+<span class="c1"># Función objetivo</span>
+<span class="n">m</span><span class="o">.</span><span class="n">setObjective</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">prod</span><span class="p">(</span><span class="n">costos</span><span class="p">),</span> <span class="n">GRB</span><span class="o">.</span><span class="n">MINIMIZE</span><span class="p">)</span>
+
+<span class="c1"># Restricciones</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">bodegas</span><span class="p">:</span>
+    <span class="n">m</span><span class="o">.</span><span class="n">addConstr</span><span class="p">(</span><span class="nb">sum</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">]</span> <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="n">tiendas</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="n">oferta</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">name</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;Oferta_</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="n">tiendas</span><span class="p">:</span>
+    <span class="n">m</span><span class="o">.</span><span class="n">addConstr</span><span class="p">(</span><span class="nb">sum</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">bodegas</span><span class="p">)</span> <span class="o">==</span> <span class="n">demanda</span><span class="p">[</span><span class="n">j</span><span class="p">],</span> <span class="n">name</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;Demanda_</span><span class="si">{</span><span class="n">j</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="c1"># Resolver</span>
+<span class="n">m</span><span class="o">.</span><span class="n">optimize</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Gurobi Optimizer version 10.0.2 build v10.0.2rc0 (win64)
+
+CPU model: 12th Gen Intel(R) Core(TM) i7-1265U, instruction set [SSE2|AVX|AVX2]
+Thread count: 10 physical cores, 12 logical processors, using up to 12 threads
+
+Optimize a model with 6 rows, 9 columns and 18 nonzeros
+Model fingerprint: 0x2446776e
+Coefficient statistics:
+  Matrix range     [1e+00, 1e+00]
+  Objective range  [5e+00, 1e+01]
+  Bounds range     [0e+00, 0e+00]
+  RHS range        [1e+01, 4e+01]
+Presolve time: 0.01s
+Presolved: 6 rows, 9 columns, 18 nonzeros
+
+Iteration    Objective       Primal Inf.    Dual Inf.      Time
+       0    4.8500000e+02   1.500000e+01   0.000000e+00      0s
+       2    5.2500000e+02   0.000000e+00   0.000000e+00      0s
+
+Solved in 2 iterations and 0.02 seconds (0.00 work units)
+Optimal objective  5.250000000e+02
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Resultados</span>
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span> <span class="ow">in</span> <span class="n">x</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Enviar </span><span class="si">{</span><span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">]</span><span class="o">.</span><span class="n">x</span><span class="si">}</span><span class="s2"> unidades de bodega </span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2"> a tienda </span><span class="si">{</span><span class="n">j</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Enviar 10.0 unidades de bodega A a tienda X
+Enviar 10.0 unidades de bodega A a tienda Y
+Enviar 0.0 unidades de bodega A a tienda Z
+Enviar 0.0 unidades de bodega B a tienda X
+Enviar 15.0 unidades de bodega B a tienda Y
+Enviar 15.0 unidades de bodega B a tienda Z
+Enviar 0.0 unidades de bodega C a tienda X
+Enviar 0.0 unidades de bodega C a tienda Y
+Enviar 25.0 unidades de bodega C a tienda Z
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Creación del grafo basado en la solución</span>
+<span class="n">G_sol</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">DiGraph</span><span class="p">()</span>
+
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span> <span class="ow">in</span> <span class="n">x</span><span class="p">:</span>
+    <span class="n">cantidad</span> <span class="o">=</span> <span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span><span class="o">.</span><span class="n">x</span>
+    <span class="k">if</span> <span class="n">cantidad</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">G_sol</span><span class="o">.</span><span class="n">add_edge</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">weight</span><span class="o">=</span><span class="n">cantidad</span><span class="p">)</span>
+
+<span class="c1"># Dibujo del grafo</span>
+<span class="n">pos</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;A&#39;</span><span class="p">:</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span>
+    <span class="s1">&#39;B&#39;</span><span class="p">:</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span>
+    <span class="s1">&#39;C&#39;</span><span class="p">:</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">),</span>
+    <span class="s1">&#39;X&#39;</span><span class="p">:</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span>
+    <span class="s1">&#39;Y&#39;</span><span class="p">:</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span>
+    <span class="s1">&#39;Z&#39;</span><span class="p">:</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+<span class="p">}</span>
+<span class="n">edge_labels</span> <span class="o">=</span> <span class="p">{(</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">):</span> <span class="n">G_sol</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">][</span><span class="s1">&#39;weight&#39;</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span> <span class="ow">in</span> <span class="n">G_sol</span><span class="o">.</span><span class="n">edges</span><span class="p">()}</span>
+
+<span class="n">nx</span><span class="o">.</span><span class="n">draw</span><span class="p">(</span><span class="n">G_sol</span><span class="p">,</span> <span class="n">pos</span><span class="p">,</span> <span class="n">with_labels</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">node_color</span><span class="o">=</span><span class="s1">&#39;lightblue&#39;</span><span class="p">,</span> <span class="n">node_size</span><span class="o">=</span><span class="mi">1500</span><span class="p">,</span> <span class="n">font_size</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">edge_color</span><span class="o">=</span><span class="s1">&#39;gray&#39;</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.6</span><span class="p">)</span>
+<span class="n">nx</span><span class="o">.</span><span class="n">draw_networkx_edge_labels</span><span class="p">(</span><span class="n">G_sol</span><span class="p">,</span> <span class="n">pos</span><span class="p">,</span> <span class="n">edge_labels</span><span class="o">=</span><span class="n">edge_labels</span><span class="p">,</span> <span class="n">font_size</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Red Óptima de Transporte&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/04ba72754cc9110e6dafb7a5a91c8c4bf28bdad765aa0808d07441afd6837fcc.png" src="../_images/04ba72754cc9110e6dafb7a5a91c8c4bf28bdad765aa0808d07441afd6837fcc.png" />
+</div>
+</div>
+<p><strong>Enunciado:</strong></p>
+<p>Se busca diseñar una red de distribución para transportar mercancías entre bodegas, distribuidores y clientes, minimizando el costo total de transporte. Las ubicaciones y detalles asociados son los siguientes:</p>
+<p><strong>Bodegas:</strong></p>
+<ul class="simple">
+<li><p>Bodega A tiene una oferta de 40 unidades.</p></li>
+<li><p>Bodega B tiene una oferta de 50 unidades.</p></li>
+<li><p>Bodega C tiene una oferta de 45 unidades.</p></li>
+</ul>
+<p><strong>Distribuidores:</strong></p>
+<ul class="simple">
+<li><p>Distribuidor D1 y D2 no tienen una demanda ni oferta inicial; actúan como puntos intermedios de transbordo.</p></li>
+</ul>
+<p><strong>Clientes:</strong></p>
+<ul class="simple">
+<li><p>Cliente X tiene una demanda de 40 unidades.</p></li>
+<li><p>Cliente Y tiene una demanda de 50 unidades.</p></li>
+<li><p>Cliente Z tiene una demanda de 45 unidades.</p></li>
+</ul>
+<p><strong>Costos y capacidades de transporte:</strong></p>
+<table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>De/Para</p></th>
+<th class="head"><p>Costo por Unidad</p></th>
+<th class="head"><p>Capacidad Máxima</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>A-D1</p></td>
+<td><p>5</p></td>
+<td><p>40</p></td>
+</tr>
+<tr class="row-odd"><td><p>A-D2</p></td>
+<td><p>6</p></td>
+<td><p>40</p></td>
+</tr>
+<tr class="row-even"><td><p>B-D1</p></td>
+<td><p>7</p></td>
+<td><p>45</p></td>
+</tr>
+<tr class="row-odd"><td><p>B-D2</p></td>
+<td><p>6</p></td>
+<td><p>40</p></td>
+</tr>
+<tr class="row-even"><td><p>C-D1</p></td>
+<td><p>8</p></td>
+<td><p>40</p></td>
+</tr>
+<tr class="row-odd"><td><p>C-D2</p></td>
+<td><p>7</p></td>
+<td><p>45</p></td>
+</tr>
+<tr class="row-even"><td><p>D1-X</p></td>
+<td><p>6</p></td>
+<td><p>40</p></td>
+</tr>
+<tr class="row-odd"><td><p>D1-Y</p></td>
+<td><p>7</p></td>
+<td><p>40</p></td>
+</tr>
+<tr class="row-even"><td><p>D1-Z</p></td>
+<td><p>9</p></td>
+<td><p>40</p></td>
+</tr>
+<tr class="row-odd"><td><p>D2-X</p></td>
+<td><p>7</p></td>
+<td><p>45</p></td>
+</tr>
+<tr class="row-even"><td><p>D2-Y</p></td>
+<td><p>5</p></td>
+<td><p>45</p></td>
+</tr>
+<tr class="row-odd"><td><p>D2-Z</p></td>
+<td><p>6</p></td>
+<td><p>45</p></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Objetivo:</strong></p>
+<p>Determine la cantidad de mercancía que debe ser transportada en cada ruta para satisfacer las demandas de los clientes al menor costo posible, respetando las capacidades máximas de cada ruta y las ofertas disponibles en las bodegas.</p>
+<p><strong>Modelo Matemático</strong></p>
+<p><strong>Conjuntos:</strong></p>
+<p><span class="math notranslate nohighlight">\( N \)</span>: Conjunto de nodos (bodegas, centros de distribución y tiendas) = {A, B, C, D1, D2, X, Y, Z}.</p>
+<p><span class="math notranslate nohighlight">\( A \)</span>: Conjunto de arcos entre nodos = {(i, j) : i, j \in N}.</p>
+<p><strong>Parámetros:</strong></p>
+<p><span class="math notranslate nohighlight">\( c_{ij} \)</span>: Costo de enviar una unidad de producto del nodo <span class="math notranslate nohighlight">\( i \)</span> al nodo <span class="math notranslate nohighlight">\( j \)</span>.</p>
+<p><span class="math notranslate nohighlight">\( u_{ij} \)</span>: Capacidad máxima de producto que se puede enviar del nodo <span class="math notranslate nohighlight">\( i \)</span> al nodo <span class="math notranslate nohighlight">\( j \)</span>.</p>
+<p><span class="math notranslate nohighlight">\( b_i \)</span>: Balance neto de productos en el nodo <span class="math notranslate nohighlight">\( i \)</span>.</p>
+<p><strong>Variables de Decisión:</strong></p>
+<p><span class="math notranslate nohighlight">\( x_{ij} \)</span>: Cantidad de producto a enviar del nodo <span class="math notranslate nohighlight">\( i \)</span> al nodo <span class="math notranslate nohighlight">\( j \)</span>.</p>
+<p><strong>Función Objetivo:</strong></p>
+<p>Minimizar el costo total de transporte:</p>
+<div class="math notranslate nohighlight">
+\[ \min Z = \sum_{(i,j) \in A} c_{ij} x_{ij} \]</div>
+<p><strong>Restricciones:</strong></p>
+<ol class="arabic simple">
+<li><p>Conservación de flujo en cada nodo:</p></li>
+</ol>
+<div class="math notranslate nohighlight">
+\[ \sum_{j \in N|(i,j) \in A} x_{ij} - \sum_{j \in N|(j,i) \in A} x_{ji} = b_i \quad \forall i \in N \]</div>
+<ol class="arabic simple" start="2">
+<li><p>Respetar capacidades:</p></li>
+</ol>
+<div class="math notranslate nohighlight">
+\[ x_{ij} \leq u_{ij} \quad \forall (i,j) \in A \]</div>
+<ol class="arabic simple" start="3">
+<li><p>Las variables de decisión son no negativas:</p></li>
+</ol>
+<div class="math notranslate nohighlight">
+\[ x_{ij} \geq 0 \quad \forall (i,j) \in A \]</div>
+<p><strong>Código en Python</strong></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">gurobipy</span> <span class="kn">import</span> <span class="n">Model</span><span class="p">,</span> <span class="n">GRB</span>
+
+<span class="c1"># Data</span>
+<span class="n">nodos</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="s1">&#39;B&#39;</span><span class="p">,</span> <span class="s1">&#39;C&#39;</span><span class="p">,</span> <span class="s1">&#39;D1&#39;</span><span class="p">,</span> <span class="s1">&#39;D2&#39;</span><span class="p">,</span> <span class="s1">&#39;X&#39;</span><span class="p">,</span> <span class="s1">&#39;Y&#39;</span><span class="p">,</span> <span class="s1">&#39;Z&#39;</span><span class="p">]</span>
+<span class="n">arcos</span> <span class="o">=</span> <span class="p">[(</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="s1">&#39;D1&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="s1">&#39;D2&#39;</span><span class="p">),</span> 
+         <span class="p">(</span><span class="s1">&#39;B&#39;</span><span class="p">,</span> <span class="s1">&#39;D1&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;B&#39;</span><span class="p">,</span> <span class="s1">&#39;D2&#39;</span><span class="p">),</span> 
+         <span class="p">(</span><span class="s1">&#39;C&#39;</span><span class="p">,</span> <span class="s1">&#39;D1&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;C&#39;</span><span class="p">,</span> <span class="s1">&#39;D2&#39;</span><span class="p">),</span> 
+         <span class="p">(</span><span class="s1">&#39;D1&#39;</span><span class="p">,</span> <span class="s1">&#39;X&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;D1&#39;</span><span class="p">,</span> <span class="s1">&#39;Y&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;D1&#39;</span><span class="p">,</span> <span class="s1">&#39;Z&#39;</span><span class="p">),</span> 
+         <span class="p">(</span><span class="s1">&#39;D2&#39;</span><span class="p">,</span> <span class="s1">&#39;X&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;D2&#39;</span><span class="p">,</span> <span class="s1">&#39;Y&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;D2&#39;</span><span class="p">,</span> <span class="s1">&#39;Z&#39;</span><span class="p">)]</span>
+
+<span class="n">balance</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;A&#39;</span><span class="p">:</span> <span class="mi">40</span><span class="p">,</span> <span class="s1">&#39;B&#39;</span><span class="p">:</span> <span class="mi">50</span><span class="p">,</span> <span class="s1">&#39;C&#39;</span><span class="p">:</span> <span class="mi">45</span><span class="p">,</span> <span class="s1">&#39;D1&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;D2&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;X&#39;</span><span class="p">:</span> <span class="o">-</span><span class="mi">40</span><span class="p">,</span> <span class="s1">&#39;Y&#39;</span><span class="p">:</span> <span class="o">-</span><span class="mi">50</span><span class="p">,</span> <span class="s1">&#39;Z&#39;</span><span class="p">:</span> <span class="o">-</span><span class="mi">45</span><span class="p">}</span>
+
+<span class="n">costos</span> <span class="o">=</span> <span class="p">{(</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="s1">&#39;D1&#39;</span><span class="p">):</span> <span class="mi">5</span><span class="p">,</span> <span class="p">(</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="s1">&#39;D2&#39;</span><span class="p">):</span> <span class="mi">6</span><span class="p">,</span>
+          <span class="p">(</span><span class="s1">&#39;B&#39;</span><span class="p">,</span> <span class="s1">&#39;D1&#39;</span><span class="p">):</span> <span class="mi">7</span><span class="p">,</span> <span class="p">(</span><span class="s1">&#39;B&#39;</span><span class="p">,</span> <span class="s1">&#39;D2&#39;</span><span class="p">):</span> <span class="mi">6</span><span class="p">,</span>
+          <span class="p">(</span><span class="s1">&#39;C&#39;</span><span class="p">,</span> <span class="s1">&#39;D1&#39;</span><span class="p">):</span> <span class="mi">8</span><span class="p">,</span> <span class="p">(</span><span class="s1">&#39;C&#39;</span><span class="p">,</span> <span class="s1">&#39;D2&#39;</span><span class="p">):</span> <span class="mi">7</span><span class="p">,</span>
+          <span class="p">(</span><span class="s1">&#39;D1&#39;</span><span class="p">,</span> <span class="s1">&#39;X&#39;</span><span class="p">):</span> <span class="mi">6</span><span class="p">,</span> <span class="p">(</span><span class="s1">&#39;D1&#39;</span><span class="p">,</span> <span class="s1">&#39;Y&#39;</span><span class="p">):</span> <span class="mi">7</span><span class="p">,</span> <span class="p">(</span><span class="s1">&#39;D1&#39;</span><span class="p">,</span> <span class="s1">&#39;Z&#39;</span><span class="p">):</span> <span class="mi">9</span><span class="p">,</span>
+          <span class="p">(</span><span class="s1">&#39;D2&#39;</span><span class="p">,</span> <span class="s1">&#39;X&#39;</span><span class="p">):</span> <span class="mi">7</span><span class="p">,</span> <span class="p">(</span><span class="s1">&#39;D2&#39;</span><span class="p">,</span> <span class="s1">&#39;Y&#39;</span><span class="p">):</span> <span class="mi">5</span><span class="p">,</span> <span class="p">(</span><span class="s1">&#39;D2&#39;</span><span class="p">,</span> <span class="s1">&#39;Z&#39;</span><span class="p">):</span> <span class="mi">6</span><span class="p">}</span>
+
+<span class="n">capacidades</span> <span class="o">=</span> <span class="p">{(</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="s1">&#39;D1&#39;</span><span class="p">):</span> <span class="mi">40</span><span class="p">,</span> <span class="p">(</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="s1">&#39;D2&#39;</span><span class="p">):</span> <span class="mi">40</span><span class="p">,</span>
+               <span class="p">(</span><span class="s1">&#39;B&#39;</span><span class="p">,</span> <span class="s1">&#39;D1&#39;</span><span class="p">):</span> <span class="mi">45</span><span class="p">,</span> <span class="p">(</span><span class="s1">&#39;B&#39;</span><span class="p">,</span> <span class="s1">&#39;D2&#39;</span><span class="p">):</span> <span class="mi">40</span><span class="p">,</span>
+               <span class="p">(</span><span class="s1">&#39;C&#39;</span><span class="p">,</span> <span class="s1">&#39;D1&#39;</span><span class="p">):</span> <span class="mi">40</span><span class="p">,</span> <span class="p">(</span><span class="s1">&#39;C&#39;</span><span class="p">,</span> <span class="s1">&#39;D2&#39;</span><span class="p">):</span> <span class="mi">45</span><span class="p">,</span>
+               <span class="p">(</span><span class="s1">&#39;D1&#39;</span><span class="p">,</span> <span class="s1">&#39;X&#39;</span><span class="p">):</span> <span class="mi">40</span><span class="p">,</span> <span class="p">(</span><span class="s1">&#39;D1&#39;</span><span class="p">,</span> <span class="s1">&#39;Y&#39;</span><span class="p">):</span> <span class="mi">40</span><span class="p">,</span> <span class="p">(</span><span class="s1">&#39;D1&#39;</span><span class="p">,</span> <span class="s1">&#39;Z&#39;</span><span class="p">):</span> <span class="mi">40</span><span class="p">,</span>
+               <span class="p">(</span><span class="s1">&#39;D2&#39;</span><span class="p">,</span> <span class="s1">&#39;X&#39;</span><span class="p">):</span> <span class="mi">45</span><span class="p">,</span> <span class="p">(</span><span class="s1">&#39;D2&#39;</span><span class="p">,</span> <span class="s1">&#39;Y&#39;</span><span class="p">):</span> <span class="mi">45</span><span class="p">,</span> <span class="p">(</span><span class="s1">&#39;D2&#39;</span><span class="p">,</span> <span class="s1">&#39;Z&#39;</span><span class="p">):</span> <span class="mi">45</span><span class="p">}</span>
+
+<span class="c1"># Modelo</span>
+<span class="n">m</span> <span class="o">=</span> <span class="n">Model</span><span class="p">(</span><span class="s2">&quot;Flujo de costo mínimo con conservación de flujo y capacidades&quot;</span><span class="p">)</span>
+
+<span class="c1"># Variables</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">addVars</span><span class="p">(</span><span class="n">arcos</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;x&quot;</span><span class="p">,</span> <span class="n">ub</span><span class="o">=</span><span class="n">capacidades</span><span class="p">)</span>
+
+<span class="c1"># Función objetivo</span>
+<span class="n">m</span><span class="o">.</span><span class="n">setObjective</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">prod</span><span class="p">(</span><span class="n">costos</span><span class="p">),</span> <span class="n">GRB</span><span class="o">.</span><span class="n">MINIMIZE</span><span class="p">)</span>
+
+<span class="c1"># Restricciones</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">nodos</span><span class="p">:</span>
+    <span class="n">m</span><span class="o">.</span><span class="n">addConstr</span><span class="p">(</span><span class="nb">sum</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">]</span> <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="n">nodos</span> <span class="k">if</span> <span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">)</span> <span class="ow">in</span> <span class="n">arcos</span><span class="p">)</span> <span class="o">-</span> 
+                <span class="nb">sum</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="n">j</span><span class="p">,</span><span class="n">i</span><span class="p">]</span> <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="n">nodos</span> <span class="k">if</span> <span class="p">(</span><span class="n">j</span><span class="p">,</span><span class="n">i</span><span class="p">)</span> <span class="ow">in</span> <span class="n">arcos</span><span class="p">)</span> <span class="o">==</span> <span class="n">balance</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">name</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;Conservacion_</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+
+<span class="c1"># Resolver</span>
+<span class="n">m</span><span class="o">.</span><span class="n">optimize</span><span class="p">()</span>
+
+<span class="k">if</span> <span class="n">m</span><span class="o">.</span><span class="n">status</span> <span class="o">==</span> <span class="n">GRB</span><span class="o">.</span><span class="n">INFEASIBLE</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;El modelo es infactible. Calculando el IIS...&quot;</span><span class="p">)</span>
+    <span class="n">m</span><span class="o">.</span><span class="n">computeIIS</span><span class="p">()</span>
+    <span class="n">m</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;model.ilp&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Se ha escrito el IIS en el archivo &#39;model.ilp&#39;. Revíselo para más detalles.&quot;</span><span class="p">)</span>
+<span class="k">elif</span> <span class="n">m</span><span class="o">.</span><span class="n">status</span> <span class="o">==</span> <span class="n">GRB</span><span class="o">.</span><span class="n">OPTIMAL</span><span class="p">:</span>
+    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span> <span class="ow">in</span> <span class="n">arcos</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Enviar </span><span class="si">{</span><span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">]</span><span class="o">.</span><span class="n">x</span><span class="si">}</span><span class="s2"> unidades de </span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2"> a </span><span class="si">{</span><span class="n">j</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Costo total: </span><span class="si">{</span><span class="n">m</span><span class="o">.</span><span class="n">objVal</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Gurobi Optimizer version 10.0.2 build v10.0.2rc0 (win64)
+
+CPU model: 12th Gen Intel(R) Core(TM) i7-1265U, instruction set [SSE2|AVX|AVX2]
+Thread count: 10 physical cores, 12 logical processors, using up to 12 threads
+
+Optimize a model with 8 rows, 12 columns and 24 nonzeros
+Model fingerprint: 0x02763b84
+Coefficient statistics:
+  Matrix range     [1e+00, 1e+00]
+  Objective range  [5e+00, 9e+00]
+  Bounds range     [4e+01, 5e+01]
+  RHS range        [4e+01, 5e+01]
+Presolve removed 6 rows and 6 columns
+Presolve time: 0.01s
+Presolved: 2 rows, 6 columns, 12 nonzeros
+
+Iteration    Objective       Primal Inf.    Dual Inf.      Time
+       0    1.5950000e+03   1.000000e+01   0.000000e+00      0s
+       1    1.6000000e+03   0.000000e+00   0.000000e+00      0s
+
+Solved in 1 iterations and 0.02 seconds (0.00 work units)
+Optimal objective  1.600000000e+03
+Enviar 35.0 unidades de A a D1
+Costo total: 1600.0
+Enviar 5.0 unidades de A a D2
+Costo total: 1600.0
+Enviar 10.0 unidades de B a D1
+Costo total: 1600.0
+Enviar 40.0 unidades de B a D2
+Costo total: 1600.0
+Enviar 0.0 unidades de C a D1
+Costo total: 1600.0
+Enviar 45.0 unidades de C a D2
+Costo total: 1600.0
+Enviar 40.0 unidades de D1 a X
+Costo total: 1600.0
+Enviar 5.0 unidades de D1 a Y
+Costo total: 1600.0
+Enviar 0.0 unidades de D1 a Z
+Costo total: 1600.0
+Enviar 0.0 unidades de D2 a X
+Costo total: 1600.0
+Enviar 45.0 unidades de D2 a Y
+Costo total: 1600.0
+Enviar 45.0 unidades de D2 a Z
+Costo total: 1600.0
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">networkx</span> <span class="k">as</span> <span class="nn">nx</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
+<span class="c1"># Crear un grafo dirigido</span>
+<span class="n">G</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">DiGraph</span><span class="p">()</span>
+
+<span class="c1"># Añadir nodos al grafo</span>
+<span class="k">for</span> <span class="n">nodo</span> <span class="ow">in</span> <span class="n">nodos</span><span class="p">:</span>
+    <span class="n">G</span><span class="o">.</span><span class="n">add_node</span><span class="p">(</span><span class="n">nodo</span><span class="p">)</span>
+
+<span class="c1"># Añadir arcos al grafo con sus capacidades y flujos</span>
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span> <span class="ow">in</span> <span class="n">arcos</span><span class="p">:</span>
+    <span class="n">G</span><span class="o">.</span><span class="n">add_edge</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">capacity</span><span class="o">=</span><span class="n">capacidades</span><span class="p">[(</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">)],</span> <span class="n">flow</span><span class="o">=</span><span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">]</span><span class="o">.</span><span class="n">x</span><span class="p">)</span>
+
+<span class="c1"># Posiciones fijas para los nodos</span>
+<span class="n">posiciones_fijas</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;A&#39;</span><span class="p">:</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span>
+    <span class="s1">&#39;B&#39;</span><span class="p">:</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span>
+    <span class="s1">&#39;C&#39;</span><span class="p">:</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span>
+    <span class="s1">&#39;D1&#39;</span><span class="p">:</span> <span class="p">(</span><span class="mf">0.5</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span>
+    <span class="s1">&#39;D2&#39;</span><span class="p">:</span> <span class="p">(</span><span class="mf">1.5</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span>
+    <span class="s1">&#39;X&#39;</span><span class="p">:</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span>
+    <span class="s1">&#39;Y&#39;</span><span class="p">:</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span>
+    <span class="s1">&#39;Z&#39;</span><span class="p">:</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="c1"># Dibujar el grafo con posiciones fijas</span>
+<span class="n">nx</span><span class="o">.</span><span class="n">draw</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">pos</span><span class="o">=</span><span class="n">posiciones_fijas</span><span class="p">,</span> <span class="n">with_labels</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">node_size</span><span class="o">=</span><span class="mi">2000</span><span class="p">,</span> <span class="n">node_color</span><span class="o">=</span><span class="s2">&quot;skyblue&quot;</span><span class="p">)</span>
+
+<span class="c1"># Etiquetas de arcos con flujos y capacidades</span>
+<span class="n">edge_labels</span> <span class="o">=</span> <span class="p">{(</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">):</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">G</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">][</span><span class="s2">&quot;flow&quot;</span><span class="p">]</span><span class="si">:</span><span class="s1">.2f</span><span class="si">}</span><span class="s1">/</span><span class="si">{</span><span class="n">G</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">][</span><span class="s2">&quot;capacity&quot;</span><span class="p">]</span><span class="si">}</span><span class="s1">&#39;</span> <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span> <span class="ow">in</span> <span class="n">G</span><span class="o">.</span><span class="n">edges</span><span class="p">()}</span>
+<span class="n">nx</span><span class="o">.</span><span class="n">draw_networkx_edge_labels</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">pos</span><span class="o">=</span><span class="n">posiciones_fijas</span><span class="p">,</span> <span class="n">edge_labels</span><span class="o">=</span><span class="n">edge_labels</span><span class="p">,</span> <span class="n">font_size</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span> <span class="n">label_pos</span><span class="o">=</span><span class="mf">0.25</span><span class="p">,</span> <span class="n">font_color</span><span class="o">=</span><span class="s2">&quot;red&quot;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Flujo de costo mínimo&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/21eb048e69c781b05d82b68b4a266173129d07b50739ff868c47983b0f93a6af.png" src="../_images/21eb048e69c781b05d82b68b4a266173129d07b50739ff868c47983b0f93a6af.png" />
+</div>
+</div>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./Class_3_Network_as_LP"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="../Class_2_Gurobi/4-Generalizing_Diet_Problem.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title"><strong>Lectura 4: Marco general para Formulación implícita</strong></p>
+      </div>
+    </a>
+</div></div>
+  
+</div>
+
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#"><strong>Lectura 1: Flujo en redes como programas lineales</strong></a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#ruta-mas-corta">Ruta mas corta.</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ejemplo-motivador">Ejemplo Motivador:</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#problema-de-flujo-maximo">Problema de Flujo Máximo</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Ejemplo Motivador:</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#formulacion-matematica">Formulación Matemática:</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Ejemplo motivador :</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#ejercicio">Ejercicio</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conjuntos">Conjuntos:</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#parametros">Parámetros:</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#variables-de-decision">Variables de decisión:</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modelo-matematico">Modelo matemático:</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#flujo-de-costo-minimo-min-cost-flow">Flujo de Costo Mínimo (Min-Cost Flow)</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#enunciado">Enunciado:</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">Formulación Matemática:</a></li>
+</ul>
+</li>
+</ul>
+
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Alejandra Tabares
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  <p class="copyright">
+    
+      © Copyright 2022.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

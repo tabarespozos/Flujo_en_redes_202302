@@ -1,0 +1,1136 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>Lectura 1: introducción a Gurobi python &#8212; Flujo en Redes 202302</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'Class_2_Gurobi/1-Hello_word_diet_problem';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Lectura 2: Formulación implícita" href="2-Implicit_formulation.html" />
+    <link rel="prev" title="Lectura 3: Grafos" href="../Class_1_Introduction_Motivation/3-Graphs.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="../SyllabusFlujoEnRedes.html">
+  
+  
+  
+  
+  
+    <p class="title logo__title">Flujo en Redes 202302</p>
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../SyllabusFlujoEnRedes.html">
+                    Syllabus
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Semana 1</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../Class_1_Introduction_Motivation/1-Introduction.html"><strong>Lectura 1: Flujo en redes</strong></a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="../Class_1_Introduction_Motivation/2-Project.html"><strong>Lectura 2: Proyecto del semestre</strong></a></li>
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../Class_1_Introduction_Motivation/3-Graphs.html"><strong>Lectura 3: Grafos</strong></a></li>
+
+
+
+
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Semana 2</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active"><a class="current reference internal" href="#"><strong>Lectura 1: introducción a Gurobi python</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="2-Implicit_formulation.html"><strong>Lectura 2: Formulación implícita</strong></a></li>
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="3-Exercice.html"><strong>Lectura 3: Ejercicio en clase</strong></a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="4-Generalizing_Diet_Problem.html"><strong>Lectura 4: Marco general para Formulación implícita</strong></a></li>
+
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Semana 3</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../Class_3_Network_as_LP/1-Introduction.html"><strong>Lectura 1: Flujo en redes como programas lineales</strong></a></li>
+
+
+
+
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/tabarespozos/Flujo_en_redes_202302/blob/Flujo_en_redes_202302/Class_2_Gurobi/1-Hello_word_diet_problem.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch onColab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img src="../_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/tabarespozos/Flujo_en_redes_202302" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/tabarespozos/Flujo_en_redes_202302/issues/new?title=Issue%20on%20page%20%2FClass_2_Gurobi/1-Hello_word_diet_problem.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/Class_2_Gurobi/1-Hello_word_diet_problem.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script>
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Lectura 1: introducción a Gurobi python</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section id="lectura-1-introduccion-a-gurobi-python">
+<h1><strong>Lectura 1: introducción a Gurobi python</strong><a class="headerlink" href="#lectura-1-introduccion-a-gurobi-python" title="Permalink to this heading">#</a></h1>
+<p><strong>1. Instalación y configuración</strong></p>
+<ul>
+<li><p><strong>Instala Gurobi:</strong> Puedes descargarlo desde el sitio web oficial. Es importante seguir las instrucciones específicas de <a class="reference external" href="https://www.gurobi.com/downloads/">instalación</a>.</p></li>
+<li><p><strong>Licencia:</strong> Gurobi no es software libre, pero ofrece licencias académicas gratuitas.</p></li>
+<li><p><strong>Instala la interfaz de Python:</strong> Una vez instalado Gurobi, instala gurobipy:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>gurobipy
+</pre></div>
+</div>
+</li>
+</ul>
+<p><strong>2. Configuración inicial en Python</strong></p>
+<p>Antes de usar Gurobi, necesitas importar su módulo en tu script de Python:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">gurobipy</span> <span class="kn">import</span> <span class="o">*</span>
+</pre></div>
+</div>
+<p><strong>3. Creando un modelo simple</strong></p>
+<p>Vamos a resolver el siguiente problema de programación lineal:</p>
+<p>Maximizar:</p>
+<p><span class="math notranslate nohighlight">\(Z = 3x + 4y\)</span></p>
+<p>Sujeto a:</p>
+<p><span class="math notranslate nohighlight">\(1x + 2y ≤ 8\)</span></p>
+<p><span class="math notranslate nohighlight">\(3x + 2y ≤ 12\)</span></p>
+<p><span class="math notranslate nohighlight">\(x, y ≥ 0\)</span></p>
+<p><b>Construyendo el modelo con gurobipy</b></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">gurobipy</span> <span class="kn">import</span> <span class="o">*</span>
+
+
+<span class="c1"># Crea el modelo</span>
+<span class="n">m</span> <span class="o">=</span> <span class="n">Model</span><span class="p">(</span><span class="s2">&quot;modelo_simple&quot;</span><span class="p">)</span>
+
+<span class="c1"># Crea las variables</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">addVar</span><span class="p">(</span><span class="n">vtype</span><span class="o">=</span><span class="n">GRB</span><span class="o">.</span><span class="n">CONTINUOUS</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;x&quot;</span><span class="p">)</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">addVar</span><span class="p">(</span><span class="n">vtype</span><span class="o">=</span><span class="n">GRB</span><span class="o">.</span><span class="n">CONTINUOUS</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;y&quot;</span><span class="p">)</span>
+
+<span class="c1"># Establece la función objetivo</span>
+<span class="n">m</span><span class="o">.</span><span class="n">setObjective</span><span class="p">(</span><span class="mi">3</span><span class="o">*</span><span class="n">x</span> <span class="o">+</span> <span class="mi">4</span><span class="o">*</span><span class="n">y</span><span class="p">,</span> <span class="n">GRB</span><span class="o">.</span><span class="n">MAXIMIZE</span><span class="p">)</span>
+
+<span class="c1"># Añade restricciones</span>
+<span class="n">m</span><span class="o">.</span><span class="n">addConstr</span><span class="p">(</span><span class="n">x</span> <span class="o">+</span> <span class="mi">2</span><span class="o">*</span><span class="n">y</span> <span class="o">&lt;=</span> <span class="mi">8</span><span class="p">,</span> <span class="s2">&quot;restriccion_1&quot;</span><span class="p">)</span>
+<span class="n">m</span><span class="o">.</span><span class="n">addConstr</span><span class="p">(</span><span class="mi">3</span><span class="o">*</span><span class="n">x</span> <span class="o">+</span> <span class="mi">2</span><span class="o">*</span><span class="n">y</span> <span class="o">&lt;=</span> <span class="mi">12</span><span class="p">,</span> <span class="s2">&quot;restriccion_2&quot;</span><span class="p">)</span>
+
+<span class="c1"># Resuelve el modelo</span>
+<span class="n">m</span><span class="o">.</span><span class="n">optimize</span><span class="p">()</span>
+
+<span class="c1"># Imprime las soluciones</span>
+<span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">m</span><span class="o">.</span><span class="n">getVars</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%s</span><span class="s1"> </span><span class="si">%g</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">v</span><span class="o">.</span><span class="n">varName</span><span class="p">,</span> <span class="n">v</span><span class="o">.</span><span class="n">x</span><span class="p">))</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Objetivo: </span><span class="si">%g</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">m</span><span class="o">.</span><span class="n">objVal</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">ModuleNotFoundError</span><span class="g g-Whitespace">                       </span>Traceback (most recent call last)
+<span class="o">~</span>\<span class="n">AppData</span>\<span class="n">Local</span>\<span class="n">Temp</span>\<span class="n">ipykernel_17152</span>\<span class="mf">892966720.</span><span class="n">py</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="kn">from</span> <span class="nn">gurobipy</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="g g-Whitespace">      </span><span class="mi">2</span> 
+<span class="g g-Whitespace">      </span><span class="mi">3</span> 
+<span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="c1"># Crea el modelo</span>
+<span class="g g-Whitespace">      </span><span class="mi">5</span> <span class="n">m</span> <span class="o">=</span> <span class="n">Model</span><span class="p">(</span><span class="s2">&quot;modelo_simple&quot;</span><span class="p">)</span>
+
+<span class="ne">ModuleNotFoundError</span>: No module named &#39;gurobipy&#39;
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>Problema de la dieta</strong></p>
+<p>Hay 5 tipos de alimentos y 2 requerimientos de nutrientes que debemos satisfacer al mínimo coste. Se nos da el contenido nutricional y el coste por onza de cada tipo de alimento.</p>
+<table>
+<caption>Unidades de nutrientes y coste por onza</caption>
+<tr>
+<th> Food type </th> <th> Iron </th> <th> Calcium </th> <th> Cost </th>
+</tr>
+<tr>
+<th> 1 </th> <th> 2 </th> <th> 0 </th> <th> 20 </th>
+</tr>
+<tr>
+<th> 2 </th> <th> 0 </th> <th> 1 </th> <th> 10 </th>
+</tr>
+<tr>
+<th> 3 </th> <th> 3 </th> <th> 2 </th> <th> 31 </th>
+</tr>
+<tr>
+<th> 4 </th> <th> 1 </th> <th> 2 </th> <th> 11 </th>
+</tr>
+<tr>
+<th> 5 </th> <th> 2 </th> <th> 1 </th> <th> 12 </th>
+</tr><blockquote>
+<div><p>¿Cuál es la combinación de costo mínimo de estos alimentos que proporciona al menos 21 unidades de hierro y 12 unidades de calcio?</p>
+</div></blockquote>
+<p><b> Formulación del problema de la dieta </b></p>
+<ul class="simple">
+<li><p>Variables de decisión:</p></li>
+</ul>
+<p><span class="math notranslate nohighlight">\(x_j\)</span> = número de onzas del tipo de alimento <span class="math notranslate nohighlight">\(j=1,\ldots,5\)</span>.</p>
+<p>Función Objetivo:</p>
+<p>min <span class="math notranslate nohighlight">\(z = 20 x_1 + 10 x_2 + 31 x_3 + 11 x_4 + 12 x_5\)</span></p>
+<p>Restricciones estructurales:</p>
+<p><span class="math notranslate nohighlight">\(2 x_1 + 0 x_2 + 3 x_3 + 1 x_4 + 2 x_5 \ge 21\)</span> (requisito de hierro)</p>
+<p><span class="math notranslate nohighlight">\(0 x_1 + 1 x_2 + 2 x_3 + 2 x_4 + 1 x_5 \ge 12\)</span> (necesidad de calcio)</p>
+<p>Restricciones de no negatividad
+<span class="math notranslate nohighlight">\(x_j \ge 0,j=1,\ldots,5\)</span></p>
+<p><b>Construyendo el modelo con gurobipy</b></p>
+<p>Primero necesitaremos importar el módulo gurobipy. Nuestro alias preferido es ‘grb’. También crearemos un alias para gurobipy.GRB, que contiene algunas constantes útiles que normalmente necesitaremos.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">gurobipy</span> <span class="k">as</span> <span class="nn">grb</span>
+<span class="n">GRB</span> <span class="o">=</span> <span class="n">grb</span><span class="o">.</span><span class="n">GRB</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>El objeto gurobipy.Model sirve como repositorio de todos los datos relativos a su problema de optimización, y proporciona métodos para establecer variables de decisión y restricciones.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">m</span> <span class="o">=</span> <span class="n">grb</span><span class="o">.</span><span class="n">Model</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Restricted license - for non-production use only - expires 2024-10-28
+</pre></div>
+</div>
+</div>
+</div>
+<p>Puedes llamar a tu objeto gurobipy.Model como quieras, pero aquí hemos elegido “m”. Este objeto proporciona métodos para instanciar variables de decisión (addVar) y restricciones estructurales (addConstr).</p>
+<p><b>Añadir Variables</b></p>
+<p>Primero añadiremos las variables de decisión utilizando el método Model.addVar().</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">?</span>m.addVar
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Bold -Color-Bold-Red">Signature:</span> m<span class=" -Color -Color-Bold -Color-Bold-Yellow">.</span>addVar<span class=" -Color -Color-Bold -Color-Bold-Yellow">(</span>lb<span class=" -Color -Color-Bold -Color-Bold-Yellow">=</span><span class=" -Color -Color-Bold -Color-Bold-Cyan">0.0</span><span class=" -Color -Color-Bold -Color-Bold-Yellow">,</span> ub<span class=" -Color -Color-Bold -Color-Bold-Yellow">=</span><span class=" -Color -Color-Bold -Color-Bold-Cyan">1e+100</span><span class=" -Color -Color-Bold -Color-Bold-Yellow">,</span> obj<span class=" -Color -Color-Bold -Color-Bold-Yellow">=</span><span class=" -Color -Color-Bold -Color-Bold-Cyan">0.0</span><span class=" -Color -Color-Bold -Color-Bold-Yellow">,</span> vtype<span class=" -Color -Color-Bold -Color-Bold-Yellow">=</span><span class=" -Color -Color-Bold -Color-Bold-Blue">&#39;C&#39;</span><span class=" -Color -Color-Bold -Color-Bold-Yellow">,</span> name<span class=" -Color -Color-Bold -Color-Bold-Yellow">=</span><span class=" -Color -Color-Bold -Color-Bold-Blue">&#39;&#39;</span><span class=" -Color -Color-Bold -Color-Bold-Yellow">,</span> column<span class=" -Color -Color-Bold -Color-Bold-Yellow">=</span><span class=" -Color -Color-Bold -Color-Bold-Green">None</span><span class=" -Color -Color-Bold -Color-Bold-Yellow">)</span>
+<span class=" -Color -Color-Bold -Color-Bold-Red">Docstring:</span>
+ROUTINE:
+  addVar(lb, ub, obj, vtype, name, column)
+
+PURPOSE:
+  Add a variable to the model.
+
+ARGUMENTS:
+  lb (float): Lower bound (default is zero)
+  ub (float): Upper bound (default is infinite)
+  obj (float): Objective coefficient (default is zero)
+  vtype (string): Variable type (default is GRB.CONTINUOUS)
+  name (string): Variable name (default is no name)
+  column (Column): Initial coefficients for column (default is None)
+
+RETURN VALUE:
+  The created Var object.
+
+EXAMPLE:
+  v = model.addVar(ub=2.0, name=&quot;NewVar&quot;)
+<span class=" -Color -Color-Bold -Color-Bold-Red">Type:</span>      method
+</pre></div>
+</div>
+</div>
+</div>
+<p>Este método toma una variedad de parámetros opcionales y devuelve una referencia a un objeto <code class="docutils literal notranslate"><span class="pre">gurobipy.Var</span></code>. Necesitará guardar estas referencias para construir restricciones estructurales más adelante. Si conoce los límites inferiores o superiores de las variables, esos límites deben pasarse a través de los argumentos <code class="docutils literal notranslate"><span class="pre">lb</span></code> y <code class="docutils literal notranslate"><span class="pre">ub</span></code>, que por defecto son 0 e infinito, respectivamente. También en este punto tiene la opción de especificar un coeficiente objetivo a través del argumento <code class="docutils literal notranslate"><span class="pre">obj</span></code>.</p>
+<p>Es opcional, pero en general es una buena práctica proporcionar nombres significativos para cada una de las variables. En última instancia vamos a querer la salida y ver el modelo que hemos construido para verificar que es lo que pretendíamos, y los nombres que ha establecido aquí aparecerá en la salida. Esos nombres no necesitan coincidir con los nombres de las variables Python usadas para establecer las variables, lo que significa que no necesitan seguir las reglas para nombrar variables Python. Una buena convención para nombrarlas es usar una palabra o frase corta que describa lo que representa la variable, seguida de una lista separada por puntos de los índices de la variable (en este caso los tipos de alimentos del 1 al 5).</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x1</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">addVar</span><span class="p">(</span><span class="n">lb</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">ub</span><span class="o">=</span><span class="n">GRB</span><span class="o">.</span><span class="n">INFINITY</span><span class="p">,</span> <span class="n">obj</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">vtype</span><span class="o">=</span><span class="n">GRB</span><span class="o">.</span><span class="n">CONTINUOUS</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;consumed.1&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x2</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">addVar</span><span class="p">(</span><span class="n">obj</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;consumed.2&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x3</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">addVar</span><span class="p">(</span><span class="n">obj</span><span class="o">=</span><span class="mi">31</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;consumed.3&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x4</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">addVar</span><span class="p">(</span><span class="n">obj</span><span class="o">=</span><span class="mi">11</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;consumed.4&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x5</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">addVar</span><span class="p">(</span><span class="n">obj</span><span class="o">=</span><span class="mi">12</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;consumed.5&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># At this point we can print what we have saved from the calls to Model.addVar().</span>
+<span class="nb">print</span><span class="p">(</span> <span class="n">x1</span><span class="p">,</span> <span class="n">x2</span><span class="p">,</span> <span class="n">x3</span><span class="p">,</span> <span class="n">x4</span><span class="p">,</span> <span class="n">x5</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;gurobi.Var *Awaiting Model Update*&gt; &lt;gurobi.Var *Awaiting Model Update*&gt; &lt;gurobi.Var *Awaiting Model Update*&gt; &lt;gurobi.Var *Awaiting Model Update*&gt; &lt;gurobi.Var *Awaiting Model Update*&gt;
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">m</span><span class="o">.</span><span class="n">update</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span> <span class="n">x1</span><span class="p">,</span> <span class="n">x2</span><span class="p">,</span> <span class="n">x3</span><span class="p">,</span> <span class="n">x4</span><span class="p">,</span> <span class="n">x5</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;gurobi.Var consumed.1&gt; &lt;gurobi.Var consumed.2&gt; &lt;gurobi.Var consumed.3&gt; &lt;gurobi.Var consumed.4&gt; &lt;gurobi.Var consumed.5&gt;
+</pre></div>
+</div>
+</div>
+</div>
+<p><b>Construcción de expresiones lineales</b></p>
+<p>Las restricciones estructurales implican múltiples variables de decisión. El objeto <code class="docutils literal notranslate"><span class="pre">gurobipy.LinExpr</span></code> almacena una función lineal de variables de decisión. Los operadores + y * están sobrecargados para que pueda crear expresiones lineales de forma natural.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">lhs</span> <span class="o">=</span> <span class="mi">2</span><span class="o">*</span><span class="n">x1</span> <span class="o">+</span> <span class="mi">3</span><span class="o">*</span><span class="n">x3</span> <span class="o">+</span> <span class="n">x4</span> <span class="o">+</span> <span class="mi">2</span><span class="o">*</span><span class="n">x5</span>
+<span class="nb">print</span> <span class="p">(</span><span class="n">lhs</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2.0 consumed.1 + 3.0 consumed.3 + consumed.4 + 2.0 consumed.5
+</pre></div>
+</div>
+</div>
+</div>
+<p><b>Añadir Restricciones Estructurales</b></p>
+<p>Para añadir una restricción estructural, llame al método addConstr en un objeto Modelo.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">?</span>m.addConstr
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Bold -Color-Bold-Red">Signature:</span> m<span class=" -Color -Color-Bold -Color-Bold-Yellow">.</span>addConstr<span class=" -Color -Color-Bold -Color-Bold-Yellow">(</span>lhs<span class=" -Color -Color-Bold -Color-Bold-Yellow">,</span> sense<span class=" -Color -Color-Bold -Color-Bold-Yellow">=</span><span class=" -Color -Color-Bold -Color-Bold-Green">None</span><span class=" -Color -Color-Bold -Color-Bold-Yellow">,</span> rhs<span class=" -Color -Color-Bold -Color-Bold-Yellow">=</span><span class=" -Color -Color-Bold -Color-Bold-Green">None</span><span class=" -Color -Color-Bold -Color-Bold-Yellow">,</span> name<span class=" -Color -Color-Bold -Color-Bold-Yellow">=</span><span class=" -Color -Color-Bold -Color-Bold-Blue">&#39;&#39;</span><span class=" -Color -Color-Bold -Color-Bold-Yellow">)</span>
+<span class=" -Color -Color-Bold -Color-Bold-Red">Docstring:</span>
+ROUTINE:
+  addConstr(tc, name)
+
+PURPOSE:
+  Add a constraint to the model.
+
+ARGUMENTS:
+  tc (TempConstr): The constraint to add
+  name (string): Constraint name (default is no name)
+
+RETURN VALUE:
+  Depending on the data of &#39;tc&#39;:
+    - A Constr object if tc arose from a linear expression
+    - A QConstr object if tc arose from a quadratic expression
+    - An MConstr object if tc arose from a linear matrix expression
+    - A GenConstr object if tc arose form a general constraint expression
+
+EXAMPLE:
+  c = model.addConstr(x + y &lt;= 1)
+  c = model.addConstr(x + y + z == [1, 2])
+  c = model.addConstr(x*x + y*y &lt;= 1)
+  c = model.addConstr(z == and_(y, x, w))
+  c = model.addConstr(z == min_(x, y))
+  c = model.addConstr((w == 1) &gt;&gt; (x + y &lt;= 1))
+  c = model.addConstr(A @ x &lt;= b)
+<span class=" -Color -Color-Bold -Color-Bold-Red">Type:</span>      method
+</pre></div>
+</div>
+</div>
+</div>
+<p>Vamos a demostrar dos maneras de llamar <code class="docutils literal notranslate"><span class="pre">Model.addConstr()</span></code> aquí. Preferimos la segunda opción, ya que tiene una conexión más explícita con la restricción en el modelo anterior.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">iron_constr</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">addConstr</span><span class="p">(</span><span class="n">lhs</span><span class="p">,</span> <span class="s1">&#39;&gt;&#39;</span><span class="p">,</span> <span class="mi">21</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;nutrient.iron&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x2</span> <span class="o">+</span> <span class="mi">2</span><span class="o">*</span><span class="n">x3</span> <span class="o">+</span> <span class="mi">2</span><span class="o">*</span><span class="n">x4</span> <span class="o">+</span> <span class="n">x5</span> <span class="o">&gt;=</span> <span class="mi">12</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;gurobi.TempConstr: consumed.2 + 2.0 consumed.3 + 2.0 consumed.4 + consumed.5 &gt;= 12&gt;
+</pre></div>
+</div>
+</div>
+</div>
+<p>También se han sobrecargado los operadores ==, &gt;= y &lt;= para que las restricciones puedan escribirse de forma natural.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">calcium_constr</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">addConstr</span><span class="p">(</span><span class="n">x2</span> <span class="o">+</span> <span class="mi">2</span><span class="o">*</span><span class="n">x3</span> <span class="o">+</span> <span class="mi">2</span><span class="o">*</span><span class="n">x4</span> <span class="o">+</span> <span class="n">x5</span> <span class="o">&gt;=</span> <span class="mi">12</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;nutrient.calcium&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Al igual que con las variables, es una buena práctica seguir una convención de nomenclatura coherente con las restricciones. Estos nombres le ayudarán a identificar las restricciones cuando visualice el modelo completo.</p>
+<p>Una vez creadas todas las restricciones, pueden añadirse al modelo por lotes llamando al método update.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">m</span><span class="o">.</span><span class="n">update</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p><b>Inspección del modelo</b></p>
+<p>Podemos optimizar en este punto, pero es bueno tener alguna garantía de que el código que acabamos de escribir realmente construyó el modelo que esperamos que construya. El formato de archivo .lp proporciona una representación legible del modelo.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">m</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;diet.lp&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>more<span class="w"> </span>diet.lp
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>\ LP format - for model browsing. Use MPS format to capture full model detail.
+Minimize
+  20 consumed.1 + 10 consumed.2 + 31 consumed.3 + 11 consumed.4
+   + 12 consumed.5
+Subject To
+ nutrient.iron: 2 consumed.1 + 3 consumed.3 + consumed.4 + 2 consumed.5
+   &gt;= 21
+ nutrient.calcium: consumed.2 + 2 consumed.3 + 2 consumed.4 + consumed.5
+   &gt;= 12
+Bounds
+End
+</pre></div>
+</div>
+</div>
+</div>
+<p><b>Resolución del modelo</b></p>
+<p>Si se ve bien, estamos listos para resolver el modelo, lo que hacemos llamando a Model.optimize(). Después, podemos comprobar el atributo Status del modelo para ver si la solución ha tenido éxito. Si el estado es igual a GRB.OPTIMAL, entonces Gurobi fue capaz de encontrar una solución óptima demostrable (dentro de una tolerancia).</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">m</span><span class="o">.</span><span class="n">optimize</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span> <span class="s2">&quot;Model status =&quot;</span><span class="p">,</span> <span class="n">m</span><span class="o">.</span><span class="n">Status</span><span class="p">)</span>
+<span class="k">assert</span> <span class="n">m</span><span class="o">.</span><span class="n">Status</span> <span class="o">==</span> <span class="n">GRB</span><span class="o">.</span><span class="n">OPTIMAL</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Gurobi Optimizer version 10.0.2 build v10.0.2rc0 (win64)
+
+CPU model: 12th Gen Intel(R) Core(TM) i7-1265U, instruction set [SSE2|AVX|AVX2]
+Thread count: 10 physical cores, 12 logical processors, using up to 12 threads
+
+Optimize a model with 2 rows, 5 columns and 8 nonzeros
+Model fingerprint: 0x7d44349f
+Coefficient statistics:
+  Matrix range     [1e+00, 3e+00]
+  Objective range  [1e+01, 3e+01]
+  Bounds range     [0e+00, 0e+00]
+  RHS range        [1e+01, 2e+01]
+Presolve removed 0 rows and 3 columns
+Presolve time: 0.01s
+Presolved: 2 rows, 2 columns, 4 nonzeros
+
+Iteration    Objective       Primal Inf.    Dual Inf.      Time
+       0    0.0000000e+00   1.650000e+01   0.000000e+00      0s
+       2    1.3100000e+02   0.000000e+00   0.000000e+00      0s
+
+Solved in 2 iterations and 0.01 seconds (0.00 work units)
+Optimal objective  1.310000000e+02
+Model status = 2
+</pre></div>
+</div>
+</div>
+</div>
+<p>La llamada a <code class="docutils literal notranslate"><span class="pre">Model.optimize()</span></code> produce un registro que da varias estadísticas del modelo como el número de variables, restricciones y entradas no nulas de la matriz de restricciones, así como rangos para todas las entradas numéricas. Para soluciones más largas, el registro también incluirá una tabla en la que Gurobi escribe periódicamente para mantenerle informado del progreso. Si se encuentra una solución óptima, el registro terminará con el valor objetivo óptimo.</p>
+<p><b>Consulta de la solución</b></p>
+<p>El registro proporciona un valor objetivo óptimo, pero no los valores óptimos de las variables, que suelen ser la salida más importante de la solución, ya que son los que en última instancia impulsan sus decisiones. Para obtener los datos de la solución, podemos consultar varios atributos de los objetos Var y Constr que guardamos anteriormente.</p>
+<p>Aquí veremos dos de estos atributos <code class="docutils literal notranslate"><span class="pre">Var</span></code>. El primer atributo, y normalmente el más importante, se llama simplemente ‘X’ y proporciona el valor de la variable en la solución óptima. Para el problema de la dieta, esto nos dice el número de onzas de cada tipo de alimento que debemos incluir en nuestra dieta. Podemos utilizar las referencias Var guardadas anteriormente para consultar este atributo.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">x1</span><span class="o">.</span><span class="n">VarName</span><span class="p">,</span> <span class="n">x1</span><span class="o">.</span><span class="n">X</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">x2</span><span class="o">.</span><span class="n">VarName</span><span class="p">,</span> <span class="n">x2</span><span class="o">.</span><span class="n">X</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">x3</span><span class="o">.</span><span class="n">VarName</span><span class="p">,</span> <span class="n">x3</span><span class="o">.</span><span class="n">X</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">x4</span><span class="o">.</span><span class="n">VarName</span><span class="p">,</span> <span class="n">x4</span><span class="o">.</span><span class="n">X</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">x5</span><span class="o">.</span><span class="n">VarName</span><span class="p">,</span> <span class="n">x5</span><span class="o">.</span><span class="n">X</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>consumed.1 0.0
+consumed.2 0.0
+consumed.3 0.0
+consumed.4 1.0
+consumed.5 10.0
+</pre></div>
+</div>
+</div>
+</div>
+<p>El segundo atributo Var que veremos aquí es el coste reducido, que tiene el nombre de atributo ‘RC’. Este coste reducido nos indica la cantidad que tendría que cambiar el coeficiente objetivo de una variable para que ésta tuviera un valor positivo en una solución óptima. Para las variables x.4 y x.5 que ya son positivas, el coste reducido es siempre cero.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">x1</span><span class="o">.</span><span class="n">VarName</span><span class="p">,</span> <span class="n">x1</span><span class="o">.</span><span class="n">RC</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">x2</span><span class="o">.</span><span class="n">VarName</span><span class="p">,</span> <span class="n">x2</span><span class="o">.</span><span class="n">RC</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">x3</span><span class="o">.</span><span class="n">VarName</span><span class="p">,</span> <span class="n">x3</span><span class="o">.</span><span class="n">RC</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">x4</span><span class="o">.</span><span class="n">VarName</span><span class="p">,</span> <span class="n">x4</span><span class="o">.</span><span class="n">RC</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">x5</span><span class="o">.</span><span class="n">VarName</span><span class="p">,</span> <span class="n">x5</span><span class="o">.</span><span class="n">RC</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>consumed.1 11.333333333333334
+consumed.2 6.666666666666666
+consumed.3 11.333333333333332
+consumed.4 0.0
+consumed.5 0.0
+</pre></div>
+</div>
+</div>
+</div>
+<p>La interpretación aquí es que el tipo de alimento 1 tendría que ser al menos <span class="math notranslate nohighlight">\(11 \frac{1}{3}\)</span>  más barato para que nos resultara rentable incluirlo en nuestra dieta.</p>
+<p>Puede iterar sobre todas las variables del modelo con el método Model.getVars().</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">var</span> <span class="ow">in</span> <span class="n">m</span><span class="o">.</span><span class="n">getVars</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">var</span><span class="o">.</span><span class="n">VarName</span><span class="p">,</span> <span class="n">var</span><span class="o">.</span><span class="n">X</span><span class="p">,</span> <span class="n">var</span><span class="o">.</span><span class="n">RC</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>consumed.1 0.0 11.333333333333334
+consumed.2 0.0 6.666666666666666
+consumed.3 0.0 11.333333333333332
+consumed.4 1.0 0.0
+consumed.5 10.0 0.0
+</pre></div>
+</div>
+</div>
+</div>
+<p>El valor objetivo aparece en el registro de soluciones, pero puede consultarse a través del atributo ObjVal del modelo.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">m</span><span class="o">.</span><span class="n">ObjVal</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>131.0
+</pre></div>
+</div>
+</div>
+</div>
+<p>También hay información de solución asociada a las restricciones que puede ser útil para algunas aplicaciones. Aquí veremos los atributos Slack y Pi del objeto Constr.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">iron_constr</span><span class="o">.</span><span class="n">Slack</span><span class="p">,</span> <span class="n">iron_constr</span><span class="o">.</span><span class="n">Pi</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(0.0, 4.333333333333333)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">constr</span> <span class="ow">in</span> <span class="n">m</span><span class="o">.</span><span class="n">getConstrs</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">constr</span><span class="o">.</span><span class="n">ConstrName</span><span class="p">,</span> <span class="n">constr</span><span class="o">.</span><span class="n">Slack</span><span class="p">,</span> <span class="n">constr</span><span class="o">.</span><span class="n">Pi</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>nutrient.iron 0.0 4.333333333333333
+nutrient.calcium 0.0 3.333333333333334
+</pre></div>
+</div>
+</div>
+</div>
+<p>El atributo Slack nos da la diferencia entre los lados derecho e izquierdo de la restricción en la solución óptima. El atributo Pi también se conoce como valor dual o precio sombra, y nos dice cuánto cambiaría el objetivo si el lado derecho de la restricción se incrementara en 1 unidad. Una restricción puede tener una holgura positiva o un valor dual positivo, pero nunca ambos simultáneamente positivos. (¿Por qué no?)</p>
+<p>En este caso, ninguna de las dos restricciones tiene holgura y ambas tienen valores duales positivos. La interpretación para el hierro sería que el aumento de la necesidad de hierro en 1 unidad (lo que aumenta el lado derecho de la restricción de hierro en 1 unidad) aumentaría el coste óptimo de nuestra dieta en <span class="math notranslate nohighlight">\(4 \frac{1}{3}\)</span>. Esto significa que el precio máximo que estaríamos dispuestos a pagar por una unidad de hierro debería ser de 4 $.</p>
+<p>Nuestras restricciones estructurales suelen imponer algún tipo de requisito mínimo de recursos para que funcione un sistema. En este caso, las variables duales pueden interpretarse como el precio de esos recursos.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x1</span><span class="o">.</span><span class="n">LB</span> <span class="o">=</span> <span class="mf">0.1</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">m</span><span class="o">.</span><span class="n">optimize</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Gurobi Optimizer version 10.0.2 build v10.0.2rc0 (win64)
+
+CPU model: 12th Gen Intel(R) Core(TM) i7-1265U, instruction set [SSE2|AVX|AVX2]
+Thread count: 10 physical cores, 12 logical processors, using up to 12 threads
+
+Optimize a model with 2 rows, 5 columns and 8 nonzeros
+Coefficient statistics:
+  Matrix range     [1e+00, 3e+00]
+  Objective range  [1e+01, 3e+01]
+  Bounds range     [1e-01, 1e-01]
+  RHS range        [1e+01, 2e+01]
+       0    1.3213333e+02   0.000000e+00   0.000000e+00      0s
+
+Solved in 0 iterations and 0.01 seconds (0.00 work units)
+Optimal objective  1.321333333e+02
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">m</span><span class="o">.</span><span class="n">ObjVal</span> <span class="o">-</span> <span class="mi">131</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1.1333333333333258
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">iron_constr</span><span class="o">.</span><span class="n">RHS</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>21.0
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">iron_constr</span><span class="o">.</span><span class="n">RHS</span> <span class="o">=</span> <span class="mf">21.1</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">old_obj</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">ObjVal</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">m</span><span class="o">.</span><span class="n">optimize</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Gurobi Optimizer version 10.0.2 build v10.0.2rc0 (win64)
+
+CPU model: 12th Gen Intel(R) Core(TM) i7-1265U, instruction set [SSE2|AVX|AVX2]
+Thread count: 10 physical cores, 12 logical processors, using up to 12 threads
+
+Optimize a model with 2 rows, 5 columns and 8 nonzeros
+Coefficient statistics:
+  Matrix range     [1e+00, 3e+00]
+  Objective range  [1e+01, 3e+01]
+  Bounds range     [1e-01, 1e-01]
+  RHS range        [1e+01, 2e+01]
+Iteration    Objective       Primal Inf.    Dual Inf.      Time
+       0    1.3256667e+02   0.000000e+00   0.000000e+00      0s
+
+Solved in 0 iterations and 0.01 seconds (0.00 work units)
+Optimal objective  1.325666667e+02
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">m</span><span class="o">.</span><span class="n">ObjVal</span> <span class="o">-</span> <span class="n">old_obj</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.4333333333333371
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./Class_2_Gurobi"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="../Class_1_Introduction_Motivation/3-Graphs.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title"><strong>Lectura 3: Grafos</strong></p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="2-Implicit_formulation.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><strong>Lectura 2: Formulación implícita</strong></p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div></div>
+  
+</div>
+
+                </footer>
+              
+            </div>
+            
+            
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Alejandra Tabares
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  <p class="copyright">
+    
+      © Copyright 2022.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
