@@ -66,6 +66,7 @@ const thebe_selector_output = ".output, .cell_output"
     <script>DOCUMENTATION_OPTIONS.pagename = 'Class_1_Introduction_Motivation/3-Graphs';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Lectura 1: introducción a Gurobi python" href="../Class_2_Gurobi/1-Hello_word_diet_problem.html" />
     <link rel="prev" title="Lectura 2: Proyecto del semestre" href="2-Project.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -147,21 +148,35 @@ const thebe_selector_output = ".output, .cell_output"
         <ul class="nav bd-sidenav bd-sidenav__home-link">
             <li class="toctree-l1">
                 <a class="reference internal" href="../SyllabusFlujoEnRedes.html">
-                    
+                    Syllabus
                 </a>
             </li>
         </ul>
-        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Lectures</span></p>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Semana 1</span></p>
 <ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="1-Introduction.html"><strong>Lectura 1: Flujo en redes</strong></a></li>
-
 <li class="toctree-l1"><a class="reference internal" href="2-Project.html"><strong>Lectura 2: Proyecto del semestre</strong></a></li>
-
-
-
-
-
 <li class="toctree-l1 current active"><a class="current reference internal" href="#"><strong>Lectura 3: Grafos</strong></a></li>
+
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Semana 2</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../Class_2_Gurobi/1-Hello_word_diet_problem.html"><strong>Lectura 1: introducción a Gurobi python</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Class_2_Gurobi/2-Implicit_formulation.html"><strong>Lectura 2: Formulación implícita</strong></a></li>
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../Class_2_Gurobi/3-Exercice.html"><strong>Lectura 3: Ejercicio en clase</strong></a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="../Class_2_Gurobi/4-Generalizing_Diet_Problem.html"><strong>Lectura 4: Marco general para Formulación implícita</strong></a></li>
+
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Semana 3</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../Class_3_Network_as_LP/1-Introduction.html"><strong>Lectura 1: Flujo en redes como programas lineales</strong></a></li>
 
 
 
@@ -390,52 +405,56 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#"><strong>Lectura 3: Grafos</strong></a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#formalmente"><strong>Formalmente</strong></a><ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ejemplo">Ejemplo</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#algunos-comandos-basicos-en-networkx">Algunos comandos básicos en Networkx</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#creacion-de-un-grafo">1. Creación de un grafo</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#adicion-de-nodos">2. Adición de nodos</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#adicion-de-aristas">3. Adición de aristas</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#atributos-de-nodos">4. Atributos de nodos</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#atributos-de-aristas">5. Atributos de aristas</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#visualizacion">6. Visualización</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#"><strong>Lectura 3: Grafos</strong></a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#formalmente"><strong>Formalmente</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ejemplo">Ejemplo</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#algunos-comandos-basicos-en-networkx">Algunos comandos básicos en Networkx</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#creacion-de-un-grafo">1. Creación de un grafo</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#adicion-de-nodos">2. Adición de nodos</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#adicion-de-aristas">3. Adición de aristas</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#atributos-de-nodos">4. Atributos de nodos</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#atributos-de-aristas">5. Atributos de aristas</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#visualizacion">6. Visualización</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#direccion-en-los-grafos"><strong>Dirección en los grafos</strong></a><ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#grafos-no-dirigidos"><strong>1. Grafos No Dirigidos</strong></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#grafos-dirigidos-digrafos"><strong>2. Grafos Dirigidos (digrafos)</strong></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multigrafos">3. <strong>Multigrafos</strong></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#nodos-y-grafos-conectados"><strong>Nodos y Grafos Conectados</strong></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ciclos-rutas-y-caminos-en-grafos"><strong>Ciclos, Rutas y Caminos en Grafos</strong></a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#definiciones-basicas">Definiciones básicas:</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#grafos-no-dirigidos-vs-grafos-dirigidos">Grafos No Dirigidos vs. Grafos Dirigidos</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ciclos-especiales">Ciclos Especiales:</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#direccion-en-los-grafos"><strong>Dirección en los grafos</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#grafos-no-dirigidos"><strong>1. Grafos No Dirigidos</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#grafos-dirigidos-digrafos"><strong>2. Grafos Dirigidos (digrafos)</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multigrafos">3. <strong>Multigrafos</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#nodos-y-grafos-conectados"><strong>Nodos y Grafos Conectados</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ciclos-rutas-y-caminos-en-grafos"><strong>Ciclos, Rutas y Caminos en Grafos</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#definiciones-basicas">Definiciones básicas:</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#grafos-no-dirigidos-vs-grafos-dirigidos">Grafos No Dirigidos vs. Grafos Dirigidos</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#ciclos-especiales">Ciclos Especiales:</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#uso-avanzado-ciclos-especiales">3. Uso Avanzado - Ciclos Especiales</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#uso-avanzado-ciclos-especiales">3. Uso Avanzado - Ciclos Especiales</a></li>
+</ul>
+</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#grado-de-un-grafo">Grado de un Grafo</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#grado-en-grafos-no-dirigidos">Grado en Grafos No Dirigidos</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#grado-en-grafos-dirigidos">Grado en Grafos Dirigidos</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#importancia-del-grado-en-el-analisis-de-redes">Importancia del Grado en el Análisis de Redes</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#grado-en-grafos-dirigidos">Grado en Grafos Dirigidos</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#importancia-del-grado-en-el-analisis-de-redes">Importancia del Grado en el Análisis de Redes</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#topologias-en-grafos">Topologías en Grafos</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topologia-radial-star-o-estrella">Topología Radial (Star o Estrella)</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topologia-mallada-mesh">Topología Mallada (Mesh)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topologias-en-grafos">Topologías en Grafos</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#topologia-radial-star-o-estrella">Topología Radial (Star o Estrella)</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#topologia-mallada-mesh">Topología Mallada (Mesh)</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#identificacion-usando-las-propiedades">Identificación Usando las Propiedades</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#identificacion-usando-las-propiedades">Identificación Usando las Propiedades</a></li>
 </ul>
 </li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#arboles">Árboles</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#definicion">Definición</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#creacion-de-un-arbol">Creación de un Árbol</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#verificando-si-un-grafo-es-un-arbol">Verificando si un Grafo es un Árbol</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#arboles-completo">Árboles completo</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#arboles-dirigidos-arborescencias">Árboles Dirigidos (Arborescencias)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#arboles">Árboles</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#definicion">Definición</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#creacion-de-un-arbol">Creación de un Árbol</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#verificando-si-un-grafo-es-un-arbol">Verificando si un Grafo es un Árbol</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#arboles-completo">Árboles completo</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#arboles-dirigidos-arborescencias">Árboles Dirigidos (Arborescencias)</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#guias-nx">Guías NX</a></li>
@@ -451,23 +470,22 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article" role="main">
                   
-  <section id="lectura-3-grafos">
+  <section class="tex2jax_ignore mathjax_ignore" id="lectura-3-grafos">
 <h1><strong>Lectura 3: Grafos</strong><a class="headerlink" href="#lectura-3-grafos" title="Permalink to this heading">#</a></h1>
-<p>Para empezar, establezcamos qué es un grafo. Un grafo representa las relaciones (aristas) entre un conjunto de entidades (nodos).</p>
+<p>Para empezar, establezcamos qué es un grafo. Un grafo representa las relaciones (aristas, arcos) entre un conjunto de entidades (nodos, vértices).</p>
 <p>Por definición, un <code class="docutils literal notranslate"><span class="pre">Graph</span></code> es una colección de nodos (vértices) junto con pares identificados de nodos (llamados aristas, enlaces, etc.).</p>
 <p>En NetworkX, los nodos pueden ser cualquier objeto <a class="reference external" href="https://docs.python.org/3/glossary.html#term-hashable">hashable</a>, por ejemplo, una cadena de texto, una imagen, un objeto XML,otro Graph, un objeto nodo personalizado, etc.</p>
 <p><img alt="" src="../_images/grafo.png" /></p>
-</section>
 <section id="formalmente">
-<h1><strong>Formalmente</strong><a class="headerlink" href="#formalmente" title="Permalink to this heading">#</a></h1>
+<h2><strong>Formalmente</strong><a class="headerlink" href="#formalmente" title="Permalink to this heading">#</a></h2>
 <p>Un grafo <span class="math notranslate nohighlight">\(G\)</span> es una pareja ordenada <span class="math notranslate nohighlight">\((V,E)\)</span> donde <span class="math notranslate nohighlight">\(V\)</span> es un conjunto finito y no vacío de vértices y <span class="math notranslate nohighlight">\(E\)</span> es un conjunto de pares no ordenados de vértices, llamados aristas.</p>
 <section id="ejemplo">
-<h2>Ejemplo<a class="headerlink" href="#ejemplo" title="Permalink to this heading">#</a></h2>
+<h3>Ejemplo<a class="headerlink" href="#ejemplo" title="Permalink to this heading">#</a></h3>
 <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5b/6n-graf.svg/1200px-6n-graf.svg.png" width="200"></section>
 <section id="algunos-comandos-basicos-en-networkx">
-<h2>Algunos comandos básicos en Networkx<a class="headerlink" href="#algunos-comandos-basicos-en-networkx" title="Permalink to this heading">#</a></h2>
+<h3>Algunos comandos básicos en Networkx<a class="headerlink" href="#algunos-comandos-basicos-en-networkx" title="Permalink to this heading">#</a></h3>
 <section id="creacion-de-un-grafo">
-<h3>1. Creación de un grafo<a class="headerlink" href="#creacion-de-un-grafo" title="Permalink to this heading">#</a></h3>
+<h4>1. Creación de un grafo<a class="headerlink" href="#creacion-de-un-grafo" title="Permalink to this heading">#</a></h4>
 <p>Para empezar, necesitamos importar la librería y crear un objeto de grafo (no dirigido en este caso).</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -480,7 +498,7 @@ document.write(`
 </div>
 </section>
 <section id="adicion-de-nodos">
-<h3>2. Adición de nodos<a class="headerlink" href="#adicion-de-nodos" title="Permalink to this heading">#</a></h3>
+<h4>2. Adición de nodos<a class="headerlink" href="#adicion-de-nodos" title="Permalink to this heading">#</a></h4>
 <p><strong>Nodo individual:</strong></p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -511,14 +529,14 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>NodeView((0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, &#39;A&#39;, &#39;B&#39;, &#39;C&#39;, &#39;D&#39;))
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>NodeView((&#39;A&#39;, &#39;B&#39;, &#39;C&#39;, &#39;D&#39;, 1, 2, 3, 4, 5, 6))
 </pre></div>
 </div>
 </div>
 </div>
 </section>
 <section id="adicion-de-aristas">
-<h3>3. Adición de aristas<a class="headerlink" href="#adicion-de-aristas" title="Permalink to this heading">#</a></h3>
+<h4>3. Adición de aristas<a class="headerlink" href="#adicion-de-aristas" title="Permalink to this heading">#</a></h4>
 <p><strong>Arista individual:</strong></p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -537,14 +555,14 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>EdgeView([(0, 1), (0, 19), (0, 10), (1, 2), (1, 8), (2, 3), (2, 6), (3, 4), (3, 19), (4, 5), (4, 17), (5, 6), (5, 15), (6, 7), (7, 8), (7, 14), (8, 9), (9, 10), (9, 13), (10, 11), (11, 12), (11, 18), (12, 13), (12, 16), (13, 14), (14, 15), (15, 16), (16, 17), (17, 18), (18, 19), (&#39;A&#39;, &#39;B&#39;), (&#39;B&#39;, &#39;C&#39;), (&#39;C&#39;, &#39;D&#39;)])
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>EdgeView([(&#39;A&#39;, &#39;B&#39;), (&#39;B&#39;, &#39;C&#39;), (&#39;C&#39;, &#39;D&#39;)])
 </pre></div>
 </div>
 </div>
 </div>
 </section>
 <section id="atributos-de-nodos">
-<h3>4. Atributos de nodos<a class="headerlink" href="#atributos-de-nodos" title="Permalink to this heading">#</a></h3>
+<h4>4. Atributos de nodos<a class="headerlink" href="#atributos-de-nodos" title="Permalink to this heading">#</a></h4>
 <p><strong>Asignar atributos al agregar un nodo:</strong></p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -576,7 +594,7 @@ document.write(`
 </div>
 </section>
 <section id="atributos-de-aristas">
-<h3>5. Atributos de aristas<a class="headerlink" href="#atributos-de-aristas" title="Permalink to this heading">#</a></h3>
+<h4>5. Atributos de aristas<a class="headerlink" href="#atributos-de-aristas" title="Permalink to this heading">#</a></h4>
 <p><strong>Asignar atributos al agregar una arista:</strong></p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -608,7 +626,7 @@ document.write(`
 </div>
 </section>
 <section id="visualizacion">
-<h3>6. Visualización<a class="headerlink" href="#visualizacion" title="Permalink to this heading">#</a></h3>
+<h4>6. Visualización<a class="headerlink" href="#visualizacion" title="Permalink to this heading">#</a></h4>
 <p>Para visualizar el grafo, podemos usar la función <code class="docutils literal notranslate"><span class="pre">draw</span></code> de NetworkX en combinación con Matplotlib.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -620,21 +638,21 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/7fa3b8ffe9e9b3469480805f0c073033adb337fe02ee936ed817902ae373aa24.png" src="../_images/7fa3b8ffe9e9b3469480805f0c073033adb337fe02ee936ed817902ae373aa24.png" />
+<img alt="../_images/87189e25f243648be400009f977ffe3de30850b0c9a82521a2c952a341395a3f.png" src="../_images/87189e25f243648be400009f977ffe3de30850b0c9a82521a2c952a341395a3f.png" />
 </div>
 </div>
 </section>
 </section>
 </section>
 <section id="direccion-en-los-grafos">
-<h1><strong>Dirección en los grafos</strong><a class="headerlink" href="#direccion-en-los-grafos" title="Permalink to this heading">#</a></h1>
+<h2><strong>Dirección en los grafos</strong><a class="headerlink" href="#direccion-en-los-grafos" title="Permalink to this heading">#</a></h2>
 <p>Además, podemos especializar los grafos asociando la direccionalidad a las aristas (dirigidas, no dirigidas).</p>
 <p><img alt="" src="../_images/edge_dir.png" /></p>
 <p>Las aristas pueden ser dirigidas, donde una arista e  tiene un nodo origen, <span class="math notranslate nohighlight">\(v_{src}\)</span> y un nodo de destino <span class="math notranslate nohighlight">\(v_{dst}\)</span> . En este caso, hay flujos de <span class="math notranslate nohighlight">\(v_{src}\)</span>  a <span class="math notranslate nohighlight">\(v_{dst}\)</span>.</p>
 <p>También pueden ser no dirigidas, donde no hay noción de nodos de origen o destino, y hay flujo en ambas direcciones. Obsérvese que tener una sola arista no dirigida equivale a tener una arista dirigida desde <span class="math notranslate nohighlight">\(v_{src}\)</span>  a <span class="math notranslate nohighlight">\(v_{dst}\)</span> y otra arista dirigida desde <span class="math notranslate nohighlight">\(v_{dst}\)</span> a <span class="math notranslate nohighlight">\(v_{src}\)</span></p>
 <p><img alt="" src="../_images/grafo_digrafo.png" /></p>
 <section id="grafos-no-dirigidos">
-<h2><strong>1. Grafos No Dirigidos</strong><a class="headerlink" href="#grafos-no-dirigidos" title="Permalink to this heading">#</a></h2>
+<h3><strong>1. Grafos No Dirigidos</strong><a class="headerlink" href="#grafos-no-dirigidos" title="Permalink to this heading">#</a></h3>
 <p>Estos son grafos donde las aristas no tienen una dirección. Es decir, si existe una arista entre los nodos A y B, entonces esa arista se puede recorrer en ambos sentidos.</p>
 <p><strong>Código de ejemplo:</strong></p>
 <div class="cell docutils container">
@@ -657,7 +675,7 @@ document.write(`
 </div>
 </section>
 <section id="grafos-dirigidos-digrafos">
-<h2><strong>2. Grafos Dirigidos (digrafos)</strong><a class="headerlink" href="#grafos-dirigidos-digrafos" title="Permalink to this heading">#</a></h2>
+<h3><strong>2. Grafos Dirigidos (digrafos)</strong><a class="headerlink" href="#grafos-dirigidos-digrafos" title="Permalink to this heading">#</a></h3>
 <p>A diferencia de los grafos no dirigidos, en un grafo dirigido, cada arista tiene una dirección definida. Es decir, si existe una arista dirigida de A hacia B, no necesariamente existe una arista de B hacia A.</p>
 <p><strong>Código de ejemplo:</strong></p>
 <div class="cell docutils container">
@@ -672,12 +690,12 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/60c7e97409821d05e313bf4a4a5281266157ce59f06357c85e1da17ee3c25de2.png" src="../_images/60c7e97409821d05e313bf4a4a5281266157ce59f06357c85e1da17ee3c25de2.png" />
+<img alt="../_images/8cf181549dc3a4e0174b38a5f763e8383ca58c539eb6ff1ba0c8abb03158c57a.png" src="../_images/8cf181549dc3a4e0174b38a5f763e8383ca58c539eb6ff1ba0c8abb03158c57a.png" />
 </div>
 </div>
 </section>
 <section id="multigrafos">
-<h2>3. <strong>Multigrafos</strong><a class="headerlink" href="#multigrafos" title="Permalink to this heading">#</a></h2>
+<h3>3. <strong>Multigrafos</strong><a class="headerlink" href="#multigrafos" title="Permalink to this heading">#</a></h3>
 <p>Un multigrafo es una generalización del concepto de grafo en la teoría de grafos. En un multigrafo, se permite más de una arista (llamada múltiples aristas) entre cualquier par de nodos. Estas múltiples aristas pueden ser dirigidas o no dirigidas.</p>
 <p>Los multigrafos son útiles en situaciones donde es necesario modelar relaciones que pueden tener múltiples instancias entre entidades. Por ejemplo, si estás modelando un sistema de transporte donde hay múltiples rutas (representadas por aristas) entre dos ciudades (representadas por vértices), un multigrafo sería una herramienta apropiada para representar esta estructura.</p>
 <p><strong>Código de ejemplo para un multigrafo no dirigido:</strong></p>
@@ -694,7 +712,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/488585f61763bae3265012c733c02bf820d1fc9da242d7b2a01a5bbba729885e.png" src="../_images/488585f61763bae3265012c733c02bf820d1fc9da242d7b2a01a5bbba729885e.png" />
+<img alt="../_images/05dd85f9b7b883fcbaec9ae5111390638b00446b63650a530f944c01a6e85d56.png" src="../_images/05dd85f9b7b883fcbaec9ae5111390638b00446b63650a530f944c01a6e85d56.png" />
 </div>
 </div>
 <p><strong>Código de ejemplo para un multigrafo dirigido:</strong></p>
@@ -711,13 +729,42 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/855f11079f43b2c9f77ab779f58c4592687cffdb26c769ddb2cbfc2f4f7d99de.png" src="../_images/855f11079f43b2c9f77ab779f58c4592687cffdb26c769ddb2cbfc2f4f7d99de.png" />
+<img alt="../_images/5969a38fc6ea7c1680de46fd9824626635ed250efda54c43df998c3fa889cd48.png" src="../_images/5969a38fc6ea7c1680de46fd9824626635ed250efda54c43df998c3fa889cd48.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Añadir aristas con diferentes pesos entre los nodos A y B</span>
+<span class="n">G_multidigraph</span><span class="o">.</span><span class="n">add_edge</span><span class="p">(</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="s1">&#39;B&#39;</span><span class="p">,</span> <span class="n">weight</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+<span class="n">G_multidigraph</span><span class="o">.</span><span class="n">add_edge</span><span class="p">(</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="s1">&#39;B&#39;</span><span class="p">,</span> <span class="n">weight</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+<span class="n">G_multidigraph</span><span class="o">.</span><span class="n">add_edge</span><span class="p">(</span><span class="s1">&#39;B&#39;</span><span class="p">,</span> <span class="s1">&#39;C&#39;</span><span class="p">,</span> <span class="n">weight</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
+
+<span class="c1"># Dibujar el multigrafo</span>
+<span class="n">pos</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">spring_layout</span><span class="p">(</span><span class="n">G_multidigraph</span><span class="p">)</span>
+<span class="n">nx</span><span class="o">.</span><span class="n">draw</span><span class="p">(</span><span class="n">G_multidigraph</span><span class="p">,</span> <span class="n">pos</span><span class="p">,</span> <span class="n">with_labels</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+
+<span class="c1"># Dibujar etiquetas de las aristas</span>
+<span class="k">for</span> <span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span> <span class="ow">in</span> <span class="n">G_multidigraph</span><span class="o">.</span><span class="n">edges</span><span class="p">(</span><span class="n">keys</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+    <span class="n">label</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;weight&#39;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">label</span><span class="p">:</span>  <span class="c1"># Solo mostramos la etiqueta si el atributo &#39;weight&#39; existe</span>
+        <span class="c1"># Calculemos una posición para las etiquetas basada en la posición de los nodos</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="p">(</span><span class="n">pos</span><span class="p">[</span><span class="n">u</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">pos</span><span class="p">[</span><span class="n">v</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span> <span class="o">/</span> <span class="mi">2</span>
+        <span class="n">y</span> <span class="o">=</span> <span class="p">(</span><span class="n">pos</span><span class="p">[</span><span class="n">u</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">pos</span><span class="p">[</span><span class="n">v</span><span class="p">][</span><span class="mi">1</span><span class="p">])</span> <span class="o">/</span> <span class="mi">2</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">label</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/721e18f43a302ecf8ed96fd9491e8a1ab9c10e6ee6810c3dcde0baf4f2c28b4f.png" src="../_images/721e18f43a302ecf8ed96fd9491e8a1ab9c10e6ee6810c3dcde0baf4f2c28b4f.png" />
 </div>
 </div>
 <p>El método <code class="docutils literal notranslate"><span class="pre">nx.draw()</span></code> proporciona una manera sencilla de visualizar grafos. En los ejemplos anteriores, utilizamos diferentes argumentos para personalizar el aspecto del grafo. Si deseas más opciones de visualización, te recomiendo investigar sobre herramientas más avanzadas como <code class="docutils literal notranslate"><span class="pre">pyplot</span></code> de <code class="docutils literal notranslate"><span class="pre">matplotlib</span></code>, con las cuales puedes lograr visualizaciones más detalladas y atractivas.</p>
 </section>
 <section id="nodos-y-grafos-conectados">
-<h2><strong>Nodos y Grafos Conectados</strong><a class="headerlink" href="#nodos-y-grafos-conectados" title="Permalink to this heading">#</a></h2>
+<h3><strong>Nodos y Grafos Conectados</strong><a class="headerlink" href="#nodos-y-grafos-conectados" title="Permalink to this heading">#</a></h3>
 <p><strong>Definición</strong>: Un grafo se considera <strong>conectado</strong> si existe un camino entre cualquier par de nodos del grafo. Si el grafo no es conectado, se divide en componentes conectados.</p>
 <p>Un <strong>componente conectado</strong> es un subconjunto del grafo en el que existe un camino entre cualquier par de nodos, y no está conectado a ningún nodo adicional del grafo.</p>
 <p><img alt="" src="../_images/conectivity.png" /></p>
@@ -747,7 +794,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/c3da2bde2346ce327bb410cb31afdf653700c09d3eb493d4001dd34a86b672f8.png" src="../_images/c3da2bde2346ce327bb410cb31afdf653700c09d3eb493d4001dd34a86b672f8.png" />
+<img alt="../_images/a98c75e9e3ac6c23ddf4d538607e6c450ff99e6ea4f63bbed9397a341d3860fd.png" src="../_images/a98c75e9e3ac6c23ddf4d538607e6c450ff99e6ea4f63bbed9397a341d3860fd.png" />
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>El grafo es conectado: True
 </pre></div>
 </div>
@@ -773,7 +820,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/fc5d5a8d02109e20b59f1fb9bfa4e5ed07df2d13b676f5fd5c1d66e68eb31091.png" src="../_images/fc5d5a8d02109e20b59f1fb9bfa4e5ed07df2d13b676f5fd5c1d66e68eb31091.png" />
+<img alt="../_images/2a22514f4c19d3ded78a5f9f53d9e93ecd67404192d0280e1871bfeb549a2716.png" src="../_images/2a22514f4c19d3ded78a5f9f53d9e93ecd67404192d0280e1871bfeb549a2716.png" />
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Componentes conectados: [{1, 2, 3}, {4, 5}]
 </pre></div>
 </div>
@@ -794,7 +841,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/75124c2af3c65c44b1d1f238055624afeeba1d6f8313096910be9b3d5d8e1712.png" src="../_images/75124c2af3c65c44b1d1f238055624afeeba1d6f8313096910be9b3d5d8e1712.png" />
+<img alt="../_images/05f402f4a678aea400c1a8488bb27f84452e05263d6685246a82a05c08ed16b9.png" src="../_images/05f402f4a678aea400c1a8488bb27f84452e05263d6685246a82a05c08ed16b9.png" />
 </div>
 </div>
 <ul class="simple">
@@ -803,10 +850,10 @@ document.write(`
 </ul>
 </section>
 <section id="ciclos-rutas-y-caminos-en-grafos">
-<h2><strong>Ciclos, Rutas y Caminos en Grafos</strong><a class="headerlink" href="#ciclos-rutas-y-caminos-en-grafos" title="Permalink to this heading">#</a></h2>
+<h3><strong>Ciclos, Rutas y Caminos en Grafos</strong><a class="headerlink" href="#ciclos-rutas-y-caminos-en-grafos" title="Permalink to this heading">#</a></h3>
 <p>Un grafo puede representar relaciones complejas entre entidades, y uno de los aspectos más intrigantes del estudio de grafos es el análisis de los caminos y ciclos dentro de ellos.</p>
 <section id="definiciones-basicas">
-<h3>Definiciones básicas:<a class="headerlink" href="#definiciones-basicas" title="Permalink to this heading">#</a></h3>
+<h4>Definiciones básicas:<a class="headerlink" href="#definiciones-basicas" title="Permalink to this heading">#</a></h4>
 <ol class="arabic simple">
 <li><p><strong>Ciclo:</strong> Es un camino que comienza y termina en el mismo nodo y no repite aristas o nodos (excepto el nodo inicial y final).</p></li>
 <li><p><strong>Camino:</strong> Es una secuencia de nodos en la que cada nodo adyacente en la secuencia está conectado por una arista.</p></li>
@@ -814,14 +861,14 @@ document.write(`
 </ol>
 </section>
 <section id="grafos-no-dirigidos-vs-grafos-dirigidos">
-<h3>Grafos No Dirigidos vs. Grafos Dirigidos<a class="headerlink" href="#grafos-no-dirigidos-vs-grafos-dirigidos" title="Permalink to this heading">#</a></h3>
+<h4>Grafos No Dirigidos vs. Grafos Dirigidos<a class="headerlink" href="#grafos-no-dirigidos-vs-grafos-dirigidos" title="Permalink to this heading">#</a></h4>
 <ul class="simple">
 <li><p>En un <strong>grafo no dirigido</strong>, la dirección de las aristas no importa. Si existe una arista entre los nodos A y B, podemos ir de A a B o de B a A.</p></li>
 <li><p>En un <strong>grafo dirigido</strong>, las aristas tienen una dirección. Si hay una arista dirigida de A a B, sólo se puede ir de A a B, y no al revés, a menos que haya otra arista dirigida en esa dirección.</p></li>
 </ul>
 </section>
 <section id="ciclos-especiales">
-<h3>Ciclos Especiales:<a class="headerlink" href="#ciclos-especiales" title="Permalink to this heading">#</a></h3>
+<h4>Ciclos Especiales:<a class="headerlink" href="#ciclos-especiales" title="Permalink to this heading">#</a></h4>
 <ol class="arabic simple">
 <li><p><strong>Ciclo Hamiltoniano:</strong> Es un ciclo que visita cada nodo del grafo exactamente una vez.</p></li>
 <li><p><strong>Ciclo Euleriano:</strong> Es un ciclo que visita cada arista del grafo exactamente una vez.</p></li>
@@ -832,7 +879,6 @@ document.write(`
 <li><p><strong>Para que un grafo dirigido tenga un ciclo Euleriano</strong>, debe ser fuertemente conexo y cada nodo debe tener el mismo <em>grado</em> de entrada y salida.</p></li>
 </ul>
 <p>Los ciclos Hamiltonianos y Eulerianos son esenciales en diversas áreas, desde la teoría de grafos hasta la optimización, pasando por aplicaciones prácticas como la planificación de rutas.</p>
-<p>Con NetworkX, el análisis de ciclos, caminos y rutas se facilita gracias a las múltiples funciones que ofrece. Sin embargo, es esencial tener un buen entendimiento de los conceptos básicos para interpretar y aplicar correctamente los resultados.</p>
 <p><img alt="" src="../_images/Ruta_ciclo.png" /></p>
 <ol class="arabic simple">
 <li><p><strong>Buscar un camino entre dos nodos:</strong></p></li>
@@ -854,7 +900,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/10ddcf892a26edffdb2b48ca3b21194713fb1420b734579dacf6fb2ff54f397b.png" src="../_images/10ddcf892a26edffdb2b48ca3b21194713fb1420b734579dacf6fb2ff54f397b.png" />
+<img alt="../_images/6200a19586308b00da504e6941c2803d00fbfb90228e7494476316bf97cee350.png" src="../_images/6200a19586308b00da504e6941c2803d00fbfb90228e7494476316bf97cee350.png" />
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Camino más corto entre 1 y 5: [1, 2, 3, 4, 5]
 </pre></div>
 </div>
@@ -882,7 +928,7 @@ document.write(`
 <p>El método <code class="docutils literal notranslate"><span class="pre">simple_cycles</span></code> es específico para grafos dirigidos (<code class="docutils literal notranslate"><span class="pre">DiGraph</span></code>) y encuentra ciclos simples, que son ciclos donde no se repiten nodos ni aristas, excepto el nodo inicial y final.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">G_directed</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">DiGraph</span><span class="p">([(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">)])</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">G_directed</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">DiGraph</span><span class="p">([(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span> <span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span> <span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">),</span> <span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">),</span> <span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">),</span> <span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">6</span><span class="p">)])</span>
 
 <span class="c1"># Visualizar</span>
 <span class="n">nx</span><span class="o">.</span><span class="n">draw</span><span class="p">(</span><span class="n">G_directed</span><span class="p">,</span> <span class="n">with_labels</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">node_size</span><span class="o">=</span><span class="mi">700</span><span class="p">,</span> <span class="n">node_color</span><span class="o">=</span><span class="s2">&quot;skyblue&quot;</span><span class="p">,</span> <span class="n">arrowsize</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
@@ -893,8 +939,21 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/0d6d740c970e42a2a213327c68f85bc6a7d08e912b7771a3014cbf4822859731.png" src="../_images/0d6d740c970e42a2a213327c68f85bc6a7d08e912b7771a3014cbf4822859731.png" />
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Ciclos simples en el grafo: [[1, 2, 3]]
+<img alt="../_images/591590b1517e436526bd6383e2c93f0f2ea08a50eec4b6296a871313aa2422dc.png" src="../_images/591590b1517e436526bd6383e2c93f0f2ea08a50eec4b6296a871313aa2422dc.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Ciclos simples en el grafo: [[1, 2, 3], [3, 4, 5], [8, 6, 7]]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">all_paths_2</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">nx</span><span class="o">.</span><span class="n">all_simple_paths</span><span class="p">(</span><span class="n">G_directed</span><span class="p">,</span> <span class="n">source</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">target</span><span class="o">=</span><span class="mi">5</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Todos los caminos entre 1 y 5: </span><span class="si">{</span><span class="n">all_paths_2</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Todos los caminos entre 1 y 5: [[3, 4, 5]]
 </pre></div>
 </div>
 </div>
@@ -938,7 +997,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/e9233bacc415a05173b8b26b39e16e31f3aea980c5e99c02d69f5d0cac640f5a.png" src="../_images/e9233bacc415a05173b8b26b39e16e31f3aea980c5e99c02d69f5d0cac640f5a.png" />
+<img alt="../_images/be95fe4eeecc3d8e8097315eadf3b24469ca9baf692384b921ea340976d755ac.png" src="../_images/be95fe4eeecc3d8e8097315eadf3b24469ca9baf692384b921ea340976d755ac.png" />
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Un ciclo en el grafo: [(1, 2), (2, 3), (3, 1)]
 </pre></div>
 </div>
@@ -947,7 +1006,7 @@ document.write(`
 </section>
 </section>
 <section id="uso-avanzado-ciclos-especiales">
-<h2>3. Uso Avanzado - Ciclos Especiales<a class="headerlink" href="#uso-avanzado-ciclos-especiales" title="Permalink to this heading">#</a></h2>
+<h3>3. Uso Avanzado - Ciclos Especiales<a class="headerlink" href="#uso-avanzado-ciclos-especiales" title="Permalink to this heading">#</a></h3>
 <p><strong>Encuentra un ciclo Euleriano (si existe):</strong></p>
 <p>Como ya se mencionó, un ciclo euleriano recorre cada arista exactamente una vez.</p>
 <div class="cell docutils container">
@@ -961,22 +1020,21 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Ciclo Euleriano: [(1, 2), (2, 3), (3, 1)]
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>El grafo no tiene un ciclo Euleriano.
 </pre></div>
 </div>
 </div>
 </div>
 <p>Lamentablemente, NetworkX no tiene una función incorporada para encontrar ciclos hamiltonianos directamente debido a la complejidad computacional del problema.</p>
 </section>
-<hr class="docutils" />
+</section>
 <section id="grado-de-un-grafo">
 <h2>Grado de un Grafo<a class="headerlink" href="#grado-de-un-grafo" title="Permalink to this heading">#</a></h2>
 <p>El grado de un nodo en un grafo es una métrica fundamental que indica el número de aristas asociadas a ese nodo. Representa la conectividad local del nodo en el contexto del grafo.</p>
 <section id="grado-en-grafos-no-dirigidos">
 <h3>Grado en Grafos No Dirigidos<a class="headerlink" href="#grado-en-grafos-no-dirigidos" title="Permalink to this heading">#</a></h3>
-<p>En un <strong>grafo no dirigido</strong>, el grado de un nodo ( v ), denotado como ( \deg(v) ), es simplemente el número de aristas que se conectan a ( v ).</p>
-<p>Por ejemplo, en un grafo que contiene una arista entre los nodos ( A ) y ( B ), ambos nodos tienen un grado de 1.</p>
-<hr class="docutils" />
+<p>En un <strong>grafo no dirigido</strong>, el grado de un nodo <span class="math notranslate nohighlight">\(v\)</span>, denotado como <span class="math notranslate nohighlight">\(\deg(v)\)</span>, es simplemente el número de aristas que se conectan a <span class="math notranslate nohighlight">\(v\)</span>.</p>
+<p>Por ejemplo, en un grafo que contiene una arista entre los nodos <span class="math notranslate nohighlight">\(A\)</span> y <span class="math notranslate nohighlight">\(B\)</span>, ambos nodos tienen un grado de 1.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">networkx</span> <span class="k">as</span> <span class="nn">nx</span>
@@ -994,14 +1052,13 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/adfebccaf1d05b3d07a5d0aa5795061fcb58ef41d9d425d8788f95d9cd1e4e5c.png" src="../_images/adfebccaf1d05b3d07a5d0aa5795061fcb58ef41d9d425d8788f95d9cd1e4e5c.png" />
+<img alt="../_images/cae0202ef51da31d13cde95f63ca7fddf169b9d4ffc73e107d4521751d3a08ce.png" src="../_images/cae0202ef51da31d13cde95f63ca7fddf169b9d4ffc73e107d4521751d3a08ce.png" />
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Grado del nodo A: 1
 </pre></div>
 </div>
 </div>
 </div>
 </section>
-<hr class="docutils" />
 <section id="grado-en-grafos-dirigidos">
 <h3>Grado en Grafos Dirigidos<a class="headerlink" href="#grado-en-grafos-dirigidos" title="Permalink to this heading">#</a></h3>
 <p>En un <strong>grafo dirigido</strong> o <strong>dígrafo</strong>, es necesario distinguir entre las conexiones entrantes y salientes. Por ello, definimos dos tipos de grados:</p>
@@ -1010,7 +1067,6 @@ document.write(`
 <li><p><strong>Grado de salida (Out-degree)</strong>: Es el número de aristas que salen del nodo.</p></li>
 </ol>
 <p>El grado total de un nodo sería la suma de su grado de entrada y su grado de salida.</p>
-<hr class="docutils" />
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">G_directed</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">DiGraph</span><span class="p">()</span>
@@ -1026,17 +1082,15 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/d320dd20de6caca8149d61a01afa31a585b300c62bd82634ae95f5f6fa09d2f1.png" src="../_images/d320dd20de6caca8149d61a01afa31a585b300c62bd82634ae95f5f6fa09d2f1.png" />
+<img alt="../_images/e55eab61e33bbe63383b9c41d75324439232db9867517408b5f1345600f924e4.png" src="../_images/e55eab61e33bbe63383b9c41d75324439232db9867517408b5f1345600f924e4.png" />
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Grado de entrada del nodo A: 0
 Grado de salida del nodo A: 2
 </pre></div>
 </div>
 </div>
 </div>
-</section>
-<hr class="docutils" />
 <section id="importancia-del-grado-en-el-analisis-de-redes">
-<h3>Importancia del Grado en el Análisis de Redes<a class="headerlink" href="#importancia-del-grado-en-el-analisis-de-redes" title="Permalink to this heading">#</a></h3>
+<h4>Importancia del Grado en el Análisis de Redes<a class="headerlink" href="#importancia-del-grado-en-el-analisis-de-redes" title="Permalink to this heading">#</a></h4>
 <p>El grado de un nodo es fundamental en el análisis de redes porque:</p>
 <ol class="arabic simple">
 <li><p><strong>Indica popularidad o centralidad</strong>: En redes sociales, un nodo (usuario) con un grado alto podría ser un influenciador o una figura central en la red.</p></li>
@@ -1045,12 +1099,11 @@ Grado de salida del nodo A: 2
 </ol>
 </section>
 </section>
-<hr class="docutils" />
 <section id="topologias-en-grafos">
-<h2>Topologías en Grafos<a class="headerlink" href="#topologias-en-grafos" title="Permalink to this heading">#</a></h2>
+<h3>Topologías en Grafos<a class="headerlink" href="#topologias-en-grafos" title="Permalink to this heading">#</a></h3>
 <p>Una topología de red describe cómo diferentes nodos o dispositivos en una red están conectados entre sí. A continuación, discutiremos dos topologías comunes: radial y mallada, y cómo podemos identificarlas utilizando propiedades de los grafos.</p>
 <section id="topologia-radial-star-o-estrella">
-<h3>Topología Radial (Star o Estrella)<a class="headerlink" href="#topologia-radial-star-o-estrella" title="Permalink to this heading">#</a></h3>
+<h4>Topología Radial (Star o Estrella)<a class="headerlink" href="#topologia-radial-star-o-estrella" title="Permalink to this heading">#</a></h4>
 <p><strong>Definición:</strong> En esta topología, tenemos un nodo central al que todos los demás nodos están conectados directamente. El nodo central actúa como un repetidor y todas las comunicaciones que pasan por la red deben pasar por el nodo central.</p>
 <p><strong>Propiedades del Grafo:</strong></p>
 <ul class="simple">
@@ -1069,7 +1122,7 @@ Grado de salida del nodo A: 2
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/b98ad0e2231cae5ebcab31192820bdec3190df40ce202da9ac17cbb07abc00ea.png" src="../_images/b98ad0e2231cae5ebcab31192820bdec3190df40ce202da9ac17cbb07abc00ea.png" />
+<img alt="../_images/08a7902309152ba2ee262b7b5dba1f51985c03a1b9b7b3be32c88da9b6d51c0b.png" src="../_images/08a7902309152ba2ee262b7b5dba1f51985c03a1b9b7b3be32c88da9b6d51c0b.png" />
 </div>
 </div>
 <p><strong>Identificación usando NetworkX:</strong></p>
@@ -1111,12 +1164,12 @@ Grado de salida del nodo A: 2
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/a35fce7d5a435936a83b13b61a79d02034af3d76382f22c746ef6d9d47f7ad99.png" src="../_images/a35fce7d5a435936a83b13b61a79d02034af3d76382f22c746ef6d9d47f7ad99.png" />
+<img alt="../_images/8f87c4a77478fd4bedcd47343cac6d9dd7573f5e2a9ec6857cb6a0edcd4a1c38.png" src="../_images/8f87c4a77478fd4bedcd47343cac6d9dd7573f5e2a9ec6857cb6a0edcd4a1c38.png" />
 </div>
 </div>
 </section>
 <section id="topologia-mallada-mesh">
-<h3>Topología Mallada (Mesh)<a class="headerlink" href="#topologia-mallada-mesh" title="Permalink to this heading">#</a></h3>
+<h4>Topología Mallada (Mesh)<a class="headerlink" href="#topologia-mallada-mesh" title="Permalink to this heading">#</a></h4>
 <p><strong>Definición:</strong> En una topología mallada, cada nodo está conectado a todos los demás nodos. Es robusta y ofrece alta redundancia y fiabilidad.</p>
 <p><strong>Propiedades del Grafo:</strong></p>
 <ul class="simple">
@@ -1131,7 +1184,7 @@ Grado de salida del nodo A: 2
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/2c78430383ad3b706a72d72bf3ba5f126a67f9b3d17b25c712ad425a3ad9fda4.png" src="../_images/2c78430383ad3b706a72d72bf3ba5f126a67f9b3d17b25c712ad425a3ad9fda4.png" />
+<img alt="../_images/c8542e0a20418a711e5a61e340ac6d9119c90379ddc4bf9b70ffcd44ed521bc8.png" src="../_images/c8542e0a20418a711e5a61e340ac6d9119c90379ddc4bf9b70ffcd44ed521bc8.png" />
 </div>
 </div>
 <p><strong>Identificación usando NetworkX:</strong></p>
@@ -1171,21 +1224,21 @@ Grado de salida del nodo A: 2
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/df26a68ffabffd68000100a0e135044dee8b737cd9057abf2d920736a9d58524.png" src="../_images/df26a68ffabffd68000100a0e135044dee8b737cd9057abf2d920736a9d58524.png" />
+<img alt="../_images/c70a512335c6108f5a542d991fef53e2a0fa67a91c01ffc58c49a2e8a854d7e0.png" src="../_images/c70a512335c6108f5a542d991fef53e2a0fa67a91c01ffc58c49a2e8a854d7e0.png" />
 </div>
 </div>
 </section>
 </section>
 <section id="identificacion-usando-las-propiedades">
-<h2>Identificación Usando las Propiedades<a class="headerlink" href="#identificacion-usando-las-propiedades" title="Permalink to this heading">#</a></h2>
+<h3>Identificación Usando las Propiedades<a class="headerlink" href="#identificacion-usando-las-propiedades" title="Permalink to this heading">#</a></h3>
 <p>Las propiedades de los grafos nos permiten identificar rápidamente qué topología estamos observando. Por ejemplo, si notamos que un nodo tiene un grado significativamente más alto que los demás, es probable que estemos observando una topología radial. Si todos los nodos tienen el mismo grado y ese grado es ( n - 1 ), entonces estamos viendo una topología mallada.</p>
 <p>Al comprender y aplicar estas propiedades, podemos diseñar y analizar redes de manera más eficiente, garantizando una comunicación efectiva y una arquitectura de red óptima.</p>
 </section>
 </section>
 <section id="arboles">
-<h1>Árboles<a class="headerlink" href="#arboles" title="Permalink to this heading">#</a></h1>
+<h2>Árboles<a class="headerlink" href="#arboles" title="Permalink to this heading">#</a></h2>
 <section id="definicion">
-<h2>Definición<a class="headerlink" href="#definicion" title="Permalink to this heading">#</a></h2>
+<h3>Definición<a class="headerlink" href="#definicion" title="Permalink to this heading">#</a></h3>
 <p>Un <strong>árbol</strong> es un grafo no dirigido y conectado que no tiene ciclos. Tiene las siguientes propiedades:</p>
 <ul class="simple">
 <li><p>Cualquier conexión entre dos nodos es un camino único.</p></li>
@@ -1194,7 +1247,7 @@ Grado de salida del nodo A: 2
 </ul>
 </section>
 <section id="creacion-de-un-arbol">
-<h2>Creación de un Árbol<a class="headerlink" href="#creacion-de-un-arbol" title="Permalink to this heading">#</a></h2>
+<h3>Creación de un Árbol<a class="headerlink" href="#creacion-de-un-arbol" title="Permalink to this heading">#</a></h3>
 <p>Para crear un árbol en NetworkX, simplemente añade nodos y aristas asegurándote de no introducir ciclos.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1210,12 +1263,12 @@ Grado de salida del nodo A: 2
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/d17cbe1225b642e7afcf66b0693c8536b00d96721d1f65d9b8b7e6a4a62ecf69.png" src="../_images/d17cbe1225b642e7afcf66b0693c8536b00d96721d1f65d9b8b7e6a4a62ecf69.png" />
+<img alt="../_images/176cf1e3f4aa5b45231b94f06129ecab4285f53bb787222cd413d9f923fb69f0.png" src="../_images/176cf1e3f4aa5b45231b94f06129ecab4285f53bb787222cd413d9f923fb69f0.png" />
 </div>
 </div>
 </section>
 <section id="verificando-si-un-grafo-es-un-arbol">
-<h2>Verificando si un Grafo es un Árbol<a class="headerlink" href="#verificando-si-un-grafo-es-un-arbol" title="Permalink to this heading">#</a></h2>
+<h3>Verificando si un Grafo es un Árbol<a class="headerlink" href="#verificando-si-un-grafo-es-un-arbol" title="Permalink to this heading">#</a></h3>
 <p>Para comprobar si un grafo es un árbol, debes asegurarte de que esté conectado y no tenga ciclos.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1240,7 +1293,7 @@ Grado de salida del nodo A: 2
 </div>
 </section>
 <section id="arboles-completo">
-<h2>Árboles completo<a class="headerlink" href="#arboles-completo" title="Permalink to this heading">#</a></h2>
+<h3>Árboles completo<a class="headerlink" href="#arboles-completo" title="Permalink to this heading">#</a></h3>
 <p>Un <strong>árbol completo</strong> de un grafo es un árbol compuesto por todos los vértices y algunas (posiblemente todas) de las aristas del grafo.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1253,12 +1306,12 @@ Grado de salida del nodo A: 2
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/c6b678ba486691325cc24db10d4aa30b4cbaf5f4b8c6ce95d392e6d35e72170d.png" src="../_images/c6b678ba486691325cc24db10d4aa30b4cbaf5f4b8c6ce95d392e6d35e72170d.png" />
+<img alt="../_images/821407dd95afdacce4b2025973a35ffbe43b8bb597c89100d95a25a417fc5355.png" src="../_images/821407dd95afdacce4b2025973a35ffbe43b8bb597c89100d95a25a417fc5355.png" />
 </div>
 </div>
 </section>
 <section id="arboles-dirigidos-arborescencias">
-<h2>Árboles Dirigidos (Arborescencias)<a class="headerlink" href="#arboles-dirigidos-arborescencias" title="Permalink to this heading">#</a></h2>
+<h3>Árboles Dirigidos (Arborescencias)<a class="headerlink" href="#arboles-dirigidos-arborescencias" title="Permalink to this heading">#</a></h3>
 <p>Un árbol dirigido es una estructura jerárquica donde hay un nodo raíz y cada nodo, excepto la raíz, tiene exactamente un nodo predecesor.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1271,9 +1324,10 @@ Grado de salida del nodo A: 2
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/3a75889238e0a305bb6ef728505c1c9daf1e893e8fb2a927395b88f6e7fbafd1.png" src="../_images/3a75889238e0a305bb6ef728505c1c9daf1e893e8fb2a927395b88f6e7fbafd1.png" />
+<img alt="../_images/8ffacffb91103f7b18d3b2ad06366ba0137fb26d52e086e9ea42db2a55ca5196.png" src="../_images/8ffacffb91103f7b18d3b2ad06366ba0137fb26d52e086e9ea42db2a55ca5196.png" />
 </div>
 </div>
+</section>
 </section>
 </section>
 <section class="tex2jax_ignore mathjax_ignore" id="guias-nx">
@@ -1321,6 +1375,15 @@ Grado de salida del nodo A: 2
         <p class="prev-next-title"><strong>Lectura 2: Proyecto del semestre</strong></p>
       </div>
     </a>
+    <a class="right-next"
+       href="../Class_2_Gurobi/1-Hello_word_diet_problem.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><strong>Lectura 1: introducción a Gurobi python</strong></p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
 </div></div>
   
 </div>
@@ -1339,52 +1402,56 @@ Grado de salida del nodo A: 2
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#"><strong>Lectura 3: Grafos</strong></a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#formalmente"><strong>Formalmente</strong></a><ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ejemplo">Ejemplo</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#algunos-comandos-basicos-en-networkx">Algunos comandos básicos en Networkx</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#creacion-de-un-grafo">1. Creación de un grafo</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#adicion-de-nodos">2. Adición de nodos</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#adicion-de-aristas">3. Adición de aristas</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#atributos-de-nodos">4. Atributos de nodos</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#atributos-de-aristas">5. Atributos de aristas</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#visualizacion">6. Visualización</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#"><strong>Lectura 3: Grafos</strong></a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#formalmente"><strong>Formalmente</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ejemplo">Ejemplo</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#algunos-comandos-basicos-en-networkx">Algunos comandos básicos en Networkx</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#creacion-de-un-grafo">1. Creación de un grafo</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#adicion-de-nodos">2. Adición de nodos</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#adicion-de-aristas">3. Adición de aristas</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#atributos-de-nodos">4. Atributos de nodos</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#atributos-de-aristas">5. Atributos de aristas</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#visualizacion">6. Visualización</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#direccion-en-los-grafos"><strong>Dirección en los grafos</strong></a><ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#grafos-no-dirigidos"><strong>1. Grafos No Dirigidos</strong></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#grafos-dirigidos-digrafos"><strong>2. Grafos Dirigidos (digrafos)</strong></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multigrafos">3. <strong>Multigrafos</strong></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#nodos-y-grafos-conectados"><strong>Nodos y Grafos Conectados</strong></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ciclos-rutas-y-caminos-en-grafos"><strong>Ciclos, Rutas y Caminos en Grafos</strong></a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#definiciones-basicas">Definiciones básicas:</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#grafos-no-dirigidos-vs-grafos-dirigidos">Grafos No Dirigidos vs. Grafos Dirigidos</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ciclos-especiales">Ciclos Especiales:</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#direccion-en-los-grafos"><strong>Dirección en los grafos</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#grafos-no-dirigidos"><strong>1. Grafos No Dirigidos</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#grafos-dirigidos-digrafos"><strong>2. Grafos Dirigidos (digrafos)</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multigrafos">3. <strong>Multigrafos</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#nodos-y-grafos-conectados"><strong>Nodos y Grafos Conectados</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ciclos-rutas-y-caminos-en-grafos"><strong>Ciclos, Rutas y Caminos en Grafos</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#definiciones-basicas">Definiciones básicas:</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#grafos-no-dirigidos-vs-grafos-dirigidos">Grafos No Dirigidos vs. Grafos Dirigidos</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#ciclos-especiales">Ciclos Especiales:</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#uso-avanzado-ciclos-especiales">3. Uso Avanzado - Ciclos Especiales</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#uso-avanzado-ciclos-especiales">3. Uso Avanzado - Ciclos Especiales</a></li>
+</ul>
+</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#grado-de-un-grafo">Grado de un Grafo</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#grado-en-grafos-no-dirigidos">Grado en Grafos No Dirigidos</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#grado-en-grafos-dirigidos">Grado en Grafos Dirigidos</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#importancia-del-grado-en-el-analisis-de-redes">Importancia del Grado en el Análisis de Redes</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#grado-en-grafos-dirigidos">Grado en Grafos Dirigidos</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#importancia-del-grado-en-el-analisis-de-redes">Importancia del Grado en el Análisis de Redes</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#topologias-en-grafos">Topologías en Grafos</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topologia-radial-star-o-estrella">Topología Radial (Star o Estrella)</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topologia-mallada-mesh">Topología Mallada (Mesh)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topologias-en-grafos">Topologías en Grafos</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#topologia-radial-star-o-estrella">Topología Radial (Star o Estrella)</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#topologia-mallada-mesh">Topología Mallada (Mesh)</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#identificacion-usando-las-propiedades">Identificación Usando las Propiedades</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#identificacion-usando-las-propiedades">Identificación Usando las Propiedades</a></li>
 </ul>
 </li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#arboles">Árboles</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#definicion">Definición</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#creacion-de-un-arbol">Creación de un Árbol</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#verificando-si-un-grafo-es-un-arbol">Verificando si un Grafo es un Árbol</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#arboles-completo">Árboles completo</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#arboles-dirigidos-arborescencias">Árboles Dirigidos (Arborescencias)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#arboles">Árboles</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#definicion">Definición</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#creacion-de-un-arbol">Creación de un Árbol</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#verificando-si-un-grafo-es-un-arbol">Verificando si un Grafo es un Árbol</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#arboles-completo">Árboles completo</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#arboles-dirigidos-arborescencias">Árboles Dirigidos (Arborescencias)</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#guias-nx">Guías NX</a></li>

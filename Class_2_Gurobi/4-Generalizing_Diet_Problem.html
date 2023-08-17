@@ -153,22 +153,6 @@ const thebe_selector_output = ".output, .cell_output"
             </li>
         </ul>
         <p aria-level="2" class="caption" role="heading"><span class="caption-text">Semana 1</span></p>
-<ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../Class_1_Introduction_Motivation/1-Introduction.html"><strong>Lectura 1: Flujo en redes</strong></a></li>
-
-<li class="toctree-l1"><a class="reference internal" href="../Class_1_Introduction_Motivation/2-Project.html"><strong>Lectura 2: Proyecto del semestre</strong></a></li>
-
-
-
-
-
-<li class="toctree-l1"><a class="reference internal" href="../Class_1_Introduction_Motivation/3-Graphs.html"><strong>Lectura 3: Grafos</strong></a></li>
-
-
-
-
-</ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">Semana 2</span></p>
 <ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="1-Hello_word_diet_problem.html"><strong>Lectura 1: introducción a Gurobi python</strong></a></li>
 <li class="toctree-l1"><a class="reference internal" href="2-Implicit_formulation.html"><strong>Lectura 2: Formulación implícita</strong></a></li>
@@ -414,7 +398,10 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#"><strong>Lectura 4: Marco general para Formulación implícita</strong></a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#"><strong>Lectura 4: Marco general para Formulación implícita</strong></a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#generalizar-el-problema-de-la-dieta">Generalizar el problema de la dieta</a></li>
+</ul>
+</li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#ejercicio">Ejercicio</a></li>
 </ul>
 
@@ -430,7 +417,8 @@ document.write(`
                   
   <section id="lectura-4-marco-general-para-formulacion-implicita">
 <h1><strong>Lectura 4: Marco general para Formulación implícita</strong><a class="headerlink" href="#lectura-4-marco-general-para-formulacion-implicita" title="Permalink to this heading">#</a></h1>
-<H3>Generalizar el problema de la dieta</H3>
+<section id="generalizar-el-problema-de-la-dieta">
+<h2>Generalizar el problema de la dieta<a class="headerlink" href="#generalizar-el-problema-de-la-dieta" title="Permalink to this heading">#</a></h2>
 <p>Recordemos que el objetivo del problema de la dieta es encontrar una combinación de alimentos que satisfaga algunos requisitos de nutrientes. Es sencillo escribir un modelo para un pequeño conjunto de entradas como el siguiente.</p>
 <p>Unidades de nutrientes y costo por onza de alimento:</p>
 <table class="table">
@@ -527,7 +515,7 @@ grb.Model.addRange<span class="o">?</span>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Bold -Color-Bold-Red">Signature:</span>      grb<span class=" -Color -Color-Bold -Color-Bold-Yellow">.</span>Model<span class=" -Color -Color-Bold -Color-Bold-Yellow">.</span>addRange<span class=" -Color -Color-Bold -Color-Bold-Yellow">(</span>self<span class=" -Color -Color-Bold -Color-Bold-Yellow">,</span> expr<span class=" -Color -Color-Bold -Color-Bold-Yellow">,</span> lower<span class=" -Color -Color-Bold -Color-Bold-Yellow">,</span> upper<span class=" -Color -Color-Bold -Color-Bold-Yellow">,</span> name<span class=" -Color -Color-Bold -Color-Bold-Yellow">=</span><span class=" -Color -Color-Bold -Color-Bold-Blue">&#39;&#39;</span><span class=" -Color -Color-Bold -Color-Bold-Yellow">)</span>
 <span class=" -Color -Color-Bold -Color-Bold-Red">Call signature:</span> grb<span class=" -Color -Color-Bold -Color-Bold-Yellow">.</span>Model<span class=" -Color -Color-Bold -Color-Bold-Yellow">.</span>addRange<span class=" -Color -Color-Bold -Color-Bold-Yellow">(*</span>args<span class=" -Color -Color-Bold -Color-Bold-Yellow">,</span> <span class=" -Color -Color-Bold -Color-Bold-Yellow">**</span>kwargs<span class=" -Color -Color-Bold -Color-Bold-Yellow">)</span>
 <span class=" -Color -Color-Bold -Color-Bold-Red">Type:</span>           cython_function_or_method
-<span class=" -Color -Color-Bold -Color-Bold-Red">String form:</span>    &lt;cyfunction Model.addRange at 0x000001F8AD7B4930&gt;
+<span class=" -Color -Color-Bold -Color-Bold-Red">String form:</span>    &lt;cyfunction Model.addRange at 0x000001C55AD44A00&gt;
 <span class=" -Color -Color-Bold -Color-Bold-Red">Docstring:</span>     
 ROUTINE:
   addRange(expr, lhs, rhs, name)
@@ -653,7 +641,8 @@ EXAMPLE:
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Gurobi Optimizer version 10.0.2 build v10.0.2rc0 (win64)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Restricted license - for non-production use only - expires 2024-10-28
+Gurobi Optimizer version 10.0.2 build v10.0.2rc0 (win64)
 
 CPU model: 12th Gen Intel(R) Core(TM) i7-1265U, instruction set [SSE2|AVX|AVX2]
 Thread count: 10 physical cores, 12 logical processors, using up to 12 threads
@@ -671,7 +660,7 @@ Presolve: All rows and columns removed
 Iteration    Objective       Primal Inf.    Dual Inf.      Time
        0    4.5977011e-01   0.000000e+00   0.000000e+00      0s
 
-Solved in 0 iterations and 0.02 seconds (0.00 work units)
+Solved in 0 iterations and 0.01 seconds (0.00 work units)
 Optimal objective  4.597701149e-01
 Gurobi Optimizer version 10.0.2 build v10.0.2rc0 (win64)
 
@@ -691,7 +680,7 @@ Presolve: All rows and columns removed
 Iteration    Objective       Primal Inf.    Dual Inf.      Time
        0    5.5609756e-01   0.000000e+00   0.000000e+00      0s
 
-Solved in 0 iterations and 0.02 seconds (0.00 work units)
+Solved in 0 iterations and 0.01 seconds (0.00 work units)
 Optimal objective  5.560975610e-01
 Resultados para la Instancia 1: {&#39;apple&#39;: 0.0, &#39;banana&#39;: 1.149425287356322, &#39;carrot&#39;: 0.0}
 Resultados para la Instancia 2: {&#39;apple&#39;: 0.0, &#39;banana&#39;: 1.4634146341463417, &#39;carrot&#39;: 0.0}
@@ -699,6 +688,7 @@ Resultados para la Instancia 2: {&#39;apple&#39;: 0.0, &#39;banana&#39;: 1.46341
 </div>
 </div>
 </div>
+</section>
 </section>
 <section id="ejercicio">
 <h1>Ejercicio<a class="headerlink" href="#ejercicio" title="Permalink to this heading">#</a></h1>
@@ -772,7 +762,10 @@ Resultados para la Instancia 2: {&#39;apple&#39;: 0.0, &#39;banana&#39;: 1.46341
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#"><strong>Lectura 4: Marco general para Formulación implícita</strong></a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#"><strong>Lectura 4: Marco general para Formulación implícita</strong></a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#generalizar-el-problema-de-la-dieta">Generalizar el problema de la dieta</a></li>
+</ul>
+</li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#ejercicio">Ejercicio</a></li>
 </ul>
 

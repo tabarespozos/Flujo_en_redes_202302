@@ -65,7 +65,7 @@ const thebe_selector_output = ".output, .cell_output"
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Lectura 2: Proyecto del semestre" href="2-Project.html" />
-    <link rel="prev" title="" href="../SyllabusFlujoEnRedes.html" />
+    <link rel="prev" title="Syllabus" href="../SyllabusFlujoEnRedes.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -146,21 +146,35 @@ const thebe_selector_output = ".output, .cell_output"
         <ul class="nav bd-sidenav bd-sidenav__home-link">
             <li class="toctree-l1">
                 <a class="reference internal" href="../SyllabusFlujoEnRedes.html">
-                    
+                    Syllabus
                 </a>
             </li>
         </ul>
-        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Lectures</span></p>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Semana 1</span></p>
 <ul class="current nav bd-sidenav">
 <li class="toctree-l1 current active"><a class="current reference internal" href="#"><strong>Lectura 1: Flujo en redes</strong></a></li>
-
 <li class="toctree-l1"><a class="reference internal" href="2-Project.html"><strong>Lectura 2: Proyecto del semestre</strong></a></li>
-
-
-
-
-
 <li class="toctree-l1"><a class="reference internal" href="3-Graphs.html"><strong>Lectura 3: Grafos</strong></a></li>
+
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Semana 2</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../Class_2_Gurobi/1-Hello_word_diet_problem.html"><strong>Lectura 1: introducción a Gurobi python</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Class_2_Gurobi/2-Implicit_formulation.html"><strong>Lectura 2: Formulación implícita</strong></a></li>
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../Class_2_Gurobi/3-Exercice.html"><strong>Lectura 3: Ejercicio en clase</strong></a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="../Class_2_Gurobi/4-Generalizing_Diet_Problem.html"><strong>Lectura 4: Marco general para Formulación implícita</strong></a></li>
+
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Semana 3</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../Class_3_Network_as_LP/1-Introduction.html"><strong>Lectura 1: Flujo en redes como programas lineales</strong></a></li>
 
 
 
@@ -389,16 +403,12 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#"><strong>Lectura 1: Flujo en redes</strong></a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#introduccion-a-la-optimizacion-en-redes"><strong>Introducción a la optimización en redes</strong></a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduccion-a-la-optimizacion-en-redes"><strong>Introducción a la optimización en redes</strong></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#problemas-clasicos-de-flujo-de-redes"><strong>Problemas clásicos de flujo de redes</strong></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#algoritmos-para-resolver-problemas-de-flujo-de-redes"><strong>Algoritmos para resolver problemas de flujo de redes</strong></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ejemplos-de-problemas-de-flujo-de-redes"><strong>Ejemplos de problemas de flujo de redes</strong></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ejemplo-practico"><strong>Ejemplo práctico</strong></a></li>
 </ul>
-</li>
-</ul>
-
             </nav>
         </div>
     </div>
@@ -409,17 +419,17 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article" role="main">
                   
-  <section id="lectura-1-flujo-en-redes">
+  <section class="tex2jax_ignore mathjax_ignore" id="lectura-1-flujo-en-redes">
 <h1><strong>Lectura 1: Flujo en redes</strong><a class="headerlink" href="#lectura-1-flujo-en-redes" title="Permalink to this heading">#</a></h1>
 <p><img alt="" src="../_images/motivation.png" /></p>
-</section>
-<section class="tex2jax_ignore mathjax_ignore" id="introduccion-a-la-optimizacion-en-redes">
-<h1><strong>Introducción a la optimización en redes</strong><a class="headerlink" href="#introduccion-a-la-optimizacion-en-redes" title="Permalink to this heading">#</a></h1>
+<section id="introduccion-a-la-optimizacion-en-redes">
+<h2><strong>Introducción a la optimización en redes</strong><a class="headerlink" href="#introduccion-a-la-optimizacion-en-redes" title="Permalink to this heading">#</a></h2>
 <p>La optimización en redes es un caso particular de programación lineal  que se ocupa del diseño de redes que minimizan o maximizan alguna función objetivo.</p>
 <p>Los problemas de optimización en redes se encuentran en una amplia variedad de aplicaciones, incluyendo la gestión de inventarios, la planificación del transporte y la distribución de energía.</p>
 <p><em>Un problema de optimización en redes se caracteriza por un conjunto de nodos, un conjunto de arcos que conectan los nodos y un conjunto de restricciones</em>. Las restricciones pueden ser restricciones de capacidad, restricciones de tiempo o restricciones de costo. El objetivo del problema es encontrar una asignación de flujo a los arcos que satisfaga las restricciones y que minimice o maximice la función objetivo.</p>
 <p>Hay una variedad de algoritmos que se pueden utilizar para resolver problemas de optimización en redes. Los algoritmos más comunes son el algoritmo de Ford-Fulkerson, el algoritmo de Dinic y el algoritmo de Push-Relabel.</p>
 <p><img alt="" src="../_images/opti.png" /></p>
+</section>
 <section id="problemas-clasicos-de-flujo-de-redes">
 <h2><strong>Problemas clásicos de flujo de redes</strong><a class="headerlink" href="#problemas-clasicos-de-flujo-de-redes" title="Permalink to this heading">#</a></h2>
 <p>Los problemas de flujo de redes son un tipo de problema de programación lineal que se utilizan para modelar y resolver una amplia variedad de problemas del mundo real, como el transporte de bienes, el flujo de información y la asignación de recursos.</p>
@@ -449,24 +459,19 @@ document.write(`
 <li><p><em>Problema de planificación del transporte</em>: Una empresa tiene tres fábricas y cuatro almacenes. Las fábricas producen diferentes productos y los almacenes almacenan diferentes productos. La empresa quiere encontrar una asignación de flujo a las fábricas y los almacenes que minimice el costo de transportar los productos de las fábricas a los almacenes.</p></li>
 <li><p><em>Problema de distribución de energía</em>: Una empresa tiene tres plantas de energía y cuatro ciudades. Las plantas de energía generan electricidad y las ciudades consumen electricidad. La empresa quiere encontrar una asignación de flujo a las plantas de energía y las ciudades que minimice el costo de transportar la electricidad de las plantas de energía a las ciudades.</p></li>
 </ul>
-<hr class="docutils" />
 </section>
-<hr class="docutils" />
 <section id="ejemplo-practico">
 <h2><strong>Ejemplo práctico</strong><a class="headerlink" href="#ejemplo-practico" title="Permalink to this heading">#</a></h2>
-<hr class="docutils" />
 <p><strong>Contexto</strong>: Imagina que eres el encargado de logística de una empresa distribuidora de agua que suministra a una ciudad. La ciudad tiene varios distritos que están conectados por una serie de tuberías. Estas tuberías tienen capacidades diferentes, y necesitas garantizar que el agua llegue a todos los distritos de manera eficiente.</p>
 <p>La fuente del agua es un gran embalse (denominado “s” en nuestro modelo) y hay un distrito principal al que se debe suministrar una gran cantidad de agua (denominado “t”). Sin embargo, el agua no puede ser enviada directamente desde el embalse al distrito principal. En lugar de eso, debe pasar a través de varios distritos intermedios (denominados “a”, “b” y “c” en nuestro modelo) que tienen sus propias necesidades y que también deben ser abastecidos.</p>
 <p>Tu objetivo es determinar cómo debe fluir el agua a través de esta red de tuberías para maximizar la cantidad de agua que llega al distrito principal, garantizando al mismo tiempo que cada distrito intermedio reciba su suministro adecuado.</p>
-<hr class="docutils" />
-<p>Con este contexto en mente, el código que iremos a ver intenta modelar este escenario:</p>
+<p><em><strong>Con este contexto en mente, el código que iremos a ver intenta modelar este escenario:</strong></em></p>
 <ul class="simple">
 <li><p>Los nodos representan el embalse, los distritos intermedios y el distrito principal.</p></li>
 <li><p>Los bordes (o arcos) representan las tuberías que conectan estos lugares, y el peso de cada borde representa la capacidad máxima de cada tubería.</p></li>
 </ul>
 <p>Al resolver el problema de flujo máximo, estás encontrando la mejor manera de distribuir el agua desde el embalse a través de los distritos intermedios para finalmente llegar al distrito principal, maximizando la cantidad entregada a este último sin violar las restricciones de capacidad de las tuberías.</p>
 <p>El flujo en cada borde (tubería) que el modelo proporciona al final indica cuánta agua debería ser enviada a través de cada tubería para lograr este objetivo.</p>
-<hr class="docutils" />
 <p><strong>Nota</strong>: El problema de flujo máximo es un problema de optimización que se puede resolver con el algoritmo de Ford-Fulkerson. Este algoritmo no se implementa en NetworkX, pero se puede encontrar en otros paquetes de Python, como <a class="reference external" href="https://networkx.org/documentation/stable/reference/algorithms/generated/networkx.algorithms.flow.maximum_flow.html">NetworkX</a>. Para más información con relación al paquete de optimización pulp, puedes consultar la <a class="reference external" href="https://coin-or.github.io/pulp/main/index.html">documentación</a>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -607,7 +612,7 @@ Flujo desde Distrito C hacia Distrito B: 0.0 unidades
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title"></p>
+        <p class="prev-next-title"><strong>Syllabus</strong></p>
       </div>
     </a>
     <a class="right-next"
@@ -637,16 +642,12 @@ Flujo desde Distrito C hacia Distrito B: 0.0 unidades
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#"><strong>Lectura 1: Flujo en redes</strong></a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#introduccion-a-la-optimizacion-en-redes"><strong>Introducción a la optimización en redes</strong></a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduccion-a-la-optimizacion-en-redes"><strong>Introducción a la optimización en redes</strong></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#problemas-clasicos-de-flujo-de-redes"><strong>Problemas clásicos de flujo de redes</strong></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#algoritmos-para-resolver-problemas-de-flujo-de-redes"><strong>Algoritmos para resolver problemas de flujo de redes</strong></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ejemplos-de-problemas-de-flujo-de-redes"><strong>Ejemplos de problemas de flujo de redes</strong></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ejemplo-practico"><strong>Ejemplo práctico</strong></a></li>
 </ul>
-</li>
-</ul>
-
   </nav></div>
 
 </div></div>

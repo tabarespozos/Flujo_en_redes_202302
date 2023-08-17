@@ -150,20 +150,11 @@ const thebe_selector_output = ".output, .cell_output"
                 </a>
             </li>
         </ul>
-        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Lectures</span></p>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Semana 1</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../Class_1_Introduction_Motivation/1-Introduction.html"><strong>Lectura 1: Flujo en redes</strong></a></li>
-
 <li class="toctree-l1"><a class="reference internal" href="../Class_1_Introduction_Motivation/2-Project.html"><strong>Lectura 2: Proyecto del semestre</strong></a></li>
-
-
-
-
-
 <li class="toctree-l1"><a class="reference internal" href="../Class_1_Introduction_Motivation/3-Graphs.html"><strong>Lectura 3: Grafos</strong></a></li>
-
-
-
 
 </ul>
 
@@ -452,6 +443,31 @@ The list <span class="math notranslate nohighlight">\(J\)</span> contains the na
 
 <span class="c1"># Available budget (thousands of dollars)</span>
 <span class="n">budget</span> <span class="o">=</span> <span class="mi">5</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">line</span> <span class="mi">7</span>
+<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="n">J</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Tester&#39;</span><span class="p">,</span> <span class="s1">&#39;JavaDeveloper&#39;</span><span class="p">,</span> <span class="s1">&#39;Architect&#39;</span><span class="p">]</span>
+<span class="g g-Whitespace">      </span><span class="mi">5</span> <span class="c1"># Matching score data</span>
+<span class="g g-Whitespace">      </span><span class="mi">6</span> <span class="c1"># Cost is given in thousands of dollars</span>
+<span class="ne">----&gt; </span><span class="mi">7</span> <span class="n">combinations</span><span class="p">,</span> <span class="n">scores</span><span class="p">,</span> <span class="n">costs</span> <span class="o">=</span> <span class="n">gp</span><span class="o">.</span><span class="n">multidict</span><span class="p">({</span>
+<span class="g g-Whitespace">      </span><span class="mi">8</span>     <span class="p">(</span><span class="s1">&#39;Carlos&#39;</span><span class="p">,</span> <span class="s1">&#39;Tester&#39;</span><span class="p">):</span> <span class="p">[</span><span class="mi">53</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
+<span class="g g-Whitespace">      </span><span class="mi">9</span>     <span class="p">(</span><span class="s1">&#39;Carlos&#39;</span><span class="p">,</span> <span class="s1">&#39;JavaDeveloper&#39;</span><span class="p">):</span> <span class="p">[</span><span class="mi">27</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
+<span class="g g-Whitespace">     </span><span class="mi">10</span>     <span class="p">(</span><span class="s1">&#39;Carlos&#39;</span><span class="p">,</span> <span class="s1">&#39;Architect&#39;</span><span class="p">):</span> <span class="p">[</span><span class="mi">13</span><span class="p">,</span><span class="mi">1</span><span class="p">],</span>
+<span class="g g-Whitespace">     </span><span class="mi">11</span>     <span class="p">(</span><span class="s1">&#39;Joe&#39;</span><span class="p">,</span> <span class="s1">&#39;Tester&#39;</span><span class="p">):</span> <span class="p">[</span><span class="mi">80</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span>
+<span class="g g-Whitespace">     </span><span class="mi">12</span>     <span class="p">(</span><span class="s1">&#39;Joe&#39;</span><span class="p">,</span> <span class="s1">&#39;JavaDeveloper&#39;</span><span class="p">):</span> <span class="p">[</span><span class="mi">47</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span>
+<span class="g g-Whitespace">     </span><span class="mi">13</span>     <span class="p">(</span><span class="s1">&#39;Joe&#39;</span><span class="p">,</span> <span class="s1">&#39;Architect&#39;</span><span class="p">):</span> <span class="p">[</span><span class="mi">67</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span>
+<span class="g g-Whitespace">     </span><span class="mi">14</span>     <span class="p">(</span><span class="s1">&#39;Monika&#39;</span><span class="p">,</span> <span class="s1">&#39;Tester&#39;</span><span class="p">):</span> <span class="p">[</span><span class="mi">53</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span> <span class="p">,</span>
+<span class="g g-Whitespace">     </span><span class="mi">15</span>     <span class="p">(</span><span class="s1">&#39;Monika&#39;</span><span class="p">,</span> <span class="s1">&#39;JavaDeveloper&#39;</span><span class="p">):</span> <span class="p">[</span><span class="mi">73</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span>
+<span class="g g-Whitespace">     </span><span class="mi">16</span>     <span class="p">(</span><span class="s1">&#39;Monika&#39;</span><span class="p">,</span> <span class="s1">&#39;Architect&#39;</span><span class="p">):</span> <span class="p">[</span><span class="mi">47</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>
+<span class="g g-Whitespace">     </span><span class="mi">17</span> <span class="p">})</span>
+<span class="g g-Whitespace">     </span><span class="mi">19</span> <span class="c1"># Available budget (thousands of dollars)</span>
+<span class="g g-Whitespace">     </span><span class="mi">20</span> <span class="n">budget</span> <span class="o">=</span> <span class="mi">5</span>
+
+<span class="ne">NameError</span>: name &#39;gp&#39; is not defined
 </pre></div>
 </div>
 </div>

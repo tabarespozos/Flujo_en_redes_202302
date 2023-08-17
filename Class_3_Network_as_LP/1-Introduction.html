@@ -153,22 +153,6 @@ const thebe_selector_output = ".output, .cell_output"
         </ul>
         <p aria-level="2" class="caption" role="heading"><span class="caption-text">Semana 1</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../Class_1_Introduction_Motivation/1-Introduction.html"><strong>Lectura 1: Flujo en redes</strong></a></li>
-
-<li class="toctree-l1"><a class="reference internal" href="../Class_1_Introduction_Motivation/2-Project.html"><strong>Lectura 2: Proyecto del semestre</strong></a></li>
-
-
-
-
-
-<li class="toctree-l1"><a class="reference internal" href="../Class_1_Introduction_Motivation/3-Graphs.html"><strong>Lectura 3: Grafos</strong></a></li>
-
-
-
-
-</ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">Semana 2</span></p>
-<ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../Class_2_Gurobi/1-Hello_word_diet_problem.html"><strong>Lectura 1: introducción a Gurobi python</strong></a></li>
 <li class="toctree-l1"><a class="reference internal" href="../Class_2_Gurobi/2-Implicit_formulation.html"><strong>Lectura 2: Formulación implícita</strong></a></li>
 
@@ -454,7 +438,7 @@ document.write(`
 <section id="ruta-mas-corta">
 <h1>Ruta mas corta.<a class="headerlink" href="#ruta-mas-corta" title="Permalink to this heading">#</a></h1>
 <p>El problema de la ruta mas corta consiste en encontrar la ruta de menor costo entre un par de nodos en una red.</p>
-<p><img alt="" src="Images/ruta_mas_corta_google.png" /></p>
+<p><img alt="" src="../_images/ruta_mas_corta_google.png" /></p>
 <section id="ejemplo-motivador">
 <h2>Ejemplo Motivador:<a class="headerlink" href="#ejemplo-motivador" title="Permalink to this heading">#</a></h2>
 <p>Supongamos que eres un viajero que busca ir de la ciudad A a la ciudad E utilizando la red de carreteras existente. Dada la siguiente red con las distancias entre ciudades, encuentra la ruta más corta entre la ciudad A y la ciudad E.</p>
@@ -494,7 +478,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/8aee54542f6164f2544bb639fffa3f31df6baf991b3cb1a3961bd2a057018fcb.png" src="../_images/8aee54542f6164f2544bb639fffa3f31df6baf991b3cb1a3961bd2a057018fcb.png" />
+<img alt="../_images/3593dca587604b9f3ba61201ee9e487fb4e199c1faf0a9dedd7b661c06f37fa4.png" src="../_images/3593dca587604b9f3ba61201ee9e487fb4e199c1faf0a9dedd7b661c06f37fa4.png" />
 </div>
 </div>
 <p><strong>Formulación del problema de optimización</strong></p>
@@ -543,8 +527,8 @@ donde <span class="math notranslate nohighlight">\(c_{ij}\)</span> es la distanc
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Restricted license - for non-production use only - expires 2024-10-28
 Gurobi Optimizer version 10.0.2 build v10.0.2rc0 (win64)
 
-CPU model: 11th Gen Intel(R) Core(TM) i7-1165G7 @ 2.80GHz, instruction set [SSE2|AVX|AVX2|AVX512]
-Thread count: 4 physical cores, 8 logical processors, using up to 8 threads
+CPU model: 12th Gen Intel(R) Core(TM) i7-1265U, instruction set [SSE2|AVX|AVX2]
+Thread count: 10 physical cores, 12 logical processors, using up to 12 threads
 
 Optimize a model with 5 rows, 7 columns and 14 nonzeros
 Model fingerprint: 0xa06d13ef
@@ -555,11 +539,11 @@ Coefficient statistics:
   Bounds range     [1e+00, 1e+00]
   RHS range        [1e+00, 1e+00]
 Presolve removed 5 rows and 7 columns
-Presolve time: 0.01s
+Presolve time: 0.02s
 Presolve: All rows and columns removed
 
 Explored 0 nodes (0 simplex iterations) in 0.02 seconds (0.00 work units)
-Thread count was 1 (of 8 available processors)
+Thread count was 1 (of 12 available processors)
 
 Solution count 1: 13 
 
@@ -587,7 +571,7 @@ Ruta desde C a E
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/46c5bac7dba08f251faa0bb23915c09f0f846e75c711936f0d7565ac605a4433.png" src="../_images/46c5bac7dba08f251faa0bb23915c09f0f846e75c711936f0d7565ac605a4433.png" />
+<img alt="../_images/00f9d7ae35c4a85216e47dfc4aecf26bcb675551b3a9bec2e6893c3806610e5f.png" src="../_images/00f9d7ae35c4a85216e47dfc4aecf26bcb675551b3a9bec2e6893c3806610e5f.png" />
 </div>
 </div>
 <p><strong>Ejercicio</strong></p>
@@ -686,11 +670,11 @@ Ruta desde C a E
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/30bdb93a4ad61b36803b0c8a4152e03323e5a1e056b6cca39802cd470349933b.png" src="../_images/30bdb93a4ad61b36803b0c8a4152e03323e5a1e056b6cca39802cd470349933b.png" />
+<img alt="../_images/e90610aa80125bca3dacb40b79cab7c07f31147faec6d276b1db856fb98144ec.png" src="../_images/e90610aa80125bca3dacb40b79cab7c07f31147faec6d276b1db856fb98144ec.png" />
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Gurobi Optimizer version 10.0.2 build v10.0.2rc0 (win64)
 
-CPU model: 11th Gen Intel(R) Core(TM) i7-1165G7 @ 2.80GHz, instruction set [SSE2|AVX|AVX2|AVX512]
-Thread count: 4 physical cores, 8 logical processors, using up to 8 threads
+CPU model: 12th Gen Intel(R) Core(TM) i7-1265U, instruction set [SSE2|AVX|AVX2]
+Thread count: 10 physical cores, 12 logical processors, using up to 12 threads
 
 Optimize a model with 9 rows, 15 columns and 30 nonzeros
 Model fingerprint: 0x8dbed9f0
@@ -705,8 +689,8 @@ Presolve removed 9 rows and 15 columns
 Presolve time: 0.00s
 Presolve: All rows and columns removed
 
-Explored 0 nodes (0 simplex iterations) in 0.01 seconds (0.00 work units)
-Thread count was 1 (of 8 available processors)
+Explored 0 nodes (0 simplex iterations) in 0.02 seconds (0.00 work units)
+Thread count was 1 (of 12 available processors)
 
 Solution count 2: 24 28 
 
@@ -714,7 +698,7 @@ Optimal solution found (tolerance 1.00e-04)
 Best objective 2.400000000000e+01, best bound 2.400000000000e+01, gap 0.0000%
 </pre></div>
 </div>
-<img alt="../_images/dee8bd8880bd9331160764a514b7a95c1dbf4117b2e03502e099b362f436a90c.png" src="../_images/dee8bd8880bd9331160764a514b7a95c1dbf4117b2e03502e099b362f436a90c.png" />
+<img alt="../_images/ba5b428db241755c1943a26fe532e91028d03d6b716c0c805d719fe7fc36de59.png" src="../_images/ba5b428db241755c1943a26fe532e91028d03d6b716c0c805d719fe7fc36de59.png" />
 </div>
 </div>
 </section>
@@ -797,7 +781,7 @@ Best objective 2.400000000000e+01, best bound 2.400000000000e+01, gap 0.0000%
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/f2f09b6465d580894b08eb272c041b4994ce60139db427396cd10712308376ca.png" src="../_images/f2f09b6465d580894b08eb272c041b4994ce60139db427396cd10712308376ca.png" />
+<img alt="../_images/8f581aa9f3012da7ffc1defb9bc17d4d730cbbf216fae8baf9a388283c02fe12.png" src="../_images/8f581aa9f3012da7ffc1defb9bc17d4d730cbbf216fae8baf9a388283c02fe12.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -828,8 +812,8 @@ Best objective 2.400000000000e+01, best bound 2.400000000000e+01, gap 0.0000%
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Gurobi Optimizer version 10.0.2 build v10.0.2rc0 (win64)
 
-CPU model: 11th Gen Intel(R) Core(TM) i7-1165G7 @ 2.80GHz, instruction set [SSE2|AVX|AVX2|AVX512]
-Thread count: 4 physical cores, 8 logical processors, using up to 8 threads
+CPU model: 12th Gen Intel(R) Core(TM) i7-1265U, instruction set [SSE2|AVX|AVX2]
+Thread count: 10 physical cores, 12 logical processors, using up to 12 threads
 
 Optimize a model with 5 rows, 7 columns and 14 nonzeros
 Model fingerprint: 0x59b4cac7
@@ -846,7 +830,7 @@ Iteration    Objective       Primal Inf.    Dual Inf.      Time
        0    5.0000000e+01   0.000000e+00   0.000000e+00      0s
        0    5.0000000e+01   0.000000e+00   0.000000e+00      0s
 
-Solved in 0 iterations and 0.01 seconds (0.00 work units)
+Solved in 0 iterations and 0.02 seconds (0.00 work units)
 Optimal objective  5.000000000e+01
 </pre></div>
 </div>
@@ -891,7 +875,7 @@ Flujo desde D hacia E: 40.0/40
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/25100be8c0483d3557259a6f46788d1285a66e2c2ebaaa918a5de4490e17df0c.png" src="../_images/25100be8c0483d3557259a6f46788d1285a66e2c2ebaaa918a5de4490e17df0c.png" />
+<img alt="../_images/385b5b9c1259803e64667e3aea2a8c3ebca9e9caa5b37fd789ae40b58a7cfd5f.png" src="../_images/385b5b9c1259803e64667e3aea2a8c3ebca9e9caa5b37fd789ae40b58a7cfd5f.png" />
 </div>
 </div>
 </section>
@@ -964,8 +948,8 @@ Flujo desde D hacia E: 40.0/40
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Gurobi Optimizer version 10.0.2 build v10.0.2rc0 (win64)
 
-CPU model: 11th Gen Intel(R) Core(TM) i7-1165G7 @ 2.80GHz, instruction set [SSE2|AVX|AVX2|AVX512]
-Thread count: 4 physical cores, 8 logical processors, using up to 8 threads
+CPU model: 12th Gen Intel(R) Core(TM) i7-1265U, instruction set [SSE2|AVX|AVX2]
+Thread count: 10 physical cores, 12 logical processors, using up to 12 threads
 
 Optimize a model with 10 rows, 11 columns and 14 nonzeros
 Model fingerprint: 0xfe3c3411
@@ -975,7 +959,7 @@ Coefficient statistics:
   Bounds range     [2e+03, 5e+03]
   RHS range        [0e+00, 0e+00]
 Presolve removed 7 rows and 1 columns
-Presolve time: 0.01s
+Presolve time: 0.00s
 Presolved: 3 rows, 10 columns, 12 nonzeros
 
 Iteration    Objective       Primal Inf.    Dual Inf.      Time
@@ -1244,7 +1228,7 @@ Coefficient statistics:
   Objective range  [5e+00, 1e+01]
   Bounds range     [0e+00, 0e+00]
   RHS range        [1e+01, 4e+01]
-Presolve time: 0.01s
+Presolve time: 0.00s
 Presolved: 6 rows, 9 columns, 18 nonzeros
 
 Iteration    Objective       Primal Inf.    Dual Inf.      Time
@@ -1491,14 +1475,14 @@ Coefficient statistics:
   Bounds range     [4e+01, 5e+01]
   RHS range        [4e+01, 5e+01]
 Presolve removed 6 rows and 6 columns
-Presolve time: 0.01s
+Presolve time: 0.02s
 Presolved: 2 rows, 6 columns, 12 nonzeros
 
 Iteration    Objective       Primal Inf.    Dual Inf.      Time
        0    1.5950000e+03   1.000000e+01   0.000000e+00      0s
        1    1.6000000e+03   0.000000e+00   0.000000e+00      0s
 
-Solved in 1 iterations and 0.02 seconds (0.00 work units)
+Solved in 1 iterations and 0.03 seconds (0.00 work units)
 Optimal objective  1.600000000e+03
 Enviar 35.0 unidades de A a D1
 Costo total: 1600.0
