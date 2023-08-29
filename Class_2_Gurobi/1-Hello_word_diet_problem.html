@@ -67,7 +67,7 @@ const thebe_selector_output = ".output, .cell_output"
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Lectura 2: Formulación implícita" href="2-Implicit_formulation.html" />
-    <link rel="prev" title="Syllabus" href="../SyllabusFlujoEnRedes.html" />
+    <link rel="prev" title="Lectura 3: Grafos" href="../Class_1_Introduction_Motivation/3-Graphs.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -153,6 +153,13 @@ const thebe_selector_output = ".output, .cell_output"
             </li>
         </ul>
         <p aria-level="2" class="caption" role="heading"><span class="caption-text">Semana 1</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../Class_1_Introduction_Motivation/1-Introduction.html"><strong>Lectura 1: Flujo en redes</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Class_1_Introduction_Motivation/2-Project.html"><strong>Lectura 2: Proyecto del semestre</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Class_1_Introduction_Motivation/3-Graphs.html"><strong>Lectura 3: Grafos</strong></a></li>
+
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Semana 2</span></p>
 <ul class="current nav bd-sidenav">
 <li class="toctree-l1 current active"><a class="current reference internal" href="#"><strong>Lectura 1: introducción a Gurobi python</strong></a></li>
 <li class="toctree-l1"><a class="reference internal" href="2-Implicit_formulation.html"><strong>Lectura 2: Formulación implícita</strong></a></li>
@@ -170,6 +177,8 @@ const thebe_selector_output = ".output, .cell_output"
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Semana 3</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../Class_3_Network_as_LP/1-Introduction.html"><strong>Lectura 1: Flujo en redes como programas lineales</strong></a></li>
+
+
 
 
 
@@ -375,7 +384,9 @@ document.write(`
   </button>
 `);
 </script>
-
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
 </div></div>
       
     </div>
@@ -391,6 +402,14 @@ document.write(`
     <div id="print-main-content">
         <div id="jb-print-toc">
             
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#unidades-de-nutrientes-y-coste-por-onza">Unidades de nutrientes y coste por onza</a></li>
+</ul>
+            </nav>
         </div>
     </div>
 </div>
@@ -488,26 +507,45 @@ Objetivo: 18
 </div>
 <p><strong>Problema de la dieta</strong></p>
 <p>Hay 5 tipos de alimentos y 2 requerimientos de nutrientes que debemos satisfacer al mínimo coste. Se nos da el contenido nutricional y el coste por onza de cada tipo de alimento.</p>
-<table>
-<caption>Unidades de nutrientes y coste por onza</caption>
-<tr>
-<th> Food type </th> <th> Iron </th> <th> Calcium </th> <th> Cost </th>
+<section id="unidades-de-nutrientes-y-coste-por-onza">
+<h2>Unidades de nutrientes y coste por onza<a class="headerlink" href="#unidades-de-nutrientes-y-coste-por-onza" title="Permalink to this heading">#</a></h2>
+<table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Food type</p></th>
+<th class="head"><p>Iron</p></th>
+<th class="head"><p>Calcium</p></th>
+<th class="head"><p>Cost</p></th>
 </tr>
-<tr>
-<th> 1 </th> <th> 2 </th> <th> 0 </th> <th> 20 </th>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>1</p></td>
+<td><p>2</p></td>
+<td><p>0</p></td>
+<td><p>20</p></td>
 </tr>
-<tr>
-<th> 2 </th> <th> 0 </th> <th> 1 </th> <th> 10 </th>
+<tr class="row-odd"><td><p>2</p></td>
+<td><p>0</p></td>
+<td><p>1</p></td>
+<td><p>10</p></td>
 </tr>
-<tr>
-<th> 3 </th> <th> 3 </th> <th> 2 </th> <th> 31 </th>
+<tr class="row-even"><td><p>3</p></td>
+<td><p>3</p></td>
+<td><p>2</p></td>
+<td><p>31</p></td>
 </tr>
-<tr>
-<th> 4 </th> <th> 1 </th> <th> 2 </th> <th> 11 </th>
+<tr class="row-odd"><td><p>4</p></td>
+<td><p>1</p></td>
+<td><p>2</p></td>
+<td><p>11</p></td>
 </tr>
-<tr>
-<th> 5 </th> <th> 2 </th> <th> 1 </th> <th> 12 </th>
-</tr><blockquote>
+<tr class="row-even"><td><p>5</p></td>
+<td><p>2</p></td>
+<td><p>1</p></td>
+<td><p>12</p></td>
+</tr>
+</tbody>
+</table>
+<blockquote>
 <div><p>¿Cuál es la combinación de costo mínimo de estos alimentos que proporciona al menos 21 unidades de hierro y 12 unidades de calcio?</p>
 </div></blockquote>
 <p><b> Formulación del problema de la dieta </b></p>
@@ -1019,6 +1057,7 @@ Optimal objective  1.325666667e+02
 </div>
 </div>
 </section>
+</section>
 
     <script type="text/x-thebe-config">
     {
@@ -1052,12 +1091,12 @@ Optimal objective  1.325666667e+02
     <div class="footer-article-item"><!-- Previous / next buttons -->
 <div class="prev-next-area">
     <a class="left-prev"
-       href="../SyllabusFlujoEnRedes.html"
+       href="../Class_1_Introduction_Motivation/3-Graphs.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title"><strong>Syllabus</strong></p>
+        <p class="prev-next-title"><strong>Lectura 3: Grafos</strong></p>
       </div>
     </a>
     <a class="right-next"
@@ -1078,6 +1117,20 @@ Optimal objective  1.325666667e+02
             </div>
             
             
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#unidades-de-nutrientes-y-coste-por-onza">Unidades de nutrientes y coste por onza</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
               
             
           </div>
