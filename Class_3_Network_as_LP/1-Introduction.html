@@ -66,6 +66,7 @@ const thebe_selector_output = ".output, .cell_output"
     <script>DOCUMENTATION_OPTIONS.pagename = 'Class_3_Network_as_LP/1-Introduction';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Lectura 2: Representaciones de los problemas de flujo" href="2-Network_representation.html" />
     <link rel="prev" title="Lectura 4: Marco general para Formulación implícita" href="../Class_2_Gurobi/4-Generalizing_Diet_Problem.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -182,6 +183,10 @@ const thebe_selector_output = ".output, .cell_output"
 
 
 
+<li class="toctree-l1"><a class="reference internal" href="2-Network_representation.html"><strong>Lectura 2: Representaciones de los problemas de flujo</strong></a></li>
+
+
+<li class="toctree-l1"><a class="reference internal" href="3-Network_transformations.html"><strong>Lectura 3: Transformaciones de redes</strong></a></li>
 </ul>
 
     </div>
@@ -659,7 +664,7 @@ donde <span class="math notranslate nohighlight">\(c_{ij}\)</span> es la distanc
 <li><p><strong>Restricciones</strong>:</p>
 <ol class="arabic simple">
 <li><p>Balance de flujo para la ciudad fuente:  <span class="math notranslate nohighlight">\(\sum_{j|(i,j) \in A} x_{ij} - \sum_{k|(k,i) \in A} x_{ki} = n-1 , \forall i\)</span> para el nodo fuente, siendo <span class="math notranslate nohighlight">\(n\)</span> el  número de ciudades.</p></li>
-<li><p>Balance de flujo para las ciudades intermedias: <span class="math notranslate nohighlight">\(\sum_{j|(i,j) \in A} x_{ij} - \sum_{k|(k,i) \in A} x_{ki} = 0 , \forall i\)</span> que no sea fuente.</p></li>
+<li><p>Balance de flujo para las otras ciudades <span class="math notranslate nohighlight">\(\sum_{j|(i,j) \in A} x_{ij} - \sum_{k|(k,i) \in A} x_{ki} = 0 , \forall i\)</span> que no sea fuente.</p></li>
 </ol>
 </li>
 </ul>
@@ -1697,8 +1702,6 @@ $<span class="math notranslate nohighlight">\( x_{ij} \geq 0 \quad \forall i \in
 </ul>
 </li>
 </ol>
-<p><img alt="" src="../_images/circulation1.png" /></p>
-<p><img alt="" src="../_images/circulation2.png" /></p>
 </section>
 <section id="multicommodity-flow-problem-mfp">
 <h2>Multicommodity Flow Problem (MFP)<a class="headerlink" href="#multicommodity-flow-problem-mfp" title="Permalink to this heading">#</a></h2>
@@ -2493,6 +2496,15 @@ Costo total: $19450.0
         <p class="prev-next-subtitle">previous</p>
         <p class="prev-next-title"><strong>Lectura 4: Marco general para Formulación implícita</strong></p>
       </div>
+    </a>
+    <a class="right-next"
+       href="2-Network_representation.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><strong>Lectura 2: Representaciones de los problemas de flujo</strong></p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
     </a>
 </div></div>
   

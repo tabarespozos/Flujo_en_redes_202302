@@ -1,0 +1,667 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>Lectura 3: Transformaciones de redes &#8212; Flujo en Redes 202302</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'Class_3_Network_as_LP/3-Network_transformations';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="prev" title="Lectura 2: Representaciones de los problemas de flujo" href="2-Network_representation.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="../SyllabusFlujoEnRedes.html">
+  
+  
+  
+  
+  
+    <p class="title logo__title">Flujo en Redes 202302</p>
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../SyllabusFlujoEnRedes.html">
+                    Syllabus
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Semana 1</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../Class_1_Introduction_Motivation/1-Introduction.html"><strong>Lectura 1: Flujo en redes</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Class_1_Introduction_Motivation/2-Project.html"><strong>Lectura 2: Proyecto del semestre</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Class_1_Introduction_Motivation/3-Graphs.html"><strong>Lectura 3: Grafos</strong></a></li>
+
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Semana 2</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../Class_2_Gurobi/1-Hello_word_diet_problem.html"><strong>Lectura 1: introducción a Gurobi python</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Class_2_Gurobi/2-Implicit_formulation.html"><strong>Lectura 2: Formulación implícita</strong></a></li>
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../Class_2_Gurobi/3-Exercice.html"><strong>Lectura 3: Ejercicio en clase</strong></a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="../Class_2_Gurobi/4-Generalizing_Diet_Problem.html"><strong>Lectura 4: Marco general para Formulación implícita</strong></a></li>
+
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Semana 3</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="1-Introduction.html"><strong>Lectura 1: Flujo en redes como programas lineales</strong></a></li>
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="2-Network_representation.html"><strong>Lectura 2: Representaciones de los problemas de flujo</strong></a></li>
+
+
+<li class="toctree-l1 current active"><a class="current reference internal" href="#"><strong>Lectura 3: Transformaciones de redes</strong></a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/tabarespozos/Flujo_en_redes_202302/blob/Flujo_en_redes_202302/Class_3_Network_as_LP/3-Network_transformations.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch onColab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img src="../_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/tabarespozos/Flujo_en_redes_202302" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/tabarespozos/Flujo_en_redes_202302/issues/new?title=Issue%20on%20page%20%2FClass_3_Network_as_LP/3-Network_transformations.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/Class_3_Network_as_LP/3-Network_transformations.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script>
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Lectura 3: Transformaciones de redes</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#problema-estandar-de-flujo-de-costo-minimo-fcm">Problema Estándar de Flujo de Costo Mínimo (FCM)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modificaciones">Modificaciones</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#transformacion">Transformación:</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#formulacion">Formulación:</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section id="lectura-3-transformaciones-de-redes">
+<h1><strong>Lectura 3: Transformaciones de redes</strong><a class="headerlink" href="#lectura-3-transformaciones-de-redes" title="Permalink to this heading">#</a></h1>
+<p>Existen variante del problema de flujo en redes que pueden ser representadas como el problema de flujo de costo mínimo (FCM). En esta lectura, describiremos algunas de estas variantes y cómo pueden ser transformadas a FCM.</p>
+<section id="problema-estandar-de-flujo-de-costo-minimo-fcm">
+<h2>Problema Estándar de Flujo de Costo Mínimo (FCM)<a class="headerlink" href="#problema-estandar-de-flujo-de-costo-minimo-fcm" title="Permalink to this heading">#</a></h2>
+<p>Dada una red dirigida <span class="math notranslate nohighlight">\(G = (V, E)\)</span> donde <span class="math notranslate nohighlight">\(V\)</span> es el conjunto de nodos y <span class="math notranslate nohighlight">\(E\)</span> es el conjunto de aristas.</p>
+<p>Se define:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(x_{ij}\)</span>: flujo en el arco <span class="math notranslate nohighlight">\((i, j)\)</span>.</p></li>
+<li><p><span class="math notranslate nohighlight">\(u_{ij}\)</span>: capacidad del arco <span class="math notranslate nohighlight">\((i, j)\)</span>.</p></li>
+<li><p><span class="math notranslate nohighlight">\(c_{ij}\)</span>: costo por unidad de flujo en el arco <span class="math notranslate nohighlight">\((i, j)\)</span>.</p></li>
+<li><p><span class="math notranslate nohighlight">\(b_i\)</span>: oferta (o demanda) en el nodo <span class="math notranslate nohighlight">\(i\)</span>.</p></li>
+</ul>
+<p>El problema FCM puede formularse como:</p>
+<p><strong>Minimizar:</strong>
+$<span class="math notranslate nohighlight">\( \sum_{(i,j) \in E} c_{ij} x_{ij} \)</span>$</p>
+<p><strong>Sujeto a:</strong></p>
+<div class="math notranslate nohighlight">
+\[ \sum_{j|(i,j) \in E} x_{ij} - \sum_{j|(j,i) \in E} x_{ji} = b_i, \forall i \in V \]</div>
+<div class="math notranslate nohighlight">
+\[0 \leq x_{ij} \leq u_{ij} \, \forall (i,j) \in E\]</div>
+</section>
+<section id="modificaciones">
+<h2>Modificaciones<a class="headerlink" href="#modificaciones" title="Permalink to this heading">#</a></h2>
+<ol class="arabic">
+<li><p><strong>Arcos no dirigidos a dirigidos</strong>:</p>
+<p>Un arco no dirigido <span class="math notranslate nohighlight">\((i, j)\)</span> con capacidad <span class="math notranslate nohighlight">\(c\)</span> se puede representar usando dos arcos dirigidos <span class="math notranslate nohighlight">\((i, j)\)</span> y <span class="math notranslate nohighlight">\((j, i)\)</span>, ambos con capacidad <span class="math notranslate nohighlight">\(c\)</span>.</p>
+<p><img alt="undirected_to_directed" src="../_images/arcos_no_dirigidos.png" /></p>
+</li>
+</ol>
+<ol class="arabic" start="2">
+<li><p><strong>Eliminar flujo mínimo no nulo</strong>:</p>
+<p>Si un arco <span class="math notranslate nohighlight">\((i, j)\)</span> tiene un flujo mínimo <span class="math notranslate nohighlight">\(l_{ij}\)</span>, puedes restar este valor del flujo máximo, es decir, <span class="math notranslate nohighlight">\(c_{ij} = c_{ij} - l_{ij}\)</span> y ajustar la oferta y la demanda de los nodos correspondientes. Esto es:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(b_i = b_i + l_{ij}\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(b_j = b_j - l_{ij}\)</span></p></li>
+</ul>
+</li>
+</ol>
+<p><img alt="min_flow" src="../_images/eliminar_flux_min.png" /></p>
+<p>Podemos usar esta transformación como un cambio de variales, es decir, <span class="math notranslate nohighlight">\(x_{ij} = y_{ij} - l_{ij}\)</span>, donde <span class="math notranslate nohighlight">\(y_{ij}\)</span> es el flujo en el arco <span class="math notranslate nohighlight">\((i, j)\)</span> después de la transformación. Esto nos da:</p>
+<p><strong>Minimizar:</strong>
+$<span class="math notranslate nohighlight">\( \sum_{(i,j) \in E} c_{ij} (y_{ij} - l_{ij}) \)</span>$</p>
+<div class="math notranslate nohighlight">
+\[ = \sum_{(i,j) \in E} c_{ij} y_{ij} - \sum_{(i,j) \in E} c_{ij} l_{ij} \]</div>
+<p><strong>Sujeto a:</strong></p>
+<div class="math notranslate nohighlight">
+\[ \sum_{j|(i,j) \in E} (y_{ij} - l_{ij}) - \sum_{j|(j,i) \in E} (y_{ji} - l_{ji}) = b_i, \forall i \in V \]</div>
+<div class="math notranslate nohighlight">
+\[ \sum_{j|(i,j) \in E} y_{ij} - \sum_{j|(i,j) \in E} l_{ij} - \sum_{j|(j,i) \in E} y_{ji} + \sum_{j|(j,i) \in E} l_{ji} = b_i, \forall i \in V \]</div>
+<div class="math notranslate nohighlight">
+\[ \sum_{j|(i,j) \in E} y_{ij} - \sum_{j|(j,i) \in E} y_{ji} = b_i + \sum_{j|(i,j) \in E} l_{ij} - \sum_{j|(j,i) \in E} l_{ji}, \forall i \in V \]</div>
+<div class="math notranslate nohighlight">
+\[ \sum_{j|(i,j) \in E} y_{ij} - \sum_{j|(j,i) \in E} y_{ji} = b_i + \sum_{j|(i,j) \in E} l_{ij} - \sum_{j|(j,i) \in E} l_{ji}, \forall i \in V \]</div>
+<div class="math notranslate nohighlight">
+\[ \sum_{j|(i,j) \in E} y_{ij} - \sum_{j|(j,i) \in E} y_{ji} = b_i + \sum_{j|(i,j) \in E} l_{ij} - \sum_{j|(j,i) \in E} l_{ji}, \forall i \in V \]</div>
+<div class="math notranslate nohighlight">
+\[0\leq y_{ij} \leq u_{ij}-l_{ij}, \forall (i,j) \in E\]</div>
+<ol class="arabic simple" start="3">
+<li><p><strong>Eliminar costos negativos</strong>:</p></li>
+</ol>
+<p>Podemos enviar <span class="math notranslate nohighlight">\(u_{ij}\)</span> unidades de flujo desde el nodo <span class="math notranslate nohighlight">\(i\)</span> hasta el nodo <span class="math notranslate nohighlight">\(j\)</span>, e invirtiendo el sentido del arco. El flujo <span class="math notranslate nohighlight">\(y_{ij}\)</span>
+representará el flujo de devolver el flujo en dichos arcos. Esto equivale a hacer un cambio de variables <span class="math notranslate nohighlight">\(x_{ij} = y_{ij} - u_{ij}\)</span>:
+<img alt="negative_costs" src="../_images/costos_negativos.png" /></p>
+<p>Observemos que pasaa analiticamente usar el cambio de variable <span class="math notranslate nohighlight">\(x_{ij} = u_{ij} - y_{ij}\)</span>:</p>
+<p><strong>Minimizar:</strong>
+$<span class="math notranslate nohighlight">\( \sum_{(i,j) \in E} (u_{ij} - y_{ij}) {c}_{ij} \)</span><span class="math notranslate nohighlight">\(
+\)</span><span class="math notranslate nohighlight">\( = \sum_{(i,j) \in E} u_{ij} c_{ij} - \sum_{(i,j) \in E} y_{ij} c_{ij} \)</span>$</p>
+<p><strong>Sujeto a:</strong>
+$<span class="math notranslate nohighlight">\( \sum_{j|(i,j) \in E} (u_{ij} - y_{ij}) - \sum_{j|(j,i) \in E} (u_{ji} - y_{ji}) = b_i, \forall i \in V \)</span><span class="math notranslate nohighlight">\(
+\)</span><span class="math notranslate nohighlight">\( \sum_{j|(i,j) \in E} u_{ij} - \sum_{j|(i,j) \in E} y_{ij} - \sum_{j|(j,i) \in E} u_{ji} + \sum_{j|(j,i) \in E} y_{ji} = b_i, \forall i \in V \)</span><span class="math notranslate nohighlight">\(
+\)</span><span class="math notranslate nohighlight">\( \sum_{j|(i,j) \in E} u_{ij} - \sum_{j|(j,i) \in E} u_{ji} = b_i + \sum_{j|(i,j) \in E} y_{ij} - \sum_{j|(j,i) \in E} y_{ji}, \forall i \in V \)</span><span class="math notranslate nohighlight">\(
+\)</span><span class="math notranslate nohighlight">\(0\leq y_{ij} \leq u_{ij}, \forall (i,j) \in E\)</span>$</p>
+<ol class="arabic simple" start="4">
+<li><p><strong>Eliminar capacidades en los arcos</strong>:</p></li>
+</ol>
+<p>Para convertir un problema de flujo de costo mínimo con capacidades máximas en uno que no las tiene, una forma de hacerlo es “integrar” la capacidad máxima dentro de la estructura del problema. A continuación se describe un enfoque para hacerlo:</p>
+<p>Dado un arco <span class="math notranslate nohighlight">\((i, j)\)</span> con capacidad máxima <span class="math notranslate nohighlight">\(u_{ij}\)</span>, podemos realizar la siguiente transformación:</p>
+<ol class="arabic simple">
+<li><p><strong>Introducir un nodo adicional</strong>: Crea un nuevo nodo <span class="math notranslate nohighlight">\(k\)</span>.</p></li>
+<li><p><strong>Reemplazar el arco original</strong>: Sustituye el arco <span class="math notranslate nohighlight">\((i, j)\)</span> por dos nuevos arcos: <span class="math notranslate nohighlight">\((i, k)\)</span> y <span class="math notranslate nohighlight">\((k, j)\)</span>.</p></li>
+<li><p><strong>Costos y oferta/demanda</strong>: Asigna a ambos nuevos arcos el mismo costo que el arco original <span class="math notranslate nohighlight">\((i, j)\)</span>. También, establece una oferta/demanda de <span class="math notranslate nohighlight">\(u_{ij}\)</span> en el nodo <span class="math notranslate nohighlight">\(k\)</span> (específicamente, oferta de <span class="math notranslate nohighlight">\(u_{ij}\)</span> y demanda de <span class="math notranslate nohighlight">\(u_{ij}\)</span>).</p></li>
+<li><p><strong>Arcos sin capacidad máxima</strong>: Los nuevos arcos <span class="math notranslate nohighlight">\((i, k)\)</span> y <span class="math notranslate nohighlight">\((k, j)\)</span> no tendrán capacidades máximas, permitiendo que cualquier cantidad de flujo pueda pasar por ellos, pero la oferta/demanda en el nodo <span class="math notranslate nohighlight">\(k\)</span> asegurará que no más de <span class="math notranslate nohighlight">\(u_{ij}\)</span> flujo atraviese la “ruta” <span class="math notranslate nohighlight">\((i, k, j)\)</span>.</p></li>
+</ol>
+<p>Repitiendo este proceso para cada arco con capacidad máxima en la red, obtendremos una red transformada sin capacidades máximas en los arcos.</p>
+<p><img alt="capacity" src="../_images/capacidad.png" /></p>
+<p><img alt="capacity" src="../_images/capacidad2.png" /></p>
+</section>
+<section id="transformacion">
+<h2>Transformación:<a class="headerlink" href="#transformacion" title="Permalink to this heading">#</a></h2>
+<p>Para cada arco <span class="math notranslate nohighlight">\((i, j)\)</span> con capacidad <span class="math notranslate nohighlight">\(u_{ij}\)</span>:</p>
+<ol class="arabic simple">
+<li><p>Introduce un nuevo nodo <span class="math notranslate nohighlight">\(k_{ij}\)</span>.</p></li>
+<li><p>Reemplaza <span class="math notranslate nohighlight">\((i, j)\)</span> con dos arcos: <span class="math notranslate nohighlight">\((i, k_{ij})\)</span> y <span class="math notranslate nohighlight">\((k_{ij}, j)\)</span>. Ambos arcos tienen el mismo costo <span class="math notranslate nohighlight">\(c_{ij}\)</span> que el arco original.</p></li>
+<li><p>Establece una demanda <span class="math notranslate nohighlight">\(b_{k_{ij}} = -u_{ij}\)</span> para el nodo <span class="math notranslate nohighlight">\(k_{ij}\)</span> y ajusta la oferta o demanda en el nodo <span class="math notranslate nohighlight">\(i\)</span> para mantener el balance, es decir, <span class="math notranslate nohighlight">\(b_i = b_i - u_{ij}\)</span>.</p></li>
+</ol>
+</section>
+<section id="formulacion">
+<h2>Formulación:<a class="headerlink" href="#formulacion" title="Permalink to this heading">#</a></h2>
+<p><strong>Minimizar:</strong></p>
+<div class="math notranslate nohighlight">
+\[ \sum_{(i,j) \in E} c_{ij} x_{ij} + \sum_{(i, k_{ij}) \in E'} c_{ij} x_{ik_{ij}} + \sum_{(k_{ij}, j) \in E'} c_{ij} x_{kj_{ij}} \]</div>
+<p><strong>Sujeto a:</strong></p>
+<div class="math notranslate nohighlight">
+\[ x_{ik_{ij}}, x_{k_{ij}j} \geq 0 \, \forall (i,j) \in E\]</div>
+<div class="math notranslate nohighlight">
+\[ \sum_{j|(i,j) \in E} x_{ij} - \sum_{j|(j,i) \in E} x_{ji} + x_{ik_{ij}} = b_i \, \forall i \in V \]</div>
+<div class="math notranslate nohighlight">
+\[ x_{ik_{ij}} = x_{kj_{ij}} + u_{ij} \]</div>
+<p>Donde <span class="math notranslate nohighlight">\(E'\)</span> es el conjunto de nuevos arcos creados a partir de la transformación.</p>
+<ol class="arabic simple" start="5">
+<li><p><strong>Eliminar costos en los nodos</strong>:</p></li>
+</ol>
+<p>En algunos problemas de optimización en redes, es posible que algunos nodos tengan costos asociados. Estos costos en los nodos pueden surgir, por ejemplo, cuando hay un costo asociado con el manejo o almacenamiento de mercancías en un punto en particular de la red. Aunque el problema clásico de flujo de costo mínimo considera únicamente costos en los arcos, es posible transformar un problema que tiene costos en los nodos en un problema estándar de flujo de costo mínimo.</p>
+<p>La estrategia general para hacer esto es “repartir” o “transferir” el costo del nodo a los arcos que inciden en ese nodo. La idea es que si hay un costo por pasar por un nodo, ese costo se manifieste en el proceso de entrar o salir de ese nodo.</p>
+<p>Consideremos el siguiente enfoque:</p>
+<ol class="arabic simple">
+<li><p><strong>Agregando el costo a los arcos salientes:</strong> Si el nodo <span class="math notranslate nohighlight">\(i\)</span> tiene un costo <span class="math notranslate nohighlight">\(c_i\)</span>, este costo puede interpretarse como un “peaje” que debe pagarse al salir del nodo. Así, por cada unidad de flujo que sale del nodo <span class="math notranslate nohighlight">\(i\)</span>, se incurre en el costo <span class="math notranslate nohighlight">\(c_i\)</span>. De esta forma, podemos simplemente añadir <span class="math notranslate nohighlight">\(c_i\)</span> al costo de cada arco que sale de <span class="math notranslate nohighlight">\(i\)</span>.</p></li>
+<li><p><strong>Restando el costo de los arcos entrantes:</strong> Del mismo modo, si interpretamos <span class="math notranslate nohighlight">\(c_i\)</span> como un “reembolso” que se recibe al entrar al nodo <span class="math notranslate nohighlight">\(i\)</span>, podemos restar <span class="math notranslate nohighlight">\(c_i\)</span> del costo de cada arco que entra en <span class="math notranslate nohighlight">\(i\)</span>. Esto significa que por cada unidad de flujo que entra al nodo <span class="math notranslate nohighlight">\(i\)</span>, obtenemos un reembolso o beneficio de <span class="math notranslate nohighlight">\(c_i\)</span>.</p></li>
+</ol>
+<p>Estas dos operaciones son equivalentes en términos del efecto total sobre el costo. Es decir, al pasar flujo a través del nodo <span class="math notranslate nohighlight">\(i\)</span>, se incurre netamente en el costo <span class="math notranslate nohighlight">\(c_i\)</span>. En la práctica, se puede elegir cualquiera de las dos operaciones dependiendo de la interpretación del problema en cuestión. Es importante destacar que esta transformación es válida porque el flujo conserva su propiedad de “continuidad” a través de un nodo: lo que entra, debe salir.</p>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./Class_3_Network_as_LP"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="2-Network_representation.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title"><strong>Lectura 2: Representaciones de los problemas de flujo</strong></p>
+      </div>
+    </a>
+</div></div>
+  
+</div>
+
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#problema-estandar-de-flujo-de-costo-minimo-fcm">Problema Estándar de Flujo de Costo Mínimo (FCM)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modificaciones">Modificaciones</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#transformacion">Transformación:</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#formulacion">Formulación:</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Alejandra Tabares
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  <p class="copyright">
+    
+      © Copyright 2022.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
