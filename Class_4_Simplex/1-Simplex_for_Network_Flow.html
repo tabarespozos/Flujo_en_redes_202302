@@ -650,7 +650,6 @@ document.write(`
 \[ \bar{c}_{ij} = c_{ij} + \pi_i - \pi_j = c_{ij} + \pi_i - \pi_j = 0 \]</div>
 <div class="math notranslate nohighlight">
 \[ c_{ij} + \pi_i = \pi_j \]</div>
-<p><img alt="" src="../_images/Expli_potenciales.png" /></p>
 </section>
 <section id="ejemplo">
 <h2>Ejemplo<a class="headerlink" href="#ejemplo" title="Permalink to this heading">#</a></h2>
@@ -697,22 +696,22 @@ document.write(`
 </section>
 <section id="construir-una-solucion-factible-inicial-un-arbol">
 <h2>Construir una solución factible inicial: un árbol<a class="headerlink" href="#construir-una-solucion-factible-inicial-un-arbol" title="Permalink to this heading">#</a></h2>
-<p>Para aplicar el algoritmo necesitamos conocer un àrbol inicial factible. Como por los general la soluciòn tribial <span class="math notranslate nohighlight">\(X=0\)</span> no es factible, es necesario resolver un problema auxiliar para encontrar un àrbol factible.
+<p>Para aplicar el algoritmo necesitamos conocer un árbol inicial factible. Como por lo general la solución trivial <span class="math notranslate nohighlight">\(X=0\)</span> no es factible, es necesario resolver un problema auxiliar para encontrar un árbol factible.
 Este problema, llamado Fase I (por analogía con el método simplex), consiste en:</p>
 <ol class="arabic simple">
-<li><p>Crear un nodo fictici y conectarlo a todos los nodos de la red con arcos ficticios.</p></li>
+<li><p>Crear un nodo ficticio y conectarlo a todos los nodos de la red con arcos ficticios.</p></li>
 <li><p>Asignar a estos nuevos arcos costo <span class="math notranslate nohighlight">\(1\)</span> y a los arcos del resto de la red costo <span class="math notranslate nohighlight">\(0\)</span>.</p></li>
-<li><p>Utilizar como árbol inicial el formaado por los nuevos arcos, e iterar hasta alcanzar una soluciòn factible en el problema original.</p></li>
+<li><p>Utilizar como árbol inicial el formado por los nuevos arcos, e iterar hasta alcanzar una solución factible en el problema original.</p></li>
 </ol>
 <p><strong>Teorema</strong>
-Un problema lineal admite soluciòn factible si y sólo si el valor óptimo de su Fase I es 0.</p>
+Un problema lineal admite solución factible si y sólo si el valor óptimo de su Fase I es 0.</p>
 <p><img alt="" src="../_images/fase_I_simplex.png" /></p>
 <p><img alt="" src="../_images/FaseISimplex.png" /></p>
 </section>
 <section id="casos-particulares">
 <h2>Casos particulares<a class="headerlink" href="#casos-particulares" title="Permalink to this heading">#</a></h2>
 <ul class="simple">
-<li><p>Asi como una instancia del problema de flujo a costo mínimo puede ser infactible, existen otras situaciones especiales que podrían darse y que son convenientes de estudiar. A continuación estudiaremos algunos casos particulares.</p></li>
+<li><p>Así como una instancia del problema de flujo a costo mínimo puede ser infactible, existen otras situaciones especiales que podrían darse y que son convenientes de estudiar. A continuación, estudiaremos algunos casos particulares.</p></li>
 </ul>
 <p><strong>Solución degenerada</strong></p>
 <ol class="arabic simple">
@@ -729,13 +728,13 @@ Un problema lineal admite soluciòn factible si y sólo si el valor óptimo de s
 <ol class="arabic simple">
 <li><p>Fue necesario probar dos bases distintas dentro del mismo vértice para poder concluir que esta solución era óptima.</p></li>
 <li><p>La solución óptima es degenerada, pues una de las variables básicas tiene flujo nulo.</p></li>
-<li><p>Una solución degenerada implica que existe más de una base asociadad a este vértice del dominio.</p></li>
-<li><p>El anterior punto puede llevar a iterar bases dentro de un mismo vértice del dominio, sin mejora de la función objetivo. En estos casoa se debe iterar hasta escapar del vértice degenerado, o hasta probar su optimalidad.</p></li>
-<li><p>Existen instancias donde el algoritmo dpuede quedarse atrapadao en un nodo (ciclaje). Para evitar iterar infinitamente dentro de un vertice existen reglas de pivoteo que permiten escapar de un vértice degenerado.</p></li>
-<li><p>A pesar de que la solución era la misma, los potenciales si cambiaban. Esto implica que si el óptimo es degenerado, el problema dual tiene múltiples soluciones óptimas (incluso fijando arbitrariamente el valor como lo hacemos en el SIMPLEX de redes).</p></li>
+<li><p>Una solución degenerada implica que existe más de una base asociada a este vértice del dominio.</p></li>
+<li><p>El anterior punto puede llevar a iterar bases dentro de un mismo vértice del dominio, sin mejora de la función objetivo. En estos casos se debe iterar hasta escapar del vértice degenerado, o hasta probar su optimalidad.</p></li>
+<li><p>Existen instancias donde el algoritmo puede quedarse atrapado en un nodo (ciclaje). Para evitar iterar infinitamente dentro de un vértice existen reglas de pivoteo que permiten escapar de un vértice degenerado.</p></li>
+<li><p>A pesar de que la solución era la misma, los potenciales si cambiaban. Esto implica que, si el óptimo es degenerado, el problema dual tiene múltiples soluciones óptimas (incluso fijando arbitrariamente el valor como lo hacemos en el SIMPLEX de redes).</p></li>
 </ol>
 <p><strong>Solciones múltiples</strong></p>
-<p>Vemos que nos encontramos en una solución óptima, pero que tenemos un arco con costo reducido igual a cero, esto implica que si entramos este arco a la base, no vamos a mejorar la función objetivo, pero tampoco la vamos a empeorar.</p>
+<p>Vemos que nos encontramos en una solución óptima, pero que tenemos un arco con costo reducido igual a cero, esto implica que, si entramos este arco a la base, no vamos a mejorar la función objetivo, pero tampoco la vamos a empeorar.</p>
 <p><img alt="" src="../_images/casos_especiales5.png" /></p>
 <p>Si hacemos entrar al arco <span class="math notranslate nohighlight">\((3_1)\)</span> a la base, obtenemos una solución factible distinta a la anterior, pero con el mismo valor de la función objetivo.</p>
 <p><img alt="" src="../_images/casos_especiales6.png" /></p>
@@ -745,8 +744,8 @@ Un problema lineal admite soluciòn factible si y sólo si el valor óptimo de s
 <li><p>Si existe un arco <span class="math notranslate nohighlight">\((ij)\)</span> con costo reducido igual a cero, entonces existe otro árbol (base) óptimo <span class="math notranslate nohighlight">\(B_1\)</span> que contiene a <span class="math notranslate nohighlight">\((ij)\)</span>.</p></li>
 <li><p><span class="math notranslate nohighlight">\(z_1 = z_0\)</span>, esto es, <span class="math notranslate nohighlight">\(B_0\)</span> y <span class="math notranslate nohighlight">\(B_1\)</span> son árboles distintos, pero tienen el mismo costo.</p></li>
 <li><p>Cualquier solución entre <span class="math notranslate nohighlight">\(B_0\)</span> y <span class="math notranslate nohighlight">\(B_1\)</span> es óptima. Esto es, <span class="math notranslate nohighlight">\(x^*=\lambda x_0 + (1-\lambda)x_1\)</span> con <span class="math notranslate nohighlight">\(\lambda \in [0,1]\)</span> también es óptima.</p></li>
-<li><p>Cabe noral que podría pasar que exista un arco <span class="math notranslate nohighlight">\((ij)\)</span> con costo reducido igual a cero, pero que no exista otro árbol (base) óptimo que contenga a <span class="math notranslate nohighlight">\((ij)\)</span>. En este caso, la solución óptima es única. (En que caso podría pasar esto?)]</p></li>
-<li><p>En general, si hay <span class="math notranslate nohighlight">\(k\)</span> costos reducidos iguales a cero, con bases óptimas asociadas <span class="math notranslate nohighlight">\(B_k\)</span>, se tiene que tambien son óptimas toddas combinaciones convexas de bases óptimas:
+<li><p>Cabe noral que podría pasar que exista un arco <span class="math notranslate nohighlight">\((ij)\)</span> con costo reducido igual a cero, pero que no exista otro árbol (base) óptimo que contenga a <span class="math notranslate nohighlight">\((ij)\)</span>. En este caso, la solución óptima es única. (¿En qué caso podría pasar esto?)</p></li>
+<li><p>En general, si hay <span class="math notranslate nohighlight">\(k\)</span> costos reducidos iguales a cero, con bases óptimas asociadas <span class="math notranslate nohighlight">\(B_k\)</span>, se tiene que también son óptimas todas combinaciones convexas de bases óptimas:
 $<span class="math notranslate nohighlight">\(x^*=sum_{i=0}^k \lambda_i x_i \quad \text{con} \quad \sum_{i=0}^k \lambda_i = 1 \quad \text{y} \quad \lambda_i \geq 0 \quad \forall i \in \{0,1,...,k\}\)</span>$</p></li>
 </ol>
 <p><strong>Solución no acotada</strong></p>
@@ -757,14 +756,14 @@ $<span class="math notranslate nohighlight">\(x^*=sum_{i=0}^k \lambda_i x_i \qua
 <section id="integralidad">
 <h2>Integralidad<a class="headerlink" href="#integralidad" title="Permalink to this heading">#</a></h2>
 <p>En ocasiones, un problema de flujo en redes puede poseer la restricción adicional de que los flujos deben ser enteros. En este caso, el problema se conoce como problema de flujo en redes con restricciones de integralidad.
-Hasta ahora, todas nuestras soluciones han satisfecho esta propiedad. Casualidad?</p>
+Hasta ahora, todas nuestras soluciones han satisfecho esta propiedad. ¿Casualidad?</p>
 <p>No, todo poliedro definido por restricciones lineales en las que el lado derecho posee sólo valores enteros, y donde la matriz de parámetros del lado izquierdo es totalmente unimodular, posee una solución básica factible con variables enteras.</p>
 <p><strong>Matrices totalmente unimodulares</strong></p>
 <p>Se define como matriz unimodular a toda matriz cuadrada compuesta por elementos enteros y cuyo determinante es igual a 1 o -1.</p>
 <p>Una matriz es totalmente unimodular si todas sus submatrices cuadradas no singulares son unimodulares. Esto implica que una matriz totalmente unimodular sólo puede contener elementos enteros, 1, 0 o -1.</p>
 <p><em><strong>Teorema</strong></em>
 Una matriz cuyas columnas poseen sólo dos elementos distintos de cero, uno positivo y otro negativo, es totalmente unimodular.<br />
-- Esto implica que en nuestro problema, si <span class="math notranslate nohighlight">\(b_ij\)</span>, <span class="math notranslate nohighlight">\(u_ij\)</span> y <span class="math notranslate nohighlight">\(l_ij\)</span> son enteros, los flujos también lo serán.</p>
+- Esto implica que, en nuestro problema, si <span class="math notranslate nohighlight">\(b_ij\)</span>, <span class="math notranslate nohighlight">\(u_ij\)</span> y <span class="math notranslate nohighlight">\(l_ij\)</span> son enteros, los flujos también lo serán.</p>
 </section>
 </section>
 
