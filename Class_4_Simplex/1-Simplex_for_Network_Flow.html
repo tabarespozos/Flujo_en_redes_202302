@@ -720,12 +720,14 @@ Un problema lineal admite solución factible si y sólo si el valor óptimo de s
 <ol class="arabic simple">
 <li><p>Existe un empate entre las variables no básicas con costo reducido negativo. En este caso, se puede escoger cualquiera de ellas para agregar al árbol. Sin importar nuestra elección en la próxima base habrá un flujo nulo.</p></li>
 </ol>
-<p><img alt="" src="../_images/casos_especiales.png" /></p>
+<p><img alt="" src="Images/casos_especiales0.png" />
+<img alt="" src="../_images/casos_especiales.png" /></p>
 <p>Escogemos el arco <span class="math notranslate nohighlight">\((21)\)</span> para salir de la base.</p>
 <p><img alt="" src="../_images/casos_especiales2.png" /></p>
 <p>La solución que presentamos, con una variable básica con flujo nulo, es una solución degenerada.</p>
 <p>Sigamos aplicando el algoritmo simplex de redes.</p>
-<p><img alt="" src="../_images/casos_especiales3.png" /></p>
+<p><img alt="" src="Images/casos_especiales30.png" />
+<img alt="" src="../_images/casos_especiales3.png" /></p>
 <p><img alt="" src="../_images/casos_especiales4.png" /></p>
 <p><em><strong>Comentarios:</strong></em></p>
 <ol class="arabic simple">
@@ -736,7 +738,7 @@ Un problema lineal admite solución factible si y sólo si el valor óptimo de s
 <li><p>Existen instancias donde el algoritmo puede quedarse atrapado en un nodo (ciclaje). Para evitar iterar infinitamente dentro de un vértice existen reglas de pivoteo que permiten escapar de un vértice degenerado.</p></li>
 <li><p>A pesar de que la solución era la misma, los potenciales si cambiaban. Esto implica que, si el óptimo es degenerado, el problema dual tiene múltiples soluciones óptimas (incluso fijando arbitrariamente el valor como lo hacemos en el SIMPLEX de redes).</p></li>
 </ol>
-<p><strong>Solciones múltiples</strong></p>
+<p><strong>Soluciones múltiples</strong></p>
 <p>Vemos que nos encontramos en una solución óptima, pero que tenemos un arco con costo reducido igual a cero, esto implica que, si entramos este arco a la base, no vamos a mejorar la función objetivo, pero tampoco la vamos a empeorar.</p>
 <p><img alt="" src="../_images/casos_especiales5.png" /></p>
 <p>Si hacemos entrar al arco <span class="math notranslate nohighlight">\((31)\)</span> a la base, obtenemos una solución factible distinta a la anterior, pero con el mismo valor de la función objetivo.</p>
