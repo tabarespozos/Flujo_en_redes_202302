@@ -66,6 +66,7 @@ const thebe_selector_output = ".output, .cell_output"
     <script>DOCUMENTATION_OPTIONS.pagename = 'Class_4_Simplex/1-Simplex_for_Network_Flow';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Lectura 2: Simplex algunos detalles" href="2-Simplex_cicling_pivot.html" />
     <link rel="prev" title="Lectura 3: Transformaciones de redes" href="../Class_3_Network_as_LP/3-Network_transformations.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -193,6 +194,8 @@ const thebe_selector_output = ".output, .cell_output"
 
 
 
+<li class="toctree-l1"><a class="reference internal" href="2-Simplex_cicling_pivot.html"><strong>Lectura 2: Simplex algunos detalles</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="3-Simplex_acotado.html"><strong>Lectura 3: Simplex con cotas</strong></a></li>
 </ul>
 
     </div>
@@ -736,7 +739,7 @@ Un problema lineal admite solución factible si y sólo si el valor óptimo de s
 <p><strong>Solciones múltiples</strong></p>
 <p>Vemos que nos encontramos en una solución óptima, pero que tenemos un arco con costo reducido igual a cero, esto implica que, si entramos este arco a la base, no vamos a mejorar la función objetivo, pero tampoco la vamos a empeorar.</p>
 <p><img alt="" src="../_images/casos_especiales5.png" /></p>
-<p>Si hacemos entrar al arco <span class="math notranslate nohighlight">\((3_1)\)</span> a la base, obtenemos una solución factible distinta a la anterior, pero con el mismo valor de la función objetivo.</p>
+<p>Si hacemos entrar al arco <span class="math notranslate nohighlight">\((31)\)</span> a la base, obtenemos una solución factible distinta a la anterior, pero con el mismo valor de la función objetivo.</p>
 <p><img alt="" src="../_images/casos_especiales6.png" /></p>
 <p><em><strong>Comentarios:</strong></em></p>
 <ol class="arabic simple">
@@ -763,7 +766,7 @@ Hasta ahora, todas nuestras soluciones han satisfecho esta propiedad. ¿Casualid
 <p>Una matriz es totalmente unimodular si todas sus submatrices cuadradas no singulares son unimodulares. Esto implica que una matriz totalmente unimodular sólo puede contener elementos enteros, 1, 0 o -1.</p>
 <p><em><strong>Teorema</strong></em>
 Una matriz cuyas columnas poseen sólo dos elementos distintos de cero, uno positivo y otro negativo, es totalmente unimodular.<br />
-- Esto implica que, en nuestro problema, si <span class="math notranslate nohighlight">\(b_ij\)</span>, <span class="math notranslate nohighlight">\(u_ij\)</span> y <span class="math notranslate nohighlight">\(l_ij\)</span> son enteros, los flujos también lo serán.</p>
+- Esto implica que, en nuestro problema, si <span class="math notranslate nohighlight">\(b_{ij}\)</span>, <span class="math notranslate nohighlight">\(u_{ij}\)</span> y <span class="math notranslate nohighlight">\(l_{ij}\)</span> son enteros, los flujos también lo serán.</p>
 </section>
 </section>
 
@@ -806,6 +809,15 @@ Una matriz cuyas columnas poseen sólo dos elementos distintos de cero, uno posi
         <p class="prev-next-subtitle">previous</p>
         <p class="prev-next-title"><strong>Lectura 3: Transformaciones de redes</strong></p>
       </div>
+    </a>
+    <a class="right-next"
+       href="2-Simplex_cicling_pivot.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><strong>Lectura 2: Simplex algunos detalles</strong></p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
     </a>
 </div></div>
   
