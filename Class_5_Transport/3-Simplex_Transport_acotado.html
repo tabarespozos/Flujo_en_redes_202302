@@ -1,0 +1,685 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>Lectura 3: Simplex de transporte con variables acotodas &#8212; Flujo en Redes 202302</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'Class_5_Transport/3-Simplex_Transport_acotado';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="prev" title="Lectura 2: Implementación simplex de transporte" href="2-Simplex_Transport_implementation.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="../SyllabusFlujoEnRedes.html">
+  
+  
+  
+  
+  
+    <p class="title logo__title">Flujo en Redes 202302</p>
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../SyllabusFlujoEnRedes.html">
+                    Syllabus
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Semana 1</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../Class_1_Introduction_Motivation/1-Introduction.html"><strong>Lectura 1: Flujo en redes</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Class_1_Introduction_Motivation/2-Project.html"><strong>Lectura 2: Proyecto del semestre</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Class_1_Introduction_Motivation/3-Graphs.html"><strong>Lectura 3: Grafos</strong></a></li>
+
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Semana 2</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../Class_2_Gurobi/1-Hello_word_diet_problem.html"><strong>Lectura 1: introducción a Gurobi python</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Class_2_Gurobi/2-Implicit_formulation.html"><strong>Lectura 2: Formulación implícita</strong></a></li>
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../Class_2_Gurobi/3-Exercice.html"><strong>Lectura 3: Ejercicio en clase</strong></a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="../Class_2_Gurobi/4-Generalizing_Diet_Problem.html"><strong>Lectura 4: Marco general para Formulación implícita</strong></a></li>
+
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Semana 3</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../Class_3_Network_as_LP/1-Introduction.html"><strong>Lectura 1: Flujo en redes como programas lineales</strong></a></li>
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../Class_3_Network_as_LP/2-Network_representation.html"><strong>Lectura 2: Representaciones de los problemas de flujo</strong></a></li>
+
+
+<li class="toctree-l1"><a class="reference internal" href="../Class_3_Network_as_LP/3-Network_transformations.html"><strong>Lectura 3: Transformaciones de redes</strong></a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Semana 4</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../Class_4_Simplex/1-Simplex_for_Network_Flow.html"><strong>Lectura 1: Simplex para problemas de Flujo</strong></a></li>
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../Class_4_Simplex/2-Simplex_cicling_pivot.html"><strong>Lectura 2: Simplex algunos detalles</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Class_4_Simplex/3-Simplex_acotado.html"><strong>Lectura 3: Simplex con cotas</strong></a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Semana</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="1-Simplex_Transport.html"><strong>Lectura 1: Simplex para problemas de transporte</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="2-Simplex_Transport_implementation.html"><strong>Lectura 2: Implementación simplex de transporte</strong></a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#"><strong>Lectura 3: Simplex de transporte con variables acotodas</strong></a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/tabarespozos/Flujo_en_redes_202302/blob/Flujo_en_redes_202302/Class_5_Transport/3-Simplex_Transport_acotado.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch onColab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img src="../_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/tabarespozos/Flujo_en_redes_202302" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/tabarespozos/Flujo_en_redes_202302/issues/new?title=Issue%20on%20page%20%2FClass_5_Transport/3-Simplex_Transport_acotado.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/Class_5_Transport/3-Simplex_Transport_acotado.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script>
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Lectura 3: Simplex de transporte con variables acotodas</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#recordando-el-metodo-simplex-para-el-problema-de-transporte">Recordando el método simplex para el problema de transporte</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#paso-2-calculo-de-los-costos-reducidos">Paso 2: Cálculo de los costos reducidos</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#paso-3-condiciones-de-optimalidad">Paso 3: Condiciones de óptimalidad</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#paso-4-variable-entrante">Paso 4: Variable entrante</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#calculo-de-los-incrementos">Cálculo de los incrementos</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#como-calcular-una-solucion-basica-factible-inicial">Como calcular una solución básica factible inicial</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section id="lectura-3-simplex-de-transporte-con-variables-acotodas">
+<h1><strong>Lectura 3: Simplex de transporte con variables acotodas</strong><a class="headerlink" href="#lectura-3-simplex-de-transporte-con-variables-acotodas" title="Permalink to this heading">#</a></h1>
+<p>Un problema de transporte con variables acotadas es un problema de programación lineal en el que se busca minimizar el costo de transporte de un conjunto de fuentes a un conjunto de destinos, donde cada fuente tiene una cantidad limitada de producto que puede enviar y cada destino tiene una cantidad limitada de producto que puede recibir.</p>
+<p>La forrmulación matemática de este problema es la siguiente:</p>
+<div class="math notranslate nohighlight">
+\[\min_{x_{ij}} \sum_{i=1}^{m} \sum_{j=1}^{n} c_{ij} x_{ij}\]</div>
+<p>Sujeto a:</p>
+<div class="math notranslate nohighlight">
+\[\sum_{j=1}^{n} x_{ij} = a_{i} \quad \forall i \in \{1,2,...,m\}\]</div>
+<div class="math notranslate nohighlight">
+\[\sum_{i=1}^{m} x_{ij} = b_{j} \quad \forall j \in \{1,2,...,n\}\]</div>
+<div class="math notranslate nohighlight">
+\[x_{ij} \geq l_{ij} \quad \forall i \in \{1,2,...,m\}, \forall j \in \{1,2,...,n\}\]</div>
+<div class="math notranslate nohighlight">
+\[x_{ij} \leq u_{ij} \quad \forall i \in \{1,2,...,m\}, \forall j \in \{1,2,...,n\}\]</div>
+<section id="recordando-el-metodo-simplex-para-el-problema-de-transporte">
+<h2>Recordando el método simplex para el problema de transporte<a class="headerlink" href="#recordando-el-metodo-simplex-para-el-problema-de-transporte" title="Permalink to this heading">#</a></h2>
+<ol class="arabic simple">
+<li><p>Se construye una solución básica factible inicial (SBFI) con <span class="math notranslate nohighlight">\(m+n-1\)</span> variables básicas.</p></li>
+<li><p>Se calculan los costos reducidos de las variables no básicas.</p></li>
+<li><p>Si todos los costos reducidos son no negativos, la SBFI es óptima y el algoritmo termina.</p></li>
+<li><p>Si existe al menos un costo reducido negativo, se selecciona una variable no básica con costo reducido negativo y se calculan los incrementos de las variables básicas.</p></li>
+<li><p>Si todos los incrementos son no positivos, el problema no tiene solución óptima y el algoritmo termina.</p></li>
+<li><p>Si existe al menos un incremento positivo, se selecciona la variable básica que sale de la base y se calcula la SBFI para la siguiente iteración.</p></li>
+</ol>
+<p>Como siempre, podemos transformar el problema de transporta a su versión canónica y resolverlo, pero como evaluamos en anteriores clases:</p>
+<ul class="simple">
+<li><p>El preenvío de <span class="math notranslate nohighlight">\(l_{ij}\)</span> es bastante fácil y solo implica un cambio de variable.</p></li>
+<li><p>Ahora, el cambio de variable para eliminar la cota superior <span class="math notranslate nohighlight">\(u_{ij}\)</span> es más complicado y requiere la introducción de variables artificiales, una por cada cota superior. Esto aumenta el tamaño del problema.</p></li>
+</ul>
+<p>Podemos sin embargo, modificar el método simplex para que funcione con variables acotadas. Para esto, debemos modificar los pasos 2, 3 y 4 del método simplex para el problema de transporte.</p>
+</section>
+<section id="paso-2-calculo-de-los-costos-reducidos">
+<h2>Paso 2: Cálculo de los costos reducidos<a class="headerlink" href="#paso-2-calculo-de-los-costos-reducidos" title="Permalink to this heading">#</a></h2>
+<p>Para calcular los costos reducidos, debemos tener en cuenta que las variables del problema pueden encontrarse en tres estados diferentes:</p>
+<ul class="simple">
+<li><p><strong>Variables básicas</strong>: Estas variables básicas tienen un valor positivo y no toman el valor de sus cotas, esto es, <span class="math notranslate nohighlight">\(l_{ij} &lt; x_{ij} &lt; u_{ij}\)</span>. Caso alguna variable básica tome un valor igual a su cota, dicho arco es un arco básico degenerado.</p></li>
+<li><p><strong>Variables no básicas acotadas inferiormente (l)</strong>: Estas variables básicas tienen un valor positivo igual a su cota inferior  <span class="math notranslate nohighlight">\(l_{ij}\)</span>.</p></li>
+<li><p><strong>Variables no básicas acotadas superiormente (u)</strong>: Estas variables básicas tienen un valor positivo igual a su cota superior <span class="math notranslate nohighlight">\(u_{ij}\)</span>.</p></li>
+</ul>
+<p>Al igual que en el simplex de transporte sin cotas, los costos reducidos serán</p>
+<div class="math notranslate nohighlight">
+\[\bar{c}_{ij} = c_{ij} - u_{i} - v_{j} \forall (i,j)\]</div>
+<p>donde <span class="math notranslate nohighlight">\(u_{i}\)</span> y <span class="math notranslate nohighlight">\(v_{j}\)</span> son las variables duales de las restricciones de oferta y demanda respectivamente.</p>
+<p>En el caso de las variables básicas el costo reducido es igual a cero, esto es, <span class="math notranslate nohighlight">\(c_{ij}= u_{i} + v_{j}\)</span>.</p>
+</section>
+<section id="paso-3-condiciones-de-optimalidad">
+<h2>Paso 3: Condiciones de óptimalidad<a class="headerlink" href="#paso-3-condiciones-de-optimalidad" title="Permalink to this heading">#</a></h2>
+<ol class="arabic simple">
+<li><p>Si <span class="math notranslate nohighlight">\((i,j)\)</span> es un arco básico, entonces <span class="math notranslate nohighlight">\(\bar{c}_{ij} = 0\)</span>.</p></li>
+<li><p>Si <span class="math notranslate nohighlight">\((i,j)\)</span> es un arco no básico acotado inferiormente, <span class="math notranslate nohighlight">\(x_{ij} = l_{ij}\)</span>, entonces <span class="math notranslate nohighlight">\(\bar{c}_{ij} \leq 0\)</span>.</p></li>
+<li><p>Si <span class="math notranslate nohighlight">\((i,j)\)</span> es un arco no básico acotado superiormente, <span class="math notranslate nohighlight">\(x_{ij} = u_{ij}\)</span>, entonces <span class="math notranslate nohighlight">\(\bar{c}_{ij} \leq 0\)</span>.</p></li>
+</ol>
+</section>
+<section id="paso-4-variable-entrante">
+<h2>Paso 4: Variable entrante<a class="headerlink" href="#paso-4-variable-entrante" title="Permalink to this heading">#</a></h2>
+<p>Para seleccionar la variable entrante, debemos tener en cuenta que las variables del problema pueden encontrarse en dos estados diferentes:</p>
+<ul class="simple">
+<li><p><strong>Variables no básicas acotadas inferiormente (l)</strong>: Estas variables básicas tienen un valor positivo igual a su cota inferior  <span class="math notranslate nohighlight">\(l_{ij}\)</span>. Se requiere que el costo reducido sea negativo, esto es, <span class="math notranslate nohighlight">\(\bar{c}_{ij} &lt; 0\)</span>.</p></li>
+<li><p><strong>Variables no básicas acotadas superiormente (u)</strong>: Estas variables básicas tienen un valor positivo igual a su cota superior <span class="math notranslate nohighlight">\(u_{ij}\)</span>. Se requiere que el costo reducido sea negativo, esto es, <span class="math notranslate nohighlight">\(\bar{c}_{ij} &gt; 0\)</span>.</p></li>
+</ul>
+<p>Podemos continuar con nuestra regla de entrar a la base la variable que primero represente una oportunidad de mejora, sin embargo, recuerde que existen muchas estrategias, como vimos en el ejemplo de clase, algunas veces se puede pedir que elija aquella con el máximo valor absoluto <span class="math notranslate nohighlight">\(\bar{c}_{ij}\)</span>.</p>
+</section>
+<section id="calculo-de-los-incrementos">
+<h2>Cálculo de los incrementos<a class="headerlink" href="#calculo-de-los-incrementos" title="Permalink to this heading">#</a></h2>
+<p>la regla para calcular los incrementos es un poco mas complicada que el simplex de transporte sin cotas:</p>
+<ul class="simple">
+<li><p>Recuerde que con base en la dirección del flujo, los arcos que son recorridos en dirección contraria tendran un decremento de su flujo y aquellos que tengan el mismo sentido del flujo tendrán un incremento de su flujo.</p>
+<ul>
+<li><p>Si la variable entrante es no básica acotada inferiormente, <span class="math notranslate nohighlight">\(x_{ij} = l_{ij}\)</span>, entonces:</p>
+<ul>
+<li><p>para las variables que tienen el mismo sentido del flujo, el incremento <span class="math notranslate nohighlight">\(\Delta_{ij}^+\)</span> es igual a <span class="math notranslate nohighlight">\(\min_{(ij \in Forward)}\{u_{ij} - x_{ij}\}\)</span>.</p></li>
+<li><p>para las variables que tienen el sentido contrario del flujo, el decremento <span class="math notranslate nohighlight">\(\Delta_{ij}^-\)</span> es igual a <span class="math notranslate nohighlight">\(\min_{(ij \in Backward)}\{x_{ij} - l_{ij}\}\)</span>.</p></li>
+<li><p>para el arco entrante en cuestion <span class="math notranslate nohighlight">\(\Delta_{ij}^0\)</span> es igual a <span class="math notranslate nohighlight">\(u_{ij} - l_{ij}\)</span>.
+-Posteriormente se elige el incremento como el mínimo de los incrementos calculados, esto es, <span class="math notranslate nohighlight">\(\Delta_{ij}^* = \min\{\Delta_{ij}^+, \Delta_{ij}^-, \Delta_{ij}^0\}\)</span>.</p></li>
+</ul>
+</li>
+<li><p>Si <span class="math notranslate nohighlight">\(\Delta_{ij}^*=\Delta_{ij}^+\)</span>,entonces cualquier arco que da lugar a <span class="math notranslate nohighlight">\(\Delta_{ij}^+\)</span> pasa a su cota superior y sale de la base.</p></li>
+<li><p>Si <span class="math notranslate nohighlight">\(\Delta_{ij}^*=\Delta_{ij}^-\)</span>,entonces cualquier arco que da lugar a <span class="math notranslate nohighlight">\(\Delta_{ij}^-\)</span> pasa a su cota inferior y sale de la base.</p></li>
+<li><p>Si <span class="math notranslate nohighlight">\(\Delta_{ij}^*=\Delta_{ij}^0\)</span>,entonces el arco entrante en cuestion pasa de su cota inferior a su cota superior (solo cambio de cota, recuerda que esto nos pasó en el ejemplo acotado para el problema de flujo a costo mínimo), no hay cambio de base, pero si de flujos, si no hay cambio de base, no hay cambio en los costos reducidos.</p></li>
+<li><p>Si la variable entrante es no básica acotada superiormente, <span class="math notranslate nohighlight">\(x_{ij} = u_{ij}\)</span>, entonces:</p>
+<ul>
+<li><p>para las variables que tienen el sentido contrario del flujo, el incremento <span class="math notranslate nohighlight">\(\Delta_{ij}^+\)</span> es igual a <span class="math notranslate nohighlight">\(\min_{(ij \in Backward)}\{u_{ij} - x_{ij}\}\)</span>.</p></li>
+<li><p>para las variables que tienen el mismo sentido del flujo, el decremento <span class="math notranslate nohighlight">\(\Delta_{ij}^-\)</span> es igual a <span class="math notranslate nohighlight">\(\min_{(ij \in Forward)}\{x_{ij} - l_{ij}\}\)</span>.</p></li>
+<li><p>para el arco entrante en cuestion <span class="math notranslate nohighlight">\(\Delta_{ij}^0\)</span> es igual a <span class="math notranslate nohighlight">\(u_{ij} - l_{ij}\)</span>.
+-Posteriormente se elige el incremento como el mínimo de los incrementos calculados, esto es, <span class="math notranslate nohighlight">\(\Delta_{ij}^* = \min\{\Delta_{ij}^+, \Delta_{ij}^-, \Delta_{ij}^0\}\)</span>.</p></li>
+</ul>
+</li>
+<li><p>Si <span class="math notranslate nohighlight">\(\Delta_{ij}^*=\Delta_{ij}^+\)</span>,entonces cualquier arco que da lugar a <span class="math notranslate nohighlight">\(\Delta_{ij}^+\)</span> pasa a su cota superior y sale de la base.</p></li>
+<li><p>Si <span class="math notranslate nohighlight">\(\Delta_{ij}^*=\Delta_{ij}^-\)</span>,entonces cualquier arco que da lugar a <span class="math notranslate nohighlight">\(\Delta_{ij}^-\)</span> pasa a su cota inferior y sale de la base.</p></li>
+<li><p>Si <span class="math notranslate nohighlight">\(\Delta_{ij}^*=\Delta_{ij}^0\)</span>,entonces el arco entrante en cuestion pasa de su cota inferior a su cota superior (solo cambio de cota, recuerda que esto nos pasó en el ejemplo acotado para el problema de flujo a costo mínimo), no hay cambio de base, pero si de flujos, si no hay cambio de base, no hay cambio en los costos reducidos.</p></li>
+</ul>
+</li>
+</ul>
+<p><img alt="" src="../_images/TACO1.png" /></p>
+<p><img alt="" src="../_images/TACO2.png" /></p>
+<p><img alt="" src="../_images/TACO3.png" /></p>
+<p><img alt="" src="../_images/TACO4.png" /></p>
+<p><img alt="" src="../_images/TACO5.png" /></p>
+</section>
+<section id="como-calcular-una-solucion-basica-factible-inicial">
+<h2>Como calcular una solución básica factible inicial<a class="headerlink" href="#como-calcular-una-solucion-basica-factible-inicial" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Fijar las cotas inferiores: <span class="math notranslate nohighlight">\(x_{ij} = l_{ij}\)</span>.</p></li>
+</ul>
+<p><img alt="" src="../_images/TACO6.png" /></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">-</span> <span class="n">Ajustar</span> <span class="n">ofertas</span> <span class="n">y</span> <span class="n">demandas</span> 
+
+<span class="o">![](</span>../Images/TACO7.png<span class="o">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<ul class="simple">
+<li><p>Realizar dicha asignación basado en el costo mínimo.</p></li>
+</ul>
+<p><img alt="" src="../_images/TACO8.png" /></p>
+<p><img alt="" src="../_images/TACO9.png" /></p>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./Class_5_Transport"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="2-Simplex_Transport_implementation.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title"><strong>Lectura 2: Implementación simplex de transporte</strong></p>
+      </div>
+    </a>
+</div></div>
+  
+</div>
+
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#recordando-el-metodo-simplex-para-el-problema-de-transporte">Recordando el método simplex para el problema de transporte</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#paso-2-calculo-de-los-costos-reducidos">Paso 2: Cálculo de los costos reducidos</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#paso-3-condiciones-de-optimalidad">Paso 3: Condiciones de óptimalidad</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#paso-4-variable-entrante">Paso 4: Variable entrante</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#calculo-de-los-incrementos">Cálculo de los incrementos</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#como-calcular-una-solucion-basica-factible-inicial">Como calcular una solución básica factible inicial</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Alejandra Tabares
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  <p class="copyright">
+    
+      © Copyright 2022.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
