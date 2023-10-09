@@ -1,0 +1,2727 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>Lectura 1: Simplex para problemas de asignación &#8212; Flujo en Redes 202302</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'Class_6_Assignment/1-Assignment_problem';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="prev" title="Lectura 3: Simplex de transporte con variables acotodas" href="../Class_5_Transport/3-Simplex_Transport_acotado.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="../SyllabusFlujoEnRedes.html">
+  
+  
+  
+  
+  
+    <p class="title logo__title">Flujo en Redes 202302</p>
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../SyllabusFlujoEnRedes.html">
+                    Syllabus
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Semana 1</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../Class_1_Introduction_Motivation/1-Introduction.html"><strong>Lectura 1: Flujo en redes</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Class_1_Introduction_Motivation/2-Project.html"><strong>Lectura 2: Proyecto del semestre</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Class_1_Introduction_Motivation/3-Graphs.html"><strong>Lectura 3: Grafos</strong></a></li>
+
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Semana 2</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../Class_2_Gurobi/1-Hello_word_diet_problem.html"><strong>Lectura 1: introducción a Gurobi python</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Class_2_Gurobi/2-Implicit_formulation.html"><strong>Lectura 2: Formulación implícita</strong></a></li>
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../Class_2_Gurobi/3-Exercice.html"><strong>Lectura 3: Ejercicio en clase</strong></a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="../Class_2_Gurobi/4-Generalizing_Diet_Problem.html"><strong>Lectura 4: Marco general para Formulación implícita</strong></a></li>
+
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Semana 3</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../Class_3_Network_as_LP/1-Introduction.html"><strong>Lectura 1: Flujo en redes como programas lineales</strong></a></li>
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../Class_3_Network_as_LP/2-Network_representation.html"><strong>Lectura 2: Representaciones de los problemas de flujo</strong></a></li>
+
+
+<li class="toctree-l1"><a class="reference internal" href="../Class_3_Network_as_LP/3-Network_transformations.html"><strong>Lectura 3: Transformaciones de redes</strong></a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Semana 4</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../Class_4_Simplex/1-Simplex_for_Network_Flow.html"><strong>Lectura 1: Simplex para problemas de Flujo</strong></a></li>
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../Class_4_Simplex/2-Simplex_cicling_pivot.html"><strong>Lectura 2: Simplex algunos detalles</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Class_4_Simplex/3-Simplex_acotado.html"><strong>Lectura 3: Simplex con cotas</strong></a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Semana</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../Class_5_Transport/1-Simplex_Transport.html"><strong>Lectura 1: Simplex para problemas de transporte</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Class_5_Transport/2-Simplex_Transport_implementation.html"><strong>Lectura 2: Implementación simplex de transporte</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Class_5_Transport/3-Simplex_Transport_acotado.html"><strong>Lectura 3: Simplex de transporte con variables acotodas</strong></a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Semana</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active"><a class="current reference internal" href="#"><strong>Lectura 1: Simplex para problemas de asignación</strong></a></li>
+
+
+
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/tabarespozos/Flujo_en_redes_202302/blob/Flujo_en_redes_202302/Class_6_Assignment/1-Assignment_problem.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch onColab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img src="../_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/tabarespozos/Flujo_en_redes_202302" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/tabarespozos/Flujo_en_redes_202302/issues/new?title=Issue%20on%20page%20%2FClass_6_Assignment/1-Assignment_problem.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/Class_6_Assignment/1-Assignment_problem.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script>
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Lectura 1: Simplex para problemas de asignación</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#"><strong>Lectura 1: Simplex para problemas de asignación</strong></a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#como-funciona-el-algoritmo-de-kuhn">2. Cómo funciona el algoritmo de Kuhn</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#que-ocurre-detras-del-algoritmo-para-decir-que-es-exacto">3. Qué ocurre detrás del algoritmo para decir que es exacto</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#glosario-de-pre-requisitos">Glosario de pre-requisitos</a></li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section id="lectura-1-simplex-para-problemas-de-asignacion">
+<h1><strong>Lectura 1: Simplex para problemas de asignación</strong><a class="headerlink" href="#lectura-1-simplex-para-problemas-de-asignacion" title="Permalink to this heading">#</a></h1>
+<p>Supongamos que queremos asignar cuatro tareas a cuatro trabajadores (o procesos a máquinas, o inquilinos a casas, o personas en sitios de citas); en fin, relacionamientos uno a uno. Debemos suponer también que, para cada pareja, existe una medida de qué tan buena (o mala) es esa asignación, por ejemplo: cuánto le toma a cada trabajador o máquina hacer cada una de las tareas (y se quiere minimizar el tiempo), o qué tanto tienen en común dos usuarios del sitio de citas (y se quiere maximizar ese índice).</p>
+<p>La formulación primal y dual del problema de asignación es la siguiente:</p>
+<ul class="simple">
+<li><p>Sea <span class="math notranslate nohighlight">\(C\)</span> una matriz de <span class="math notranslate nohighlight">\(n\times n\)</span> de costos (o beneficios) de asignar la tarea <span class="math notranslate nohighlight">\(i\)</span> al trabajador <span class="math notranslate nohighlight">\(j\)</span>.</p></li>
+<li><p>Sea <span class="math notranslate nohighlight">\(x_{ij}\)</span> una variable binaria que vale 1 si la tarea <span class="math notranslate nohighlight">\(i\)</span> es asignada al trabajador <span class="math notranslate nohighlight">\(j\)</span> y 0 en otro caso.</p></li>
+<li><p>Sea <span class="math notranslate nohighlight">\(u_i\)</span> y <span class="math notranslate nohighlight">\(v_j\)</span> variables duales asociadas a las restricciones de que cada trabajador debe hacer una sola tarea y cada tarea debe ser hecha por un solo trabajador, respectivamente.</p></li>
+</ul>
+<p>minimizar</p>
+<div class="math notranslate nohighlight">
+\[\sum_{i=1}^n\sum_{j=1}^n c_{ij}x_{ij}\]</div>
+<p>sujeto a</p>
+<div class="math notranslate nohighlight">
+\[\sum_{j=1}^n x_{ij} = 1 \forall i=1,\ldots,n\]</div>
+<div class="math notranslate nohighlight">
+\[\sum_{i=1}^n x_{ij} = 1 \forall j=1,\ldots,n\]</div>
+<div class="math notranslate nohighlight">
+\[x_{ij} \in \{0,1\} \forall i,j=1,\ldots,n\]</div>
+<p>El problema dual es</p>
+<p>maximizar</p>
+<div class="math notranslate nohighlight">
+\[\sum_{i=1}^n u_i + \sum_{j=1}^n v_j\]</div>
+<p>sujeto a</p>
+<div class="math notranslate nohighlight">
+\[u_i + v_j \leq c_{ij}  \forall i,j=1,\ldots,n\]</div>
+<div class="math notranslate nohighlight">
+\[u_i \geq 0 \forall i=1,\ldots,n\]</div>
+<div class="math notranslate nohighlight">
+\[v_j \geq 0 \forall j=1,\ldots,n\]</div>
+<p>Intentemos aplicar el algoritmo de transporte (dado que podemos ver al problema de asignación como un caso particular de dicho problema). Supongamos que una compañia quiere asignar 4 tareas a un conjunto de 4 maquinas y que el tiempo de alistamiento de las maquinas se muestra en la siguiente tabla:</p>
+<p><img alt="" src="Images/ASSIGN_.png" /></p>
+<p><strong>Solución inicial</strong></p>
+<p><img alt="" src="Images/ASSIGN_1.png" /></p>
+<p>Calculando los costos reducidos de las variables no básicas:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(\bar{c}_{11} = 11\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(\bar{c}_{21} = 1\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(\bar{c}_{22} = 9\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(\bar{c}_{23} = 0\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(\bar{c}_{31} = 8\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(\bar{c}_{32} = 7\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(\bar{c}_{34} = -1\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(\bar{c}_{43} = 4\)</span></p></li>
+</ul>
+<p>Dado que tenemos un costo reducido negativo, la solución no es óptima.</p>
+<p><strong>Iteración del simplex de transporte</strong></p>
+<p><img alt="" src="Images/ASSIGN_2.png" /></p>
+<p><img alt="" src="Images/ASSIGN_3.png" /></p>
+<p>Vemos que: La solución óptima es degenerada</p>
+<ul class="simple">
+<li><p>Aunque necesitamos <span class="math notranslate nohighlight">\(2m-1\)</span> variables básicas, para que la solución sea factible se requiere apenas <span class="math notranslate nohighlight">\(m\)</span> variables diferentes de cero.</p></li>
+</ul>
+<p>Veamos un ejemplo concreto con máquinas y tareas. Supongamos que tenemos cuatro máquinas, y cuatro tareas. La siguiente tabla muestra el tiempo que le toma a cada máquina hacer cada tarea:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+
+<span class="n">M</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Maq. &quot;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">5</span><span class="p">)]</span>
+<span class="n">T</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Tarea &quot;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">5</span><span class="p">)]</span>
+
+<span class="c1"># Generar dataframe con costos de asignar cada tarea a cada máquina</span>
+<span class="n">asignacion</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span> <span class="p">{</span><span class="n">T</span><span class="p">[</span><span class="mi">0</span><span class="p">]:[</span><span class="mi">14</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span><span class="mi">2</span><span class="p">],</span>
+                            <span class="n">T</span><span class="p">[</span><span class="mi">1</span><span class="p">]:[</span><span class="mi">5</span><span class="p">,</span><span class="mi">12</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="mi">4</span><span class="p">],</span>
+                            <span class="n">T</span><span class="p">[</span><span class="mi">2</span><span class="p">]:[</span><span class="mi">8</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">6</span><span class="p">],</span>
+                            <span class="n">T</span><span class="p">[</span><span class="mi">3</span><span class="p">]:[</span><span class="mi">7</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">9</span><span class="p">,</span><span class="mi">10</span><span class="p">]},</span> <span class="n">index</span><span class="o">=</span><span class="n">M</span><span class="p">)</span>
+<span class="n">asignacion_copia</span> <span class="o">=</span> <span class="n">asignacion</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+<span class="n">asignacion</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style>
+    .dataframe thead tr:only-child th {
+        text-align: right;
+    }
+
+    .dataframe thead th {
+        text-align: left;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Tarea 1</th>
+      <th>Tarea 2</th>
+      <th>Tarea 3</th>
+      <th>Tarea 4</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>Maq. 1</th>
+      <td>14</td>
+      <td>5</td>
+      <td>8</td>
+      <td>7</td>
+    </tr>
+    <tr>
+      <th>Maq. 2</th>
+      <td>2</td>
+      <td>12</td>
+      <td>6</td>
+      <td>5</td>
+    </tr>
+    <tr>
+      <th>Maq. 3</th>
+      <td>7</td>
+      <td>8</td>
+      <td>3</td>
+      <td>9</td>
+    </tr>
+    <tr>
+      <th>Maq. 4</th>
+      <td>2</td>
+      <td>4</td>
+      <td>6</td>
+      <td>10</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+</section>
+<section id="como-funciona-el-algoritmo-de-kuhn">
+<h1>2. Cómo funciona el algoritmo de Kuhn<a class="headerlink" href="#como-funciona-el-algoritmo-de-kuhn" title="Permalink to this heading">#</a></h1>
+<p>Si uno hace una búsqueda en Internet, seguramente le dirán que el algoritmo de Kuhn hace lo siguiente:</p>
+<ol class="arabic simple">
+<li><p><strong>Inicialización</strong>:</p>
+<ul class="simple">
+<li><p>Encuentre el mínimo valor de cada fila y réstelo de dicha fila.</p></li>
+<li><p>Luego, encuentre el mínimo valor de cada (nueva) columna y réstelo de ella.</p></li>
+</ul>
+</li>
+<li><p><strong>Verificación de “convergencia”</strong>:</p>
+<ul class="simple">
+<li><p>Encuentre el menor número de líneas (horizontales y/o verticales) que permiten tachar todos los ceros que hayan aparecido en la nueva tabla.</p></li>
+<li><p>Si el número de líneas requerido es menor al número de asignaciones a lograr, entonces vaya al paso 3.</p></li>
+<li><p>Si, en cambio, hay tantas líneas como asignaciones a lograr, es posible encontrar una asignación factible, ¡y óptima!, entre las celdas que contengan ceros.</p></li>
+</ul>
+</li>
+<li><p><strong>Actualización</strong>:</p>
+<ul class="simple">
+<li><p>Encuentre el menor valor entre las celdas no tachadas por líneas.</p></li>
+<li><p>Si a ese valor lo llamamos <em>k</em>, reste <em>k</em> de todas las celdas no cubiertas por líneas,</p></li>
+<li><p>Luego, sume <em>k</em> a aquellas celdas donde se crucen líneas.</p></li>
+<li><p>Vuelva al paso 2.</p></li>
+</ul>
+</li>
+</ol>
+<p>Veamos esto en nuestro ejemplo: El problema consiste en elegir un emparejamiento uno a uno de máquina y tarea que represente el menor costo posible; por ejemplo, en terminos de tiempo, si los valores de la tabla corresponden a tiempos que toman las tareas según la máquina.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Encontrar mínimo de cada fila</span>
+<span class="n">asignacion</span><span class="p">[</span><span class="s2">&quot;min_cada_fila&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">asignacion</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">asignacion</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style>
+    .dataframe thead tr:only-child th {
+        text-align: right;
+    }
+
+    .dataframe thead th {
+        text-align: left;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Tarea 1</th>
+      <th>Tarea 2</th>
+      <th>Tarea 3</th>
+      <th>Tarea 4</th>
+      <th>min_cada_fila</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>Maq. 1</th>
+      <td>14</td>
+      <td>5</td>
+      <td>8</td>
+      <td>7</td>
+      <td>5</td>
+    </tr>
+    <tr>
+      <th>Maq. 2</th>
+      <td>2</td>
+      <td>12</td>
+      <td>6</td>
+      <td>5</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>Maq. 3</th>
+      <td>7</td>
+      <td>8</td>
+      <td>3</td>
+      <td>9</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <th>Maq. 4</th>
+      <td>2</td>
+      <td>4</td>
+      <td>6</td>
+      <td>10</td>
+      <td>2</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Restar a cada fila su mínimo (por practicidad hago la operación por columnas, pero la operación es en filas)</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">4</span><span class="p">):</span>
+    <span class="n">asignacion</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:,</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">asignacion</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:,</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">subtract</span><span class="p">(</span><span class="n">asignacion</span><span class="p">[</span><span class="s2">&quot;min_cada_fila&quot;</span><span class="p">])</span>
+<span class="n">asignacion</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style>
+    .dataframe thead tr:only-child th {
+        text-align: right;
+    }
+
+    .dataframe thead th {
+        text-align: left;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Tarea 1</th>
+      <th>Tarea 2</th>
+      <th>Tarea 3</th>
+      <th>Tarea 4</th>
+      <th>min_cada_fila</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>Maq. 1</th>
+      <td>9</td>
+      <td>0</td>
+      <td>3</td>
+      <td>2</td>
+      <td>5</td>
+    </tr>
+    <tr>
+      <th>Maq. 2</th>
+      <td>0</td>
+      <td>10</td>
+      <td>4</td>
+      <td>3</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>Maq. 3</th>
+      <td>4</td>
+      <td>5</td>
+      <td>0</td>
+      <td>6</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <th>Maq. 4</th>
+      <td>0</td>
+      <td>2</td>
+      <td>4</td>
+      <td>8</td>
+      <td>2</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="c1"># encontrar mínimo de cada (nueva) columna</span>
+<span class="n">min_cols</span> <span class="o">=</span> <span class="n">asignacion</span><span class="o">.</span><span class="n">min</span><span class="p">()</span>
+
+<span class="c1"># registrarlo</span>
+<span class="n">nueva_fila</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span> <span class="nb">dict</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">T</span><span class="o">+</span><span class="p">[</span><span class="s2">&quot;min_cada_fila&quot;</span><span class="p">],</span> <span class="n">min_cols</span><span class="p">)),</span> <span class="n">index</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;min_cada_col&quot;</span><span class="p">]</span> <span class="p">)</span>
+<span class="n">nueva_fila</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">4</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span>
+
+<span class="n">asignacion</span> <span class="o">=</span> <span class="n">asignacion</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">nueva_fila</span><span class="p">)</span>
+<span class="n">asignacion</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style>
+    .dataframe thead tr:only-child th {
+        text-align: right;
+    }
+
+    .dataframe thead th {
+        text-align: left;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Tarea 1</th>
+      <th>Tarea 2</th>
+      <th>Tarea 3</th>
+      <th>Tarea 4</th>
+      <th>min_cada_fila</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>Maq. 1</th>
+      <td>9</td>
+      <td>0</td>
+      <td>3</td>
+      <td>2</td>
+      <td>5.0</td>
+    </tr>
+    <tr>
+      <th>Maq. 2</th>
+      <td>0</td>
+      <td>10</td>
+      <td>4</td>
+      <td>3</td>
+      <td>2.0</td>
+    </tr>
+    <tr>
+      <th>Maq. 3</th>
+      <td>4</td>
+      <td>5</td>
+      <td>0</td>
+      <td>6</td>
+      <td>3.0</td>
+    </tr>
+    <tr>
+      <th>Maq. 4</th>
+      <td>0</td>
+      <td>2</td>
+      <td>4</td>
+      <td>8</td>
+      <td>2.0</td>
+    </tr>
+    <tr>
+      <th>min_cada_col</th>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>2</td>
+      <td>NaN</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># restar a cada columna su mínimo</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">4</span><span class="p">):</span>
+    <span class="n">asignacion</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">3</span><span class="p">,</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">asignacion</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">3</span><span class="p">,</span><span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="n">asignacion</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">4</span><span class="p">,</span><span class="n">i</span><span class="p">]</span>
+
+<span class="c1"># eliminar columnas agregadas antes</span>
+<span class="n">asignacion</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s2">&quot;min_cada_fila&quot;</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">asignacion</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s2">&quot;min_cada_col&quot;</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="n">asignacion</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style>
+    .dataframe thead tr:only-child th {
+        text-align: right;
+    }
+
+    .dataframe thead th {
+        text-align: left;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Tarea 1</th>
+      <th>Tarea 2</th>
+      <th>Tarea 3</th>
+      <th>Tarea 4</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>Maq. 1</th>
+      <td>9</td>
+      <td>0</td>
+      <td>3</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>Maq. 2</th>
+      <td>0</td>
+      <td>10</td>
+      <td>4</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>Maq. 3</th>
+      <td>4</td>
+      <td>5</td>
+      <td>0</td>
+      <td>4</td>
+    </tr>
+    <tr>
+      <th>Maq. 4</th>
+      <td>0</td>
+      <td>2</td>
+      <td>4</td>
+      <td>8</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">resaltar</span>
+
+<span class="c1"># Tachar ceros con MÍNIMA cantidad de líneas horizontales y verticales</span>
+<span class="n">asignacion</span><span class="o">.</span><span class="n">style</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">resaltar</span><span class="o">.</span><span class="n">tabla</span><span class="p">,</span> <span class="n">filas</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">2</span><span class="p">],</span> <span class="n">cols</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">col_names</span><span class="o">=</span><span class="n">asignacion</span><span class="o">.</span><span class="n">columns</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><style  type="text/css" >
+    #T_89b986e2_f770_11ea_883b_7c5cf8399c33row0_col0 {
+            background-color:  yellow;
+        }    #T_89b986e2_f770_11ea_883b_7c5cf8399c33row0_col1 {
+            background-color:  yellow;
+        }    #T_89b986e2_f770_11ea_883b_7c5cf8399c33row0_col2 {
+            background-color:  yellow;
+        }    #T_89b986e2_f770_11ea_883b_7c5cf8399c33row0_col3 {
+            background-color:  yellow;
+        }    #T_89b986e2_f770_11ea_883b_7c5cf8399c33row1_col0 {
+            background-color:  yellow;
+        }    #T_89b986e2_f770_11ea_883b_7c5cf8399c33row2_col0 {
+            background-color:  yellow;
+        }    #T_89b986e2_f770_11ea_883b_7c5cf8399c33row2_col1 {
+            background-color:  yellow;
+        }    #T_89b986e2_f770_11ea_883b_7c5cf8399c33row2_col2 {
+            background-color:  yellow;
+        }    #T_89b986e2_f770_11ea_883b_7c5cf8399c33row2_col3 {
+            background-color:  yellow;
+        }    #T_89b986e2_f770_11ea_883b_7c5cf8399c33row3_col0 {
+            background-color:  yellow;
+        }</style>  
+<table id="T_89b986e2_f770_11ea_883b_7c5cf8399c33" > 
+<thead>    <tr> 
+        <th class="blank level0" ></th> 
+        <th class="col_heading level0 col0" >Tarea 1</th> 
+        <th class="col_heading level0 col1" >Tarea 2</th> 
+        <th class="col_heading level0 col2" >Tarea 3</th> 
+        <th class="col_heading level0 col3" >Tarea 4</th> 
+    </tr></thead> 
+<tbody>    <tr> 
+        <th id="T_89b986e2_f770_11ea_883b_7c5cf8399c33" class="row_heading level0 row0" >Maq. 1</th> 
+        <td id="T_89b986e2_f770_11ea_883b_7c5cf8399c33row0_col0" class="data row0 col0" >9</td> 
+        <td id="T_89b986e2_f770_11ea_883b_7c5cf8399c33row0_col1" class="data row0 col1" >0</td> 
+        <td id="T_89b986e2_f770_11ea_883b_7c5cf8399c33row0_col2" class="data row0 col2" >3</td> 
+        <td id="T_89b986e2_f770_11ea_883b_7c5cf8399c33row0_col3" class="data row0 col3" >0</td> 
+    </tr>    <tr> 
+        <th id="T_89b986e2_f770_11ea_883b_7c5cf8399c33" class="row_heading level0 row1" >Maq. 2</th> 
+        <td id="T_89b986e2_f770_11ea_883b_7c5cf8399c33row1_col0" class="data row1 col0" >0</td> 
+        <td id="T_89b986e2_f770_11ea_883b_7c5cf8399c33row1_col1" class="data row1 col1" >10</td> 
+        <td id="T_89b986e2_f770_11ea_883b_7c5cf8399c33row1_col2" class="data row1 col2" >4</td> 
+        <td id="T_89b986e2_f770_11ea_883b_7c5cf8399c33row1_col3" class="data row1 col3" >1</td> 
+    </tr>    <tr> 
+        <th id="T_89b986e2_f770_11ea_883b_7c5cf8399c33" class="row_heading level0 row2" >Maq. 3</th> 
+        <td id="T_89b986e2_f770_11ea_883b_7c5cf8399c33row2_col0" class="data row2 col0" >4</td> 
+        <td id="T_89b986e2_f770_11ea_883b_7c5cf8399c33row2_col1" class="data row2 col1" >5</td> 
+        <td id="T_89b986e2_f770_11ea_883b_7c5cf8399c33row2_col2" class="data row2 col2" >0</td> 
+        <td id="T_89b986e2_f770_11ea_883b_7c5cf8399c33row2_col3" class="data row2 col3" >4</td> 
+    </tr>    <tr> 
+        <th id="T_89b986e2_f770_11ea_883b_7c5cf8399c33" class="row_heading level0 row3" >Maq. 4</th> 
+        <td id="T_89b986e2_f770_11ea_883b_7c5cf8399c33row3_col0" class="data row3 col0" >0</td> 
+        <td id="T_89b986e2_f770_11ea_883b_7c5cf8399c33row3_col1" class="data row3 col1" >2</td> 
+        <td id="T_89b986e2_f770_11ea_883b_7c5cf8399c33row3_col2" class="data row3 col2" >4</td> 
+        <td id="T_89b986e2_f770_11ea_883b_7c5cf8399c33row3_col3" class="data row3 col3" >8</td> 
+    </tr></tbody> 
+</table> </div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Dado que hay 3 líneas tachadas, y se deben hacer 4 asignaciones, NO hay convergencia aun...</span>
+
+<span class="c1"># Encontrar mínimo de celdas no cubiertas y llamarlo k</span>
+<span class="n">k</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span> <span class="n">asignacion</span><span class="o">.</span><span class="n">iloc</span><span class="p">[[</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">],[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">]]</span><span class="o">.</span><span class="n">min</span><span class="p">()</span> <span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Mínimo no cubierto es k=&quot;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">k</span><span class="p">))</span>
+
+<span class="c1"># Restar k de celdas no cubiertas (encontradas por inspección visual)</span>
+<span class="n">asignacion</span><span class="o">.</span><span class="n">iloc</span><span class="p">[[</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">],[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">]]</span> <span class="o">=</span> <span class="n">asignacion</span><span class="o">.</span><span class="n">iloc</span><span class="p">[[</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">],[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">]]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">-</span><span class="n">k</span><span class="p">)</span>
+
+<span class="c1"># Sumar k a celdas cubiertas dos veces (encontradas por inspección visual)</span>
+<span class="n">asignacion</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">asignacion</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">k</span>
+<span class="n">asignacion</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">asignacion</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">k</span>
+
+<span class="n">asignacion</span><span class="o">.</span><span class="n">style</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">resaltar</span><span class="o">.</span><span class="n">celdas</span><span class="p">,</span> <span class="n">cells</span><span class="o">=</span><span class="p">[(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">),(</span><span class="mi">2</span><span class="p">,</span><span class="mi">0</span><span class="p">),(</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">)],</span> <span class="n">col_names</span><span class="o">=</span><span class="n">asignacion</span><span class="o">.</span><span class="n">columns</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Mínimo no cubierto es k=1
+</pre></div>
+</div>
+<div class="output text_html"><style  type="text/css" >
+    #T_89bf2c46_f770_11ea_bcf1_7c5cf8399c33row0_col0 {
+            background-color:  yellow;
+        }    #T_89bf2c46_f770_11ea_bcf1_7c5cf8399c33row1_col3 {
+            background-color:  yellow;
+        }    #T_89bf2c46_f770_11ea_bcf1_7c5cf8399c33row2_col0 {
+            background-color:  yellow;
+        }</style>  
+<table id="T_89bf2c46_f770_11ea_bcf1_7c5cf8399c33" > 
+<thead>    <tr> 
+        <th class="blank level0" ></th> 
+        <th class="col_heading level0 col0" >Tarea 1</th> 
+        <th class="col_heading level0 col1" >Tarea 2</th> 
+        <th class="col_heading level0 col2" >Tarea 3</th> 
+        <th class="col_heading level0 col3" >Tarea 4</th> 
+    </tr></thead> 
+<tbody>    <tr> 
+        <th id="T_89bf2c46_f770_11ea_bcf1_7c5cf8399c33" class="row_heading level0 row0" >Maq. 1</th> 
+        <td id="T_89bf2c46_f770_11ea_bcf1_7c5cf8399c33row0_col0" class="data row0 col0" >10</td> 
+        <td id="T_89bf2c46_f770_11ea_bcf1_7c5cf8399c33row0_col1" class="data row0 col1" >0</td> 
+        <td id="T_89bf2c46_f770_11ea_bcf1_7c5cf8399c33row0_col2" class="data row0 col2" >3</td> 
+        <td id="T_89bf2c46_f770_11ea_bcf1_7c5cf8399c33row0_col3" class="data row0 col3" >0</td> 
+    </tr>    <tr> 
+        <th id="T_89bf2c46_f770_11ea_bcf1_7c5cf8399c33" class="row_heading level0 row1" >Maq. 2</th> 
+        <td id="T_89bf2c46_f770_11ea_bcf1_7c5cf8399c33row1_col0" class="data row1 col0" >0</td> 
+        <td id="T_89bf2c46_f770_11ea_bcf1_7c5cf8399c33row1_col1" class="data row1 col1" >9</td> 
+        <td id="T_89bf2c46_f770_11ea_bcf1_7c5cf8399c33row1_col2" class="data row1 col2" >3</td> 
+        <td id="T_89bf2c46_f770_11ea_bcf1_7c5cf8399c33row1_col3" class="data row1 col3" >0</td> 
+    </tr>    <tr> 
+        <th id="T_89bf2c46_f770_11ea_bcf1_7c5cf8399c33" class="row_heading level0 row2" >Maq. 3</th> 
+        <td id="T_89bf2c46_f770_11ea_bcf1_7c5cf8399c33row2_col0" class="data row2 col0" >5</td> 
+        <td id="T_89bf2c46_f770_11ea_bcf1_7c5cf8399c33row2_col1" class="data row2 col1" >5</td> 
+        <td id="T_89bf2c46_f770_11ea_bcf1_7c5cf8399c33row2_col2" class="data row2 col2" >0</td> 
+        <td id="T_89bf2c46_f770_11ea_bcf1_7c5cf8399c33row2_col3" class="data row2 col3" >4</td> 
+    </tr>    <tr> 
+        <th id="T_89bf2c46_f770_11ea_bcf1_7c5cf8399c33" class="row_heading level0 row3" >Maq. 4</th> 
+        <td id="T_89bf2c46_f770_11ea_bcf1_7c5cf8399c33row3_col0" class="data row3 col0" >0</td> 
+        <td id="T_89bf2c46_f770_11ea_bcf1_7c5cf8399c33row3_col1" class="data row3 col1" >1</td> 
+        <td id="T_89bf2c46_f770_11ea_bcf1_7c5cf8399c33row3_col2" class="data row3 col2" >3</td> 
+        <td id="T_89bf2c46_f770_11ea_bcf1_7c5cf8399c33row3_col3" class="data row3 col3" >7</td> 
+    </tr></tbody> 
+</table> </div></div>
+</div>
+<p>Cambiaron varios datos en la tabla:</p>
+<ul class="simple">
+<li><p>El 10, 4, 1 de la Maq. 2 pasó a ser 9, 3, 0</p></li>
+<li><p>El 2, 4, 8 de la Maq. 4 pasó a ser 1, 3, 7</p></li>
+<li><p>El 9 y 4 de los cruces pasaron a 10 y 5</p></li>
+</ul>
+<p>De destacar: hay un nuevo cero.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Tachar ceros con MÍNIMA cantidad de líneas horizontales y verticales</span>
+<span class="n">asignacion</span><span class="o">.</span><span class="n">style</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">resaltar</span><span class="o">.</span><span class="n">tabla</span><span class="p">,</span> <span class="n">filas</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">2</span><span class="p">],</span> <span class="n">cols</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">3</span><span class="p">],</span> <span class="n">col_names</span><span class="o">=</span><span class="n">asignacion</span><span class="o">.</span><span class="n">columns</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><style  type="text/css" >
+    #T_89c51fca_f770_11ea_8a21_7c5cf8399c33row0_col0 {
+            background-color:  yellow;
+        }    #T_89c51fca_f770_11ea_8a21_7c5cf8399c33row0_col1 {
+            background-color:  yellow;
+        }    #T_89c51fca_f770_11ea_8a21_7c5cf8399c33row0_col2 {
+            background-color:  yellow;
+        }    #T_89c51fca_f770_11ea_8a21_7c5cf8399c33row0_col3 {
+            background-color:  yellow;
+        }    #T_89c51fca_f770_11ea_8a21_7c5cf8399c33row1_col0 {
+            background-color:  yellow;
+        }    #T_89c51fca_f770_11ea_8a21_7c5cf8399c33row1_col3 {
+            background-color:  yellow;
+        }    #T_89c51fca_f770_11ea_8a21_7c5cf8399c33row2_col0 {
+            background-color:  yellow;
+        }    #T_89c51fca_f770_11ea_8a21_7c5cf8399c33row2_col1 {
+            background-color:  yellow;
+        }    #T_89c51fca_f770_11ea_8a21_7c5cf8399c33row2_col2 {
+            background-color:  yellow;
+        }    #T_89c51fca_f770_11ea_8a21_7c5cf8399c33row2_col3 {
+            background-color:  yellow;
+        }    #T_89c51fca_f770_11ea_8a21_7c5cf8399c33row3_col0 {
+            background-color:  yellow;
+        }    #T_89c51fca_f770_11ea_8a21_7c5cf8399c33row3_col3 {
+            background-color:  yellow;
+        }</style>  
+<table id="T_89c51fca_f770_11ea_8a21_7c5cf8399c33" > 
+<thead>    <tr> 
+        <th class="blank level0" ></th> 
+        <th class="col_heading level0 col0" >Tarea 1</th> 
+        <th class="col_heading level0 col1" >Tarea 2</th> 
+        <th class="col_heading level0 col2" >Tarea 3</th> 
+        <th class="col_heading level0 col3" >Tarea 4</th> 
+    </tr></thead> 
+<tbody>    <tr> 
+        <th id="T_89c51fca_f770_11ea_8a21_7c5cf8399c33" class="row_heading level0 row0" >Maq. 1</th> 
+        <td id="T_89c51fca_f770_11ea_8a21_7c5cf8399c33row0_col0" class="data row0 col0" >10</td> 
+        <td id="T_89c51fca_f770_11ea_8a21_7c5cf8399c33row0_col1" class="data row0 col1" >0</td> 
+        <td id="T_89c51fca_f770_11ea_8a21_7c5cf8399c33row0_col2" class="data row0 col2" >3</td> 
+        <td id="T_89c51fca_f770_11ea_8a21_7c5cf8399c33row0_col3" class="data row0 col3" >0</td> 
+    </tr>    <tr> 
+        <th id="T_89c51fca_f770_11ea_8a21_7c5cf8399c33" class="row_heading level0 row1" >Maq. 2</th> 
+        <td id="T_89c51fca_f770_11ea_8a21_7c5cf8399c33row1_col0" class="data row1 col0" >0</td> 
+        <td id="T_89c51fca_f770_11ea_8a21_7c5cf8399c33row1_col1" class="data row1 col1" >9</td> 
+        <td id="T_89c51fca_f770_11ea_8a21_7c5cf8399c33row1_col2" class="data row1 col2" >3</td> 
+        <td id="T_89c51fca_f770_11ea_8a21_7c5cf8399c33row1_col3" class="data row1 col3" >0</td> 
+    </tr>    <tr> 
+        <th id="T_89c51fca_f770_11ea_8a21_7c5cf8399c33" class="row_heading level0 row2" >Maq. 3</th> 
+        <td id="T_89c51fca_f770_11ea_8a21_7c5cf8399c33row2_col0" class="data row2 col0" >5</td> 
+        <td id="T_89c51fca_f770_11ea_8a21_7c5cf8399c33row2_col1" class="data row2 col1" >5</td> 
+        <td id="T_89c51fca_f770_11ea_8a21_7c5cf8399c33row2_col2" class="data row2 col2" >0</td> 
+        <td id="T_89c51fca_f770_11ea_8a21_7c5cf8399c33row2_col3" class="data row2 col3" >4</td> 
+    </tr>    <tr> 
+        <th id="T_89c51fca_f770_11ea_8a21_7c5cf8399c33" class="row_heading level0 row3" >Maq. 4</th> 
+        <td id="T_89c51fca_f770_11ea_8a21_7c5cf8399c33row3_col0" class="data row3 col0" >0</td> 
+        <td id="T_89c51fca_f770_11ea_8a21_7c5cf8399c33row3_col1" class="data row3 col1" >1</td> 
+        <td id="T_89c51fca_f770_11ea_8a21_7c5cf8399c33row3_col2" class="data row3 col2" >3</td> 
+        <td id="T_89c51fca_f770_11ea_8a21_7c5cf8399c33row3_col3" class="data row3 col3" >7</td> 
+    </tr></tbody> 
+</table> </div></div>
+</div>
+<p>Hay 4 líneas y se requieren 4 asignaciones. Si hago asignaciones donde hay ceros, dicha asignación será óptima. Solo es necesario elegir celdas factibles (no se asigna una tarea a más de una máquina, o una máquina a más de una tarea).</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">asignacion</span><span class="o">.</span><span class="n">style</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">resaltar</span><span class="o">.</span><span class="n">celdas</span><span class="p">,</span> <span class="n">cells</span><span class="o">=</span><span class="p">[(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">),(</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">),(</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">),(</span><span class="mi">3</span><span class="p">,</span><span class="mi">0</span><span class="p">)],</span> <span class="n">col_names</span><span class="o">=</span><span class="n">asignacion</span><span class="o">.</span><span class="n">columns</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><style  type="text/css" >
+    #T_89c8c95a_f770_11ea_a631_7c5cf8399c33row0_col1 {
+            background-color:  yellow;
+        }    #T_89c8c95a_f770_11ea_a631_7c5cf8399c33row1_col3 {
+            background-color:  yellow;
+        }    #T_89c8c95a_f770_11ea_a631_7c5cf8399c33row2_col2 {
+            background-color:  yellow;
+        }    #T_89c8c95a_f770_11ea_a631_7c5cf8399c33row3_col0 {
+            background-color:  yellow;
+        }</style>  
+<table id="T_89c8c95a_f770_11ea_a631_7c5cf8399c33" > 
+<thead>    <tr> 
+        <th class="blank level0" ></th> 
+        <th class="col_heading level0 col0" >Tarea 1</th> 
+        <th class="col_heading level0 col1" >Tarea 2</th> 
+        <th class="col_heading level0 col2" >Tarea 3</th> 
+        <th class="col_heading level0 col3" >Tarea 4</th> 
+    </tr></thead> 
+<tbody>    <tr> 
+        <th id="T_89c8c95a_f770_11ea_a631_7c5cf8399c33" class="row_heading level0 row0" >Maq. 1</th> 
+        <td id="T_89c8c95a_f770_11ea_a631_7c5cf8399c33row0_col0" class="data row0 col0" >10</td> 
+        <td id="T_89c8c95a_f770_11ea_a631_7c5cf8399c33row0_col1" class="data row0 col1" >0</td> 
+        <td id="T_89c8c95a_f770_11ea_a631_7c5cf8399c33row0_col2" class="data row0 col2" >3</td> 
+        <td id="T_89c8c95a_f770_11ea_a631_7c5cf8399c33row0_col3" class="data row0 col3" >0</td> 
+    </tr>    <tr> 
+        <th id="T_89c8c95a_f770_11ea_a631_7c5cf8399c33" class="row_heading level0 row1" >Maq. 2</th> 
+        <td id="T_89c8c95a_f770_11ea_a631_7c5cf8399c33row1_col0" class="data row1 col0" >0</td> 
+        <td id="T_89c8c95a_f770_11ea_a631_7c5cf8399c33row1_col1" class="data row1 col1" >9</td> 
+        <td id="T_89c8c95a_f770_11ea_a631_7c5cf8399c33row1_col2" class="data row1 col2" >3</td> 
+        <td id="T_89c8c95a_f770_11ea_a631_7c5cf8399c33row1_col3" class="data row1 col3" >0</td> 
+    </tr>    <tr> 
+        <th id="T_89c8c95a_f770_11ea_a631_7c5cf8399c33" class="row_heading level0 row2" >Maq. 3</th> 
+        <td id="T_89c8c95a_f770_11ea_a631_7c5cf8399c33row2_col0" class="data row2 col0" >5</td> 
+        <td id="T_89c8c95a_f770_11ea_a631_7c5cf8399c33row2_col1" class="data row2 col1" >5</td> 
+        <td id="T_89c8c95a_f770_11ea_a631_7c5cf8399c33row2_col2" class="data row2 col2" >0</td> 
+        <td id="T_89c8c95a_f770_11ea_a631_7c5cf8399c33row2_col3" class="data row2 col3" >4</td> 
+    </tr>    <tr> 
+        <th id="T_89c8c95a_f770_11ea_a631_7c5cf8399c33" class="row_heading level0 row3" >Maq. 4</th> 
+        <td id="T_89c8c95a_f770_11ea_a631_7c5cf8399c33row3_col0" class="data row3 col0" >0</td> 
+        <td id="T_89c8c95a_f770_11ea_a631_7c5cf8399c33row3_col1" class="data row3 col1" >1</td> 
+        <td id="T_89c8c95a_f770_11ea_a631_7c5cf8399c33row3_col2" class="data row3 col2" >3</td> 
+        <td id="T_89c8c95a_f770_11ea_a631_7c5cf8399c33row3_col3" class="data row3 col3" >7</td> 
+    </tr></tbody> 
+</table> </div></div>
+</div>
+<p>Se ignoran los demás ceros puesto que se incurriría en dobles asignaciones. Sin embargo, se puede garantizar que la asignación hecha es ¡óptima!</p>
+<p>¿Es en serio? La asignación implica los siguientes costos, si nos devolvemos a la tabla original:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Revisar los costos de esa asignación sobre los costos originales del problema</span>
+<span class="n">asignacion_copia</span><span class="o">.</span><span class="n">style</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">resaltar</span><span class="o">.</span><span class="n">celdas</span><span class="p">,</span> <span class="n">cells</span><span class="o">=</span><span class="p">[(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">),(</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">),(</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">),(</span><span class="mi">3</span><span class="p">,</span><span class="mi">0</span><span class="p">)],</span> <span class="n">col_names</span><span class="o">=</span><span class="n">asignacion</span><span class="o">.</span><span class="n">columns</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><style  type="text/css" >
+    #T_89cd5d4a_f770_11ea_aeb1_7c5cf8399c33row0_col1 {
+            background-color:  yellow;
+        }    #T_89cd5d4a_f770_11ea_aeb1_7c5cf8399c33row1_col3 {
+            background-color:  yellow;
+        }    #T_89cd5d4a_f770_11ea_aeb1_7c5cf8399c33row2_col2 {
+            background-color:  yellow;
+        }    #T_89cd5d4a_f770_11ea_aeb1_7c5cf8399c33row3_col0 {
+            background-color:  yellow;
+        }</style>  
+<table id="T_89cd5d4a_f770_11ea_aeb1_7c5cf8399c33" > 
+<thead>    <tr> 
+        <th class="blank level0" ></th> 
+        <th class="col_heading level0 col0" >Tarea 1</th> 
+        <th class="col_heading level0 col1" >Tarea 2</th> 
+        <th class="col_heading level0 col2" >Tarea 3</th> 
+        <th class="col_heading level0 col3" >Tarea 4</th> 
+    </tr></thead> 
+<tbody>    <tr> 
+        <th id="T_89cd5d4a_f770_11ea_aeb1_7c5cf8399c33" class="row_heading level0 row0" >Maq. 1</th> 
+        <td id="T_89cd5d4a_f770_11ea_aeb1_7c5cf8399c33row0_col0" class="data row0 col0" >14</td> 
+        <td id="T_89cd5d4a_f770_11ea_aeb1_7c5cf8399c33row0_col1" class="data row0 col1" >5</td> 
+        <td id="T_89cd5d4a_f770_11ea_aeb1_7c5cf8399c33row0_col2" class="data row0 col2" >8</td> 
+        <td id="T_89cd5d4a_f770_11ea_aeb1_7c5cf8399c33row0_col3" class="data row0 col3" >7</td> 
+    </tr>    <tr> 
+        <th id="T_89cd5d4a_f770_11ea_aeb1_7c5cf8399c33" class="row_heading level0 row1" >Maq. 2</th> 
+        <td id="T_89cd5d4a_f770_11ea_aeb1_7c5cf8399c33row1_col0" class="data row1 col0" >2</td> 
+        <td id="T_89cd5d4a_f770_11ea_aeb1_7c5cf8399c33row1_col1" class="data row1 col1" >12</td> 
+        <td id="T_89cd5d4a_f770_11ea_aeb1_7c5cf8399c33row1_col2" class="data row1 col2" >6</td> 
+        <td id="T_89cd5d4a_f770_11ea_aeb1_7c5cf8399c33row1_col3" class="data row1 col3" >5</td> 
+    </tr>    <tr> 
+        <th id="T_89cd5d4a_f770_11ea_aeb1_7c5cf8399c33" class="row_heading level0 row2" >Maq. 3</th> 
+        <td id="T_89cd5d4a_f770_11ea_aeb1_7c5cf8399c33row2_col0" class="data row2 col0" >7</td> 
+        <td id="T_89cd5d4a_f770_11ea_aeb1_7c5cf8399c33row2_col1" class="data row2 col1" >8</td> 
+        <td id="T_89cd5d4a_f770_11ea_aeb1_7c5cf8399c33row2_col2" class="data row2 col2" >3</td> 
+        <td id="T_89cd5d4a_f770_11ea_aeb1_7c5cf8399c33row2_col3" class="data row2 col3" >9</td> 
+    </tr>    <tr> 
+        <th id="T_89cd5d4a_f770_11ea_aeb1_7c5cf8399c33" class="row_heading level0 row3" >Maq. 4</th> 
+        <td id="T_89cd5d4a_f770_11ea_aeb1_7c5cf8399c33row3_col0" class="data row3 col0" >2</td> 
+        <td id="T_89cd5d4a_f770_11ea_aeb1_7c5cf8399c33row3_col1" class="data row3 col1" >4</td> 
+        <td id="T_89cd5d4a_f770_11ea_aeb1_7c5cf8399c33row3_col2" class="data row3 col2" >6</td> 
+        <td id="T_89cd5d4a_f770_11ea_aeb1_7c5cf8399c33row3_col3" class="data row3 col3" >10</td> 
+    </tr></tbody> 
+</table> </div></div>
+</div>
+<p>Lo anterior conlleva a que el costo total de asignar esas tareas a esas máquinas sea de $15.</p>
+<p>Los reto a encontrar una asignación de menor costo. No la van a encontrar. Pero ¿por qué?</p>
+</section>
+<section id="que-ocurre-detras-del-algoritmo-para-decir-que-es-exacto">
+<h1>3. Qué ocurre detrás del algoritmo para decir que es exacto<a class="headerlink" href="#que-ocurre-detras-del-algoritmo-para-decir-que-es-exacto" title="Permalink to this heading">#</a></h1>
+<p>El problema descrito se puede escribir matemáticamente como:</p>
+<div class="math notranslate nohighlight">
+\[\min \sum\limits_{i\in\mathcal{O}}\sum\limits_{j\in\mathcal{D}}c_{ij}x_{ij}\]</div>
+<div class="math notranslate nohighlight">
+\[\sum\limits_{j\in\mathcal{D}}x_{ij} = 1, \forall i \in \mathcal{O}\]</div>
+<div class="math notranslate nohighlight">
+\[\sum\limits_{i\in\mathcal{O}}x_{ij} = 1, \forall j \in \mathcal{D}\]</div>
+<div class="math notranslate nohighlight">
+\[x_{ij} \geq 0, \forall i\in \mathcal{O},j\in \mathcal{D}\]</div>
+<p>Cuyo problema dual (relajando la integralidad de las variables) es:</p>
+<div class="math notranslate nohighlight">
+\[\max \sum\limits_{i\in \mathcal{O}}u_i + \sum\limits_{j\in \mathcal{D}}v_j\]</div>
+<div class="math notranslate nohighlight">
+\[ u_i + v_j \leq c_{ij}, \forall i\in \mathcal{O},j\in \mathcal{D}\]</div>
+<div class="math notranslate nohighlight">
+\[ u_i \in \mathbb{R}, \forall i\in \mathcal{O}\]</div>
+<div class="math notranslate nohighlight">
+\[ v_j \in \mathbb{R}, \forall j\in \mathcal{D}\]</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">min_filas</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">asignacion_copia</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">))</span>
+<span class="n">min_cols</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">2</span><span class="p">]</span> <span class="c1"># mínimos sobre columna, pero después de restar, ver paso XX</span>
+
+<span class="n">duales</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span> <span class="p">{</span><span class="s2">&quot;u(i)&quot;</span><span class="p">:</span><span class="n">min_filas</span><span class="p">,</span> <span class="s2">&quot;v(j)&quot;</span><span class="p">:</span><span class="n">min_cols</span><span class="p">},</span> <span class="n">index</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">]</span> <span class="p">)</span>
+<span class="n">duales</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style>
+    .dataframe thead tr:only-child th {
+        text-align: right;
+    }
+
+    .dataframe thead th {
+        text-align: left;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>u(i)</th>
+      <th>v(j)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>1</th>
+      <td>5</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>2</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>3</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>2</td>
+      <td>2</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">actualizar_costos_red</span><span class="p">(</span><span class="n">duales</span><span class="p">):</span>
+    <span class="c1"># Conjunto de arcos</span>
+    <span class="n">arcos</span> <span class="o">=</span> <span class="p">[(</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">5</span><span class="p">)</span> <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">5</span><span class="p">)]</span>
+    
+    <span class="c1"># Costos reducidos</span>
+    <span class="n">cred</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;c(&quot;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="o">+</span><span class="s2">&quot;,&quot;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">j</span><span class="p">)</span><span class="o">+</span><span class="s2">&quot;)  -  u(&quot;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="o">+</span><span class="s2">&quot;)  -  v(&quot;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">j</span><span class="p">)</span><span class="o">+</span><span class="s2">&quot;)&quot;</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">5</span><span class="p">)</span> <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">5</span><span class="p">)]</span>
+
+    <span class="n">c</span> <span class="o">=</span> <span class="p">[</span><span class="n">asignacion_copia</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="n">j</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">5</span><span class="p">)</span> <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">5</span><span class="p">)]</span>
+    <span class="n">U</span> <span class="o">=</span> <span class="p">[</span><span class="n">duales</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">5</span><span class="p">)</span> <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">5</span><span class="p">)]</span>
+    <span class="n">V</span> <span class="o">=</span> <span class="p">[</span><span class="n">duales</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">j</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">5</span><span class="p">)</span> <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">5</span><span class="p">)]</span>
+    <span class="n">v_cred</span> <span class="o">=</span> <span class="p">[</span><span class="n">c</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">-</span><span class="n">U</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">-</span><span class="n">V</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">c</span><span class="p">))]</span>
+
+    <span class="n">asignable</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span><span class="o">==</span><span class="mi">0</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">v_cred</span><span class="p">]</span>    
+
+    <span class="n">DF</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s2">&quot;(i,j)&quot;</span><span class="p">:</span><span class="n">arcos</span><span class="p">,</span> 
+                       <span class="s2">&quot;Valor costo c(i,j)&quot;</span><span class="p">:</span><span class="n">c</span><span class="p">,</span> 
+                       <span class="s2">&quot;Holgura Dual / C.Redu.Primal&quot;</span><span class="p">:</span><span class="n">cred</span><span class="p">,</span>
+                       <span class="s2">&quot;Valor u(i)&quot;</span><span class="p">:</span><span class="n">U</span><span class="p">,</span>
+                       <span class="s2">&quot;Valor v(j)&quot;</span><span class="p">:</span><span class="n">V</span><span class="p">,</span>
+                       <span class="s2">&quot;Result. &#39;costo red&#39;&quot;</span><span class="p">:</span><span class="n">v_cred</span><span class="p">,</span>
+                       <span class="s2">&quot;Asignable?&quot;</span><span class="p">:</span><span class="n">asignable</span><span class="p">})</span>
+    <span class="n">DF</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s2">&quot;(i,j)&quot;</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">DF</span>
+
+<span class="n">DF</span> <span class="o">=</span> <span class="n">actualizar_costos_red</span><span class="p">(</span><span class="n">duales</span><span class="p">)</span>
+<span class="n">colorear</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">DF</span><span class="p">[</span><span class="s2">&quot;Asignable?&quot;</span><span class="p">]))</span> <span class="k">if</span> <span class="nb">list</span><span class="p">(</span><span class="n">DF</span><span class="p">[</span><span class="s2">&quot;Asignable?&quot;</span><span class="p">])[</span><span class="n">i</span><span class="p">]]</span>
+
+<span class="n">DF</span><span class="o">.</span><span class="n">style</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">resaltar</span><span class="o">.</span><span class="n">tabla</span><span class="p">,</span> <span class="n">filas</span><span class="o">=</span><span class="n">colorear</span><span class="p">,</span> <span class="n">cols</span><span class="o">=</span><span class="p">[],</span> <span class="n">col_names</span><span class="o">=</span><span class="n">DF</span><span class="o">.</span><span class="n">columns</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><style  type="text/css" >
+    #T_89ddb136_f770_11ea_82af_7c5cf8399c33row1_col0 {
+            background-color:  yellow;
+        }    #T_89ddb136_f770_11ea_82af_7c5cf8399c33row1_col1 {
+            background-color:  yellow;
+        }    #T_89ddb136_f770_11ea_82af_7c5cf8399c33row1_col2 {
+            background-color:  yellow;
+        }    #T_89ddb136_f770_11ea_82af_7c5cf8399c33row1_col3 {
+            background-color:  yellow;
+        }    #T_89ddb136_f770_11ea_82af_7c5cf8399c33row1_col4 {
+            background-color:  yellow;
+        }    #T_89ddb136_f770_11ea_82af_7c5cf8399c33row1_col5 {
+            background-color:  yellow;
+        }    #T_89ddb136_f770_11ea_82af_7c5cf8399c33row3_col0 {
+            background-color:  yellow;
+        }    #T_89ddb136_f770_11ea_82af_7c5cf8399c33row3_col1 {
+            background-color:  yellow;
+        }    #T_89ddb136_f770_11ea_82af_7c5cf8399c33row3_col2 {
+            background-color:  yellow;
+        }    #T_89ddb136_f770_11ea_82af_7c5cf8399c33row3_col3 {
+            background-color:  yellow;
+        }    #T_89ddb136_f770_11ea_82af_7c5cf8399c33row3_col4 {
+            background-color:  yellow;
+        }    #T_89ddb136_f770_11ea_82af_7c5cf8399c33row3_col5 {
+            background-color:  yellow;
+        }    #T_89ddb136_f770_11ea_82af_7c5cf8399c33row4_col0 {
+            background-color:  yellow;
+        }    #T_89ddb136_f770_11ea_82af_7c5cf8399c33row4_col1 {
+            background-color:  yellow;
+        }    #T_89ddb136_f770_11ea_82af_7c5cf8399c33row4_col2 {
+            background-color:  yellow;
+        }    #T_89ddb136_f770_11ea_82af_7c5cf8399c33row4_col3 {
+            background-color:  yellow;
+        }    #T_89ddb136_f770_11ea_82af_7c5cf8399c33row4_col4 {
+            background-color:  yellow;
+        }    #T_89ddb136_f770_11ea_82af_7c5cf8399c33row4_col5 {
+            background-color:  yellow;
+        }    #T_89ddb136_f770_11ea_82af_7c5cf8399c33row10_col0 {
+            background-color:  yellow;
+        }    #T_89ddb136_f770_11ea_82af_7c5cf8399c33row10_col1 {
+            background-color:  yellow;
+        }    #T_89ddb136_f770_11ea_82af_7c5cf8399c33row10_col2 {
+            background-color:  yellow;
+        }    #T_89ddb136_f770_11ea_82af_7c5cf8399c33row10_col3 {
+            background-color:  yellow;
+        }    #T_89ddb136_f770_11ea_82af_7c5cf8399c33row10_col4 {
+            background-color:  yellow;
+        }    #T_89ddb136_f770_11ea_82af_7c5cf8399c33row10_col5 {
+            background-color:  yellow;
+        }    #T_89ddb136_f770_11ea_82af_7c5cf8399c33row12_col0 {
+            background-color:  yellow;
+        }    #T_89ddb136_f770_11ea_82af_7c5cf8399c33row12_col1 {
+            background-color:  yellow;
+        }    #T_89ddb136_f770_11ea_82af_7c5cf8399c33row12_col2 {
+            background-color:  yellow;
+        }    #T_89ddb136_f770_11ea_82af_7c5cf8399c33row12_col3 {
+            background-color:  yellow;
+        }    #T_89ddb136_f770_11ea_82af_7c5cf8399c33row12_col4 {
+            background-color:  yellow;
+        }    #T_89ddb136_f770_11ea_82af_7c5cf8399c33row12_col5 {
+            background-color:  yellow;
+        }</style>  
+<table id="T_89ddb136_f770_11ea_82af_7c5cf8399c33" > 
+<thead>    <tr> 
+        <th class="blank level0" ></th> 
+        <th class="col_heading level0 col0" >Asignable?</th> 
+        <th class="col_heading level0 col1" >Holgura Dual / C.Redu.Primal</th> 
+        <th class="col_heading level0 col2" >Result. 'costo red'</th> 
+        <th class="col_heading level0 col3" >Valor costo c(i,j)</th> 
+        <th class="col_heading level0 col4" >Valor u(i)</th> 
+        <th class="col_heading level0 col5" >Valor v(j)</th> 
+    </tr>    <tr> 
+        <th class="index_name level0" >(i,j)</th> 
+        <th class="blank" ></th> 
+        <th class="blank" ></th> 
+        <th class="blank" ></th> 
+        <th class="blank" ></th> 
+        <th class="blank" ></th> 
+        <th class="blank" ></th> 
+    </tr></thead> 
+<tbody>    <tr> 
+        <th id="T_89ddb136_f770_11ea_82af_7c5cf8399c33" class="row_heading level0 row0" >(1, 1)</th> 
+        <td id="T_89ddb136_f770_11ea_82af_7c5cf8399c33row0_col0" class="data row0 col0" >False</td> 
+        <td id="T_89ddb136_f770_11ea_82af_7c5cf8399c33row0_col1" class="data row0 col1" >c(1,1)  -  u(1)  -  v(1)</td> 
+        <td id="T_89ddb136_f770_11ea_82af_7c5cf8399c33row0_col2" class="data row0 col2" >9</td> 
+        <td id="T_89ddb136_f770_11ea_82af_7c5cf8399c33row0_col3" class="data row0 col3" >14</td> 
+        <td id="T_89ddb136_f770_11ea_82af_7c5cf8399c33row0_col4" class="data row0 col4" >5</td> 
+        <td id="T_89ddb136_f770_11ea_82af_7c5cf8399c33row0_col5" class="data row0 col5" >0</td> 
+    </tr>    <tr> 
+        <th id="T_89ddb136_f770_11ea_82af_7c5cf8399c33" class="row_heading level0 row1" >(1, 2)</th> 
+        <td id="T_89ddb136_f770_11ea_82af_7c5cf8399c33row1_col0" class="data row1 col0" >True</td> 
+        <td id="T_89ddb136_f770_11ea_82af_7c5cf8399c33row1_col1" class="data row1 col1" >c(1,2)  -  u(1)  -  v(2)</td> 
+        <td id="T_89ddb136_f770_11ea_82af_7c5cf8399c33row1_col2" class="data row1 col2" >0</td> 
+        <td id="T_89ddb136_f770_11ea_82af_7c5cf8399c33row1_col3" class="data row1 col3" >5</td> 
+        <td id="T_89ddb136_f770_11ea_82af_7c5cf8399c33row1_col4" class="data row1 col4" >5</td> 
+        <td id="T_89ddb136_f770_11ea_82af_7c5cf8399c33row1_col5" class="data row1 col5" >0</td> 
+    </tr>    <tr> 
+        <th id="T_89ddb136_f770_11ea_82af_7c5cf8399c33" class="row_heading level0 row2" >(1, 3)</th> 
+        <td id="T_89ddb136_f770_11ea_82af_7c5cf8399c33row2_col0" class="data row2 col0" >False</td> 
+        <td id="T_89ddb136_f770_11ea_82af_7c5cf8399c33row2_col1" class="data row2 col1" >c(1,3)  -  u(1)  -  v(3)</td> 
+        <td id="T_89ddb136_f770_11ea_82af_7c5cf8399c33row2_col2" class="data row2 col2" >3</td> 
+        <td id="T_89ddb136_f770_11ea_82af_7c5cf8399c33row2_col3" class="data row2 col3" >8</td> 
+        <td id="T_89ddb136_f770_11ea_82af_7c5cf8399c33row2_col4" class="data row2 col4" >5</td> 
+        <td id="T_89ddb136_f770_11ea_82af_7c5cf8399c33row2_col5" class="data row2 col5" >0</td> 
+    </tr>    <tr> 
+        <th id="T_89ddb136_f770_11ea_82af_7c5cf8399c33" class="row_heading level0 row3" >(1, 4)</th> 
+        <td id="T_89ddb136_f770_11ea_82af_7c5cf8399c33row3_col0" class="data row3 col0" >True</td> 
+        <td id="T_89ddb136_f770_11ea_82af_7c5cf8399c33row3_col1" class="data row3 col1" >c(1,4)  -  u(1)  -  v(4)</td> 
+        <td id="T_89ddb136_f770_11ea_82af_7c5cf8399c33row3_col2" class="data row3 col2" >0</td> 
+        <td id="T_89ddb136_f770_11ea_82af_7c5cf8399c33row3_col3" class="data row3 col3" >7</td> 
+        <td id="T_89ddb136_f770_11ea_82af_7c5cf8399c33row3_col4" class="data row3 col4" >5</td> 
+        <td id="T_89ddb136_f770_11ea_82af_7c5cf8399c33row3_col5" class="data row3 col5" >2</td> 
+    </tr>    <tr> 
+        <th id="T_89ddb136_f770_11ea_82af_7c5cf8399c33" class="row_heading level0 row4" >(2, 1)</th> 
+        <td id="T_89ddb136_f770_11ea_82af_7c5cf8399c33row4_col0" class="data row4 col0" >True</td> 
+        <td id="T_89ddb136_f770_11ea_82af_7c5cf8399c33row4_col1" class="data row4 col1" >c(2,1)  -  u(2)  -  v(1)</td> 
+        <td id="T_89ddb136_f770_11ea_82af_7c5cf8399c33row4_col2" class="data row4 col2" >0</td> 
+        <td id="T_89ddb136_f770_11ea_82af_7c5cf8399c33row4_col3" class="data row4 col3" >2</td> 
+        <td id="T_89ddb136_f770_11ea_82af_7c5cf8399c33row4_col4" class="data row4 col4" >2</td> 
+        <td id="T_89ddb136_f770_11ea_82af_7c5cf8399c33row4_col5" class="data row4 col5" >0</td> 
+    </tr>    <tr> 
+        <th id="T_89ddb136_f770_11ea_82af_7c5cf8399c33" class="row_heading level0 row5" >(2, 2)</th> 
+        <td id="T_89ddb136_f770_11ea_82af_7c5cf8399c33row5_col0" class="data row5 col0" >False</td> 
+        <td id="T_89ddb136_f770_11ea_82af_7c5cf8399c33row5_col1" class="data row5 col1" >c(2,2)  -  u(2)  -  v(2)</td> 
+        <td id="T_89ddb136_f770_11ea_82af_7c5cf8399c33row5_col2" class="data row5 col2" >10</td> 
+        <td id="T_89ddb136_f770_11ea_82af_7c5cf8399c33row5_col3" class="data row5 col3" >12</td> 
+        <td id="T_89ddb136_f770_11ea_82af_7c5cf8399c33row5_col4" class="data row5 col4" >2</td> 
+        <td id="T_89ddb136_f770_11ea_82af_7c5cf8399c33row5_col5" class="data row5 col5" >0</td> 
+    </tr>    <tr> 
+        <th id="T_89ddb136_f770_11ea_82af_7c5cf8399c33" class="row_heading level0 row6" >(2, 3)</th> 
+        <td id="T_89ddb136_f770_11ea_82af_7c5cf8399c33row6_col0" class="data row6 col0" >False</td> 
+        <td id="T_89ddb136_f770_11ea_82af_7c5cf8399c33row6_col1" class="data row6 col1" >c(2,3)  -  u(2)  -  v(3)</td> 
+        <td id="T_89ddb136_f770_11ea_82af_7c5cf8399c33row6_col2" class="data row6 col2" >4</td> 
+        <td id="T_89ddb136_f770_11ea_82af_7c5cf8399c33row6_col3" class="data row6 col3" >6</td> 
+        <td id="T_89ddb136_f770_11ea_82af_7c5cf8399c33row6_col4" class="data row6 col4" >2</td> 
+        <td id="T_89ddb136_f770_11ea_82af_7c5cf8399c33row6_col5" class="data row6 col5" >0</td> 
+    </tr>    <tr> 
+        <th id="T_89ddb136_f770_11ea_82af_7c5cf8399c33" class="row_heading level0 row7" >(2, 4)</th> 
+        <td id="T_89ddb136_f770_11ea_82af_7c5cf8399c33row7_col0" class="data row7 col0" >False</td> 
+        <td id="T_89ddb136_f770_11ea_82af_7c5cf8399c33row7_col1" class="data row7 col1" >c(2,4)  -  u(2)  -  v(4)</td> 
+        <td id="T_89ddb136_f770_11ea_82af_7c5cf8399c33row7_col2" class="data row7 col2" >1</td> 
+        <td id="T_89ddb136_f770_11ea_82af_7c5cf8399c33row7_col3" class="data row7 col3" >5</td> 
+        <td id="T_89ddb136_f770_11ea_82af_7c5cf8399c33row7_col4" class="data row7 col4" >2</td> 
+        <td id="T_89ddb136_f770_11ea_82af_7c5cf8399c33row7_col5" class="data row7 col5" >2</td> 
+    </tr>    <tr> 
+        <th id="T_89ddb136_f770_11ea_82af_7c5cf8399c33" class="row_heading level0 row8" >(3, 1)</th> 
+        <td id="T_89ddb136_f770_11ea_82af_7c5cf8399c33row8_col0" class="data row8 col0" >False</td> 
+        <td id="T_89ddb136_f770_11ea_82af_7c5cf8399c33row8_col1" class="data row8 col1" >c(3,1)  -  u(3)  -  v(1)</td> 
+        <td id="T_89ddb136_f770_11ea_82af_7c5cf8399c33row8_col2" class="data row8 col2" >4</td> 
+        <td id="T_89ddb136_f770_11ea_82af_7c5cf8399c33row8_col3" class="data row8 col3" >7</td> 
+        <td id="T_89ddb136_f770_11ea_82af_7c5cf8399c33row8_col4" class="data row8 col4" >3</td> 
+        <td id="T_89ddb136_f770_11ea_82af_7c5cf8399c33row8_col5" class="data row8 col5" >0</td> 
+    </tr>    <tr> 
+        <th id="T_89ddb136_f770_11ea_82af_7c5cf8399c33" class="row_heading level0 row9" >(3, 2)</th> 
+        <td id="T_89ddb136_f770_11ea_82af_7c5cf8399c33row9_col0" class="data row9 col0" >False</td> 
+        <td id="T_89ddb136_f770_11ea_82af_7c5cf8399c33row9_col1" class="data row9 col1" >c(3,2)  -  u(3)  -  v(2)</td> 
+        <td id="T_89ddb136_f770_11ea_82af_7c5cf8399c33row9_col2" class="data row9 col2" >5</td> 
+        <td id="T_89ddb136_f770_11ea_82af_7c5cf8399c33row9_col3" class="data row9 col3" >8</td> 
+        <td id="T_89ddb136_f770_11ea_82af_7c5cf8399c33row9_col4" class="data row9 col4" >3</td> 
+        <td id="T_89ddb136_f770_11ea_82af_7c5cf8399c33row9_col5" class="data row9 col5" >0</td> 
+    </tr>    <tr> 
+        <th id="T_89ddb136_f770_11ea_82af_7c5cf8399c33" class="row_heading level0 row10" >(3, 3)</th> 
+        <td id="T_89ddb136_f770_11ea_82af_7c5cf8399c33row10_col0" class="data row10 col0" >True</td> 
+        <td id="T_89ddb136_f770_11ea_82af_7c5cf8399c33row10_col1" class="data row10 col1" >c(3,3)  -  u(3)  -  v(3)</td> 
+        <td id="T_89ddb136_f770_11ea_82af_7c5cf8399c33row10_col2" class="data row10 col2" >0</td> 
+        <td id="T_89ddb136_f770_11ea_82af_7c5cf8399c33row10_col3" class="data row10 col3" >3</td> 
+        <td id="T_89ddb136_f770_11ea_82af_7c5cf8399c33row10_col4" class="data row10 col4" >3</td> 
+        <td id="T_89ddb136_f770_11ea_82af_7c5cf8399c33row10_col5" class="data row10 col5" >0</td> 
+    </tr>    <tr> 
+        <th id="T_89ddb136_f770_11ea_82af_7c5cf8399c33" class="row_heading level0 row11" >(3, 4)</th> 
+        <td id="T_89ddb136_f770_11ea_82af_7c5cf8399c33row11_col0" class="data row11 col0" >False</td> 
+        <td id="T_89ddb136_f770_11ea_82af_7c5cf8399c33row11_col1" class="data row11 col1" >c(3,4)  -  u(3)  -  v(4)</td> 
+        <td id="T_89ddb136_f770_11ea_82af_7c5cf8399c33row11_col2" class="data row11 col2" >4</td> 
+        <td id="T_89ddb136_f770_11ea_82af_7c5cf8399c33row11_col3" class="data row11 col3" >9</td> 
+        <td id="T_89ddb136_f770_11ea_82af_7c5cf8399c33row11_col4" class="data row11 col4" >3</td> 
+        <td id="T_89ddb136_f770_11ea_82af_7c5cf8399c33row11_col5" class="data row11 col5" >2</td> 
+    </tr>    <tr> 
+        <th id="T_89ddb136_f770_11ea_82af_7c5cf8399c33" class="row_heading level0 row12" >(4, 1)</th> 
+        <td id="T_89ddb136_f770_11ea_82af_7c5cf8399c33row12_col0" class="data row12 col0" >True</td> 
+        <td id="T_89ddb136_f770_11ea_82af_7c5cf8399c33row12_col1" class="data row12 col1" >c(4,1)  -  u(4)  -  v(1)</td> 
+        <td id="T_89ddb136_f770_11ea_82af_7c5cf8399c33row12_col2" class="data row12 col2" >0</td> 
+        <td id="T_89ddb136_f770_11ea_82af_7c5cf8399c33row12_col3" class="data row12 col3" >2</td> 
+        <td id="T_89ddb136_f770_11ea_82af_7c5cf8399c33row12_col4" class="data row12 col4" >2</td> 
+        <td id="T_89ddb136_f770_11ea_82af_7c5cf8399c33row12_col5" class="data row12 col5" >0</td> 
+    </tr>    <tr> 
+        <th id="T_89ddb136_f770_11ea_82af_7c5cf8399c33" class="row_heading level0 row13" >(4, 2)</th> 
+        <td id="T_89ddb136_f770_11ea_82af_7c5cf8399c33row13_col0" class="data row13 col0" >False</td> 
+        <td id="T_89ddb136_f770_11ea_82af_7c5cf8399c33row13_col1" class="data row13 col1" >c(4,2)  -  u(4)  -  v(2)</td> 
+        <td id="T_89ddb136_f770_11ea_82af_7c5cf8399c33row13_col2" class="data row13 col2" >2</td> 
+        <td id="T_89ddb136_f770_11ea_82af_7c5cf8399c33row13_col3" class="data row13 col3" >4</td> 
+        <td id="T_89ddb136_f770_11ea_82af_7c5cf8399c33row13_col4" class="data row13 col4" >2</td> 
+        <td id="T_89ddb136_f770_11ea_82af_7c5cf8399c33row13_col5" class="data row13 col5" >0</td> 
+    </tr>    <tr> 
+        <th id="T_89ddb136_f770_11ea_82af_7c5cf8399c33" class="row_heading level0 row14" >(4, 3)</th> 
+        <td id="T_89ddb136_f770_11ea_82af_7c5cf8399c33row14_col0" class="data row14 col0" >False</td> 
+        <td id="T_89ddb136_f770_11ea_82af_7c5cf8399c33row14_col1" class="data row14 col1" >c(4,3)  -  u(4)  -  v(3)</td> 
+        <td id="T_89ddb136_f770_11ea_82af_7c5cf8399c33row14_col2" class="data row14 col2" >4</td> 
+        <td id="T_89ddb136_f770_11ea_82af_7c5cf8399c33row14_col3" class="data row14 col3" >6</td> 
+        <td id="T_89ddb136_f770_11ea_82af_7c5cf8399c33row14_col4" class="data row14 col4" >2</td> 
+        <td id="T_89ddb136_f770_11ea_82af_7c5cf8399c33row14_col5" class="data row14 col5" >0</td> 
+    </tr>    <tr> 
+        <th id="T_89ddb136_f770_11ea_82af_7c5cf8399c33" class="row_heading level0 row15" >(4, 4)</th> 
+        <td id="T_89ddb136_f770_11ea_82af_7c5cf8399c33row15_col0" class="data row15 col0" >False</td> 
+        <td id="T_89ddb136_f770_11ea_82af_7c5cf8399c33row15_col1" class="data row15 col1" >c(4,4)  -  u(4)  -  v(4)</td> 
+        <td id="T_89ddb136_f770_11ea_82af_7c5cf8399c33row15_col2" class="data row15 col2" >6</td> 
+        <td id="T_89ddb136_f770_11ea_82af_7c5cf8399c33row15_col3" class="data row15 col3" >10</td> 
+        <td id="T_89ddb136_f770_11ea_82af_7c5cf8399c33row15_col4" class="data row15 col4" >2</td> 
+        <td id="T_89ddb136_f770_11ea_82af_7c5cf8399c33row15_col5" class="data row15 col5" >2</td> 
+    </tr></tbody> 
+</table> </div></div>
+</div>
+<p>Con las alternativas actuales de asignación no es posible generar una solución que no asigne más de una tarea a una máquina, o más de una máquina a una tarea.</p>
+<p>¡Debemos generar un nuevo cero en la columna Result. ‘costo red.’! Es decir, llevar una nueva holgura del dual a 0 para poder que una nueva variable del primal pueda tomar valor.</p>
+<p>¿Cómo hacerlo? Podemos cambiar los valores de alguna(s) variables <span class="math notranslate nohighlight">\(u_i\)</span> y/o <span class="math notranslate nohighlight">\(v_j\)</span> a nuestro antojo, <strong>siempre y cuando garanticemos que:</strong></p>
+<ul class="simple">
+<li><p>No perdemos ninguno de los ceros que ya tenemos (porque perderíamos posibles asignaciones)</p></li>
+<li><p>No se genera ningún valor negativo en “Result ‘costo red.’” (porque eso implicaría que hay una holgura negativa en el dual, y que por lo tanto el dual es infactible)</p></li>
+</ul>
+<p>Por ejemplo, podemos llevar a cero el 1 de la fila (2,4) aumentando el valor de <span class="math notranslate nohighlight">\(u_2\)</span> de 2 a 3.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">duales</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">3</span>
+
+<span class="n">DF</span> <span class="o">=</span> <span class="n">actualizar_costos_red</span><span class="p">(</span><span class="n">duales</span><span class="p">)</span>
+<span class="n">colorear</span> <span class="o">=</span> <span class="p">[(</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span><span class="mi">8</span><span class="p">)</span> <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span><span class="mi">4</span><span class="p">]]</span>
+
+<span class="n">DF</span><span class="o">.</span><span class="n">style</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">resaltar</span><span class="o">.</span><span class="n">celdas</span><span class="p">,</span> <span class="n">cells</span><span class="o">=</span><span class="n">colorear</span><span class="p">,</span> <span class="n">col_names</span><span class="o">=</span><span class="n">DF</span><span class="o">.</span><span class="n">columns</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><style  type="text/css" >
+    #T_89e6b20a_f770_11ea_b111_7c5cf8399c33row4_col2 {
+            background-color:  yellow;
+        }    #T_89e6b20a_f770_11ea_b111_7c5cf8399c33row4_col4 {
+            background-color:  yellow;
+        }    #T_89e6b20a_f770_11ea_b111_7c5cf8399c33row5_col2 {
+            background-color:  yellow;
+        }    #T_89e6b20a_f770_11ea_b111_7c5cf8399c33row5_col4 {
+            background-color:  yellow;
+        }    #T_89e6b20a_f770_11ea_b111_7c5cf8399c33row6_col2 {
+            background-color:  yellow;
+        }    #T_89e6b20a_f770_11ea_b111_7c5cf8399c33row6_col4 {
+            background-color:  yellow;
+        }    #T_89e6b20a_f770_11ea_b111_7c5cf8399c33row7_col2 {
+            background-color:  yellow;
+        }    #T_89e6b20a_f770_11ea_b111_7c5cf8399c33row7_col4 {
+            background-color:  yellow;
+        }</style>  
+<table id="T_89e6b20a_f770_11ea_b111_7c5cf8399c33" > 
+<thead>    <tr> 
+        <th class="blank level0" ></th> 
+        <th class="col_heading level0 col0" >Asignable?</th> 
+        <th class="col_heading level0 col1" >Holgura Dual / C.Redu.Primal</th> 
+        <th class="col_heading level0 col2" >Result. 'costo red'</th> 
+        <th class="col_heading level0 col3" >Valor costo c(i,j)</th> 
+        <th class="col_heading level0 col4" >Valor u(i)</th> 
+        <th class="col_heading level0 col5" >Valor v(j)</th> 
+    </tr>    <tr> 
+        <th class="index_name level0" >(i,j)</th> 
+        <th class="blank" ></th> 
+        <th class="blank" ></th> 
+        <th class="blank" ></th> 
+        <th class="blank" ></th> 
+        <th class="blank" ></th> 
+        <th class="blank" ></th> 
+    </tr></thead> 
+<tbody>    <tr> 
+        <th id="T_89e6b20a_f770_11ea_b111_7c5cf8399c33" class="row_heading level0 row0" >(1, 1)</th> 
+        <td id="T_89e6b20a_f770_11ea_b111_7c5cf8399c33row0_col0" class="data row0 col0" >False</td> 
+        <td id="T_89e6b20a_f770_11ea_b111_7c5cf8399c33row0_col1" class="data row0 col1" >c(1,1)  -  u(1)  -  v(1)</td> 
+        <td id="T_89e6b20a_f770_11ea_b111_7c5cf8399c33row0_col2" class="data row0 col2" >9</td> 
+        <td id="T_89e6b20a_f770_11ea_b111_7c5cf8399c33row0_col3" class="data row0 col3" >14</td> 
+        <td id="T_89e6b20a_f770_11ea_b111_7c5cf8399c33row0_col4" class="data row0 col4" >5</td> 
+        <td id="T_89e6b20a_f770_11ea_b111_7c5cf8399c33row0_col5" class="data row0 col5" >0</td> 
+    </tr>    <tr> 
+        <th id="T_89e6b20a_f770_11ea_b111_7c5cf8399c33" class="row_heading level0 row1" >(1, 2)</th> 
+        <td id="T_89e6b20a_f770_11ea_b111_7c5cf8399c33row1_col0" class="data row1 col0" >True</td> 
+        <td id="T_89e6b20a_f770_11ea_b111_7c5cf8399c33row1_col1" class="data row1 col1" >c(1,2)  -  u(1)  -  v(2)</td> 
+        <td id="T_89e6b20a_f770_11ea_b111_7c5cf8399c33row1_col2" class="data row1 col2" >0</td> 
+        <td id="T_89e6b20a_f770_11ea_b111_7c5cf8399c33row1_col3" class="data row1 col3" >5</td> 
+        <td id="T_89e6b20a_f770_11ea_b111_7c5cf8399c33row1_col4" class="data row1 col4" >5</td> 
+        <td id="T_89e6b20a_f770_11ea_b111_7c5cf8399c33row1_col5" class="data row1 col5" >0</td> 
+    </tr>    <tr> 
+        <th id="T_89e6b20a_f770_11ea_b111_7c5cf8399c33" class="row_heading level0 row2" >(1, 3)</th> 
+        <td id="T_89e6b20a_f770_11ea_b111_7c5cf8399c33row2_col0" class="data row2 col0" >False</td> 
+        <td id="T_89e6b20a_f770_11ea_b111_7c5cf8399c33row2_col1" class="data row2 col1" >c(1,3)  -  u(1)  -  v(3)</td> 
+        <td id="T_89e6b20a_f770_11ea_b111_7c5cf8399c33row2_col2" class="data row2 col2" >3</td> 
+        <td id="T_89e6b20a_f770_11ea_b111_7c5cf8399c33row2_col3" class="data row2 col3" >8</td> 
+        <td id="T_89e6b20a_f770_11ea_b111_7c5cf8399c33row2_col4" class="data row2 col4" >5</td> 
+        <td id="T_89e6b20a_f770_11ea_b111_7c5cf8399c33row2_col5" class="data row2 col5" >0</td> 
+    </tr>    <tr> 
+        <th id="T_89e6b20a_f770_11ea_b111_7c5cf8399c33" class="row_heading level0 row3" >(1, 4)</th> 
+        <td id="T_89e6b20a_f770_11ea_b111_7c5cf8399c33row3_col0" class="data row3 col0" >True</td> 
+        <td id="T_89e6b20a_f770_11ea_b111_7c5cf8399c33row3_col1" class="data row3 col1" >c(1,4)  -  u(1)  -  v(4)</td> 
+        <td id="T_89e6b20a_f770_11ea_b111_7c5cf8399c33row3_col2" class="data row3 col2" >0</td> 
+        <td id="T_89e6b20a_f770_11ea_b111_7c5cf8399c33row3_col3" class="data row3 col3" >7</td> 
+        <td id="T_89e6b20a_f770_11ea_b111_7c5cf8399c33row3_col4" class="data row3 col4" >5</td> 
+        <td id="T_89e6b20a_f770_11ea_b111_7c5cf8399c33row3_col5" class="data row3 col5" >2</td> 
+    </tr>    <tr> 
+        <th id="T_89e6b20a_f770_11ea_b111_7c5cf8399c33" class="row_heading level0 row4" >(2, 1)</th> 
+        <td id="T_89e6b20a_f770_11ea_b111_7c5cf8399c33row4_col0" class="data row4 col0" >False</td> 
+        <td id="T_89e6b20a_f770_11ea_b111_7c5cf8399c33row4_col1" class="data row4 col1" >c(2,1)  -  u(2)  -  v(1)</td> 
+        <td id="T_89e6b20a_f770_11ea_b111_7c5cf8399c33row4_col2" class="data row4 col2" >-1</td> 
+        <td id="T_89e6b20a_f770_11ea_b111_7c5cf8399c33row4_col3" class="data row4 col3" >2</td> 
+        <td id="T_89e6b20a_f770_11ea_b111_7c5cf8399c33row4_col4" class="data row4 col4" >3</td> 
+        <td id="T_89e6b20a_f770_11ea_b111_7c5cf8399c33row4_col5" class="data row4 col5" >0</td> 
+    </tr>    <tr> 
+        <th id="T_89e6b20a_f770_11ea_b111_7c5cf8399c33" class="row_heading level0 row5" >(2, 2)</th> 
+        <td id="T_89e6b20a_f770_11ea_b111_7c5cf8399c33row5_col0" class="data row5 col0" >False</td> 
+        <td id="T_89e6b20a_f770_11ea_b111_7c5cf8399c33row5_col1" class="data row5 col1" >c(2,2)  -  u(2)  -  v(2)</td> 
+        <td id="T_89e6b20a_f770_11ea_b111_7c5cf8399c33row5_col2" class="data row5 col2" >9</td> 
+        <td id="T_89e6b20a_f770_11ea_b111_7c5cf8399c33row5_col3" class="data row5 col3" >12</td> 
+        <td id="T_89e6b20a_f770_11ea_b111_7c5cf8399c33row5_col4" class="data row5 col4" >3</td> 
+        <td id="T_89e6b20a_f770_11ea_b111_7c5cf8399c33row5_col5" class="data row5 col5" >0</td> 
+    </tr>    <tr> 
+        <th id="T_89e6b20a_f770_11ea_b111_7c5cf8399c33" class="row_heading level0 row6" >(2, 3)</th> 
+        <td id="T_89e6b20a_f770_11ea_b111_7c5cf8399c33row6_col0" class="data row6 col0" >False</td> 
+        <td id="T_89e6b20a_f770_11ea_b111_7c5cf8399c33row6_col1" class="data row6 col1" >c(2,3)  -  u(2)  -  v(3)</td> 
+        <td id="T_89e6b20a_f770_11ea_b111_7c5cf8399c33row6_col2" class="data row6 col2" >3</td> 
+        <td id="T_89e6b20a_f770_11ea_b111_7c5cf8399c33row6_col3" class="data row6 col3" >6</td> 
+        <td id="T_89e6b20a_f770_11ea_b111_7c5cf8399c33row6_col4" class="data row6 col4" >3</td> 
+        <td id="T_89e6b20a_f770_11ea_b111_7c5cf8399c33row6_col5" class="data row6 col5" >0</td> 
+    </tr>    <tr> 
+        <th id="T_89e6b20a_f770_11ea_b111_7c5cf8399c33" class="row_heading level0 row7" >(2, 4)</th> 
+        <td id="T_89e6b20a_f770_11ea_b111_7c5cf8399c33row7_col0" class="data row7 col0" >True</td> 
+        <td id="T_89e6b20a_f770_11ea_b111_7c5cf8399c33row7_col1" class="data row7 col1" >c(2,4)  -  u(2)  -  v(4)</td> 
+        <td id="T_89e6b20a_f770_11ea_b111_7c5cf8399c33row7_col2" class="data row7 col2" >0</td> 
+        <td id="T_89e6b20a_f770_11ea_b111_7c5cf8399c33row7_col3" class="data row7 col3" >5</td> 
+        <td id="T_89e6b20a_f770_11ea_b111_7c5cf8399c33row7_col4" class="data row7 col4" >3</td> 
+        <td id="T_89e6b20a_f770_11ea_b111_7c5cf8399c33row7_col5" class="data row7 col5" >2</td> 
+    </tr>    <tr> 
+        <th id="T_89e6b20a_f770_11ea_b111_7c5cf8399c33" class="row_heading level0 row8" >(3, 1)</th> 
+        <td id="T_89e6b20a_f770_11ea_b111_7c5cf8399c33row8_col0" class="data row8 col0" >False</td> 
+        <td id="T_89e6b20a_f770_11ea_b111_7c5cf8399c33row8_col1" class="data row8 col1" >c(3,1)  -  u(3)  -  v(1)</td> 
+        <td id="T_89e6b20a_f770_11ea_b111_7c5cf8399c33row8_col2" class="data row8 col2" >4</td> 
+        <td id="T_89e6b20a_f770_11ea_b111_7c5cf8399c33row8_col3" class="data row8 col3" >7</td> 
+        <td id="T_89e6b20a_f770_11ea_b111_7c5cf8399c33row8_col4" class="data row8 col4" >3</td> 
+        <td id="T_89e6b20a_f770_11ea_b111_7c5cf8399c33row8_col5" class="data row8 col5" >0</td> 
+    </tr>    <tr> 
+        <th id="T_89e6b20a_f770_11ea_b111_7c5cf8399c33" class="row_heading level0 row9" >(3, 2)</th> 
+        <td id="T_89e6b20a_f770_11ea_b111_7c5cf8399c33row9_col0" class="data row9 col0" >False</td> 
+        <td id="T_89e6b20a_f770_11ea_b111_7c5cf8399c33row9_col1" class="data row9 col1" >c(3,2)  -  u(3)  -  v(2)</td> 
+        <td id="T_89e6b20a_f770_11ea_b111_7c5cf8399c33row9_col2" class="data row9 col2" >5</td> 
+        <td id="T_89e6b20a_f770_11ea_b111_7c5cf8399c33row9_col3" class="data row9 col3" >8</td> 
+        <td id="T_89e6b20a_f770_11ea_b111_7c5cf8399c33row9_col4" class="data row9 col4" >3</td> 
+        <td id="T_89e6b20a_f770_11ea_b111_7c5cf8399c33row9_col5" class="data row9 col5" >0</td> 
+    </tr>    <tr> 
+        <th id="T_89e6b20a_f770_11ea_b111_7c5cf8399c33" class="row_heading level0 row10" >(3, 3)</th> 
+        <td id="T_89e6b20a_f770_11ea_b111_7c5cf8399c33row10_col0" class="data row10 col0" >True</td> 
+        <td id="T_89e6b20a_f770_11ea_b111_7c5cf8399c33row10_col1" class="data row10 col1" >c(3,3)  -  u(3)  -  v(3)</td> 
+        <td id="T_89e6b20a_f770_11ea_b111_7c5cf8399c33row10_col2" class="data row10 col2" >0</td> 
+        <td id="T_89e6b20a_f770_11ea_b111_7c5cf8399c33row10_col3" class="data row10 col3" >3</td> 
+        <td id="T_89e6b20a_f770_11ea_b111_7c5cf8399c33row10_col4" class="data row10 col4" >3</td> 
+        <td id="T_89e6b20a_f770_11ea_b111_7c5cf8399c33row10_col5" class="data row10 col5" >0</td> 
+    </tr>    <tr> 
+        <th id="T_89e6b20a_f770_11ea_b111_7c5cf8399c33" class="row_heading level0 row11" >(3, 4)</th> 
+        <td id="T_89e6b20a_f770_11ea_b111_7c5cf8399c33row11_col0" class="data row11 col0" >False</td> 
+        <td id="T_89e6b20a_f770_11ea_b111_7c5cf8399c33row11_col1" class="data row11 col1" >c(3,4)  -  u(3)  -  v(4)</td> 
+        <td id="T_89e6b20a_f770_11ea_b111_7c5cf8399c33row11_col2" class="data row11 col2" >4</td> 
+        <td id="T_89e6b20a_f770_11ea_b111_7c5cf8399c33row11_col3" class="data row11 col3" >9</td> 
+        <td id="T_89e6b20a_f770_11ea_b111_7c5cf8399c33row11_col4" class="data row11 col4" >3</td> 
+        <td id="T_89e6b20a_f770_11ea_b111_7c5cf8399c33row11_col5" class="data row11 col5" >2</td> 
+    </tr>    <tr> 
+        <th id="T_89e6b20a_f770_11ea_b111_7c5cf8399c33" class="row_heading level0 row12" >(4, 1)</th> 
+        <td id="T_89e6b20a_f770_11ea_b111_7c5cf8399c33row12_col0" class="data row12 col0" >True</td> 
+        <td id="T_89e6b20a_f770_11ea_b111_7c5cf8399c33row12_col1" class="data row12 col1" >c(4,1)  -  u(4)  -  v(1)</td> 
+        <td id="T_89e6b20a_f770_11ea_b111_7c5cf8399c33row12_col2" class="data row12 col2" >0</td> 
+        <td id="T_89e6b20a_f770_11ea_b111_7c5cf8399c33row12_col3" class="data row12 col3" >2</td> 
+        <td id="T_89e6b20a_f770_11ea_b111_7c5cf8399c33row12_col4" class="data row12 col4" >2</td> 
+        <td id="T_89e6b20a_f770_11ea_b111_7c5cf8399c33row12_col5" class="data row12 col5" >0</td> 
+    </tr>    <tr> 
+        <th id="T_89e6b20a_f770_11ea_b111_7c5cf8399c33" class="row_heading level0 row13" >(4, 2)</th> 
+        <td id="T_89e6b20a_f770_11ea_b111_7c5cf8399c33row13_col0" class="data row13 col0" >False</td> 
+        <td id="T_89e6b20a_f770_11ea_b111_7c5cf8399c33row13_col1" class="data row13 col1" >c(4,2)  -  u(4)  -  v(2)</td> 
+        <td id="T_89e6b20a_f770_11ea_b111_7c5cf8399c33row13_col2" class="data row13 col2" >2</td> 
+        <td id="T_89e6b20a_f770_11ea_b111_7c5cf8399c33row13_col3" class="data row13 col3" >4</td> 
+        <td id="T_89e6b20a_f770_11ea_b111_7c5cf8399c33row13_col4" class="data row13 col4" >2</td> 
+        <td id="T_89e6b20a_f770_11ea_b111_7c5cf8399c33row13_col5" class="data row13 col5" >0</td> 
+    </tr>    <tr> 
+        <th id="T_89e6b20a_f770_11ea_b111_7c5cf8399c33" class="row_heading level0 row14" >(4, 3)</th> 
+        <td id="T_89e6b20a_f770_11ea_b111_7c5cf8399c33row14_col0" class="data row14 col0" >False</td> 
+        <td id="T_89e6b20a_f770_11ea_b111_7c5cf8399c33row14_col1" class="data row14 col1" >c(4,3)  -  u(4)  -  v(3)</td> 
+        <td id="T_89e6b20a_f770_11ea_b111_7c5cf8399c33row14_col2" class="data row14 col2" >4</td> 
+        <td id="T_89e6b20a_f770_11ea_b111_7c5cf8399c33row14_col3" class="data row14 col3" >6</td> 
+        <td id="T_89e6b20a_f770_11ea_b111_7c5cf8399c33row14_col4" class="data row14 col4" >2</td> 
+        <td id="T_89e6b20a_f770_11ea_b111_7c5cf8399c33row14_col5" class="data row14 col5" >0</td> 
+    </tr>    <tr> 
+        <th id="T_89e6b20a_f770_11ea_b111_7c5cf8399c33" class="row_heading level0 row15" >(4, 4)</th> 
+        <td id="T_89e6b20a_f770_11ea_b111_7c5cf8399c33row15_col0" class="data row15 col0" >False</td> 
+        <td id="T_89e6b20a_f770_11ea_b111_7c5cf8399c33row15_col1" class="data row15 col1" >c(4,4)  -  u(4)  -  v(4)</td> 
+        <td id="T_89e6b20a_f770_11ea_b111_7c5cf8399c33row15_col2" class="data row15 col2" >6</td> 
+        <td id="T_89e6b20a_f770_11ea_b111_7c5cf8399c33row15_col3" class="data row15 col3" >10</td> 
+        <td id="T_89e6b20a_f770_11ea_b111_7c5cf8399c33row15_col4" class="data row15 col4" >2</td> 
+        <td id="T_89e6b20a_f770_11ea_b111_7c5cf8399c33row15_col5" class="data row15 col5" >2</td> 
+    </tr></tbody> 
+</table> </div></div>
+</div>
+<p>Al cambiar <span class="math notranslate nohighlight">\(u_2\)</span> de 2 a 3 (actualización señalada en verde), los valores de costos reducidos cambian para las celdas que dependen de <span class="math notranslate nohighlight">\(u_2\)</span> (mostradas también en amarillo). En resumen:</p>
+<ul class="simple">
+<li><p>Obtuvimos el cero que queríamos en la fila (2,4)</p></li>
+<li><p>¡En la fila (2,1) apareció un valor <strong>negativo</strong>!</p>
+<ul>
+<li><p>Perdimos un cero, pero más importante que eso…</p></li>
+<li><p>De dejarlo así, <strong>el problema dual se haría infactible</strong></p></li>
+</ul>
+</li>
+</ul>
+<p>¿Cómo arreglarlo? Podríamos hacer que <span class="math notranslate nohighlight">\(v_1\)</span>, que se resta en la fila problemática (2,1), pase a valer -1 en vez de 0. Con eso:</p>
+<ul class="simple">
+<li><p>Recuperamos factibilidad dual (porque volveríamos a holguras no negativas)</p></li>
+<li><p>Recuperaríamos el cero, que por holgura complementaria permitiría asignar valor a la variable primal asociada</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">duales</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
+
+<span class="n">DF</span> <span class="o">=</span> <span class="n">actualizar_costos_red</span><span class="p">(</span><span class="n">duales</span><span class="p">)</span>
+<span class="n">colorear</span> <span class="o">=</span> <span class="p">[(</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="mi">12</span><span class="p">]</span> <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span><span class="mi">5</span><span class="p">]]</span>
+
+<span class="n">DF</span><span class="o">.</span><span class="n">style</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">resaltar</span><span class="o">.</span><span class="n">celdas</span><span class="p">,</span> <span class="n">cells</span><span class="o">=</span><span class="n">colorear</span><span class="p">,</span> <span class="n">col_names</span><span class="o">=</span><span class="n">DF</span><span class="o">.</span><span class="n">columns</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><style  type="text/css" >
+    #T_89ef169a_f770_11ea_afdd_7c5cf8399c33row0_col2 {
+            background-color:  yellow;
+        }    #T_89ef169a_f770_11ea_afdd_7c5cf8399c33row0_col5 {
+            background-color:  yellow;
+        }    #T_89ef169a_f770_11ea_afdd_7c5cf8399c33row4_col2 {
+            background-color:  yellow;
+        }    #T_89ef169a_f770_11ea_afdd_7c5cf8399c33row4_col5 {
+            background-color:  yellow;
+        }    #T_89ef169a_f770_11ea_afdd_7c5cf8399c33row8_col2 {
+            background-color:  yellow;
+        }    #T_89ef169a_f770_11ea_afdd_7c5cf8399c33row8_col5 {
+            background-color:  yellow;
+        }    #T_89ef169a_f770_11ea_afdd_7c5cf8399c33row12_col2 {
+            background-color:  yellow;
+        }    #T_89ef169a_f770_11ea_afdd_7c5cf8399c33row12_col5 {
+            background-color:  yellow;
+        }</style>  
+<table id="T_89ef169a_f770_11ea_afdd_7c5cf8399c33" > 
+<thead>    <tr> 
+        <th class="blank level0" ></th> 
+        <th class="col_heading level0 col0" >Asignable?</th> 
+        <th class="col_heading level0 col1" >Holgura Dual / C.Redu.Primal</th> 
+        <th class="col_heading level0 col2" >Result. 'costo red'</th> 
+        <th class="col_heading level0 col3" >Valor costo c(i,j)</th> 
+        <th class="col_heading level0 col4" >Valor u(i)</th> 
+        <th class="col_heading level0 col5" >Valor v(j)</th> 
+    </tr>    <tr> 
+        <th class="index_name level0" >(i,j)</th> 
+        <th class="blank" ></th> 
+        <th class="blank" ></th> 
+        <th class="blank" ></th> 
+        <th class="blank" ></th> 
+        <th class="blank" ></th> 
+        <th class="blank" ></th> 
+    </tr></thead> 
+<tbody>    <tr> 
+        <th id="T_89ef169a_f770_11ea_afdd_7c5cf8399c33" class="row_heading level0 row0" >(1, 1)</th> 
+        <td id="T_89ef169a_f770_11ea_afdd_7c5cf8399c33row0_col0" class="data row0 col0" >False</td> 
+        <td id="T_89ef169a_f770_11ea_afdd_7c5cf8399c33row0_col1" class="data row0 col1" >c(1,1)  -  u(1)  -  v(1)</td> 
+        <td id="T_89ef169a_f770_11ea_afdd_7c5cf8399c33row0_col2" class="data row0 col2" >10</td> 
+        <td id="T_89ef169a_f770_11ea_afdd_7c5cf8399c33row0_col3" class="data row0 col3" >14</td> 
+        <td id="T_89ef169a_f770_11ea_afdd_7c5cf8399c33row0_col4" class="data row0 col4" >5</td> 
+        <td id="T_89ef169a_f770_11ea_afdd_7c5cf8399c33row0_col5" class="data row0 col5" >-1</td> 
+    </tr>    <tr> 
+        <th id="T_89ef169a_f770_11ea_afdd_7c5cf8399c33" class="row_heading level0 row1" >(1, 2)</th> 
+        <td id="T_89ef169a_f770_11ea_afdd_7c5cf8399c33row1_col0" class="data row1 col0" >True</td> 
+        <td id="T_89ef169a_f770_11ea_afdd_7c5cf8399c33row1_col1" class="data row1 col1" >c(1,2)  -  u(1)  -  v(2)</td> 
+        <td id="T_89ef169a_f770_11ea_afdd_7c5cf8399c33row1_col2" class="data row1 col2" >0</td> 
+        <td id="T_89ef169a_f770_11ea_afdd_7c5cf8399c33row1_col3" class="data row1 col3" >5</td> 
+        <td id="T_89ef169a_f770_11ea_afdd_7c5cf8399c33row1_col4" class="data row1 col4" >5</td> 
+        <td id="T_89ef169a_f770_11ea_afdd_7c5cf8399c33row1_col5" class="data row1 col5" >0</td> 
+    </tr>    <tr> 
+        <th id="T_89ef169a_f770_11ea_afdd_7c5cf8399c33" class="row_heading level0 row2" >(1, 3)</th> 
+        <td id="T_89ef169a_f770_11ea_afdd_7c5cf8399c33row2_col0" class="data row2 col0" >False</td> 
+        <td id="T_89ef169a_f770_11ea_afdd_7c5cf8399c33row2_col1" class="data row2 col1" >c(1,3)  -  u(1)  -  v(3)</td> 
+        <td id="T_89ef169a_f770_11ea_afdd_7c5cf8399c33row2_col2" class="data row2 col2" >3</td> 
+        <td id="T_89ef169a_f770_11ea_afdd_7c5cf8399c33row2_col3" class="data row2 col3" >8</td> 
+        <td id="T_89ef169a_f770_11ea_afdd_7c5cf8399c33row2_col4" class="data row2 col4" >5</td> 
+        <td id="T_89ef169a_f770_11ea_afdd_7c5cf8399c33row2_col5" class="data row2 col5" >0</td> 
+    </tr>    <tr> 
+        <th id="T_89ef169a_f770_11ea_afdd_7c5cf8399c33" class="row_heading level0 row3" >(1, 4)</th> 
+        <td id="T_89ef169a_f770_11ea_afdd_7c5cf8399c33row3_col0" class="data row3 col0" >True</td> 
+        <td id="T_89ef169a_f770_11ea_afdd_7c5cf8399c33row3_col1" class="data row3 col1" >c(1,4)  -  u(1)  -  v(4)</td> 
+        <td id="T_89ef169a_f770_11ea_afdd_7c5cf8399c33row3_col2" class="data row3 col2" >0</td> 
+        <td id="T_89ef169a_f770_11ea_afdd_7c5cf8399c33row3_col3" class="data row3 col3" >7</td> 
+        <td id="T_89ef169a_f770_11ea_afdd_7c5cf8399c33row3_col4" class="data row3 col4" >5</td> 
+        <td id="T_89ef169a_f770_11ea_afdd_7c5cf8399c33row3_col5" class="data row3 col5" >2</td> 
+    </tr>    <tr> 
+        <th id="T_89ef169a_f770_11ea_afdd_7c5cf8399c33" class="row_heading level0 row4" >(2, 1)</th> 
+        <td id="T_89ef169a_f770_11ea_afdd_7c5cf8399c33row4_col0" class="data row4 col0" >True</td> 
+        <td id="T_89ef169a_f770_11ea_afdd_7c5cf8399c33row4_col1" class="data row4 col1" >c(2,1)  -  u(2)  -  v(1)</td> 
+        <td id="T_89ef169a_f770_11ea_afdd_7c5cf8399c33row4_col2" class="data row4 col2" >0</td> 
+        <td id="T_89ef169a_f770_11ea_afdd_7c5cf8399c33row4_col3" class="data row4 col3" >2</td> 
+        <td id="T_89ef169a_f770_11ea_afdd_7c5cf8399c33row4_col4" class="data row4 col4" >3</td> 
+        <td id="T_89ef169a_f770_11ea_afdd_7c5cf8399c33row4_col5" class="data row4 col5" >-1</td> 
+    </tr>    <tr> 
+        <th id="T_89ef169a_f770_11ea_afdd_7c5cf8399c33" class="row_heading level0 row5" >(2, 2)</th> 
+        <td id="T_89ef169a_f770_11ea_afdd_7c5cf8399c33row5_col0" class="data row5 col0" >False</td> 
+        <td id="T_89ef169a_f770_11ea_afdd_7c5cf8399c33row5_col1" class="data row5 col1" >c(2,2)  -  u(2)  -  v(2)</td> 
+        <td id="T_89ef169a_f770_11ea_afdd_7c5cf8399c33row5_col2" class="data row5 col2" >9</td> 
+        <td id="T_89ef169a_f770_11ea_afdd_7c5cf8399c33row5_col3" class="data row5 col3" >12</td> 
+        <td id="T_89ef169a_f770_11ea_afdd_7c5cf8399c33row5_col4" class="data row5 col4" >3</td> 
+        <td id="T_89ef169a_f770_11ea_afdd_7c5cf8399c33row5_col5" class="data row5 col5" >0</td> 
+    </tr>    <tr> 
+        <th id="T_89ef169a_f770_11ea_afdd_7c5cf8399c33" class="row_heading level0 row6" >(2, 3)</th> 
+        <td id="T_89ef169a_f770_11ea_afdd_7c5cf8399c33row6_col0" class="data row6 col0" >False</td> 
+        <td id="T_89ef169a_f770_11ea_afdd_7c5cf8399c33row6_col1" class="data row6 col1" >c(2,3)  -  u(2)  -  v(3)</td> 
+        <td id="T_89ef169a_f770_11ea_afdd_7c5cf8399c33row6_col2" class="data row6 col2" >3</td> 
+        <td id="T_89ef169a_f770_11ea_afdd_7c5cf8399c33row6_col3" class="data row6 col3" >6</td> 
+        <td id="T_89ef169a_f770_11ea_afdd_7c5cf8399c33row6_col4" class="data row6 col4" >3</td> 
+        <td id="T_89ef169a_f770_11ea_afdd_7c5cf8399c33row6_col5" class="data row6 col5" >0</td> 
+    </tr>    <tr> 
+        <th id="T_89ef169a_f770_11ea_afdd_7c5cf8399c33" class="row_heading level0 row7" >(2, 4)</th> 
+        <td id="T_89ef169a_f770_11ea_afdd_7c5cf8399c33row7_col0" class="data row7 col0" >True</td> 
+        <td id="T_89ef169a_f770_11ea_afdd_7c5cf8399c33row7_col1" class="data row7 col1" >c(2,4)  -  u(2)  -  v(4)</td> 
+        <td id="T_89ef169a_f770_11ea_afdd_7c5cf8399c33row7_col2" class="data row7 col2" >0</td> 
+        <td id="T_89ef169a_f770_11ea_afdd_7c5cf8399c33row7_col3" class="data row7 col3" >5</td> 
+        <td id="T_89ef169a_f770_11ea_afdd_7c5cf8399c33row7_col4" class="data row7 col4" >3</td> 
+        <td id="T_89ef169a_f770_11ea_afdd_7c5cf8399c33row7_col5" class="data row7 col5" >2</td> 
+    </tr>    <tr> 
+        <th id="T_89ef169a_f770_11ea_afdd_7c5cf8399c33" class="row_heading level0 row8" >(3, 1)</th> 
+        <td id="T_89ef169a_f770_11ea_afdd_7c5cf8399c33row8_col0" class="data row8 col0" >False</td> 
+        <td id="T_89ef169a_f770_11ea_afdd_7c5cf8399c33row8_col1" class="data row8 col1" >c(3,1)  -  u(3)  -  v(1)</td> 
+        <td id="T_89ef169a_f770_11ea_afdd_7c5cf8399c33row8_col2" class="data row8 col2" >5</td> 
+        <td id="T_89ef169a_f770_11ea_afdd_7c5cf8399c33row8_col3" class="data row8 col3" >7</td> 
+        <td id="T_89ef169a_f770_11ea_afdd_7c5cf8399c33row8_col4" class="data row8 col4" >3</td> 
+        <td id="T_89ef169a_f770_11ea_afdd_7c5cf8399c33row8_col5" class="data row8 col5" >-1</td> 
+    </tr>    <tr> 
+        <th id="T_89ef169a_f770_11ea_afdd_7c5cf8399c33" class="row_heading level0 row9" >(3, 2)</th> 
+        <td id="T_89ef169a_f770_11ea_afdd_7c5cf8399c33row9_col0" class="data row9 col0" >False</td> 
+        <td id="T_89ef169a_f770_11ea_afdd_7c5cf8399c33row9_col1" class="data row9 col1" >c(3,2)  -  u(3)  -  v(2)</td> 
+        <td id="T_89ef169a_f770_11ea_afdd_7c5cf8399c33row9_col2" class="data row9 col2" >5</td> 
+        <td id="T_89ef169a_f770_11ea_afdd_7c5cf8399c33row9_col3" class="data row9 col3" >8</td> 
+        <td id="T_89ef169a_f770_11ea_afdd_7c5cf8399c33row9_col4" class="data row9 col4" >3</td> 
+        <td id="T_89ef169a_f770_11ea_afdd_7c5cf8399c33row9_col5" class="data row9 col5" >0</td> 
+    </tr>    <tr> 
+        <th id="T_89ef169a_f770_11ea_afdd_7c5cf8399c33" class="row_heading level0 row10" >(3, 3)</th> 
+        <td id="T_89ef169a_f770_11ea_afdd_7c5cf8399c33row10_col0" class="data row10 col0" >True</td> 
+        <td id="T_89ef169a_f770_11ea_afdd_7c5cf8399c33row10_col1" class="data row10 col1" >c(3,3)  -  u(3)  -  v(3)</td> 
+        <td id="T_89ef169a_f770_11ea_afdd_7c5cf8399c33row10_col2" class="data row10 col2" >0</td> 
+        <td id="T_89ef169a_f770_11ea_afdd_7c5cf8399c33row10_col3" class="data row10 col3" >3</td> 
+        <td id="T_89ef169a_f770_11ea_afdd_7c5cf8399c33row10_col4" class="data row10 col4" >3</td> 
+        <td id="T_89ef169a_f770_11ea_afdd_7c5cf8399c33row10_col5" class="data row10 col5" >0</td> 
+    </tr>    <tr> 
+        <th id="T_89ef169a_f770_11ea_afdd_7c5cf8399c33" class="row_heading level0 row11" >(3, 4)</th> 
+        <td id="T_89ef169a_f770_11ea_afdd_7c5cf8399c33row11_col0" class="data row11 col0" >False</td> 
+        <td id="T_89ef169a_f770_11ea_afdd_7c5cf8399c33row11_col1" class="data row11 col1" >c(3,4)  -  u(3)  -  v(4)</td> 
+        <td id="T_89ef169a_f770_11ea_afdd_7c5cf8399c33row11_col2" class="data row11 col2" >4</td> 
+        <td id="T_89ef169a_f770_11ea_afdd_7c5cf8399c33row11_col3" class="data row11 col3" >9</td> 
+        <td id="T_89ef169a_f770_11ea_afdd_7c5cf8399c33row11_col4" class="data row11 col4" >3</td> 
+        <td id="T_89ef169a_f770_11ea_afdd_7c5cf8399c33row11_col5" class="data row11 col5" >2</td> 
+    </tr>    <tr> 
+        <th id="T_89ef169a_f770_11ea_afdd_7c5cf8399c33" class="row_heading level0 row12" >(4, 1)</th> 
+        <td id="T_89ef169a_f770_11ea_afdd_7c5cf8399c33row12_col0" class="data row12 col0" >False</td> 
+        <td id="T_89ef169a_f770_11ea_afdd_7c5cf8399c33row12_col1" class="data row12 col1" >c(4,1)  -  u(4)  -  v(1)</td> 
+        <td id="T_89ef169a_f770_11ea_afdd_7c5cf8399c33row12_col2" class="data row12 col2" >1</td> 
+        <td id="T_89ef169a_f770_11ea_afdd_7c5cf8399c33row12_col3" class="data row12 col3" >2</td> 
+        <td id="T_89ef169a_f770_11ea_afdd_7c5cf8399c33row12_col4" class="data row12 col4" >2</td> 
+        <td id="T_89ef169a_f770_11ea_afdd_7c5cf8399c33row12_col5" class="data row12 col5" >-1</td> 
+    </tr>    <tr> 
+        <th id="T_89ef169a_f770_11ea_afdd_7c5cf8399c33" class="row_heading level0 row13" >(4, 2)</th> 
+        <td id="T_89ef169a_f770_11ea_afdd_7c5cf8399c33row13_col0" class="data row13 col0" >False</td> 
+        <td id="T_89ef169a_f770_11ea_afdd_7c5cf8399c33row13_col1" class="data row13 col1" >c(4,2)  -  u(4)  -  v(2)</td> 
+        <td id="T_89ef169a_f770_11ea_afdd_7c5cf8399c33row13_col2" class="data row13 col2" >2</td> 
+        <td id="T_89ef169a_f770_11ea_afdd_7c5cf8399c33row13_col3" class="data row13 col3" >4</td> 
+        <td id="T_89ef169a_f770_11ea_afdd_7c5cf8399c33row13_col4" class="data row13 col4" >2</td> 
+        <td id="T_89ef169a_f770_11ea_afdd_7c5cf8399c33row13_col5" class="data row13 col5" >0</td> 
+    </tr>    <tr> 
+        <th id="T_89ef169a_f770_11ea_afdd_7c5cf8399c33" class="row_heading level0 row14" >(4, 3)</th> 
+        <td id="T_89ef169a_f770_11ea_afdd_7c5cf8399c33row14_col0" class="data row14 col0" >False</td> 
+        <td id="T_89ef169a_f770_11ea_afdd_7c5cf8399c33row14_col1" class="data row14 col1" >c(4,3)  -  u(4)  -  v(3)</td> 
+        <td id="T_89ef169a_f770_11ea_afdd_7c5cf8399c33row14_col2" class="data row14 col2" >4</td> 
+        <td id="T_89ef169a_f770_11ea_afdd_7c5cf8399c33row14_col3" class="data row14 col3" >6</td> 
+        <td id="T_89ef169a_f770_11ea_afdd_7c5cf8399c33row14_col4" class="data row14 col4" >2</td> 
+        <td id="T_89ef169a_f770_11ea_afdd_7c5cf8399c33row14_col5" class="data row14 col5" >0</td> 
+    </tr>    <tr> 
+        <th id="T_89ef169a_f770_11ea_afdd_7c5cf8399c33" class="row_heading level0 row15" >(4, 4)</th> 
+        <td id="T_89ef169a_f770_11ea_afdd_7c5cf8399c33row15_col0" class="data row15 col0" >False</td> 
+        <td id="T_89ef169a_f770_11ea_afdd_7c5cf8399c33row15_col1" class="data row15 col1" >c(4,4)  -  u(4)  -  v(4)</td> 
+        <td id="T_89ef169a_f770_11ea_afdd_7c5cf8399c33row15_col2" class="data row15 col2" >6</td> 
+        <td id="T_89ef169a_f770_11ea_afdd_7c5cf8399c33row15_col3" class="data row15 col3" >10</td> 
+        <td id="T_89ef169a_f770_11ea_afdd_7c5cf8399c33row15_col4" class="data row15 col4" >2</td> 
+        <td id="T_89ef169a_f770_11ea_afdd_7c5cf8399c33row15_col5" class="data row15 col5" >2</td> 
+    </tr></tbody> 
+</table> </div></div>
+</div>
+<p>Al cambiar <span class="math notranslate nohighlight">\(v_1\)</span> de 0 a -1 (actualización señalada en verde), los valores de costos reducidos cambian para las celdas que dependen de <span class="math notranslate nohighlight">\(v_1\)</span> (mostradas también en verde). En resumen:</p>
+<ul class="simple">
+<li><p>Recuperamos la no-negatividad y el cero que queríamos en la fila (2,1)</p></li>
+<li><p>Perdimos el cero que había en la fila (4,1); es decir, perdimos una posible asignación</p></li>
+</ul>
+<p>¿Cómo arreglarlo? Podríamos hacer que <span class="math notranslate nohighlight">\(u_4\)</span>, que se resta en la fila problemática (2,1), pase a valer 3 en vez de 2. Con eso recuperaríamos el cero, que por holgura complementaria permitiría asignar valor a la variable primal asociada.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">duales</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">3</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">3</span>
+
+<span class="n">DF</span> <span class="o">=</span> <span class="n">actualizar_costos_red</span><span class="p">(</span><span class="n">duales</span><span class="p">)</span>
+<span class="n">colorear</span> <span class="o">=</span> <span class="p">[(</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span><span class="mi">16</span><span class="p">)</span> <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span><span class="mi">4</span><span class="p">]]</span>
+
+<span class="n">DF</span><span class="o">.</span><span class="n">style</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">resaltar</span><span class="o">.</span><span class="n">celdas</span><span class="p">,</span> <span class="n">cells</span><span class="o">=</span><span class="n">colorear</span><span class="p">,</span> <span class="n">col_names</span><span class="o">=</span><span class="n">DF</span><span class="o">.</span><span class="n">columns</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><style  type="text/css" >
+    #T_89f7a238_f770_11ea_9d8b_7c5cf8399c33row12_col2 {
+            background-color:  yellow;
+        }    #T_89f7a238_f770_11ea_9d8b_7c5cf8399c33row12_col4 {
+            background-color:  yellow;
+        }    #T_89f7a238_f770_11ea_9d8b_7c5cf8399c33row13_col2 {
+            background-color:  yellow;
+        }    #T_89f7a238_f770_11ea_9d8b_7c5cf8399c33row13_col4 {
+            background-color:  yellow;
+        }    #T_89f7a238_f770_11ea_9d8b_7c5cf8399c33row14_col2 {
+            background-color:  yellow;
+        }    #T_89f7a238_f770_11ea_9d8b_7c5cf8399c33row14_col4 {
+            background-color:  yellow;
+        }    #T_89f7a238_f770_11ea_9d8b_7c5cf8399c33row15_col2 {
+            background-color:  yellow;
+        }    #T_89f7a238_f770_11ea_9d8b_7c5cf8399c33row15_col4 {
+            background-color:  yellow;
+        }</style>  
+<table id="T_89f7a238_f770_11ea_9d8b_7c5cf8399c33" > 
+<thead>    <tr> 
+        <th class="blank level0" ></th> 
+        <th class="col_heading level0 col0" >Asignable?</th> 
+        <th class="col_heading level0 col1" >Holgura Dual / C.Redu.Primal</th> 
+        <th class="col_heading level0 col2" >Result. 'costo red'</th> 
+        <th class="col_heading level0 col3" >Valor costo c(i,j)</th> 
+        <th class="col_heading level0 col4" >Valor u(i)</th> 
+        <th class="col_heading level0 col5" >Valor v(j)</th> 
+    </tr>    <tr> 
+        <th class="index_name level0" >(i,j)</th> 
+        <th class="blank" ></th> 
+        <th class="blank" ></th> 
+        <th class="blank" ></th> 
+        <th class="blank" ></th> 
+        <th class="blank" ></th> 
+        <th class="blank" ></th> 
+    </tr></thead> 
+<tbody>    <tr> 
+        <th id="T_89f7a238_f770_11ea_9d8b_7c5cf8399c33" class="row_heading level0 row0" >(1, 1)</th> 
+        <td id="T_89f7a238_f770_11ea_9d8b_7c5cf8399c33row0_col0" class="data row0 col0" >False</td> 
+        <td id="T_89f7a238_f770_11ea_9d8b_7c5cf8399c33row0_col1" class="data row0 col1" >c(1,1)  -  u(1)  -  v(1)</td> 
+        <td id="T_89f7a238_f770_11ea_9d8b_7c5cf8399c33row0_col2" class="data row0 col2" >10</td> 
+        <td id="T_89f7a238_f770_11ea_9d8b_7c5cf8399c33row0_col3" class="data row0 col3" >14</td> 
+        <td id="T_89f7a238_f770_11ea_9d8b_7c5cf8399c33row0_col4" class="data row0 col4" >5</td> 
+        <td id="T_89f7a238_f770_11ea_9d8b_7c5cf8399c33row0_col5" class="data row0 col5" >-1</td> 
+    </tr>    <tr> 
+        <th id="T_89f7a238_f770_11ea_9d8b_7c5cf8399c33" class="row_heading level0 row1" >(1, 2)</th> 
+        <td id="T_89f7a238_f770_11ea_9d8b_7c5cf8399c33row1_col0" class="data row1 col0" >True</td> 
+        <td id="T_89f7a238_f770_11ea_9d8b_7c5cf8399c33row1_col1" class="data row1 col1" >c(1,2)  -  u(1)  -  v(2)</td> 
+        <td id="T_89f7a238_f770_11ea_9d8b_7c5cf8399c33row1_col2" class="data row1 col2" >0</td> 
+        <td id="T_89f7a238_f770_11ea_9d8b_7c5cf8399c33row1_col3" class="data row1 col3" >5</td> 
+        <td id="T_89f7a238_f770_11ea_9d8b_7c5cf8399c33row1_col4" class="data row1 col4" >5</td> 
+        <td id="T_89f7a238_f770_11ea_9d8b_7c5cf8399c33row1_col5" class="data row1 col5" >0</td> 
+    </tr>    <tr> 
+        <th id="T_89f7a238_f770_11ea_9d8b_7c5cf8399c33" class="row_heading level0 row2" >(1, 3)</th> 
+        <td id="T_89f7a238_f770_11ea_9d8b_7c5cf8399c33row2_col0" class="data row2 col0" >False</td> 
+        <td id="T_89f7a238_f770_11ea_9d8b_7c5cf8399c33row2_col1" class="data row2 col1" >c(1,3)  -  u(1)  -  v(3)</td> 
+        <td id="T_89f7a238_f770_11ea_9d8b_7c5cf8399c33row2_col2" class="data row2 col2" >3</td> 
+        <td id="T_89f7a238_f770_11ea_9d8b_7c5cf8399c33row2_col3" class="data row2 col3" >8</td> 
+        <td id="T_89f7a238_f770_11ea_9d8b_7c5cf8399c33row2_col4" class="data row2 col4" >5</td> 
+        <td id="T_89f7a238_f770_11ea_9d8b_7c5cf8399c33row2_col5" class="data row2 col5" >0</td> 
+    </tr>    <tr> 
+        <th id="T_89f7a238_f770_11ea_9d8b_7c5cf8399c33" class="row_heading level0 row3" >(1, 4)</th> 
+        <td id="T_89f7a238_f770_11ea_9d8b_7c5cf8399c33row3_col0" class="data row3 col0" >True</td> 
+        <td id="T_89f7a238_f770_11ea_9d8b_7c5cf8399c33row3_col1" class="data row3 col1" >c(1,4)  -  u(1)  -  v(4)</td> 
+        <td id="T_89f7a238_f770_11ea_9d8b_7c5cf8399c33row3_col2" class="data row3 col2" >0</td> 
+        <td id="T_89f7a238_f770_11ea_9d8b_7c5cf8399c33row3_col3" class="data row3 col3" >7</td> 
+        <td id="T_89f7a238_f770_11ea_9d8b_7c5cf8399c33row3_col4" class="data row3 col4" >5</td> 
+        <td id="T_89f7a238_f770_11ea_9d8b_7c5cf8399c33row3_col5" class="data row3 col5" >2</td> 
+    </tr>    <tr> 
+        <th id="T_89f7a238_f770_11ea_9d8b_7c5cf8399c33" class="row_heading level0 row4" >(2, 1)</th> 
+        <td id="T_89f7a238_f770_11ea_9d8b_7c5cf8399c33row4_col0" class="data row4 col0" >True</td> 
+        <td id="T_89f7a238_f770_11ea_9d8b_7c5cf8399c33row4_col1" class="data row4 col1" >c(2,1)  -  u(2)  -  v(1)</td> 
+        <td id="T_89f7a238_f770_11ea_9d8b_7c5cf8399c33row4_col2" class="data row4 col2" >0</td> 
+        <td id="T_89f7a238_f770_11ea_9d8b_7c5cf8399c33row4_col3" class="data row4 col3" >2</td> 
+        <td id="T_89f7a238_f770_11ea_9d8b_7c5cf8399c33row4_col4" class="data row4 col4" >3</td> 
+        <td id="T_89f7a238_f770_11ea_9d8b_7c5cf8399c33row4_col5" class="data row4 col5" >-1</td> 
+    </tr>    <tr> 
+        <th id="T_89f7a238_f770_11ea_9d8b_7c5cf8399c33" class="row_heading level0 row5" >(2, 2)</th> 
+        <td id="T_89f7a238_f770_11ea_9d8b_7c5cf8399c33row5_col0" class="data row5 col0" >False</td> 
+        <td id="T_89f7a238_f770_11ea_9d8b_7c5cf8399c33row5_col1" class="data row5 col1" >c(2,2)  -  u(2)  -  v(2)</td> 
+        <td id="T_89f7a238_f770_11ea_9d8b_7c5cf8399c33row5_col2" class="data row5 col2" >9</td> 
+        <td id="T_89f7a238_f770_11ea_9d8b_7c5cf8399c33row5_col3" class="data row5 col3" >12</td> 
+        <td id="T_89f7a238_f770_11ea_9d8b_7c5cf8399c33row5_col4" class="data row5 col4" >3</td> 
+        <td id="T_89f7a238_f770_11ea_9d8b_7c5cf8399c33row5_col5" class="data row5 col5" >0</td> 
+    </tr>    <tr> 
+        <th id="T_89f7a238_f770_11ea_9d8b_7c5cf8399c33" class="row_heading level0 row6" >(2, 3)</th> 
+        <td id="T_89f7a238_f770_11ea_9d8b_7c5cf8399c33row6_col0" class="data row6 col0" >False</td> 
+        <td id="T_89f7a238_f770_11ea_9d8b_7c5cf8399c33row6_col1" class="data row6 col1" >c(2,3)  -  u(2)  -  v(3)</td> 
+        <td id="T_89f7a238_f770_11ea_9d8b_7c5cf8399c33row6_col2" class="data row6 col2" >3</td> 
+        <td id="T_89f7a238_f770_11ea_9d8b_7c5cf8399c33row6_col3" class="data row6 col3" >6</td> 
+        <td id="T_89f7a238_f770_11ea_9d8b_7c5cf8399c33row6_col4" class="data row6 col4" >3</td> 
+        <td id="T_89f7a238_f770_11ea_9d8b_7c5cf8399c33row6_col5" class="data row6 col5" >0</td> 
+    </tr>    <tr> 
+        <th id="T_89f7a238_f770_11ea_9d8b_7c5cf8399c33" class="row_heading level0 row7" >(2, 4)</th> 
+        <td id="T_89f7a238_f770_11ea_9d8b_7c5cf8399c33row7_col0" class="data row7 col0" >True</td> 
+        <td id="T_89f7a238_f770_11ea_9d8b_7c5cf8399c33row7_col1" class="data row7 col1" >c(2,4)  -  u(2)  -  v(4)</td> 
+        <td id="T_89f7a238_f770_11ea_9d8b_7c5cf8399c33row7_col2" class="data row7 col2" >0</td> 
+        <td id="T_89f7a238_f770_11ea_9d8b_7c5cf8399c33row7_col3" class="data row7 col3" >5</td> 
+        <td id="T_89f7a238_f770_11ea_9d8b_7c5cf8399c33row7_col4" class="data row7 col4" >3</td> 
+        <td id="T_89f7a238_f770_11ea_9d8b_7c5cf8399c33row7_col5" class="data row7 col5" >2</td> 
+    </tr>    <tr> 
+        <th id="T_89f7a238_f770_11ea_9d8b_7c5cf8399c33" class="row_heading level0 row8" >(3, 1)</th> 
+        <td id="T_89f7a238_f770_11ea_9d8b_7c5cf8399c33row8_col0" class="data row8 col0" >False</td> 
+        <td id="T_89f7a238_f770_11ea_9d8b_7c5cf8399c33row8_col1" class="data row8 col1" >c(3,1)  -  u(3)  -  v(1)</td> 
+        <td id="T_89f7a238_f770_11ea_9d8b_7c5cf8399c33row8_col2" class="data row8 col2" >5</td> 
+        <td id="T_89f7a238_f770_11ea_9d8b_7c5cf8399c33row8_col3" class="data row8 col3" >7</td> 
+        <td id="T_89f7a238_f770_11ea_9d8b_7c5cf8399c33row8_col4" class="data row8 col4" >3</td> 
+        <td id="T_89f7a238_f770_11ea_9d8b_7c5cf8399c33row8_col5" class="data row8 col5" >-1</td> 
+    </tr>    <tr> 
+        <th id="T_89f7a238_f770_11ea_9d8b_7c5cf8399c33" class="row_heading level0 row9" >(3, 2)</th> 
+        <td id="T_89f7a238_f770_11ea_9d8b_7c5cf8399c33row9_col0" class="data row9 col0" >False</td> 
+        <td id="T_89f7a238_f770_11ea_9d8b_7c5cf8399c33row9_col1" class="data row9 col1" >c(3,2)  -  u(3)  -  v(2)</td> 
+        <td id="T_89f7a238_f770_11ea_9d8b_7c5cf8399c33row9_col2" class="data row9 col2" >5</td> 
+        <td id="T_89f7a238_f770_11ea_9d8b_7c5cf8399c33row9_col3" class="data row9 col3" >8</td> 
+        <td id="T_89f7a238_f770_11ea_9d8b_7c5cf8399c33row9_col4" class="data row9 col4" >3</td> 
+        <td id="T_89f7a238_f770_11ea_9d8b_7c5cf8399c33row9_col5" class="data row9 col5" >0</td> 
+    </tr>    <tr> 
+        <th id="T_89f7a238_f770_11ea_9d8b_7c5cf8399c33" class="row_heading level0 row10" >(3, 3)</th> 
+        <td id="T_89f7a238_f770_11ea_9d8b_7c5cf8399c33row10_col0" class="data row10 col0" >True</td> 
+        <td id="T_89f7a238_f770_11ea_9d8b_7c5cf8399c33row10_col1" class="data row10 col1" >c(3,3)  -  u(3)  -  v(3)</td> 
+        <td id="T_89f7a238_f770_11ea_9d8b_7c5cf8399c33row10_col2" class="data row10 col2" >0</td> 
+        <td id="T_89f7a238_f770_11ea_9d8b_7c5cf8399c33row10_col3" class="data row10 col3" >3</td> 
+        <td id="T_89f7a238_f770_11ea_9d8b_7c5cf8399c33row10_col4" class="data row10 col4" >3</td> 
+        <td id="T_89f7a238_f770_11ea_9d8b_7c5cf8399c33row10_col5" class="data row10 col5" >0</td> 
+    </tr>    <tr> 
+        <th id="T_89f7a238_f770_11ea_9d8b_7c5cf8399c33" class="row_heading level0 row11" >(3, 4)</th> 
+        <td id="T_89f7a238_f770_11ea_9d8b_7c5cf8399c33row11_col0" class="data row11 col0" >False</td> 
+        <td id="T_89f7a238_f770_11ea_9d8b_7c5cf8399c33row11_col1" class="data row11 col1" >c(3,4)  -  u(3)  -  v(4)</td> 
+        <td id="T_89f7a238_f770_11ea_9d8b_7c5cf8399c33row11_col2" class="data row11 col2" >4</td> 
+        <td id="T_89f7a238_f770_11ea_9d8b_7c5cf8399c33row11_col3" class="data row11 col3" >9</td> 
+        <td id="T_89f7a238_f770_11ea_9d8b_7c5cf8399c33row11_col4" class="data row11 col4" >3</td> 
+        <td id="T_89f7a238_f770_11ea_9d8b_7c5cf8399c33row11_col5" class="data row11 col5" >2</td> 
+    </tr>    <tr> 
+        <th id="T_89f7a238_f770_11ea_9d8b_7c5cf8399c33" class="row_heading level0 row12" >(4, 1)</th> 
+        <td id="T_89f7a238_f770_11ea_9d8b_7c5cf8399c33row12_col0" class="data row12 col0" >True</td> 
+        <td id="T_89f7a238_f770_11ea_9d8b_7c5cf8399c33row12_col1" class="data row12 col1" >c(4,1)  -  u(4)  -  v(1)</td> 
+        <td id="T_89f7a238_f770_11ea_9d8b_7c5cf8399c33row12_col2" class="data row12 col2" >0</td> 
+        <td id="T_89f7a238_f770_11ea_9d8b_7c5cf8399c33row12_col3" class="data row12 col3" >2</td> 
+        <td id="T_89f7a238_f770_11ea_9d8b_7c5cf8399c33row12_col4" class="data row12 col4" >3</td> 
+        <td id="T_89f7a238_f770_11ea_9d8b_7c5cf8399c33row12_col5" class="data row12 col5" >-1</td> 
+    </tr>    <tr> 
+        <th id="T_89f7a238_f770_11ea_9d8b_7c5cf8399c33" class="row_heading level0 row13" >(4, 2)</th> 
+        <td id="T_89f7a238_f770_11ea_9d8b_7c5cf8399c33row13_col0" class="data row13 col0" >False</td> 
+        <td id="T_89f7a238_f770_11ea_9d8b_7c5cf8399c33row13_col1" class="data row13 col1" >c(4,2)  -  u(4)  -  v(2)</td> 
+        <td id="T_89f7a238_f770_11ea_9d8b_7c5cf8399c33row13_col2" class="data row13 col2" >1</td> 
+        <td id="T_89f7a238_f770_11ea_9d8b_7c5cf8399c33row13_col3" class="data row13 col3" >4</td> 
+        <td id="T_89f7a238_f770_11ea_9d8b_7c5cf8399c33row13_col4" class="data row13 col4" >3</td> 
+        <td id="T_89f7a238_f770_11ea_9d8b_7c5cf8399c33row13_col5" class="data row13 col5" >0</td> 
+    </tr>    <tr> 
+        <th id="T_89f7a238_f770_11ea_9d8b_7c5cf8399c33" class="row_heading level0 row14" >(4, 3)</th> 
+        <td id="T_89f7a238_f770_11ea_9d8b_7c5cf8399c33row14_col0" class="data row14 col0" >False</td> 
+        <td id="T_89f7a238_f770_11ea_9d8b_7c5cf8399c33row14_col1" class="data row14 col1" >c(4,3)  -  u(4)  -  v(3)</td> 
+        <td id="T_89f7a238_f770_11ea_9d8b_7c5cf8399c33row14_col2" class="data row14 col2" >3</td> 
+        <td id="T_89f7a238_f770_11ea_9d8b_7c5cf8399c33row14_col3" class="data row14 col3" >6</td> 
+        <td id="T_89f7a238_f770_11ea_9d8b_7c5cf8399c33row14_col4" class="data row14 col4" >3</td> 
+        <td id="T_89f7a238_f770_11ea_9d8b_7c5cf8399c33row14_col5" class="data row14 col5" >0</td> 
+    </tr>    <tr> 
+        <th id="T_89f7a238_f770_11ea_9d8b_7c5cf8399c33" class="row_heading level0 row15" >(4, 4)</th> 
+        <td id="T_89f7a238_f770_11ea_9d8b_7c5cf8399c33row15_col0" class="data row15 col0" >False</td> 
+        <td id="T_89f7a238_f770_11ea_9d8b_7c5cf8399c33row15_col1" class="data row15 col1" >c(4,4)  -  u(4)  -  v(4)</td> 
+        <td id="T_89f7a238_f770_11ea_9d8b_7c5cf8399c33row15_col2" class="data row15 col2" >5</td> 
+        <td id="T_89f7a238_f770_11ea_9d8b_7c5cf8399c33row15_col3" class="data row15 col3" >10</td> 
+        <td id="T_89f7a238_f770_11ea_9d8b_7c5cf8399c33row15_col4" class="data row15 col4" >3</td> 
+        <td id="T_89f7a238_f770_11ea_9d8b_7c5cf8399c33row15_col5" class="data row15 col5" >2</td> 
+    </tr></tbody> 
+</table> </div></div>
+</div>
+<p>¡Hemos recuperado el cero <strong>SIN</strong> generar valores negativos ni perder otros ceros!</p>
+<p>Veamos qué asignaciones son posibles ahora, ya que deberíamos tener un cero más, o sea, un asignable más…</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">colorear</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">DF</span><span class="p">[</span><span class="s2">&quot;Asignable?&quot;</span><span class="p">]))</span> <span class="k">if</span> <span class="nb">list</span><span class="p">(</span><span class="n">DF</span><span class="p">[</span><span class="s2">&quot;Asignable?&quot;</span><span class="p">])[</span><span class="n">i</span><span class="p">]]</span>
+
+<span class="n">DF</span><span class="o">.</span><span class="n">style</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">resaltar</span><span class="o">.</span><span class="n">tabla</span><span class="p">,</span> <span class="n">filas</span><span class="o">=</span><span class="n">colorear</span><span class="p">,</span> <span class="n">cols</span><span class="o">=</span><span class="p">[],</span> <span class="n">col_names</span><span class="o">=</span><span class="n">DF</span><span class="o">.</span><span class="n">columns</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><style  type="text/css" >
+    #T_8a0006c8_f770_11ea_a299_7c5cf8399c33row1_col0 {
+            background-color:  yellow;
+        }    #T_8a0006c8_f770_11ea_a299_7c5cf8399c33row1_col1 {
+            background-color:  yellow;
+        }    #T_8a0006c8_f770_11ea_a299_7c5cf8399c33row1_col2 {
+            background-color:  yellow;
+        }    #T_8a0006c8_f770_11ea_a299_7c5cf8399c33row1_col3 {
+            background-color:  yellow;
+        }    #T_8a0006c8_f770_11ea_a299_7c5cf8399c33row1_col4 {
+            background-color:  yellow;
+        }    #T_8a0006c8_f770_11ea_a299_7c5cf8399c33row1_col5 {
+            background-color:  yellow;
+        }    #T_8a0006c8_f770_11ea_a299_7c5cf8399c33row3_col0 {
+            background-color:  yellow;
+        }    #T_8a0006c8_f770_11ea_a299_7c5cf8399c33row3_col1 {
+            background-color:  yellow;
+        }    #T_8a0006c8_f770_11ea_a299_7c5cf8399c33row3_col2 {
+            background-color:  yellow;
+        }    #T_8a0006c8_f770_11ea_a299_7c5cf8399c33row3_col3 {
+            background-color:  yellow;
+        }    #T_8a0006c8_f770_11ea_a299_7c5cf8399c33row3_col4 {
+            background-color:  yellow;
+        }    #T_8a0006c8_f770_11ea_a299_7c5cf8399c33row3_col5 {
+            background-color:  yellow;
+        }    #T_8a0006c8_f770_11ea_a299_7c5cf8399c33row4_col0 {
+            background-color:  yellow;
+        }    #T_8a0006c8_f770_11ea_a299_7c5cf8399c33row4_col1 {
+            background-color:  yellow;
+        }    #T_8a0006c8_f770_11ea_a299_7c5cf8399c33row4_col2 {
+            background-color:  yellow;
+        }    #T_8a0006c8_f770_11ea_a299_7c5cf8399c33row4_col3 {
+            background-color:  yellow;
+        }    #T_8a0006c8_f770_11ea_a299_7c5cf8399c33row4_col4 {
+            background-color:  yellow;
+        }    #T_8a0006c8_f770_11ea_a299_7c5cf8399c33row4_col5 {
+            background-color:  yellow;
+        }    #T_8a0006c8_f770_11ea_a299_7c5cf8399c33row7_col0 {
+            background-color:  yellow;
+        }    #T_8a0006c8_f770_11ea_a299_7c5cf8399c33row7_col1 {
+            background-color:  yellow;
+        }    #T_8a0006c8_f770_11ea_a299_7c5cf8399c33row7_col2 {
+            background-color:  yellow;
+        }    #T_8a0006c8_f770_11ea_a299_7c5cf8399c33row7_col3 {
+            background-color:  yellow;
+        }    #T_8a0006c8_f770_11ea_a299_7c5cf8399c33row7_col4 {
+            background-color:  yellow;
+        }    #T_8a0006c8_f770_11ea_a299_7c5cf8399c33row7_col5 {
+            background-color:  yellow;
+        }    #T_8a0006c8_f770_11ea_a299_7c5cf8399c33row10_col0 {
+            background-color:  yellow;
+        }    #T_8a0006c8_f770_11ea_a299_7c5cf8399c33row10_col1 {
+            background-color:  yellow;
+        }    #T_8a0006c8_f770_11ea_a299_7c5cf8399c33row10_col2 {
+            background-color:  yellow;
+        }    #T_8a0006c8_f770_11ea_a299_7c5cf8399c33row10_col3 {
+            background-color:  yellow;
+        }    #T_8a0006c8_f770_11ea_a299_7c5cf8399c33row10_col4 {
+            background-color:  yellow;
+        }    #T_8a0006c8_f770_11ea_a299_7c5cf8399c33row10_col5 {
+            background-color:  yellow;
+        }    #T_8a0006c8_f770_11ea_a299_7c5cf8399c33row12_col0 {
+            background-color:  yellow;
+        }    #T_8a0006c8_f770_11ea_a299_7c5cf8399c33row12_col1 {
+            background-color:  yellow;
+        }    #T_8a0006c8_f770_11ea_a299_7c5cf8399c33row12_col2 {
+            background-color:  yellow;
+        }    #T_8a0006c8_f770_11ea_a299_7c5cf8399c33row12_col3 {
+            background-color:  yellow;
+        }    #T_8a0006c8_f770_11ea_a299_7c5cf8399c33row12_col4 {
+            background-color:  yellow;
+        }    #T_8a0006c8_f770_11ea_a299_7c5cf8399c33row12_col5 {
+            background-color:  yellow;
+        }</style>  
+<table id="T_8a0006c8_f770_11ea_a299_7c5cf8399c33" > 
+<thead>    <tr> 
+        <th class="blank level0" ></th> 
+        <th class="col_heading level0 col0" >Asignable?</th> 
+        <th class="col_heading level0 col1" >Holgura Dual / C.Redu.Primal</th> 
+        <th class="col_heading level0 col2" >Result. 'costo red'</th> 
+        <th class="col_heading level0 col3" >Valor costo c(i,j)</th> 
+        <th class="col_heading level0 col4" >Valor u(i)</th> 
+        <th class="col_heading level0 col5" >Valor v(j)</th> 
+    </tr>    <tr> 
+        <th class="index_name level0" >(i,j)</th> 
+        <th class="blank" ></th> 
+        <th class="blank" ></th> 
+        <th class="blank" ></th> 
+        <th class="blank" ></th> 
+        <th class="blank" ></th> 
+        <th class="blank" ></th> 
+    </tr></thead> 
+<tbody>    <tr> 
+        <th id="T_8a0006c8_f770_11ea_a299_7c5cf8399c33" class="row_heading level0 row0" >(1, 1)</th> 
+        <td id="T_8a0006c8_f770_11ea_a299_7c5cf8399c33row0_col0" class="data row0 col0" >False</td> 
+        <td id="T_8a0006c8_f770_11ea_a299_7c5cf8399c33row0_col1" class="data row0 col1" >c(1,1)  -  u(1)  -  v(1)</td> 
+        <td id="T_8a0006c8_f770_11ea_a299_7c5cf8399c33row0_col2" class="data row0 col2" >10</td> 
+        <td id="T_8a0006c8_f770_11ea_a299_7c5cf8399c33row0_col3" class="data row0 col3" >14</td> 
+        <td id="T_8a0006c8_f770_11ea_a299_7c5cf8399c33row0_col4" class="data row0 col4" >5</td> 
+        <td id="T_8a0006c8_f770_11ea_a299_7c5cf8399c33row0_col5" class="data row0 col5" >-1</td> 
+    </tr>    <tr> 
+        <th id="T_8a0006c8_f770_11ea_a299_7c5cf8399c33" class="row_heading level0 row1" >(1, 2)</th> 
+        <td id="T_8a0006c8_f770_11ea_a299_7c5cf8399c33row1_col0" class="data row1 col0" >True</td> 
+        <td id="T_8a0006c8_f770_11ea_a299_7c5cf8399c33row1_col1" class="data row1 col1" >c(1,2)  -  u(1)  -  v(2)</td> 
+        <td id="T_8a0006c8_f770_11ea_a299_7c5cf8399c33row1_col2" class="data row1 col2" >0</td> 
+        <td id="T_8a0006c8_f770_11ea_a299_7c5cf8399c33row1_col3" class="data row1 col3" >5</td> 
+        <td id="T_8a0006c8_f770_11ea_a299_7c5cf8399c33row1_col4" class="data row1 col4" >5</td> 
+        <td id="T_8a0006c8_f770_11ea_a299_7c5cf8399c33row1_col5" class="data row1 col5" >0</td> 
+    </tr>    <tr> 
+        <th id="T_8a0006c8_f770_11ea_a299_7c5cf8399c33" class="row_heading level0 row2" >(1, 3)</th> 
+        <td id="T_8a0006c8_f770_11ea_a299_7c5cf8399c33row2_col0" class="data row2 col0" >False</td> 
+        <td id="T_8a0006c8_f770_11ea_a299_7c5cf8399c33row2_col1" class="data row2 col1" >c(1,3)  -  u(1)  -  v(3)</td> 
+        <td id="T_8a0006c8_f770_11ea_a299_7c5cf8399c33row2_col2" class="data row2 col2" >3</td> 
+        <td id="T_8a0006c8_f770_11ea_a299_7c5cf8399c33row2_col3" class="data row2 col3" >8</td> 
+        <td id="T_8a0006c8_f770_11ea_a299_7c5cf8399c33row2_col4" class="data row2 col4" >5</td> 
+        <td id="T_8a0006c8_f770_11ea_a299_7c5cf8399c33row2_col5" class="data row2 col5" >0</td> 
+    </tr>    <tr> 
+        <th id="T_8a0006c8_f770_11ea_a299_7c5cf8399c33" class="row_heading level0 row3" >(1, 4)</th> 
+        <td id="T_8a0006c8_f770_11ea_a299_7c5cf8399c33row3_col0" class="data row3 col0" >True</td> 
+        <td id="T_8a0006c8_f770_11ea_a299_7c5cf8399c33row3_col1" class="data row3 col1" >c(1,4)  -  u(1)  -  v(4)</td> 
+        <td id="T_8a0006c8_f770_11ea_a299_7c5cf8399c33row3_col2" class="data row3 col2" >0</td> 
+        <td id="T_8a0006c8_f770_11ea_a299_7c5cf8399c33row3_col3" class="data row3 col3" >7</td> 
+        <td id="T_8a0006c8_f770_11ea_a299_7c5cf8399c33row3_col4" class="data row3 col4" >5</td> 
+        <td id="T_8a0006c8_f770_11ea_a299_7c5cf8399c33row3_col5" class="data row3 col5" >2</td> 
+    </tr>    <tr> 
+        <th id="T_8a0006c8_f770_11ea_a299_7c5cf8399c33" class="row_heading level0 row4" >(2, 1)</th> 
+        <td id="T_8a0006c8_f770_11ea_a299_7c5cf8399c33row4_col0" class="data row4 col0" >True</td> 
+        <td id="T_8a0006c8_f770_11ea_a299_7c5cf8399c33row4_col1" class="data row4 col1" >c(2,1)  -  u(2)  -  v(1)</td> 
+        <td id="T_8a0006c8_f770_11ea_a299_7c5cf8399c33row4_col2" class="data row4 col2" >0</td> 
+        <td id="T_8a0006c8_f770_11ea_a299_7c5cf8399c33row4_col3" class="data row4 col3" >2</td> 
+        <td id="T_8a0006c8_f770_11ea_a299_7c5cf8399c33row4_col4" class="data row4 col4" >3</td> 
+        <td id="T_8a0006c8_f770_11ea_a299_7c5cf8399c33row4_col5" class="data row4 col5" >-1</td> 
+    </tr>    <tr> 
+        <th id="T_8a0006c8_f770_11ea_a299_7c5cf8399c33" class="row_heading level0 row5" >(2, 2)</th> 
+        <td id="T_8a0006c8_f770_11ea_a299_7c5cf8399c33row5_col0" class="data row5 col0" >False</td> 
+        <td id="T_8a0006c8_f770_11ea_a299_7c5cf8399c33row5_col1" class="data row5 col1" >c(2,2)  -  u(2)  -  v(2)</td> 
+        <td id="T_8a0006c8_f770_11ea_a299_7c5cf8399c33row5_col2" class="data row5 col2" >9</td> 
+        <td id="T_8a0006c8_f770_11ea_a299_7c5cf8399c33row5_col3" class="data row5 col3" >12</td> 
+        <td id="T_8a0006c8_f770_11ea_a299_7c5cf8399c33row5_col4" class="data row5 col4" >3</td> 
+        <td id="T_8a0006c8_f770_11ea_a299_7c5cf8399c33row5_col5" class="data row5 col5" >0</td> 
+    </tr>    <tr> 
+        <th id="T_8a0006c8_f770_11ea_a299_7c5cf8399c33" class="row_heading level0 row6" >(2, 3)</th> 
+        <td id="T_8a0006c8_f770_11ea_a299_7c5cf8399c33row6_col0" class="data row6 col0" >False</td> 
+        <td id="T_8a0006c8_f770_11ea_a299_7c5cf8399c33row6_col1" class="data row6 col1" >c(2,3)  -  u(2)  -  v(3)</td> 
+        <td id="T_8a0006c8_f770_11ea_a299_7c5cf8399c33row6_col2" class="data row6 col2" >3</td> 
+        <td id="T_8a0006c8_f770_11ea_a299_7c5cf8399c33row6_col3" class="data row6 col3" >6</td> 
+        <td id="T_8a0006c8_f770_11ea_a299_7c5cf8399c33row6_col4" class="data row6 col4" >3</td> 
+        <td id="T_8a0006c8_f770_11ea_a299_7c5cf8399c33row6_col5" class="data row6 col5" >0</td> 
+    </tr>    <tr> 
+        <th id="T_8a0006c8_f770_11ea_a299_7c5cf8399c33" class="row_heading level0 row7" >(2, 4)</th> 
+        <td id="T_8a0006c8_f770_11ea_a299_7c5cf8399c33row7_col0" class="data row7 col0" >True</td> 
+        <td id="T_8a0006c8_f770_11ea_a299_7c5cf8399c33row7_col1" class="data row7 col1" >c(2,4)  -  u(2)  -  v(4)</td> 
+        <td id="T_8a0006c8_f770_11ea_a299_7c5cf8399c33row7_col2" class="data row7 col2" >0</td> 
+        <td id="T_8a0006c8_f770_11ea_a299_7c5cf8399c33row7_col3" class="data row7 col3" >5</td> 
+        <td id="T_8a0006c8_f770_11ea_a299_7c5cf8399c33row7_col4" class="data row7 col4" >3</td> 
+        <td id="T_8a0006c8_f770_11ea_a299_7c5cf8399c33row7_col5" class="data row7 col5" >2</td> 
+    </tr>    <tr> 
+        <th id="T_8a0006c8_f770_11ea_a299_7c5cf8399c33" class="row_heading level0 row8" >(3, 1)</th> 
+        <td id="T_8a0006c8_f770_11ea_a299_7c5cf8399c33row8_col0" class="data row8 col0" >False</td> 
+        <td id="T_8a0006c8_f770_11ea_a299_7c5cf8399c33row8_col1" class="data row8 col1" >c(3,1)  -  u(3)  -  v(1)</td> 
+        <td id="T_8a0006c8_f770_11ea_a299_7c5cf8399c33row8_col2" class="data row8 col2" >5</td> 
+        <td id="T_8a0006c8_f770_11ea_a299_7c5cf8399c33row8_col3" class="data row8 col3" >7</td> 
+        <td id="T_8a0006c8_f770_11ea_a299_7c5cf8399c33row8_col4" class="data row8 col4" >3</td> 
+        <td id="T_8a0006c8_f770_11ea_a299_7c5cf8399c33row8_col5" class="data row8 col5" >-1</td> 
+    </tr>    <tr> 
+        <th id="T_8a0006c8_f770_11ea_a299_7c5cf8399c33" class="row_heading level0 row9" >(3, 2)</th> 
+        <td id="T_8a0006c8_f770_11ea_a299_7c5cf8399c33row9_col0" class="data row9 col0" >False</td> 
+        <td id="T_8a0006c8_f770_11ea_a299_7c5cf8399c33row9_col1" class="data row9 col1" >c(3,2)  -  u(3)  -  v(2)</td> 
+        <td id="T_8a0006c8_f770_11ea_a299_7c5cf8399c33row9_col2" class="data row9 col2" >5</td> 
+        <td id="T_8a0006c8_f770_11ea_a299_7c5cf8399c33row9_col3" class="data row9 col3" >8</td> 
+        <td id="T_8a0006c8_f770_11ea_a299_7c5cf8399c33row9_col4" class="data row9 col4" >3</td> 
+        <td id="T_8a0006c8_f770_11ea_a299_7c5cf8399c33row9_col5" class="data row9 col5" >0</td> 
+    </tr>    <tr> 
+        <th id="T_8a0006c8_f770_11ea_a299_7c5cf8399c33" class="row_heading level0 row10" >(3, 3)</th> 
+        <td id="T_8a0006c8_f770_11ea_a299_7c5cf8399c33row10_col0" class="data row10 col0" >True</td> 
+        <td id="T_8a0006c8_f770_11ea_a299_7c5cf8399c33row10_col1" class="data row10 col1" >c(3,3)  -  u(3)  -  v(3)</td> 
+        <td id="T_8a0006c8_f770_11ea_a299_7c5cf8399c33row10_col2" class="data row10 col2" >0</td> 
+        <td id="T_8a0006c8_f770_11ea_a299_7c5cf8399c33row10_col3" class="data row10 col3" >3</td> 
+        <td id="T_8a0006c8_f770_11ea_a299_7c5cf8399c33row10_col4" class="data row10 col4" >3</td> 
+        <td id="T_8a0006c8_f770_11ea_a299_7c5cf8399c33row10_col5" class="data row10 col5" >0</td> 
+    </tr>    <tr> 
+        <th id="T_8a0006c8_f770_11ea_a299_7c5cf8399c33" class="row_heading level0 row11" >(3, 4)</th> 
+        <td id="T_8a0006c8_f770_11ea_a299_7c5cf8399c33row11_col0" class="data row11 col0" >False</td> 
+        <td id="T_8a0006c8_f770_11ea_a299_7c5cf8399c33row11_col1" class="data row11 col1" >c(3,4)  -  u(3)  -  v(4)</td> 
+        <td id="T_8a0006c8_f770_11ea_a299_7c5cf8399c33row11_col2" class="data row11 col2" >4</td> 
+        <td id="T_8a0006c8_f770_11ea_a299_7c5cf8399c33row11_col3" class="data row11 col3" >9</td> 
+        <td id="T_8a0006c8_f770_11ea_a299_7c5cf8399c33row11_col4" class="data row11 col4" >3</td> 
+        <td id="T_8a0006c8_f770_11ea_a299_7c5cf8399c33row11_col5" class="data row11 col5" >2</td> 
+    </tr>    <tr> 
+        <th id="T_8a0006c8_f770_11ea_a299_7c5cf8399c33" class="row_heading level0 row12" >(4, 1)</th> 
+        <td id="T_8a0006c8_f770_11ea_a299_7c5cf8399c33row12_col0" class="data row12 col0" >True</td> 
+        <td id="T_8a0006c8_f770_11ea_a299_7c5cf8399c33row12_col1" class="data row12 col1" >c(4,1)  -  u(4)  -  v(1)</td> 
+        <td id="T_8a0006c8_f770_11ea_a299_7c5cf8399c33row12_col2" class="data row12 col2" >0</td> 
+        <td id="T_8a0006c8_f770_11ea_a299_7c5cf8399c33row12_col3" class="data row12 col3" >2</td> 
+        <td id="T_8a0006c8_f770_11ea_a299_7c5cf8399c33row12_col4" class="data row12 col4" >3</td> 
+        <td id="T_8a0006c8_f770_11ea_a299_7c5cf8399c33row12_col5" class="data row12 col5" >-1</td> 
+    </tr>    <tr> 
+        <th id="T_8a0006c8_f770_11ea_a299_7c5cf8399c33" class="row_heading level0 row13" >(4, 2)</th> 
+        <td id="T_8a0006c8_f770_11ea_a299_7c5cf8399c33row13_col0" class="data row13 col0" >False</td> 
+        <td id="T_8a0006c8_f770_11ea_a299_7c5cf8399c33row13_col1" class="data row13 col1" >c(4,2)  -  u(4)  -  v(2)</td> 
+        <td id="T_8a0006c8_f770_11ea_a299_7c5cf8399c33row13_col2" class="data row13 col2" >1</td> 
+        <td id="T_8a0006c8_f770_11ea_a299_7c5cf8399c33row13_col3" class="data row13 col3" >4</td> 
+        <td id="T_8a0006c8_f770_11ea_a299_7c5cf8399c33row13_col4" class="data row13 col4" >3</td> 
+        <td id="T_8a0006c8_f770_11ea_a299_7c5cf8399c33row13_col5" class="data row13 col5" >0</td> 
+    </tr>    <tr> 
+        <th id="T_8a0006c8_f770_11ea_a299_7c5cf8399c33" class="row_heading level0 row14" >(4, 3)</th> 
+        <td id="T_8a0006c8_f770_11ea_a299_7c5cf8399c33row14_col0" class="data row14 col0" >False</td> 
+        <td id="T_8a0006c8_f770_11ea_a299_7c5cf8399c33row14_col1" class="data row14 col1" >c(4,3)  -  u(4)  -  v(3)</td> 
+        <td id="T_8a0006c8_f770_11ea_a299_7c5cf8399c33row14_col2" class="data row14 col2" >3</td> 
+        <td id="T_8a0006c8_f770_11ea_a299_7c5cf8399c33row14_col3" class="data row14 col3" >6</td> 
+        <td id="T_8a0006c8_f770_11ea_a299_7c5cf8399c33row14_col4" class="data row14 col4" >3</td> 
+        <td id="T_8a0006c8_f770_11ea_a299_7c5cf8399c33row14_col5" class="data row14 col5" >0</td> 
+    </tr>    <tr> 
+        <th id="T_8a0006c8_f770_11ea_a299_7c5cf8399c33" class="row_heading level0 row15" >(4, 4)</th> 
+        <td id="T_8a0006c8_f770_11ea_a299_7c5cf8399c33row15_col0" class="data row15 col0" >False</td> 
+        <td id="T_8a0006c8_f770_11ea_a299_7c5cf8399c33row15_col1" class="data row15 col1" >c(4,4)  -  u(4)  -  v(4)</td> 
+        <td id="T_8a0006c8_f770_11ea_a299_7c5cf8399c33row15_col2" class="data row15 col2" >5</td> 
+        <td id="T_8a0006c8_f770_11ea_a299_7c5cf8399c33row15_col3" class="data row15 col3" >10</td> 
+        <td id="T_8a0006c8_f770_11ea_a299_7c5cf8399c33row15_col4" class="data row15 col4" >3</td> 
+        <td id="T_8a0006c8_f770_11ea_a299_7c5cf8399c33row15_col5" class="data row15 col5" >2</td> 
+    </tr></tbody> 
+</table> </div></div>
+</div>
+<p>Sobre esta versión SÍ podemos hacer una asignación factible (que no se asigne más de una máquina a una tarea o viceversa).</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">colorear</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span><span class="mi">12</span><span class="p">]</span>
+
+<span class="n">DF</span><span class="o">.</span><span class="n">style</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">resaltar</span><span class="o">.</span><span class="n">tabla</span><span class="p">,</span> <span class="n">filas</span><span class="o">=</span><span class="n">colorear</span><span class="p">,</span> <span class="n">cols</span><span class="o">=</span><span class="p">[],</span> <span class="n">col_names</span><span class="o">=</span><span class="n">DF</span><span class="o">.</span><span class="n">columns</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><style  type="text/css" >
+    #T_8a097ccc_f770_11ea_b1eb_7c5cf8399c33row1_col0 {
+            background-color:  yellow;
+        }    #T_8a097ccc_f770_11ea_b1eb_7c5cf8399c33row1_col1 {
+            background-color:  yellow;
+        }    #T_8a097ccc_f770_11ea_b1eb_7c5cf8399c33row1_col2 {
+            background-color:  yellow;
+        }    #T_8a097ccc_f770_11ea_b1eb_7c5cf8399c33row1_col3 {
+            background-color:  yellow;
+        }    #T_8a097ccc_f770_11ea_b1eb_7c5cf8399c33row1_col4 {
+            background-color:  yellow;
+        }    #T_8a097ccc_f770_11ea_b1eb_7c5cf8399c33row1_col5 {
+            background-color:  yellow;
+        }    #T_8a097ccc_f770_11ea_b1eb_7c5cf8399c33row7_col0 {
+            background-color:  yellow;
+        }    #T_8a097ccc_f770_11ea_b1eb_7c5cf8399c33row7_col1 {
+            background-color:  yellow;
+        }    #T_8a097ccc_f770_11ea_b1eb_7c5cf8399c33row7_col2 {
+            background-color:  yellow;
+        }    #T_8a097ccc_f770_11ea_b1eb_7c5cf8399c33row7_col3 {
+            background-color:  yellow;
+        }    #T_8a097ccc_f770_11ea_b1eb_7c5cf8399c33row7_col4 {
+            background-color:  yellow;
+        }    #T_8a097ccc_f770_11ea_b1eb_7c5cf8399c33row7_col5 {
+            background-color:  yellow;
+        }    #T_8a097ccc_f770_11ea_b1eb_7c5cf8399c33row10_col0 {
+            background-color:  yellow;
+        }    #T_8a097ccc_f770_11ea_b1eb_7c5cf8399c33row10_col1 {
+            background-color:  yellow;
+        }    #T_8a097ccc_f770_11ea_b1eb_7c5cf8399c33row10_col2 {
+            background-color:  yellow;
+        }    #T_8a097ccc_f770_11ea_b1eb_7c5cf8399c33row10_col3 {
+            background-color:  yellow;
+        }    #T_8a097ccc_f770_11ea_b1eb_7c5cf8399c33row10_col4 {
+            background-color:  yellow;
+        }    #T_8a097ccc_f770_11ea_b1eb_7c5cf8399c33row10_col5 {
+            background-color:  yellow;
+        }    #T_8a097ccc_f770_11ea_b1eb_7c5cf8399c33row12_col0 {
+            background-color:  yellow;
+        }    #T_8a097ccc_f770_11ea_b1eb_7c5cf8399c33row12_col1 {
+            background-color:  yellow;
+        }    #T_8a097ccc_f770_11ea_b1eb_7c5cf8399c33row12_col2 {
+            background-color:  yellow;
+        }    #T_8a097ccc_f770_11ea_b1eb_7c5cf8399c33row12_col3 {
+            background-color:  yellow;
+        }    #T_8a097ccc_f770_11ea_b1eb_7c5cf8399c33row12_col4 {
+            background-color:  yellow;
+        }    #T_8a097ccc_f770_11ea_b1eb_7c5cf8399c33row12_col5 {
+            background-color:  yellow;
+        }</style>  
+<table id="T_8a097ccc_f770_11ea_b1eb_7c5cf8399c33" > 
+<thead>    <tr> 
+        <th class="blank level0" ></th> 
+        <th class="col_heading level0 col0" >Asignable?</th> 
+        <th class="col_heading level0 col1" >Holgura Dual / C.Redu.Primal</th> 
+        <th class="col_heading level0 col2" >Result. 'costo red'</th> 
+        <th class="col_heading level0 col3" >Valor costo c(i,j)</th> 
+        <th class="col_heading level0 col4" >Valor u(i)</th> 
+        <th class="col_heading level0 col5" >Valor v(j)</th> 
+    </tr>    <tr> 
+        <th class="index_name level0" >(i,j)</th> 
+        <th class="blank" ></th> 
+        <th class="blank" ></th> 
+        <th class="blank" ></th> 
+        <th class="blank" ></th> 
+        <th class="blank" ></th> 
+        <th class="blank" ></th> 
+    </tr></thead> 
+<tbody>    <tr> 
+        <th id="T_8a097ccc_f770_11ea_b1eb_7c5cf8399c33" class="row_heading level0 row0" >(1, 1)</th> 
+        <td id="T_8a097ccc_f770_11ea_b1eb_7c5cf8399c33row0_col0" class="data row0 col0" >False</td> 
+        <td id="T_8a097ccc_f770_11ea_b1eb_7c5cf8399c33row0_col1" class="data row0 col1" >c(1,1)  -  u(1)  -  v(1)</td> 
+        <td id="T_8a097ccc_f770_11ea_b1eb_7c5cf8399c33row0_col2" class="data row0 col2" >10</td> 
+        <td id="T_8a097ccc_f770_11ea_b1eb_7c5cf8399c33row0_col3" class="data row0 col3" >14</td> 
+        <td id="T_8a097ccc_f770_11ea_b1eb_7c5cf8399c33row0_col4" class="data row0 col4" >5</td> 
+        <td id="T_8a097ccc_f770_11ea_b1eb_7c5cf8399c33row0_col5" class="data row0 col5" >-1</td> 
+    </tr>    <tr> 
+        <th id="T_8a097ccc_f770_11ea_b1eb_7c5cf8399c33" class="row_heading level0 row1" >(1, 2)</th> 
+        <td id="T_8a097ccc_f770_11ea_b1eb_7c5cf8399c33row1_col0" class="data row1 col0" >True</td> 
+        <td id="T_8a097ccc_f770_11ea_b1eb_7c5cf8399c33row1_col1" class="data row1 col1" >c(1,2)  -  u(1)  -  v(2)</td> 
+        <td id="T_8a097ccc_f770_11ea_b1eb_7c5cf8399c33row1_col2" class="data row1 col2" >0</td> 
+        <td id="T_8a097ccc_f770_11ea_b1eb_7c5cf8399c33row1_col3" class="data row1 col3" >5</td> 
+        <td id="T_8a097ccc_f770_11ea_b1eb_7c5cf8399c33row1_col4" class="data row1 col4" >5</td> 
+        <td id="T_8a097ccc_f770_11ea_b1eb_7c5cf8399c33row1_col5" class="data row1 col5" >0</td> 
+    </tr>    <tr> 
+        <th id="T_8a097ccc_f770_11ea_b1eb_7c5cf8399c33" class="row_heading level0 row2" >(1, 3)</th> 
+        <td id="T_8a097ccc_f770_11ea_b1eb_7c5cf8399c33row2_col0" class="data row2 col0" >False</td> 
+        <td id="T_8a097ccc_f770_11ea_b1eb_7c5cf8399c33row2_col1" class="data row2 col1" >c(1,3)  -  u(1)  -  v(3)</td> 
+        <td id="T_8a097ccc_f770_11ea_b1eb_7c5cf8399c33row2_col2" class="data row2 col2" >3</td> 
+        <td id="T_8a097ccc_f770_11ea_b1eb_7c5cf8399c33row2_col3" class="data row2 col3" >8</td> 
+        <td id="T_8a097ccc_f770_11ea_b1eb_7c5cf8399c33row2_col4" class="data row2 col4" >5</td> 
+        <td id="T_8a097ccc_f770_11ea_b1eb_7c5cf8399c33row2_col5" class="data row2 col5" >0</td> 
+    </tr>    <tr> 
+        <th id="T_8a097ccc_f770_11ea_b1eb_7c5cf8399c33" class="row_heading level0 row3" >(1, 4)</th> 
+        <td id="T_8a097ccc_f770_11ea_b1eb_7c5cf8399c33row3_col0" class="data row3 col0" >True</td> 
+        <td id="T_8a097ccc_f770_11ea_b1eb_7c5cf8399c33row3_col1" class="data row3 col1" >c(1,4)  -  u(1)  -  v(4)</td> 
+        <td id="T_8a097ccc_f770_11ea_b1eb_7c5cf8399c33row3_col2" class="data row3 col2" >0</td> 
+        <td id="T_8a097ccc_f770_11ea_b1eb_7c5cf8399c33row3_col3" class="data row3 col3" >7</td> 
+        <td id="T_8a097ccc_f770_11ea_b1eb_7c5cf8399c33row3_col4" class="data row3 col4" >5</td> 
+        <td id="T_8a097ccc_f770_11ea_b1eb_7c5cf8399c33row3_col5" class="data row3 col5" >2</td> 
+    </tr>    <tr> 
+        <th id="T_8a097ccc_f770_11ea_b1eb_7c5cf8399c33" class="row_heading level0 row4" >(2, 1)</th> 
+        <td id="T_8a097ccc_f770_11ea_b1eb_7c5cf8399c33row4_col0" class="data row4 col0" >True</td> 
+        <td id="T_8a097ccc_f770_11ea_b1eb_7c5cf8399c33row4_col1" class="data row4 col1" >c(2,1)  -  u(2)  -  v(1)</td> 
+        <td id="T_8a097ccc_f770_11ea_b1eb_7c5cf8399c33row4_col2" class="data row4 col2" >0</td> 
+        <td id="T_8a097ccc_f770_11ea_b1eb_7c5cf8399c33row4_col3" class="data row4 col3" >2</td> 
+        <td id="T_8a097ccc_f770_11ea_b1eb_7c5cf8399c33row4_col4" class="data row4 col4" >3</td> 
+        <td id="T_8a097ccc_f770_11ea_b1eb_7c5cf8399c33row4_col5" class="data row4 col5" >-1</td> 
+    </tr>    <tr> 
+        <th id="T_8a097ccc_f770_11ea_b1eb_7c5cf8399c33" class="row_heading level0 row5" >(2, 2)</th> 
+        <td id="T_8a097ccc_f770_11ea_b1eb_7c5cf8399c33row5_col0" class="data row5 col0" >False</td> 
+        <td id="T_8a097ccc_f770_11ea_b1eb_7c5cf8399c33row5_col1" class="data row5 col1" >c(2,2)  -  u(2)  -  v(2)</td> 
+        <td id="T_8a097ccc_f770_11ea_b1eb_7c5cf8399c33row5_col2" class="data row5 col2" >9</td> 
+        <td id="T_8a097ccc_f770_11ea_b1eb_7c5cf8399c33row5_col3" class="data row5 col3" >12</td> 
+        <td id="T_8a097ccc_f770_11ea_b1eb_7c5cf8399c33row5_col4" class="data row5 col4" >3</td> 
+        <td id="T_8a097ccc_f770_11ea_b1eb_7c5cf8399c33row5_col5" class="data row5 col5" >0</td> 
+    </tr>    <tr> 
+        <th id="T_8a097ccc_f770_11ea_b1eb_7c5cf8399c33" class="row_heading level0 row6" >(2, 3)</th> 
+        <td id="T_8a097ccc_f770_11ea_b1eb_7c5cf8399c33row6_col0" class="data row6 col0" >False</td> 
+        <td id="T_8a097ccc_f770_11ea_b1eb_7c5cf8399c33row6_col1" class="data row6 col1" >c(2,3)  -  u(2)  -  v(3)</td> 
+        <td id="T_8a097ccc_f770_11ea_b1eb_7c5cf8399c33row6_col2" class="data row6 col2" >3</td> 
+        <td id="T_8a097ccc_f770_11ea_b1eb_7c5cf8399c33row6_col3" class="data row6 col3" >6</td> 
+        <td id="T_8a097ccc_f770_11ea_b1eb_7c5cf8399c33row6_col4" class="data row6 col4" >3</td> 
+        <td id="T_8a097ccc_f770_11ea_b1eb_7c5cf8399c33row6_col5" class="data row6 col5" >0</td> 
+    </tr>    <tr> 
+        <th id="T_8a097ccc_f770_11ea_b1eb_7c5cf8399c33" class="row_heading level0 row7" >(2, 4)</th> 
+        <td id="T_8a097ccc_f770_11ea_b1eb_7c5cf8399c33row7_col0" class="data row7 col0" >True</td> 
+        <td id="T_8a097ccc_f770_11ea_b1eb_7c5cf8399c33row7_col1" class="data row7 col1" >c(2,4)  -  u(2)  -  v(4)</td> 
+        <td id="T_8a097ccc_f770_11ea_b1eb_7c5cf8399c33row7_col2" class="data row7 col2" >0</td> 
+        <td id="T_8a097ccc_f770_11ea_b1eb_7c5cf8399c33row7_col3" class="data row7 col3" >5</td> 
+        <td id="T_8a097ccc_f770_11ea_b1eb_7c5cf8399c33row7_col4" class="data row7 col4" >3</td> 
+        <td id="T_8a097ccc_f770_11ea_b1eb_7c5cf8399c33row7_col5" class="data row7 col5" >2</td> 
+    </tr>    <tr> 
+        <th id="T_8a097ccc_f770_11ea_b1eb_7c5cf8399c33" class="row_heading level0 row8" >(3, 1)</th> 
+        <td id="T_8a097ccc_f770_11ea_b1eb_7c5cf8399c33row8_col0" class="data row8 col0" >False</td> 
+        <td id="T_8a097ccc_f770_11ea_b1eb_7c5cf8399c33row8_col1" class="data row8 col1" >c(3,1)  -  u(3)  -  v(1)</td> 
+        <td id="T_8a097ccc_f770_11ea_b1eb_7c5cf8399c33row8_col2" class="data row8 col2" >5</td> 
+        <td id="T_8a097ccc_f770_11ea_b1eb_7c5cf8399c33row8_col3" class="data row8 col3" >7</td> 
+        <td id="T_8a097ccc_f770_11ea_b1eb_7c5cf8399c33row8_col4" class="data row8 col4" >3</td> 
+        <td id="T_8a097ccc_f770_11ea_b1eb_7c5cf8399c33row8_col5" class="data row8 col5" >-1</td> 
+    </tr>    <tr> 
+        <th id="T_8a097ccc_f770_11ea_b1eb_7c5cf8399c33" class="row_heading level0 row9" >(3, 2)</th> 
+        <td id="T_8a097ccc_f770_11ea_b1eb_7c5cf8399c33row9_col0" class="data row9 col0" >False</td> 
+        <td id="T_8a097ccc_f770_11ea_b1eb_7c5cf8399c33row9_col1" class="data row9 col1" >c(3,2)  -  u(3)  -  v(2)</td> 
+        <td id="T_8a097ccc_f770_11ea_b1eb_7c5cf8399c33row9_col2" class="data row9 col2" >5</td> 
+        <td id="T_8a097ccc_f770_11ea_b1eb_7c5cf8399c33row9_col3" class="data row9 col3" >8</td> 
+        <td id="T_8a097ccc_f770_11ea_b1eb_7c5cf8399c33row9_col4" class="data row9 col4" >3</td> 
+        <td id="T_8a097ccc_f770_11ea_b1eb_7c5cf8399c33row9_col5" class="data row9 col5" >0</td> 
+    </tr>    <tr> 
+        <th id="T_8a097ccc_f770_11ea_b1eb_7c5cf8399c33" class="row_heading level0 row10" >(3, 3)</th> 
+        <td id="T_8a097ccc_f770_11ea_b1eb_7c5cf8399c33row10_col0" class="data row10 col0" >True</td> 
+        <td id="T_8a097ccc_f770_11ea_b1eb_7c5cf8399c33row10_col1" class="data row10 col1" >c(3,3)  -  u(3)  -  v(3)</td> 
+        <td id="T_8a097ccc_f770_11ea_b1eb_7c5cf8399c33row10_col2" class="data row10 col2" >0</td> 
+        <td id="T_8a097ccc_f770_11ea_b1eb_7c5cf8399c33row10_col3" class="data row10 col3" >3</td> 
+        <td id="T_8a097ccc_f770_11ea_b1eb_7c5cf8399c33row10_col4" class="data row10 col4" >3</td> 
+        <td id="T_8a097ccc_f770_11ea_b1eb_7c5cf8399c33row10_col5" class="data row10 col5" >0</td> 
+    </tr>    <tr> 
+        <th id="T_8a097ccc_f770_11ea_b1eb_7c5cf8399c33" class="row_heading level0 row11" >(3, 4)</th> 
+        <td id="T_8a097ccc_f770_11ea_b1eb_7c5cf8399c33row11_col0" class="data row11 col0" >False</td> 
+        <td id="T_8a097ccc_f770_11ea_b1eb_7c5cf8399c33row11_col1" class="data row11 col1" >c(3,4)  -  u(3)  -  v(4)</td> 
+        <td id="T_8a097ccc_f770_11ea_b1eb_7c5cf8399c33row11_col2" class="data row11 col2" >4</td> 
+        <td id="T_8a097ccc_f770_11ea_b1eb_7c5cf8399c33row11_col3" class="data row11 col3" >9</td> 
+        <td id="T_8a097ccc_f770_11ea_b1eb_7c5cf8399c33row11_col4" class="data row11 col4" >3</td> 
+        <td id="T_8a097ccc_f770_11ea_b1eb_7c5cf8399c33row11_col5" class="data row11 col5" >2</td> 
+    </tr>    <tr> 
+        <th id="T_8a097ccc_f770_11ea_b1eb_7c5cf8399c33" class="row_heading level0 row12" >(4, 1)</th> 
+        <td id="T_8a097ccc_f770_11ea_b1eb_7c5cf8399c33row12_col0" class="data row12 col0" >True</td> 
+        <td id="T_8a097ccc_f770_11ea_b1eb_7c5cf8399c33row12_col1" class="data row12 col1" >c(4,1)  -  u(4)  -  v(1)</td> 
+        <td id="T_8a097ccc_f770_11ea_b1eb_7c5cf8399c33row12_col2" class="data row12 col2" >0</td> 
+        <td id="T_8a097ccc_f770_11ea_b1eb_7c5cf8399c33row12_col3" class="data row12 col3" >2</td> 
+        <td id="T_8a097ccc_f770_11ea_b1eb_7c5cf8399c33row12_col4" class="data row12 col4" >3</td> 
+        <td id="T_8a097ccc_f770_11ea_b1eb_7c5cf8399c33row12_col5" class="data row12 col5" >-1</td> 
+    </tr>    <tr> 
+        <th id="T_8a097ccc_f770_11ea_b1eb_7c5cf8399c33" class="row_heading level0 row13" >(4, 2)</th> 
+        <td id="T_8a097ccc_f770_11ea_b1eb_7c5cf8399c33row13_col0" class="data row13 col0" >False</td> 
+        <td id="T_8a097ccc_f770_11ea_b1eb_7c5cf8399c33row13_col1" class="data row13 col1" >c(4,2)  -  u(4)  -  v(2)</td> 
+        <td id="T_8a097ccc_f770_11ea_b1eb_7c5cf8399c33row13_col2" class="data row13 col2" >1</td> 
+        <td id="T_8a097ccc_f770_11ea_b1eb_7c5cf8399c33row13_col3" class="data row13 col3" >4</td> 
+        <td id="T_8a097ccc_f770_11ea_b1eb_7c5cf8399c33row13_col4" class="data row13 col4" >3</td> 
+        <td id="T_8a097ccc_f770_11ea_b1eb_7c5cf8399c33row13_col5" class="data row13 col5" >0</td> 
+    </tr>    <tr> 
+        <th id="T_8a097ccc_f770_11ea_b1eb_7c5cf8399c33" class="row_heading level0 row14" >(4, 3)</th> 
+        <td id="T_8a097ccc_f770_11ea_b1eb_7c5cf8399c33row14_col0" class="data row14 col0" >False</td> 
+        <td id="T_8a097ccc_f770_11ea_b1eb_7c5cf8399c33row14_col1" class="data row14 col1" >c(4,3)  -  u(4)  -  v(3)</td> 
+        <td id="T_8a097ccc_f770_11ea_b1eb_7c5cf8399c33row14_col2" class="data row14 col2" >3</td> 
+        <td id="T_8a097ccc_f770_11ea_b1eb_7c5cf8399c33row14_col3" class="data row14 col3" >6</td> 
+        <td id="T_8a097ccc_f770_11ea_b1eb_7c5cf8399c33row14_col4" class="data row14 col4" >3</td> 
+        <td id="T_8a097ccc_f770_11ea_b1eb_7c5cf8399c33row14_col5" class="data row14 col5" >0</td> 
+    </tr>    <tr> 
+        <th id="T_8a097ccc_f770_11ea_b1eb_7c5cf8399c33" class="row_heading level0 row15" >(4, 4)</th> 
+        <td id="T_8a097ccc_f770_11ea_b1eb_7c5cf8399c33row15_col0" class="data row15 col0" >False</td> 
+        <td id="T_8a097ccc_f770_11ea_b1eb_7c5cf8399c33row15_col1" class="data row15 col1" >c(4,4)  -  u(4)  -  v(4)</td> 
+        <td id="T_8a097ccc_f770_11ea_b1eb_7c5cf8399c33row15_col2" class="data row15 col2" >5</td> 
+        <td id="T_8a097ccc_f770_11ea_b1eb_7c5cf8399c33row15_col3" class="data row15 col3" >10</td> 
+        <td id="T_8a097ccc_f770_11ea_b1eb_7c5cf8399c33row15_col4" class="data row15 col4" >3</td> 
+        <td id="T_8a097ccc_f770_11ea_b1eb_7c5cf8399c33row15_col5" class="data row15 col5" >2</td> 
+    </tr></tbody> 
+</table> </div></div>
+</div>
+<p>¡LA MISMA SOLUCIÓN QUE HABÍAMOS LOGRADO CON LAS REGLAS LOCAS!</p>
+<p>Los ceros que no se usan corresponden al típico degeneramiento que presentan los problemas de asignación. La base debe ser de tamaño igual a dos veces el número de nodos (<span class="math notranslate nohighlight">\(m\)</span>) menos uno, pero para tener una asignación factible, solo <span class="math notranslate nohighlight">\(m\)</span> toman valor.</p>
+<p><strong>Observaciones:</strong></p>
+<ul class="simple">
+<li><p>Cuando se toma la tabla de costos y se restan los mínimos de fila y columna, se están calculando en cada celda los <strong>costos reducidos del problema primal</strong>, que son las mismas holguras del dual, a través de darle valores arbitrarios <em>pero factibles</em> a las variables duales (son factibles al evitar que las holguras, o valores de las celdas, se hagan negativas).</p></li>
+<li><p>Esa solución es factible para el dual <strong>pero NO para el primal</strong> (o no necesariamente). En efecto, no era posible hacer asignaciones factibles (uno a uno) con las condiciones de holgura complementaria de la primera iteración (es decir, como solo pueden tomar valor las variables relacionadas con holguras duales en cero, no se lograba el uno a uno).</p></li>
+<li><p>Conclusión de lo anterior: <strong>el dual era factible pero el primal NO</strong>. No se dejen engañar. Todos los costos reducidos para el problema primal de minimización eran positivos (ya que las holguras duales lo eran), PERO NO se podía decretar optimalidad, ya que <strong>NO</strong> había factibilidad primal; no se cumplían las condiciones KKT.</p></li>
+</ul>
+<p>Cómo opera el algoritmo:</p>
+<ol class="arabic simple">
+<li><p>Empieza con una solución dual factible (<span class="math notranslate nohighlight">\(u_i\)</span> y <span class="math notranslate nohighlight">\(v_j\)</span> triviales que no hagan negativos sus <span class="math notranslate nohighlight">\(c_{ij}\)</span>)</p></li>
+<li><p>Revisa si hay factibilidad primal</p>
+<ul class="simple">
+<li><p>Si sí, hay optimalidad por KKT</p></li>
+<li><p>Si no, pasa a 3</p></li>
+</ul>
+</li>
+<li><p>Aumenta el valor de una dual buscando un nuevo cero en holguras (apretar restricciones), PERO:</p>
+<ul class="simple">
+<li><p>Debe reducir el valor de otra(s) dual(es) para revertir holguras que se hayan negativos</p></li>
+<li><p>Debe aumentar el valor de otra(s) dual(es) más para recuperar ceros perdidos</p></li>
+<li><p>Volver a 2</p></li>
+</ul>
+</li>
+</ol>
+<p>En el fondo, se hace lo mismo que en Simplex, pero desde la perspectiva del problema dual. Es decir: (i) partir de una solución factible; (ii) verificar costos reducidos (¡que es verificar factibilidad dual!); (iii) moverme buscando factibilidad dual SIN PERDER la primal. Cuando Simplex, desde su factibilidad primal, encuentra factibilidad dual (i.e., costos reducidos que no prometen), entonces decreta optimalidad.</p>
+<p>Este tipo de algoritmos se conocen como Simplex-Dual, y desde su factibilidad dual tratan de mejorar su función objetivo; cuando encuentran factibilidad primal, decretan optimalidad.</p>
+</section>
+<section id="glosario-de-pre-requisitos">
+<h1>Glosario de pre-requisitos<a class="headerlink" href="#glosario-de-pre-requisitos" title="Permalink to this heading">#</a></h1>
+<p>Algunas cosas que vale la pena recordar sobre programación lineal para entender el proceso. Solamente se menciona la idea general de cada caso, pero se recomienda profundizar en ellos si no se dominan.</p>
+<ul class="simple">
+<li><p><em>Holgura complementaria</em>: Si una restricción se cumple con igualdad (i.e., su holgura es cero), entonces la variable asociada a dicha restricción en el problema dual debe tomar valor. Si, por el contrario, una restricción se cumple con desigualdad (i.e., su holgura toma valor), entonces la variable asociada a dicha restricción en el problema dual TIENE que ser cero.</p></li>
+<li><p>Los costos reducidos del problema primal son equivalentes a las variables de holgura del problema dual.</p></li>
+<li><p><em>Condiciones de optimalidad de Karush-Kuhn-Tucker (KKT)</em>: para garantizar que un problema es óptimo, se debe cumplir:</p>
+<ul>
+<li><p>Factibilidad primal</p></li>
+<li><p>Factibilidad dual (o sea costos reducidos “favorables” en el primal)</p></li>
+<li><p>Holgura complementaria</p></li>
+</ul>
+</li>
+</ul>
+<p><strong>Ejercicio</strong></p>
+<p>Resuelva usando el algoritmo de Kuhn el siguiente problema de asignación:</p>
+<p>El entrenador de la selección colombiana de natación tiene que determinar quién participará en una carrera de 4x100 metros.</p>
+<p><img alt="" src="Images/ASSIGN_4.png" /></p>
+<p>¿Cómo debe elegir el entrenador a los miembros del equipo?</p>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./Class_6_Assignment"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="../Class_5_Transport/3-Simplex_Transport_acotado.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title"><strong>Lectura 3: Simplex de transporte con variables acotodas</strong></p>
+      </div>
+    </a>
+</div></div>
+  
+</div>
+
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#"><strong>Lectura 1: Simplex para problemas de asignación</strong></a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#como-funciona-el-algoritmo-de-kuhn">2. Cómo funciona el algoritmo de Kuhn</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#que-ocurre-detras-del-algoritmo-para-decir-que-es-exacto">3. Qué ocurre detrás del algoritmo para decir que es exacto</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#glosario-de-pre-requisitos">Glosario de pre-requisitos</a></li>
+</ul>
+
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Alejandra Tabares
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  <p class="copyright">
+    
+      © Copyright 2022.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
