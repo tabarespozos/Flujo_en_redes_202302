@@ -6,8 +6,8 @@ vref  = 1.0;        % tensión en la subestación (pu)
 vbase = 13.8;       % Tensión base (kV)
 sbase = 100000;     % Potencia base (kVA)
 tol   = 10^-8;      % Tolerancia de error permitida
-vmin  = 0.93;       % Tensión mínima (pu)
-vmax  = 1.05;       % Tensión máxima (pu)
+vmin  = 0.95;       % Tensión mínima (pu)
+vmax  = 1.00;       % Tensión máxima (pu)
 
 % Base de impedancia
 zbase = 1000*((vbase^2)/sbase);
